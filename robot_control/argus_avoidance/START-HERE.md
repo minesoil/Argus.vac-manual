@@ -14,7 +14,7 @@ The bridge starts at boot but waits for an explicit Start request. If the camera
 cannot see a continuous strip of tape, it refuses to drive. Press STOP before
 retrying a failed start. No camera obstacle detection is installed in this demo.
 
-Commissioning status: the ESP32 upload is hash verified and all 88 software tests
+Commissioning status: the ESP32 upload is hash verified and all 93 software tests
 pass on the Pi. The real phone Start, operator Stop and phone-lock stop checks
 have passed with motor power OFF. Raised-wheel and untethered floor checks
 remain pending.

@@ -35,6 +35,27 @@ def stop(reason):
     return TapeDecision("STOP", reason)
 
 
+def usable_floor(floor):
+    """Exclude an isolated, shallow camera-edge band on the fixed caster mount.
+
+    This is a camera framing correction, not obstacle detection. A band joined
+    to the tape, a deep patch, or a crossing keeps the original stop checks.
+    Never bridge gaps or retain fewer than half the original rows.
+    """
+    height, width = floor.shape[:2]
+    gray = cv2.cvtColor(floor, cv2.COLOR_BGR2GRAY)
+    _, mask = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)
+    mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
+    _, _, statistics, _ = cv2.connectedComponentsWithStats(mask, connectivity=8)
+    for x, y, w, h, area in statistics[1:]:
+        cut = int(y + h + 2)
+        if (y == 0 and x <= 2 and x + w >= width - 2
+                and h <= height * 0.45 and area >= w * h * 0.60
+                and height - cut >= max(48, height * 0.50)):
+            return floor[cut:]
+    return floor
+
+
 def decide_tape(frame, tape="black"):
     """Evaluate a BGR camera frame using a lower-frame floor region.
 
@@ -56,6 +77,8 @@ def decide_tape(frame, tape="black"):
 
     # The mounted camera's usable floor starts below the chassis/background.
     floor = frame[int(height * FLOOR_START):height, :]
+    if tape == "black":
+        floor = usable_floor(floor)
     floor_height = floor.shape[0]
     gray = cv2.cvtColor(floor, cv2.COLOR_BGR2GRAY)
     contrast = float(np.percentile(gray, 99) - np.percentile(gray, 1))

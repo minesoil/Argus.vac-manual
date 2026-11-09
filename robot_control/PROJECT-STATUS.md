@@ -1,6 +1,6 @@
 # Argus robot progress — 2026-11-09
 
-Phone Start firmware is installed and hash verified. All 88 tests pass on the
+Phone Start firmware is installed and hash verified. All 93 tests pass on the
 actual Pi. The real phone Start/Stop and phone-lock stop checks pass; after
 restoring ESP USB power to the bank, both raised wheels turn forward from
 phone Start and stop on command. The Pi camera/bridge start automatically.
@@ -12,7 +12,10 @@ piece covers 60.3% of the 116-row analysis band, below the required 70%.
 Justin keeps the sharp corner and overlaps the joins; the stationary tape view
 then passes at confidence 1.0. Another tethered run starts turning but stops
 early: the next image has too little floor visible and tape leaving the lower
-right edge. A downward camera adjustment is pending. See
+right edge. User confirms the camera also holds the caster and cannot tilt.
+A bounded background-band framing adjustment passes 92 tests but another run
+still stops on a deep dark band. Tighter, slower large-error turns are now
+installed and pass 93 tests; their physical corner trial is pending. See
 [corner test report](argus_avoidance/reports/CORNER-CHECK.md). A completed
 untethered floor trial remains unverified.
 
@@ -46,16 +49,22 @@ and GPIO state remains stopped/zero until an explicit phone Start. USB data
 and laptop Ethernet are not part of the driving-command path. Phone controls
 pass motors-off and raised-wheel tests; the untethered floor check remains.
 
-## After tape following: camera obstacle warning and stop
+## Main goal: assisted manual driving
 
-Justin wants the camera to warn and stop or steer around obstacles. First build
-a stationary detection preview with timestamped frames, bounding boxes, inference
+Justin clarifies that the original goal is manual driving: the camera warns
+the driver and stops the robot when it detects an obstacle. Line following is
+a separate demo. Automatic detours are not the immediate priority. Camera
+obstacle protection is not currently installed in manual mode.
+
+First build a stationary detection preview with timestamped frames, bounding boxes, inference
 latency and recorded examples from the actual camera. Evaluate cables, shoes,
 small dark objects and floor shadows; a class detector will miss unknown objects.
 
-Then add a stop gate in the shared automatic command path. A detected hazard
-in the robot's intended path, a stale frame or a detector fault should stop and
-require a deliberate restart. Validate with motors off, raised wheels, and slow
+Then add an explicit assisted-manual mode with a stop gate in the shared drive
+path. A detected hazard, stale frame or detector fault in that mode should stop,
+show a warning on the phone, and reject further drive commands until the view
+is clear and the driver deliberately re-enables control. Keep any unprotected
+standalone manual fallback clearly labeled. Validate with motors off, raised wheels, and slow
 supervised trials against soft obstacles. Record false detections and misses.
 A monocular camera alone does not establish reliable distance or a clear path.
 

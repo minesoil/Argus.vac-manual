@@ -1,6 +1,6 @@
 # Phone start for the tape follower
 
-Status, 2026-11-09: ESP32 upload hash verified; 88 tests pass on the actual Pi.
+Status, 2026-11-09: ESP32 upload hash verified; 93 tests pass on the actual Pi.
 The GPIO bridge is restarted and reports stopped/zero. Real phone Start/Stop
 and phone-lock stop now pass with motor power OFF, and the adjusted tape view
 is clear on a continuous strip. Bank-powered GPIO operation and raised-wheel

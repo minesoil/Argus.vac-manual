@@ -95,6 +95,12 @@ class ESP32AutoClient:
 def wheel_percentages(error):
     if not math.isfinite(error) or not -1 <= error <= 1:
         raise ValueError("Steering error must be finite and between minus one and one")
+    if abs(error) > 0.35:
+        # A wide forward arc loses a sharp corner from the fixed camera view.
+        # Reduce forward travel, reaching an inside-wheel stop at large error.
+        # This still requires a fresh, confidently detected path each frame.
+        inside = max(0, round(17 * (0.65 - abs(error)) / 0.30))
+        return (inside, 25) if error < 0 else (25, inside)
     correction = 0
     if abs(error) > 0.10:
         correction = max(1, round(abs(error) * 10))

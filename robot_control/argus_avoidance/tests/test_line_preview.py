@@ -161,6 +161,32 @@ class TapePreviewTests(unittest.TestCase):
         image[340:400] = 210
         self.assertEqual(line_preview.decide_tape(image).state, "STOP")
 
+    def test_shallow_separate_camera_edge_preserves_offset_tape(self):
+        image = self.floor()
+        image[364:402] = 15
+        cv2.line(image, (520, 420), (590, 479), (15, 15, 15), 28)
+        result = line_preview.decide_tape(image)
+        self.assertEqual(result.state, "RIGHT")
+        self.assertGreater(result.confidence, 0.9)
+
+    def test_edge_trim_does_not_hide_a_gap_below_the_edge(self):
+        image = self.floor()
+        image[364:390] = 15
+        cv2.line(image, (320, 400), (320, 479), (15, 15, 15), 28)
+        image[424:453] = 210
+        self.assertEqual(line_preview.decide_tape(image).state, "STOP")
+
+    def test_connected_crossbar_is_not_cropped_away(self):
+        image = self.stripe(self.floor(), 320)
+        image[364:390] = 15
+        self.assertEqual(line_preview.decide_tape(image).state, "STOP")
+
+    def test_deep_dark_band_does_not_become_a_new_floor(self):
+        image = self.floor()
+        image[364:435] = 15
+        cv2.line(image, (320, 450), (320, 479), (15, 15, 15), 28)
+        self.assertEqual(line_preview.decide_tape(image).state, "STOP")
+
     def test_blue_and_white_tape_are_explicit_options(self):
         blue = self.stripe(self.floor(), 320, (230, 40, 30))
         white = self.stripe(self.floor(25), 320, (235, 235, 235))

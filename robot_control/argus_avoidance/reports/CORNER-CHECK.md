@@ -41,3 +41,43 @@ continue blindly or relax gap checks to force this view to pass.
 
 Private diagnostic frames stay local in .tmp/corner-check and on the Pi under
 .tools/corner-check. They are not included in the public report.
+
+## Fixed mounting constraint and framing adjustment
+
+Justin confirms that the camera assembly also holds the caster. It cannot be
+tilted independently without structural changes. Preserve the mount.
+
+An upward crop extension fails because it includes more dark background. A
+simple narrower crop accepts the original gapped frame as well, so it was not
+deployed. Instead, usable_floor excludes only a shallow, separate dark band
+touching the top and both sides of the original floor ROI, with at least half
+the rows and 48 rows retained. Joined tape, deep patches, crossings and gaps
+retain the normal stop rules. This is framing for the tape demo, not obstacle
+clearance detection.
+
+Saved-frame regression: original gap STOP, joined tape FORWARD/confidence 1.0,
+post-turn tape RIGHT/error +0.712/confidence 0.944. Four new regression tests
+cover the isolated band, a gap below it, a connected crossbar and a deep band.
+All 92 tests pass locally and on Pi. Two-second live stationary preview returns
+RIGHT consistently with 0.94–0.96 confidence. User attempts a short floor run;
+it turns a little and stops again. Logs show excessive dark coverage. The next
+frame's band reaches 63 of 116 rows, beyond the permitted trim; the tape itself
+covers only 35.3% of the original band. The stop gate remains intact.
+
+## Tighter turns, awaiting physical verification
+
+The original large-error command keeps both wheels moving quickly (e.g.32/18),
+creating a wide arc. A revised wheel law reduces forward motion for |error|>0.35;
+the outside wheel is 25%, the inside wheel decreases smoothly to zero at 0.65.
+Small corrections and all camera freshness, Stop, ownership and lease checks
+are unchanged. No reverse or blind-search motion is added.
+
+A test sweeps large errors to verify mirrored left/right commands, bounds,
+decreasing forward travel and increasing turn curvature. All 93 tests pass
+locally and on the actual Pi. User confirms motor OFF; code installed, bridge
+restarted. Repositioning onto the straight section before the corner is pending
+before the next drive. A successful sharp-corner or untethered run is not claimed.
+
+Justin reiterates the primary goal: manual driving with camera obstacle warning
+and automatic stop. This remains separate, unimplemented work; these tape tests
+do not provide obstacle protection to manual driving.

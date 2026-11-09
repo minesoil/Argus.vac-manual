@@ -180,8 +180,8 @@ class FollowClientTests(unittest.TestCase):
 
     def test_wheel_percentages_and_invalid_inputs(self):
         self.assertEqual(wheel_percentages(0), (25, 25))
-        self.assertEqual(wheel_percentages(-1), (15, 35))
-        self.assertEqual(wheel_percentages(1), (35, 15))
+        self.assertEqual(wheel_percentages(-1), (0, 25))
+        self.assertEqual(wheel_percentages(1), (25, 0))
         for error in (math.nan, math.inf, 2):
             with self.assertRaises(ValueError):
                 wheel_percentages(error)
@@ -194,6 +194,20 @@ class FollowClientTests(unittest.TestCase):
         self.assertEqual(wheel_percentages(-0.11), (24, 26))
         self.assertEqual(wheel_percentages(0.11), (26, 24))
         self.assertEqual(wheel_percentages(0.09), (25, 25))
+
+    def test_large_offsets_reduce_forward_travel_and_tighten_turn(self):
+        previous_ratio = 0.0
+        previous_sum = 50
+        for i in range(36, 101):
+            error = i / 100
+            left, right = wheel_percentages(error)
+            self.assertEqual((right, left), wheel_percentages(-error))
+            self.assertTrue(0 <= right <= left <= 35)
+            self.assertLessEqual(left + right, previous_sum)
+            ratio = (left - right) / (left + right)
+            self.assertGreaterEqual(ratio, previous_ratio)
+            previous_ratio, previous_sum = ratio, left + right
+        self.assertEqual(wheel_percentages(0.71), (25, 0))
 
 
 if __name__ == "__main__":
