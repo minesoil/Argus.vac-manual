@@ -9,6 +9,12 @@ frames but rejects the initial view as too broadly dark. User phone Start/Stop
 and untethered floor tests remain pending. This supersedes the disconnected
 and upload-pending state in the earlier deployment section below.
 
+The user now confirms START LINE FOLLOWING appears on the phone, starts AUTO,
+and STOP returns it to STOPPED. GPIO verifies zero outputs afterward. Locking
+the phone during another motors-off session also returns it to STOPPED. Tape
+preview is now clear (offset -0.04, confidence 0.91). These verify software
+control with motor power OFF; restored bank power and physical trials remain.
+
 This folder records source, tests, wiring documentation and progress. The
 existing website/manual outside this folder preserves earlier project history.
 

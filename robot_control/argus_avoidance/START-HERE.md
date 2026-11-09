@@ -15,8 +15,9 @@ cannot see a continuous strip of tape, it refuses to drive. Press STOP before
 retrying a failed start. No camera obstacle detection is installed in this demo.
 
 Commissioning status: the ESP32 upload is hash verified and all 88 software tests
-pass on the Pi. The real phone button, operator Stop and untethered floor checks
-still need to be completed. Keep motor power off for the first phone test.
+pass on the Pi. The real phone Start, operator Stop and phone-lock stop checks
+have passed with motor power OFF. Raised-wheel and untethered floor checks
+remain pending.
 
 The current bridge uses `/dev/ttyS0`, not USB data. ESP USB is temporarily plugged
 into the Pi for the upload; the planned bank-powered arrangement needs restoring
