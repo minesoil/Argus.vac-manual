@@ -81,3 +81,12 @@ before the next drive. A successful sharp-corner or untethered run is not claime
 Justin reiterates the primary goal: manual driving with camera obstacle warning
 and automatic stop. This remains separate, unimplemented work; these tape tests
 do not provide obstacle protection to manual driving.
+
+Final trial: after repositioning, camera reports FORWARD -0.08/confidence 0.99–1.0.
+User runs the tighter-turn version and observes sharper turning, then another
+early stop. Logs show RIGHT errors +0.51 through +0.55, confidence declining
+0.85 to0.76, followed by "Too much of the floor matches the tape colour".
+Final GPIO state is STOPPED/zero. User delegates when to stop tape testing;
+assistant stops it here to prioritize assisted manual warning/braking. No
+successful complete sharp-corner or untethered floor run is claimed. Ethernet
+remained connected during the reported floor tests.

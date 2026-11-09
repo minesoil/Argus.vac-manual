@@ -15,7 +15,10 @@ early: the next image has too little floor visible and tape leaving the lower
 right edge. User confirms the camera also holds the caster and cannot tilt.
 A bounded background-band framing adjustment passes 92 tests but another run
 still stops on a deep dark band. Tighter, slower large-error turns are now
-installed and pass 93 tests; their physical corner trial is pending. See
+installed and pass 93 tests. The next physical trial turns more sharply but
+still stops early on excessive dark coverage. Justin leaves the decision on
+further tape testing to the assistant; we stop tape commissioning here and
+prioritize assisted manual driving. See
 [corner test report](argus_avoidance/reports/CORNER-CHECK.md). A completed
 untethered floor trial remains unverified.
 
@@ -55,6 +58,9 @@ Justin clarifies that the original goal is manual driving: the camera warns
 the driver and stops the robot when it detects an obstacle. Line following is
 a separate demo. Automatic detours are not the immediate priority. Camera
 obstacle protection is not currently installed in manual mode.
+
+[Next implementation plan](MANUAL-ASSIST-PLAN.md): stationary detection preview,
+then phone warning and a latched stop gate, then motors-off/raised-wheel checks.
 
 First build a stationary detection preview with timestamped frames, bounding boxes, inference
 latency and recorded examples from the actual camera. Evaluate cables, shoes,
