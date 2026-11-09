@@ -1,22 +1,23 @@
 # Argus robot progress — 2026-11-09
 
-Latest commissioning update: Justin reconnects the Pi and ESP32 and confirms
-motor power OFF. ESP32 identity matches the recorded MAC. The prepared phone
-Start application uploads successfully, with esptool's data hash verified.
-All 88 tests pass using /usr/bin/python3 on the actual Pi. The restarted GPIO
-bridge reports STOPPED and zero wheel outputs. Camera preview receives fresh
-frames but rejects the initial view as too broadly dark. User phone Start/Stop
-and untethered floor tests remain pending. This supersedes the disconnected
-and upload-pending state in the earlier deployment section below.
+Phone Start firmware is installed and hash verified. All 88 tests pass on the
+actual Pi. The real phone Start/Stop and phone-lock stop checks pass; after
+restoring ESP USB power to the bank, both raised wheels turn forward from
+phone Start and stop on command. The Pi camera/bridge start automatically.
 
-The user now confirms START LINE FOLLOWING appears on the phone, starts AUTO,
-and STOP returns it to STOPPED. GPIO verifies zero outputs afterward. Locking
-the phone during another motors-off session also returns it to STOPPED. Tape
-preview is now clear (offset -0.04, confidence 0.91). These verify software
-control with motor power OFF; restored bank power and physical trials remain.
+A phone-started floor trial, with Ethernet still connected, stops automatically
+near the angled tape. Logs confirm tape-continuity loss, not a session timer.
+A stationary frame shows separate straight/diagonal tape components; the lower
+piece covers 60.3% of the 116-row analysis band, below the required 70%.
+Justin keeps the sharp corner and overlaps the joins; the stationary tape view
+then passes at confidence 1.0. Another tethered run starts turning but stops
+early: the next image has too little floor visible and tape leaving the lower
+right edge. A downward camera adjustment is pending. See
+[corner test report](argus_avoidance/reports/CORNER-CHECK.md). A completed
+untethered floor trial remains unverified.
 
 This folder records source, tests, wiring documentation and progress. The
-existing website/manual outside this folder preserves earlier project history.
+dashboard and archive outside this folder provide access to earlier project history.
 
 ## Confirmed physical results
 
@@ -38,11 +39,12 @@ a phone heartbeat watchdog, operator Stop and manual takeover. Local validation:
 88 Python tests, actual-sketch C++ route/control tests, and browser race tests
 passed. Target ESP32 firmware compiled successfully (938244 bytes).
 
-The updated Pi modules were copied on November 8 and argus-bridge.service was
-stopped. An attempted Pi test used a missing interpreter path and did not run.
-The ESP32 upload and all new live tests remain pending. On November 9 the laptop
-Ethernet link is disconnected; Justin cannot reconnect now. This prevents
-finishing installation. Do not enable motor power as a substitute for these checks.
+On November 9, the ESP32 application upload passes esptool's data-hash check.
+The actual service uses /usr/bin/python3 and /dev/ttyS0; its 88 tests pass.
+After reboot with ESP USB powered from the bank, the camera/bridge autostart
+and GPIO state remains stopped/zero until an explicit phone Start. USB data
+and laptop Ethernet are not part of the driving-command path. Phone controls
+pass motors-off and raised-wheel tests; the untethered floor check remains.
 
 ## After tape following: camera obstacle warning and stop
 
