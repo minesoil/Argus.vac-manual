@@ -12,37 +12,31 @@
 <body>
   <a class="skip" href="#viewer">Skip to file</a>
   <header class="topbar">
-    <a class="brand" href="#"><span class="brand-icon" aria-hidden="true">A<span>·</span></span><span>ARGUS<small>PROJECT WORKSPACE</small></span></a>
-    <div class="header-right"><span class="readonly">Repository viewer</span><a id="repo-link" href="https://github.com/minesoil/Argus.vac-manual" target="_blank" rel="noopener">GitHub ↗</a></div>
+    <a class="brand" href="#">Argus<span>Vacuum robot project</span></a>
+    <div class="header-right"><a id="repo-link" href="https://github.com/minesoil/Argus.vac-manual" target="_blank" rel="noopener">GitHub ↗</a></div>
   </header>
   <main>
     <section class="intro">
-      <div><p class="eyebrow">THE BUILD, IN ONE PLACE</p><h1>A clearer view of Argus.</h1><p class="intro-copy">Explore the code, understand the decisions, and see what’s actually been tested.</p></div>
-      <div class="sync"><span class="sync-dot"></span><span id="sync-label" role="status">Loading repository…</span><button id="refresh" title="Reload the latest repository files">Refresh ↻</button></div>
+      <div><h1>Files & notes</h1><p class="intro-copy">Code, wiring, tests, and progress on Argus.</p></div>
+      <div class="sync"><span id="sync-label" role="status">Loading repository…</span><button id="refresh" title="Reload the latest repository files">Refresh</button></div>
     </section>
-    <section class="milestones" aria-label="Project milestones">
-      <a class="milestone" href="#file=robot_control%2FPROJECT-STATUS.md"><span class="step">01 / PHYSICAL CHECK</span><strong>Tape following</strong><span class="badge good">Short floor run verified</span><p>A two-second run followed the tape and stopped.</p></a>
-      <a class="milestone" href="#file=robot_control%2Fargus_avoidance%2FPHONE-START-DESIGN.md"><span class="step">02 / CURRENT WORK</span><strong>Phone start</strong><span class="badge pending">Installation pending</span><p>Local tests pass. Upload and live checks remain.</p></a>
-      <a class="milestone" href="#file=robot_control%2FPROJECT-STATUS.md"><span class="step">03 / NEXT MILESTONE</span><strong>See it. Warn. Stop.</strong><span class="badge planned">Planned</span><p>Camera obstacle detection, then verified clearance.</p></a>
-    </section>
-    <p class="status-note">Milestone snapshot · 9 Nov 2026 · These are recorded test results, not live robot telemetry. <a href="#file=robot_control%2FPROJECT-STATUS.md">Read the evidence ↗</a></p>
+    <aside class="build-note" aria-label="Last recorded progress"><time datetime="2026-11-09">9 Nov 2026</time><p>The short tape-following test worked. Phone start still needs uploading and checking on the robot.</p><a href="#file=robot_control%2FPROJECT-STATUS.md">Progress notes →</a></aside>
     <section class="workspace" aria-label="Repository browser">
       <aside class="sidebar">
         <div class="sidebar-heading"><h2>Project files</h2><span id="file-count" class="count">—</span></div>
         <label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Find a file…" aria-label="Search file names and paths" autocomplete="off"><kbd>/</kbd></label>
         <div class="filters" role="group" aria-label="Filter files"><button class="active" data-filter="all" aria-pressed="true">All</button><button data-filter="docs" aria-pressed="false">Docs</button><button data-filter="code" aria-pressed="false">Code</button><button data-filter="tests" aria-pressed="false">Tests</button></div>
         <nav id="file-tree" aria-label="Files"><p class="empty">Loading files…</p></nav>
-        <div class="sidebar-footer">One source of truth.<br><span>Files come directly from this repository.</span></div>
       </aside>
       <article class="viewer" id="viewer" tabindex="-1">
         <div class="file-heading"><div class="file-title"><p id="breadcrumb" class="eyebrow">ARGUS / REPOSITORY</p><h2 id="file-name">Opening project status…</h2><p id="file-meta" class="file-meta"></p></div><a id="github-file" class="button" href="https://github.com/minesoil/Argus.vac-manual" target="_blank" rel="noopener">Open in GitHub ↗</a></div>
         <div class="viewer-toolbar"><div class="tabs" role="group" aria-label="File view"><button id="preview-tab" class="active" aria-pressed="true">Formatted</button><button id="source-tab" aria-pressed="false">Source</button></div><div class="file-actions"><button id="copy">Copy</button><a id="download" download>Raw file ↗</a></div></div>
         <div id="notice" class="notice" role="status" hidden></div>
         <div id="file-content" class="file-content" aria-busy="true"><p class="empty">Fetching the latest files…</p></div>
-        <section class="explanation" aria-labelledby="explanation-title"><div class="explain-icon" aria-hidden="true">i</div><div><p class="eyebrow">UNDERSTAND THIS FILE</p><h3 id="explanation-title">What you’re looking at</h3><p id="file-explanation">Select a file to see its role in Argus.</p><p id="explanation-origin" class="explanation-origin"></p></div></section>
+        <section class="explanation" aria-labelledby="explanation-title"><h3 id="explanation-title">About this file</h3><p id="file-explanation">Select a file to see what it does.</p><p id="explanation-origin" class="explanation-origin"></p></section>
       </article>
     </section>
-    <footer><span>ARGUS VAC <span class="footer-dot">/</span> Build. Test. Record.</span><span>No motor controls on this page.</span></footer>
+    <footer><span>Argus · Justin’s build notes</span><span>Repository files, not live robot data.</span></footer>
   </main>
 </body>
 </html>
