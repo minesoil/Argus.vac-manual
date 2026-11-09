@@ -1,0 +1,233 @@
+{
+  "ref": "5287f98aeed327e59bbe068f0f162f3f81e00a1c",
+  "files": [
+    {
+      "path": "README.md",
+      "size": 18
+    },
+    {
+      "path": "index.html",
+      "size": 76599
+    },
+    {
+      "path": "robot_control/PROJECT-STATUS.md",
+      "size": 3397
+    },
+    {
+      "path": "robot_control/argus_avoidance/.vscode/tasks.json",
+      "size": 780
+    },
+    {
+      "path": "robot_control/argus_avoidance/PHONE-START-DESIGN.md",
+      "size": 2622
+    },
+    {
+      "path": "robot_control/argus_avoidance/PI-ESP32-WIRING.md",
+      "size": 2896
+    },
+    {
+      "path": "robot_control/argus_avoidance/README.md",
+      "size": 7669
+    },
+    {
+      "path": "robot_control/argus_avoidance/Run-Checks.ps1",
+      "size": 1051
+    },
+    {
+      "path": "robot_control/argus_avoidance/START-HERE.md",
+      "size": 6882
+    },
+    {
+      "path": "robot_control/argus_avoidance/argus",
+      "size": 1597
+    },
+    {
+      "path": "robot_control/argus_avoidance/argus_avoidance/__init__.py",
+      "size": 83
+    },
+    {
+      "path": "robot_control/argus_avoidance/argus_avoidance/bench.py",
+      "size": 2823
+    },
+    {
+      "path": "robot_control/argus_avoidance/argus_avoidance/core.py",
+      "size": 11804
+    },
+    {
+      "path": "robot_control/argus_avoidance/argus_avoidance/follow.py",
+      "size": 7621
+    },
+    {
+      "path": "robot_control/argus_avoidance/argus_avoidance/line_preview.py",
+      "size": 13013
+    },
+    {
+      "path": "robot_control/argus_avoidance/argus_avoidance/node.py",
+      "size": 15770
+    },
+    {
+      "path": "robot_control/argus_avoidance/argus_avoidance/serial_control.py",
+      "size": 4568
+    },
+    {
+      "path": "robot_control/argus_avoidance/argus_avoidance/simulate.py",
+      "size": 17320
+    },
+    {
+      "path": "robot_control/argus_avoidance/argus_avoidance/usb_bridge.py",
+      "size": 5325
+    },
+    {
+      "path": "robot_control/argus_avoidance/config/avoidance.yaml",
+      "size": 904
+    },
+    {
+      "path": "robot_control/argus_avoidance/config/preview_guard.yaml",
+      "size": 699
+    },
+    {
+      "path": "robot_control/argus_avoidance/config/preview_guard_humble.yaml",
+      "size": 615
+    },
+    {
+      "path": "robot_control/argus_avoidance/config/simulation.yaml",
+      "size": 643
+    },
+    {
+      "path": "robot_control/argus_avoidance/launch/avoidance.launch.py",
+      "size": 1795
+    },
+    {
+      "path": "robot_control/argus_avoidance/launch/guarded_preview.launch.py",
+      "size": 2207
+    },
+    {
+      "path": "robot_control/argus_avoidance/package.xml",
+      "size": 903
+    },
+    {
+      "path": "robot_control/argus_avoidance/reports/ORANGE-PI-CHECK.md",
+      "size": 2024
+    },
+    {
+      "path": "robot_control/argus_avoidance/reports/TAPE-PREVIEW-CHECK.md",
+      "size": 6471
+    },
+    {
+      "path": "robot_control/argus_avoidance/reports/VERIFICATION.md",
+      "size": 2863
+    },
+    {
+      "path": "robot_control/argus_avoidance/reports/standalone-simulation.json",
+      "size": 235912
+    },
+    {
+      "path": "robot_control/argus_avoidance/resource/argus_avoidance",
+      "size": 1
+    },
+    {
+      "path": "robot_control/argus_avoidance/setup.cfg",
+      "size": 99
+    },
+    {
+      "path": "robot_control/argus_avoidance/setup.py",
+      "size": 772
+    },
+    {
+      "path": "robot_control/argus_avoidance/systemd/argus-bridge-avoidance.conf",
+      "size": 407
+    },
+    {
+      "path": "robot_control/argus_avoidance/tests/test_adapter.py",
+      "size": 9647
+    },
+    {
+      "path": "robot_control/argus_avoidance/tests/test_core.py",
+      "size": 8962
+    },
+    {
+      "path": "robot_control/argus_avoidance/tests/test_follow.py",
+      "size": 8483
+    },
+    {
+      "path": "robot_control/argus_avoidance/tests/test_line_preview.py",
+      "size": 8220
+    },
+    {
+      "path": "robot_control/argus_avoidance/tests/test_serial_control.py",
+      "size": 3473
+    },
+    {
+      "path": "robot_control/argus_avoidance/tests/test_simulation.py",
+      "size": 3608
+    },
+    {
+      "path": "robot_control/argus_avoidance/tests/test_usb_bridge.py",
+      "size": 3919
+    },
+    {
+      "path": "robot_control/argus_avoidance/tools/build_replay.py",
+      "size": 1275
+    },
+    {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/.gitignore",
+      "size": 38
+    },
+    {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/ControlPacketParser.h",
+      "size": 1510
+    },
+    {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/DriveControl.h",
+      "size": 2608
+    },
+    {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/PhoneStart.h",
+      "size": 1228
+    },
+    {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/README.md",
+      "size": 5498
+    },
+    {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/VERIFICATION.md",
+      "size": 1865
+    },
+    {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/config.h.example",
+      "size": 172
+    },
+    {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/esp32_wifi_controlcam_auto.ino",
+      "size": 28184
+    },
+    {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/tests/browser_check.js",
+      "size": 5410
+    },
+    {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/tests/host_check.cpp",
+      "size": 13632
+    },
+    {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/tests/phone_start_check.cpp",
+      "size": 1062
+    },
+    {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/tests/stubs/Arduino.h",
+      "size": 1374
+    },
+    {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/tests/stubs/WebServer.h",
+      "size": 1374
+    },
+    {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/tests/stubs/WiFi.h",
+      "size": 252
+    },
+    {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/tests/stubs/config.h",
+      "size": 150
+    }
+  ]
+}

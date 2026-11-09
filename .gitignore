@@ -1,0 +1,13 @@
+# Local settings and generated files never belong in the public dashboard.
+**/__pycache__/
+*.pyc
+.tmp/
+node_modules/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.bin
+*.elf
+robot_control/firmware/esp32_wifi_controlcam_auto/config.h
