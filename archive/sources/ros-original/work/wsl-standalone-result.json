@@ -1,0 +1,10 @@
+﻿{
+    "Started":  "2026-09-30T20:50:16.5638176+08:00",
+    "BootTime":  "2026-09-30T19:05:32.5000000+08:00",
+    "Status":  "Installed",
+    "MsiExitCode":  0,
+    "VirtualMachinePlatform":  "Enabled",
+    "RestartNeeded":  true,
+    "Error":  null,
+    "Finished":  "2026-09-30T20:50:50.4429077+08:00"
+}

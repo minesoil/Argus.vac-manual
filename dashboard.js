@@ -7,13 +7,13 @@ const DEFAULT_FILE = 'robot_control/PROJECT-STATUS.md';
 const CACHE_KEY = `argus-tree-v1:${REPO}:${BRANCH}`;
 const MAX_TEXT = 1024 * 1024;
 const $ = id => document.getElementById(id);
-const state = { files: [], ref: BRANCH, selected: '', text: '', filter: 'all', source: false, request: 0, ready: false };
+const state = { files: [], ref: BRANCH, selected: '', text: '', filter: 'all', source: false, request: 0, ready: false, archive: {} };
 const codeExtensions = new Set(['py','js','ts','cpp','c','h','ino','json','yaml','yml','cfg','conf','xml','html','css','ps1','sh','toml','example']);
 const imageExtensions = new Set(['png','jpg','jpeg','gif','webp','svg','avif']);
 function ext(path) { return path.split('/').pop().split('.').pop().toLowerCase(); }
 function fileKind(path) {
   if (/(^|\/)(tests?|stubs)(\/|$)/i.test(path) || /(?:^|\/)(test_|.*_check\.)/.test(path)) return 'tests';
-  if (['md','txt','rst'].includes(ext(path))) return 'docs';
+  if (['md','txt','rst','pdf','docx','pptx','xlsx'].includes(ext(path))) return 'docs';
   return codeExtensions.has(ext(path)) || path.endsWith('/argus') ? 'code' : 'other';
 }
 function encodedPath(path) { return path.split('/').map(encodeURIComponent).join('/'); }
@@ -117,6 +117,11 @@ const explanations = {
   'config.h.example': 'A public template for local Wi-Fi settings. Copy it to config.h privately; never commit real passwords or compiled images containing them.'
 };
 function explain(path) {
+  if(path.startsWith('archive/')) {
+    const record=state.archive[path];
+    if(record) return [`Historical record from ${record.source}. ${record.date?'Source date: '+record.date.slice(0,10)+'. ':''}${record.status}. ${record.redactions&&Object.keys(record.redactions).length?'This public copy has privacy redactions. ':''}Older wiring, AI answers and simulator reports must be checked against the current build notes.`, `Archive record ${record.id}. Original title: ${record.title}`];
+    return ['The project archive contains older conversations, notes, images, designs and reports. Its index records sources, dates, aliases and omissions. Older plans and AI answers do not establish what is installed or tested on Argus today.', 'See archive/README.md for collection limits and source groups.'];
+  }
   const name=path.split('/').pop();
   if(explanations[name]) return [explanations[name], 'Project-maintained explanation.'];
   if(fileKind(path)==='tests') return ['A software test or test fixture. It checks behavior without proving physical robot performance. Read the cases and assertions to see exactly what is covered.', 'Explanation inferred from the file’s test directory or name.'];
@@ -127,7 +132,7 @@ function explain(path) {
 }
 function renderFiles() {
   const query=$('search').value.toLowerCase().trim();
-  const files=state.files.filter(f=>(state.filter==='all'||fileKind(f.path)===state.filter)&&f.path.toLowerCase().includes(query));
+  const files=state.files.filter(f=>(state.filter==='all'||(state.filter==='archive'?f.path.startsWith('archive/'):fileKind(f.path)===state.filter))&&(f.path+' '+(state.archive[f.path]?.title||'')).toLowerCase().includes(query));
   $('file-count').textContent=`${files.length} / ${state.files.length}`;
   const tree=$('file-tree');tree.replaceChildren();
   const groups=new Map([['',tree]]);
@@ -143,6 +148,9 @@ function renderContent() {
   const type=ext(state.selected);
   if(imageExtensions.has(type) && !state.source){const img=el('img');img.src=rawURL(state.selected);img.alt=state.selected;img.onerror=()=>setNotice('Image could not be loaded. Open the raw file to inspect it.');area.append(img);}
   else if(imageExtensions.has(type))area.append(el('p','Image source is available through Raw file.','empty'));
+  else if(['mp3','m4a','wav','ogg'].includes(type)) {const audio=el('audio');audio.controls=true;audio.preload='none';audio.src=rawURL(state.selected);area.append(audio);}
+  else if(type==='pdf') {const frame=el('iframe');frame.title='PDF preview';frame.src=rawURL(state.selected);frame.setAttribute('sandbox','');area.append(frame);area.append(el('p','If your browser cannot display the PDF, use Raw file.'));}
+  else if(!state.text && !['md','txt'].includes(type)) {area.append(el('p','Use Raw file to download this format.','empty'));const record=state.archive[state.selected];if(record?.readable){const a=el('a','Read the extracted text →');a.href='#file='+encodeURIComponent(record.readable);area.append(a);}}
   else if(type==='md'&&!state.source)area.append(markdown(state.text,state.selected));
   else area.append(codeView(state.text,!state.source&&fileKind(state.selected)==='code'));
 }
@@ -151,11 +159,12 @@ async function openFile(path) {
   state.selected=path;state.text='';state.ready=false;renderFiles();
   $('file-name').textContent=path.split('/').pop();$('breadcrumb').textContent=path.includes('/')?path.slice(0,path.lastIndexOf('/')):'REPOSITORY ROOT';$('file-meta').textContent='Loading…';
   $('github-file').href=githubURL(path);$('download').href=rawURL(path);$('copy').disabled=true;
-  const [explanation,origin]=explain(path);$('file-explanation').textContent=explanation;$('explanation-origin').textContent=origin;
+    const [explanation,origin]=explain(path);$('file-explanation').textContent=explanation;$('explanation-origin').textContent=origin;
   const area=$('file-content');area.setAttribute('aria-busy','true');area.replaceChildren(el('p','Loading file…','empty'));setNotice('');
   try {
     const file=state.files.find(f=>f.path===path);if(!file)throw Error('This path is not in the current repository. Choose a file from the browser.');
     if(imageExtensions.has(ext(path))){state.ready=true;$('file-meta').textContent=`Image · ${Math.ceil((file.size||0)/1024)} KB`;renderContent();return;}
+    if(['pdf','mp3','m4a','wav','ogg','pptx','docx','xlsx','stl','step','stp','shapr','fzz','fz','fzpz','iam','ipt','tflite','pgm','dae','ico'].includes(ext(path))){state.ready=true;$('file-meta').textContent=`${ext(path).toUpperCase()} · ${Math.ceil((file.size||0)/1024)} KB`;renderContent();return;}
     if(file.size>MAX_TEXT)throw Error('This file is larger than the 1 MB preview limit. Open it in GitHub or use Raw file.');
     const response=await fetch(rawURL(path));if(!response.ok)throw Error(`GitHub returned ${response.status}. Try Refresh or open the file in GitHub.`);
     const text=await response.text();if(request!==state.request)return;
@@ -185,6 +194,9 @@ async function loadRepository() {
     if(!state.files.length){$('sync-label').textContent='GitHub unavailable';$('file-tree').replaceChildren(el('p','Cannot load files. Try Refresh or open GitHub.','empty'));$('file-content').replaceChildren(el('p','Repository unavailable. Check your connection and try Refresh.','empty'));$('file-content').setAttribute('aria-busy','false');$('refresh').disabled=false;return;}
   }
   state.files.sort((a,b)=>a.path.localeCompare(b.path));
+  if(state.files.some(f=>f.path==='archive/manifest.json')) {
+    try {const manifest=await jsonFetch(rawURL('archive/manifest.json'));state.archive={};for(const record of manifest.records){if(record.path&&!state.archive[record.path])state.archive[record.path]=record;if(record.readable&&!state.archive[record.readable])state.archive[record.readable]=record;}}catch{/* File browsing still works if archive metadata is unavailable. */}
+  }
   $('sync-label').textContent=`${source} · ${state.ref.slice(0,7)}`;
   $('refresh').disabled=false;route();
   if(source!=='GitHub')setNotice('GitHub is unavailable or rate limited. Showing an older file listing; use Refresh to retry.');

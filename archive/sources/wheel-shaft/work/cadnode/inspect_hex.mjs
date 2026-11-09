@@ -1,0 +1,16 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import init from 'replicad-opencascadejs';
+import * as r from 'replicad';
+import {buildExternal,dims} from './hex_external.mjs';
+const oc=await init({wasmBinary:fs.readFileSync(new URL('./node_modules/replicad-opencascadejs/dist/replicad_single.wasm',import.meta.url))});r.setOC(oc);
+const original=await r.importSTEP(new Blob([fs.readFileSync('../original_output.step')]));
+const {part,base,lowerBox,zHex,zTip}=buildExternal(original);
+const a=new oc.BRepCheck_Analyzer(part.wrapped,true,false);assert(a.IsValid());assert.equal(part.solids.length,1);
+const outsideSocket=r.makeCylinder(12,6,[0,0,zHex]).cut(r.drawPolysides(12/Math.sqrt(3),6).sketchOnPlane('XY',zHex).extrude(6));
+assert(Math.abs(r.measureVolume(part.clone().intersect(outsideSocket)))<1e-6);
+assert(Math.abs(r.measureVolume(base.clone().cut(part.clone())))<1e-6);
+assert(Math.abs(r.measureVolume(part.clone().intersect(lowerBox()).cut(base.clone())))<1e-6);
+fs.writeFileSync('../hex_external.step',Buffer.from(await part.blobSTEP().arrayBuffer()));
+fs.writeFileSync('../hex_external_mesh.json',JSON.stringify(part.mesh({tolerance:.02,angularTolerance:.06})));
+console.log(JSON.stringify({...dims,zHex,zTip,valid:true,nominal12mmSocketClears:true,overallHeight:zTip+4.2},null,2));

@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-07",
+  "scope": "simulator only",
+  "tests": {
+    "circular_robot_goal": {
+      "status": 4,
+      "error_code": 0
+    },
+    "map_save": true,
+    "manual_hold_and_release": {
+      "movement_m": 0.14618799997488358,
+      "released_speed_m_s": 3.102552933766603e-16
+    },
+    "input_timeout_stop": true,
+    "bridge_eof_cleanup": true
+  },
+  "passed": true
+}

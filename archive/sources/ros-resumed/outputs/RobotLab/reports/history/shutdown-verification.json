@@ -1,0 +1,10 @@
+{
+  "Checks": [
+    "Stop removes Gazebo and camera viewer processes",
+    "Fresh ROS discovery is empty after shutdown",
+    "Restart uses the single-simulator lock"
+  ],
+  "Scope": "Launcher-owned simulation",
+  "Cleanup": "Tracked child process identities with bounded signal escalation",
+  "Passed": true
+}

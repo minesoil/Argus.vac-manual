@@ -1,0 +1,644 @@
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="vacuum">
+  <xacro:arg name="controllers_file" default="$(find vacuum_sim)/config/controllers.yaml" />
+  <xacro:arg name="camera_width" default="320" />
+  <xacro:arg name="camera_height" default="240" />
+  <xacro:arg name="camera_rate" default="60" />
+  <xacro:property name="wheel_radius" value="0.035" />
+  <xacro:property name="wheel_separation" value="0.22" />
+  <xacro:property name="wheel_width" value="0.025" />
+  <xacro:property name="body_x" value="0.30" />
+  <xacro:property name="body_y" value="0.25" />
+  <xacro:property name="body_z" value="0.08" />
+  <xacro:property name="body_mass" value="3.0" />
+  <material name="acrylic">
+    <color rgba=".17 .70 .77 .55" />
+  </material>
+  <material name="rubber">
+    <color rgba=".055 .065 .075 1" />
+  </material>
+  <material name="sensor">
+    <color rgba=".08 .10 .14 1" />
+  </material>
+  <link name="base_footprint" />
+  <joint name="base_joint" type="fixed">
+    <parent link="base_footprint" />
+    <child link="base_link" />
+    <origin xyz="-0.03 0 0.116" />
+  </joint>
+  <link name="base_link">
+    <inertial>
+      <mass value="${body_mass}" />
+      <inertia ixx="${body_mass*(3*0.15**2+body_z**2)/12}" iyy="${body_mass*(3*0.15**2+body_z**2)/12}" izz="${body_mass*0.15**2/2}" ixy="0" ixz="0" iyz="0" />
+    </inertial>
+    <collision>
+      <geometry>
+        <cylinder radius="0.15" length="${body_z}" />
+      </geometry>
+    </collision>
+    <visual name="lower_acrylic_chassis">
+      <origin xyz="0 0 -0.038" />
+      <geometry>
+        <cylinder radius="0.15" length="0.004" />
+      </geometry>
+      <material name="acrylic" />
+    </visual>
+    <visual name="upper_acrylic_chassis">
+      <origin xyz="0 0 0.038" />
+      <geometry>
+        <cylinder radius="0.15" length="0.004" />
+      </geometry>
+      <material name="acrylic" />
+    </visual>
+    <visual name="standoff_-0.08_-0.075">
+      <origin xyz="-0.08 -0.075 0" />
+      <geometry>
+        <cylinder radius="0.004" length="0.072" />
+      </geometry>
+      <material name="aluminium" />
+    </visual>
+    <visual name="standoff_-0.08_0.075">
+      <origin xyz="-0.08 0.075 0" />
+      <geometry>
+        <cylinder radius="0.004" length="0.072" />
+      </geometry>
+      <material name="aluminium" />
+    </visual>
+    <visual name="standoff_0.08_-0.075">
+      <origin xyz="0.08 -0.075 0" />
+      <geometry>
+        <cylinder radius="0.004" length="0.072" />
+      </geometry>
+      <material name="aluminium" />
+    </visual>
+    <visual name="standoff_0.08_0.075">
+      <origin xyz="0.08 0.075 0" />
+      <geometry>
+        <cylinder radius="0.004" length="0.072" />
+      </geometry>
+      <material name="aluminium" />
+    </visual>
+  </link>
+  <xacro:macro name="wheel" params="side sign">
+    <link name="${side}_wheel">
+      <inertial>
+        <mass value="0.12" />
+        <inertia ixx="${0.12*(3*wheel_radius**2+wheel_width**2)/12}" iyy="${0.12*wheel_radius**2/2}" izz="${0.12*(3*wheel_radius**2+wheel_width**2)/12}" ixy="0" ixz="0" iyz="0" />
+      </inertial>
+      <visual>
+        <origin rpy="${pi/2} 0 0" />
+        <geometry>
+          <cylinder radius="${wheel_radius}" length="${wheel_width}" />
+        </geometry>
+        <material name="rubber" />
+      </visual>
+      <collision>
+        <origin rpy="${pi/2} 0 0" />
+        <geometry>
+          <cylinder radius="${wheel_radius}" length="${wheel_width}" />
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${side}_wheel_joint" type="continuous">
+      <parent link="base_link" />
+      <child link="${side}_wheel" />
+      <origin xyz="0.03 ${sign*wheel_separation/2} ${wheel_radius-0.116}" />
+      <axis xyz="0 1 0" />
+      <limit effort="3.0" velocity="70.0" />
+      <dynamics damping="0.01" friction="0.0" />
+    </joint>
+    <gazebo reference="${side}_wheel">
+      <mu1>1.0</mu1>
+      <mu2>1.0</mu2>
+    </gazebo>
+  </xacro:macro>
+  <xacro:wheel side="left" sign="1" />
+  <xacro:wheel side="right" sign="-1" />
+  <joint name="caster_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="caster" />
+    <origin xyz="-0.105 0 -0.096" />
+  </joint>
+  <link name="caster">
+    <inertial>
+      <mass value="0.08" />
+      <inertia ixx="0.0000128" iyy="0.0000128" izz="0.0000128" ixy="0" ixz="0" iyz="0" />
+    </inertial>
+    <visual>
+      <geometry>
+        <sphere radius="0.02" />
+      </geometry>
+      <material name="rubber" />
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.02" />
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="caster_joint">
+    <preserveFixedJoint>true</preserveFixedJoint>
+  </gazebo>
+  <gazebo reference="caster">
+    <mu1>0.01</mu1>
+    <mu2>0.01</mu2>
+  </gazebo>
+  <joint name="lidar_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="lidar_link" />
+    <origin xyz="0 0 0.085" />
+  </joint>
+  <link name="lidar_link">
+    <inertial>
+      <mass value="0.05" />
+      <inertia ixx="0.00001" iyy="0.00001" izz="0.00002" ixy="0" ixz="0" iyz="0" />
+    </inertial>
+    <collision>
+      <geometry>
+        <cylinder radius="0.03" length="0.025" />
+      </geometry>
+    </collision>
+    <visual name="rplidar_c1_base">
+      <origin xyz="0 0 -0.009" />
+      <geometry>
+        <box size="0.054 0.054 0.012" />
+      </geometry>
+      <material name="sensor" />
+    </visual>
+    <visual name="rplidar_c1_scanner">
+      <origin xyz="0 0 0.005" />
+      <geometry>
+        <cylinder radius="0.027" length="0.025" />
+      </geometry>
+      <material name="sensor" />
+    </visual>
+    <visual name="rplidar_c1_accent">
+      <origin xyz="0 0 0.015" />
+      <geometry>
+        <cylinder radius="0.025" length="0.004" />
+      </geometry>
+      <material name="copper" />
+    </visual>
+  </link>
+  <gazebo reference="lidar_joint">
+    <preserveFixedJoint>true</preserveFixedJoint>
+  </gazebo>
+  <gazebo reference="lidar_link">
+    <sensor name="lidar" type="gpu_lidar">
+      <topic>/scan</topic>
+      <gz_frame_id>lidar_link</gz_frame_id>
+      <update_rate>10.0</update_rate>
+      <always_on>true</always_on>
+      <lidar>
+        <scan>
+          <horizontal>
+            <samples>500</samples>
+            <resolution>1</resolution>
+            <min_angle>${-pi}</min_angle>
+            <max_angle>${pi}</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.05</min>
+          <max>12.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0</mean>
+          <stddev>0.015</stddev>
+        </noise>
+      </lidar>
+    </sensor>
+  </gazebo>
+  <joint name="camera_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="camera_link" />
+    <origin xyz="0.1325 0 0.025" />
+  </joint>
+  <link name="camera_link">
+    <inertial>
+      <mass value="0.03" />
+      <inertia ixx="0.000004" iyy="0.000004" izz="0.000004" ixy="0" ixz="0" iyz="0" />
+    </inertial>
+    <visual>
+      <geometry>
+        <box size="0.015 0.04 0.025" />
+      </geometry>
+      <material name="sensor" />
+    </visual>
+  </link>
+  <joint name="camera_optical_joint" type="fixed">
+    <parent link="camera_link" />
+    <child link="camera_optical_frame" />
+    <origin rpy="${-pi/2} 0 ${-pi/2}" />
+  </joint>
+  <link name="camera_optical_frame" />
+  <gazebo reference="camera_joint">
+    <preserveFixedJoint>true</preserveFixedJoint>
+  </gazebo>
+  <gazebo reference="camera_link">
+    <sensor name="camera" type="camera">
+      <topic>/camera/image_raw</topic>
+      <gz_frame_id>camera_optical_frame</gz_frame_id>
+      <update_rate>$(arg camera_rate)</update_rate>
+      <always_on>true</always_on>
+      <camera>
+        <horizontal_fov>1.0472</horizontal_fov>
+        <image>
+          <width>$(arg camera_width)</width>
+          <height>$(arg camera_height)</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.03</near>
+          <far>15</far>
+        </clip>
+        <camera_info_topic>/camera/camera_info</camera_info_topic>
+      </camera>
+    </sensor>
+  </gazebo>
+  <ros2_control name="VacuumSimulation" type="system">
+    <hardware>
+      <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+    </hardware>
+    <joint name="left_wheel_joint">
+      <command_interface name="velocity" />
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+    </joint>
+    <joint name="right_wheel_joint">
+      <command_interface name="velocity" />
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+    </joint>
+  </ros2_control>
+  <gazebo>
+    <plugin filename="libgz_ros2_control-system.so" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+      <parameters>$(arg controllers_file)</parameters>
+      <ros>
+        <remapping>/diff_drive_controller/odom:=/odom</remapping>
+      </ros>
+    </plugin>
+  </gazebo>
+  <material name="aluminium">
+    <color rgba=".62 .68 .75 1" />
+  </material>
+  <material name="pcb">
+    <color rgba=".06 .42 .25 1" />
+  </material>
+  <material name="pcb_blue">
+    <color rgba=".06 .25 .52 1" />
+  </material>
+  <material name="copper">
+    <color rgba=".95 .58 .18 1" />
+  </material>
+  <material name="terminal">
+    <color rgba=".15 .61 .29 1" />
+  </material>
+  <joint name="left_nema17_mount" type="fixed">
+    <parent link="base_link" />
+    <child link="left_nema17" />
+    <origin xyz="0.03 0.071 -0.081" />
+  </joint>
+  <link name="left_nema17">
+    <inertial>
+      <mass value="0.25" />
+      <inertia ixx="7.061020833333332e-05" iyy="7.455374999999999e-05" izz="7.061020833333332e-05" ixy="0" ixz="0" iyz="0" />
+    </inertial>
+    <visual name="left_nema17_body">
+      <origin xyz="0 0 0" />
+      <geometry>
+        <box size="0.0423 0.04 0.0423" />
+      </geometry>
+      <material name="sensor" />
+    </visual>
+    <visual name="endplate_-0.016">
+      <origin xyz="0 -0.016 0" />
+      <geometry>
+        <box size="0.0423 0.008 0.0423" />
+      </geometry>
+      <material name="aluminium" />
+    </visual>
+    <visual name="endplate_0.016">
+      <origin xyz="0 0.016 0" />
+      <geometry>
+        <box size="0.0423 0.008 0.0423" />
+      </geometry>
+      <material name="aluminium" />
+    </visual>
+    <visual name="shaft_and_hub">
+      <origin xyz="0 0.031 0" rpy="${pi/2} 0 0" />
+      <geometry>
+        <cylinder radius="0.004" length="0.023" />
+      </geometry>
+      <material name="aluminium" />
+    </visual>
+    <visual name="under_chassis_mount">
+      <origin xyz="0 0 0.03" />
+      <geometry>
+        <box size="0.043 0.042 0.018" />
+      </geometry>
+      <material name="aluminium" />
+    </visual>
+  </link>
+  <joint name="left_tb6600_mount" type="fixed">
+    <parent link="base_link" />
+    <child link="left_tb6600" />
+    <origin xyz="0.078 0.044 -0.021" />
+  </joint>
+  <link name="left_tb6600">
+    <inertial>
+      <mass value="0.1" />
+      <inertia ixx="1.7666666666666668e-05" iyy="5.504166666666667e-05" izz="6.144166666666668e-05" ixy="0" ixz="0" iyz="0" />
+    </inertial>
+    <visual name="left_tb6600_body">
+      <origin xyz="0 0 0" />
+      <geometry>
+        <box size="0.077 0.038 0.026" />
+      </geometry>
+      <material name="sensor" />
+    </visual>
+    <visual name="cooling_fin_-0.025">
+      <origin xyz="-0.025 0 0.016" />
+      <geometry>
+        <box size="0.003 0.038 0.009" />
+      </geometry>
+      <material name="aluminium" />
+    </visual>
+    <visual name="cooling_fin_-0.015">
+      <origin xyz="-0.015 0 0.016" />
+      <geometry>
+        <box size="0.003 0.038 0.009" />
+      </geometry>
+      <material name="aluminium" />
+    </visual>
+    <visual name="cooling_fin_-0.005">
+      <origin xyz="-0.005 0 0.016" />
+      <geometry>
+        <box size="0.003 0.038 0.009" />
+      </geometry>
+      <material name="aluminium" />
+    </visual>
+    <visual name="cooling_fin_0.005">
+      <origin xyz="0.005 0 0.016" />
+      <geometry>
+        <box size="0.003 0.038 0.009" />
+      </geometry>
+      <material name="aluminium" />
+    </visual>
+    <visual name="cooling_fin_0.015">
+      <origin xyz="0.015 0 0.016" />
+      <geometry>
+        <box size="0.003 0.038 0.009" />
+      </geometry>
+      <material name="aluminium" />
+    </visual>
+    <visual name="cooling_fin_0.025">
+      <origin xyz="0.025 0 0.016" />
+      <geometry>
+        <box size="0.003 0.038 0.009" />
+      </geometry>
+      <material name="aluminium" />
+    </visual>
+    <visual name="screw_terminals">
+      <origin xyz="0 -0.022 0" />
+      <geometry>
+        <box size="0.065 0.01 0.018" />
+      </geometry>
+      <material name="terminal" />
+    </visual>
+  </link>
+  <joint name="right_nema17_mount" type="fixed">
+    <parent link="base_link" />
+    <child link="right_nema17" />
+    <origin xyz="0.03 -0.071 -0.081" />
+  </joint>
+  <link name="right_nema17">
+    <inertial>
+      <mass value="0.25" />
+      <inertia ixx="7.061020833333332e-05" iyy="7.455374999999999e-05" izz="7.061020833333332e-05" ixy="0" ixz="0" iyz="0" />
+    </inertial>
+    <visual name="right_nema17_body">
+      <origin xyz="0 0 0" />
+      <geometry>
+        <box size="0.0423 0.04 0.0423" />
+      </geometry>
+      <material name="sensor" />
+    </visual>
+    <visual name="endplate_-0.016">
+      <origin xyz="0 -0.016 0" />
+      <geometry>
+        <box size="0.0423 0.008 0.0423" />
+      </geometry>
+      <material name="aluminium" />
+    </visual>
+    <visual name="endplate_0.016">
+      <origin xyz="0 0.016 0" />
+      <geometry>
+        <box size="0.0423 0.008 0.0423" />
+      </geometry>
+      <material name="aluminium" />
+    </visual>
+    <visual name="shaft_and_hub">
+      <origin xyz="0 -0.031 0" rpy="${pi/2} 0 0" />
+      <geometry>
+        <cylinder radius="0.004" length="0.023" />
+      </geometry>
+      <material name="aluminium" />
+    </visual>
+    <visual name="under_chassis_mount">
+      <origin xyz="0 0 0.03" />
+      <geometry>
+        <box size="0.043 0.042 0.018" />
+      </geometry>
+      <material name="aluminium" />
+    </visual>
+  </link>
+  <joint name="right_tb6600_mount" type="fixed">
+    <parent link="base_link" />
+    <child link="right_tb6600" />
+    <origin xyz="0.078 -0.044 -0.021" />
+  </joint>
+  <link name="right_tb6600">
+    <inertial>
+      <mass value="0.1" />
+      <inertia ixx="1.7666666666666668e-05" iyy="5.504166666666667e-05" izz="6.144166666666668e-05" ixy="0" ixz="0" iyz="0" />
+    </inertial>
+    <visual name="right_tb6600_body">
+      <origin xyz="0 0 0" />
+      <geometry>
+        <box size="0.077 0.038 0.026" />
+      </geometry>
+      <material name="sensor" />
+    </visual>
+    <visual name="cooling_fin_-0.025">
+      <origin xyz="-0.025 0 0.016" />
+      <geometry>
+        <box size="0.003 0.038 0.009" />
+      </geometry>
+      <material name="aluminium" />
+    </visual>
+    <visual name="cooling_fin_-0.015">
+      <origin xyz="-0.015 0 0.016" />
+      <geometry>
+        <box size="0.003 0.038 0.009" />
+      </geometry>
+      <material name="aluminium" />
+    </visual>
+    <visual name="cooling_fin_-0.005">
+      <origin xyz="-0.005 0 0.016" />
+      <geometry>
+        <box size="0.003 0.038 0.009" />
+      </geometry>
+      <material name="aluminium" />
+    </visual>
+    <visual name="cooling_fin_0.005">
+      <origin xyz="0.005 0 0.016" />
+      <geometry>
+        <box size="0.003 0.038 0.009" />
+      </geometry>
+      <material name="aluminium" />
+    </visual>
+    <visual name="cooling_fin_0.015">
+      <origin xyz="0.015 0 0.016" />
+      <geometry>
+        <box size="0.003 0.038 0.009" />
+      </geometry>
+      <material name="aluminium" />
+    </visual>
+    <visual name="cooling_fin_0.025">
+      <origin xyz="0.025 0 0.016" />
+      <geometry>
+        <box size="0.003 0.038 0.009" />
+      </geometry>
+      <material name="aluminium" />
+    </visual>
+    <visual name="screw_terminals">
+      <origin xyz="0 0.022 0" />
+      <geometry>
+        <box size="0.065 0.01 0.018" />
+      </geometry>
+      <material name="terminal" />
+    </visual>
+  </link>
+  <joint name="arduino_mega_mount" type="fixed">
+    <parent link="base_link" />
+    <child link="arduino_mega" />
+    <origin xyz="-0.044 0.056 -0.027" />
+  </joint>
+  <link name="arduino_mega">
+    <inertial>
+      <mass value="0.037" />
+      <inertia ixx="8.787160833333333e-06" iyy="3.1805540399999995e-05" izz="4.053720123333333e-05" ixy="0" ixz="0" iyz="0" />
+    </inertial>
+    <visual name="arduino_mega_body">
+      <origin xyz="0 0 0" />
+      <geometry>
+        <box size="0.10152 0.0533 0.003" />
+      </geometry>
+      <material name="pcb_blue" />
+    </visual>
+    <visual name="mega_processor">
+      <origin xyz="-0.009 0 0.004" />
+      <geometry>
+        <box size="0.014 0.014 0.005" />
+      </geometry>
+      <material name="sensor" />
+    </visual>
+    <visual name="mega_pin_headers_-0.023">
+      <origin xyz="0 -0.023 0.005" />
+      <geometry>
+        <box size="0.079 0.004 0.007" />
+      </geometry>
+      <material name="sensor" />
+    </visual>
+    <visual name="mega_pin_headers_0.023">
+      <origin xyz="0 0.023 0.005" />
+      <geometry>
+        <box size="0.079 0.004 0.007" />
+      </geometry>
+      <material name="sensor" />
+    </visual>
+    <visual name="mega_usb">
+      <origin xyz="-0.046 0 0.007" />
+      <geometry>
+        <box size="0.015 0.013 0.012" />
+      </geometry>
+      <material name="aluminium" />
+    </visual>
+  </link>
+  <joint name="orange_pi5_mount" type="fixed">
+    <parent link="base_link" />
+    <child link="orange_pi5" />
+    <origin xyz="-0.044 -0.054 -0.027" />
+  </joint>
+  <link name="orange_pi5">
+    <inertial>
+      <mass value="0.046" />
+      <inertia ixx="1.476983333333333e-05" iyy="3.836783333333334e-05" izz="5.3068666666666676e-05" ixy="0" ixz="0" iyz="0" />
+    </inertial>
+    <visual name="orange_pi5_body">
+      <origin xyz="0 0 0" />
+      <geometry>
+        <box size="0.1 0.062 0.003" />
+      </geometry>
+      <material name="pcb" />
+    </visual>
+    <visual name="rk3588s_heatsink">
+      <origin xyz="0 0 0.009" />
+      <geometry>
+        <box size="0.025 0.025 0.016" />
+      </geometry>
+      <material name="aluminium" />
+    </visual>
+    <visual name="heatsink_fin_-0.01">
+      <origin xyz="-0.01 0 0.019" />
+      <geometry>
+        <box size="0.002 0.025 0.006" />
+      </geometry>
+      <material name="sensor" />
+    </visual>
+    <visual name="heatsink_fin_-0.005">
+      <origin xyz="-0.005 0 0.019" />
+      <geometry>
+        <box size="0.002 0.025 0.006" />
+      </geometry>
+      <material name="sensor" />
+    </visual>
+    <visual name="heatsink_fin_0">
+      <origin xyz="0 0 0.019" />
+      <geometry>
+        <box size="0.002 0.025 0.006" />
+      </geometry>
+      <material name="sensor" />
+    </visual>
+    <visual name="heatsink_fin_0.005">
+      <origin xyz="0.005 0 0.019" />
+      <geometry>
+        <box size="0.002 0.025 0.006" />
+      </geometry>
+      <material name="sensor" />
+    </visual>
+    <visual name="heatsink_fin_0.01">
+      <origin xyz="0.01 0 0.019" />
+      <geometry>
+        <box size="0.002 0.025 0.006" />
+      </geometry>
+      <material name="sensor" />
+    </visual>
+    <visual name="ethernet_port">
+      <origin xyz="-0.04 0 0.007" />
+      <geometry>
+        <box size="0.019 0.016 0.014" />
+      </geometry>
+      <material name="aluminium" />
+    </visual>
+    <visual name="gpio_header">
+      <origin xyz="0.009 0.026 0.006" />
+      <geometry>
+        <box size="0.05 0.005 0.009" />
+      </geometry>
+      <material name="sensor" />
+    </visual>
+  </link>
+</robot>

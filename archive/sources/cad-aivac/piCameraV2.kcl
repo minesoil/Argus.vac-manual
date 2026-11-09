@@ -1,0 +1,81 @@
+// AIVac Raspberry Pi camera
+// 25 by 24 mm Camera Module V2 with lens stack, ribbon cable, and mounting holes.
+@settings(defaultLengthUnit = mm, kclVersion = 1.0)
+
+import unitBlock, unitSoftBlock, unitCylinder, unitSoftCylinder from "primitives.kcl"
+
+boardLength = 25mm
+boardWidth = 24mm
+boardThickness = 1.4mm
+
+cameraPcb = clone(unitBlock)
+  |> scale(x = boardLength / 1mm, y = boardWidth / 1mm, z = boardThickness / 1mm)
+  |> appearance(color = "#194d2e", roughness = 72, metalness = 0)
+
+lensHousing = clone(unitCylinder)
+  |> scale(x = 5.2mm / 1mm, y = 5.2mm / 1mm, z = 4mm / 1mm)
+  |> translate(z = 2.7mm, global = true)
+  |> appearance(color = "#101010", roughness = 38, metalness = 10)
+lensGlass = clone(unitCylinder)
+  |> scale(x = 3mm / 1mm, y = 3mm / 1mm, z = 0.8mm / 1mm)
+  |> translate(z = 5.2mm, global = true)
+  |> appearance(
+       color = "#233747",
+       roughness = 12,
+       metalness = 0,
+       opacity = 72,
+     )
+
+holePadOne = clone(unitCylinder)
+  |> scale(x = 2.1mm / 1mm, y = 2.1mm / 1mm, z = 0.4mm / 1mm)
+  |> translate(
+       x = -10.2mm,
+       y = -9.5mm,
+       z = 1mm,
+       global = true,
+     )
+holePadTwo = clone(holePadOne)
+  |> translate(x = 20.4mm, global = true)
+holePadThree = clone(holePadOne)
+  |> translate(y = 19mm, global = true)
+holePadFour = clone(holePadTwo)
+  |> translate(y = 19mm, global = true)
+holePads = appearance(
+  [
+    holePadOne,
+    holePadTwo,
+    holePadThree,
+    holePadFour
+  ],
+  color = "#d7ad4b",
+  roughness = 35,
+  metalness = 76,
+)
+
+ribbonCable = clone(unitSoftBlock)
+  |> scale(x = 16mm / 1mm, y = 38mm / 1mm, z = 0.5mm / 1mm)
+  |> translate(
+       x = 0mm,
+       y = -31mm,
+       z = -0.6mm,
+       global = true,
+     )
+  |> appearance(color = "#f4e9c7", roughness = 62, metalness = 0)
+connectorClamp = clone(unitSoftBlock)
+  |> scale(x = 18mm / 1mm, y = 4mm / 1mm, z = 2mm / 1mm)
+  |> translate(
+       x = 0mm,
+       y = -11.5mm,
+       z = 1.5mm,
+       global = true,
+     )
+  |> appearance(color = "#171717", roughness = 62, metalness = 0)
+
+piCameraV2 = flatten([
+  cameraPcb,
+  lensHousing,
+  lensGlass,
+  holePads,
+  ribbonCable,
+  connectorClamp
+])

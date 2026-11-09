@@ -1,0 +1,115 @@
+// AIVac right NEMA 17 stepper
+// Duplicate 42 mm frame stepper motor for the opposite drivetrain side.
+@settings(defaultLengthUnit = mm, kclVersion = 1.0)
+
+import unitBlock, unitSoftBlock, unitCylinder, unitSoftCylinder from "primitives.kcl"
+
+frameSize = 42.3mm
+bodyDepth = 34mm
+shaftRadius = 2.5mm
+shaftLength = 20mm
+pilotRadius = 11mm
+pilotLength = 4mm
+mountPitch = 31mm
+
+motorFrame = clone(unitSoftBlock)
+  |> scale(x = bodyDepth / 1mm, y = frameSize / 1mm, z = frameSize / 1mm)
+  |> appearance(color = "#25282c", roughness = 62, metalness = 25)
+frontPlate = clone(unitBlock)
+  |> scale(x = 2.4mm / 1mm, y = frameSize / 1mm, z = frameSize / 1mm)
+  |> translate(x = -(bodyDepth / 2 + 1.2mm), global = true)
+  |> appearance(color = "#d3d7da", roughness = 34, metalness = 82)
+rearPlate = clone(unitBlock)
+  |> scale(x = 2.4mm / 1mm, y = frameSize / 1mm, z = frameSize / 1mm)
+  |> translate(x = bodyDepth / 2 + 1.2mm, global = true)
+  |> appearance(color = "#d3d7da", roughness = 34, metalness = 82)
+
+pilotBoss = clone(unitCylinder)
+  |> scale(x = pilotRadius / 1mm, y = pilotRadius / 1mm, z = pilotLength / 1mm)
+  |> rotate(axis = Y, angle = 90deg, global = false)
+  |> translate(x = -(bodyDepth / 2 + 4.4mm), global = true)
+  |> appearance(color = "#c4c9cc", roughness = 32, metalness = 86)
+outputShaft = clone(unitCylinder)
+  |> scale(x = shaftRadius / 1mm, y = shaftRadius / 1mm, z = shaftLength / 1mm)
+  |> rotate(axis = Y, angle = 90deg, global = false)
+  |> translate(x = -(bodyDepth / 2 + pilotLength + shaftLength / 2), global = true)
+  |> appearance(color = "#9ca3a8", roughness = 25, metalness = 90)
+
+screwHeadOne = clone(unitCylinder)
+  |> scale(x = 2.4mm / 1mm, y = 2.4mm / 1mm, z = 1.6mm / 1mm)
+  |> rotate(axis = Y, angle = 90deg, global = false)
+  |> translate(
+       x = -(bodyDepth / 2 + 2.8mm),
+       y = -mountPitch / 2,
+       z = -mountPitch / 2,
+       global = true,
+     )
+screwHeadTwo = clone(screwHeadOne)
+  |> translate(y = mountPitch, global = true)
+screwHeadThree = clone(screwHeadOne)
+  |> translate(z = mountPitch, global = true)
+screwHeadFour = clone(screwHeadTwo)
+  |> translate(z = mountPitch, global = true)
+frontScrewHeads = appearance(
+  [
+    screwHeadOne,
+    screwHeadTwo,
+    screwHeadThree,
+    screwHeadFour
+  ],
+  color = "#1b1d20",
+  roughness = 40,
+  metalness = 70,
+)
+
+redLead = clone(unitBlock)
+  |> scale(x = 44mm / 1mm, y = 1.8mm / 1mm, z = 1.8mm / 1mm)
+  |> translate(
+       x = bodyDepth / 2 + 24mm,
+       y = -11mm,
+       z = 9mm,
+       global = true,
+     )
+blackLead = clone(redLead)
+  |> translate(y = 7mm, global = true)
+greenLead = clone(redLead)
+  |> translate(y = 14mm, global = true)
+yellowLead = clone(redLead)
+  |> translate(y = 21mm, global = true)
+redLeadStyled = appearance(
+  redLead,
+  color = "#d51f1f",
+  roughness = 72,
+  metalness = 0,
+)
+blackLeadStyled = appearance(
+  blackLead,
+  color = "#111111",
+  roughness = 72,
+  metalness = 0,
+)
+greenLeadStyled = appearance(
+  greenLead,
+  color = "#1ea45a",
+  roughness = 72,
+  metalness = 0,
+)
+yellowLeadStyled = appearance(
+  yellowLead,
+  color = "#f0c22b",
+  roughness = 72,
+  metalness = 0,
+)
+
+nema17StepperRight = flatten([
+  motorFrame,
+  frontPlate,
+  rearPlate,
+  pilotBoss,
+  outputShaft,
+  frontScrewHeads,
+  redLeadStyled,
+  blackLeadStyled,
+  greenLeadStyled,
+  yellowLeadStyled
+])

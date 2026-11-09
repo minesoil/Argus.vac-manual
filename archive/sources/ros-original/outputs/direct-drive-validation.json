@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-07",
+  "scope": "simulator only",
+  "tests": {
+    "camera": {
+      "target_fps": 60,
+      "simulation_fps": 62.56311305242787,
+      "wall_fps": 62.333455866397394,
+      "frames": 180
+    },
+    "forward": {
+      "signed_displacement_m": 0.6847406568533845,
+      "peak_odometry_m_s": 0.5299999998527204
+    },
+    "reverse": {
+      "signed_displacement_m": -0.7665678189885476,
+      "peak_odometry_m_s": -0.31799999991020744
+    },
+    "released_stop": true,
+    "input_timeout_stop": true
+  },
+  "passed": true
+}

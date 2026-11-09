@@ -1,0 +1,132 @@
+// AIVac chassis base
+// PETG/MDF internal base plate with electronics standoffs, intake gasket, and inserts.
+@settings(defaultLengthUnit = mm, kclVersion = 1.0)
+
+import unitBlock, unitSoftBlock, unitCylinder, unitSoftCylinder from "primitives.kcl"
+
+chassisRadius = 118mm
+baseThickness = 8mm
+intakeSealHeight = 4mm
+standoffRadius = 4.2mm
+standoffHeight = 10mm
+
+baseDeck = clone(unitSoftCylinder)
+  |> scale(x = chassisRadius / 1mm, y = chassisRadius / 1mm, z = baseThickness / 1mm)
+  |> appearance(color = "#3b3327", roughness = 88, metalness = 0)
+
+frontIntakeMouth = clone(unitSoftBlock)
+  |> scale(x = 126mm / 1mm, y = 22mm / 1mm, z = 7mm / 1mm)
+  |> translate(
+       x = 0mm,
+       y = -120mm,
+       z = -1mm,
+       global = true,
+     )
+  |> appearance(color = "#101214", roughness = 82, metalness = 0)
+
+piStandoffOne = clone(unitSoftCylinder)
+  |> scale(x = standoffRadius / 1mm, y = standoffRadius / 1mm, z = standoffHeight / 1mm)
+  |> translate(
+       x = -76mm,
+       y = 14mm,
+       z = 8.9mm,
+       global = true,
+     )
+piStandoffTwo = clone(piStandoffOne)
+  |> translate(x = 58mm, global = true)
+piStandoffThree = clone(piStandoffOne)
+  |> translate(y = 49mm, global = true)
+piStandoffFour = clone(piStandoffTwo)
+  |> translate(y = 49mm, global = true)
+arduinoStandoffOne = clone(unitSoftCylinder)
+  |> scale(x = standoffRadius / 1mm, y = standoffRadius / 1mm, z = standoffHeight / 1mm)
+  |> translate(
+       x = 31mm,
+       y = 18mm,
+       z = 8.9mm,
+       global = true,
+     )
+arduinoStandoffTwo = clone(arduinoStandoffOne)
+  |> translate(x = 72mm, global = true)
+arduinoStandoffThree = clone(arduinoStandoffOne)
+  |> translate(y = 42mm, global = true)
+arduinoStandoffFour = clone(arduinoStandoffTwo)
+  |> translate(y = 42mm, global = true)
+standoffGroup = appearance(
+  [
+    piStandoffOne,
+    piStandoffTwo,
+    piStandoffThree,
+    piStandoffFour,
+    arduinoStandoffOne,
+    arduinoStandoffTwo,
+    arduinoStandoffThree,
+    arduinoStandoffFour
+  ],
+  color = "#2f2a22",
+  roughness = 82,
+  metalness = 0,
+)
+
+frontSealBack = clone(unitSoftBlock)
+  |> scale(x = 126mm / 1mm, y = 5mm / 1mm, z = intakeSealHeight / 1mm)
+  |> translate(
+       x = 0mm,
+       y = -105mm,
+       z = 7.8mm,
+       global = true,
+     )
+frontSealLeft = clone(unitSoftBlock)
+  |> scale(x = 5mm / 1mm, y = 34mm / 1mm, z = intakeSealHeight / 1mm)
+  |> translate(
+       x = -63mm,
+       y = -122mm,
+       z = 7.8mm,
+       global = true,
+     )
+frontSealRight = clone(frontSealLeft)
+  |> translate(x = 126mm, global = true)
+intakeSeal = appearance(
+  [
+    frontSealBack,
+    frontSealLeft,
+    frontSealRight
+  ],
+  color = "#111417",
+  roughness = 93,
+  metalness = 0,
+)
+
+firstThreadedInsert = clone(unitCylinder)
+  |> scale(x = 2.6mm / 1mm, y = 2.6mm / 1mm, z = 5mm / 1mm)
+  |> translate(
+       x = -76mm,
+       y = 14mm,
+       z = 14mm,
+       global = true,
+     )
+threadedInsertTwo = clone(firstThreadedInsert)
+  |> translate(x = 58mm, global = true)
+threadedInsertThree = clone(firstThreadedInsert)
+  |> translate(y = 49mm, global = true)
+threadedInsertFour = clone(threadedInsertTwo)
+  |> translate(y = 49mm, global = true)
+threadedInserts = appearance(
+  [
+    firstThreadedInsert,
+    threadedInsertTwo,
+    threadedInsertThree,
+    threadedInsertFour
+  ],
+  color = "#c58a36",
+  roughness = 38,
+  metalness = 70,
+)
+
+chassisBase = flatten([
+  baseDeck,
+  frontIntakeMouth,
+  standoffGroup,
+  intakeSeal,
+  threadedInserts
+])

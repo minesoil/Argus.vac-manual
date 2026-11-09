@@ -1,0 +1,17 @@
+﻿{
+    "Date":  "2026-10-07",
+    "Passed":  true,
+    "SHA256":  "8A7AB5124FA561337D660CAB4DF3528CCC5E69FB47F8F195E3492CB76F04492A",
+    "Checks":  [
+                   "Embedded payload extraction",
+                   "Packaged launcher startup",
+                   "Files panel construction",
+                   "Windows file listing",
+                   "Hidden/live Ubuntu workspace files",
+                   "Recursive search",
+                   "Unavailable folder feedback",
+                   "Path conversion",
+                   "Disarmed controller default"
+               ],
+    "Executable":  "Vacuum Lab.exe"
+}

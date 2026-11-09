@@ -1,0 +1,121 @@
+{
+	"version": 2,
+	"nodes": [
+		{
+			"id": "1787748663301",
+			"type": "textInput",
+			"position": {
+				"x": 20,
+				"y": 0
+			},
+			"data": {
+				"value": "What is LLM?\n",
+				"template": false
+			},
+			"width": 160,
+			"height": 100,
+			"measured": {
+				"width": 160,
+				"height": 100
+			},
+			"selected": false
+		},
+		{
+			"id": "1787748663302",
+			"type": "generate",
+			"position": {
+				"x": 200,
+				"y": -100
+			},
+			"width": 460,
+			"height": 340,
+			"data": {
+				"results": [],
+				"model": "stealth/ox-alpha",
+				"provider": "openrouter"
+			},
+			"measured": {
+				"width": 460,
+				"height": 340
+			},
+			"selected": false,
+			"dragging": false
+		},
+		{
+			"type": "generate",
+			"width": 460,
+			"height": 340,
+			"data": {
+				"results": [],
+				"provider": "openrouter",
+				"model": "z-ai/glm-5.2:free",
+				"part": 0
+			},
+			"id": "1787748954746",
+			"origin": [
+				0,
+				0
+			],
+			"position": {
+				"x": 740,
+				"y": -260
+			},
+			"measured": {
+				"width": 460,
+				"height": 340
+			},
+			"selected": true,
+			"dragging": false
+		},
+		{
+			"type": "generate",
+			"width": 460,
+			"height": 340,
+			"data": {
+				"results": [
+					{
+						"think": "The user is asking \"What is LLM?\".\nI need to provide a clear, concise, and comprehensive definition of Large Language Models.",
+						"text": "**LLM** stands for **Large Language Model**.\n\nIt is a type of **Artificial Intelligence (AI)** program designed to understand, generate, and manipulate human language. Think of it as a very advanced, statistically driven text prediction engine that has \"read\" a massive portion of the internet, books, articles, code, and other text data.\n\nHere is a breakdown of the key components:\n\n### 1. The \"Large\" (Scale)\n*   **Parameters:** They have billions (or trillions) of adjustable settings (parameters/weights) learned during training. These act like the \"knobs\" the model tunes to understand language patterns.\n*   **Data:** They are trained on massive datasets (terabytes of text) covering diverse topics, languages, and writing styles.\n*   **Compute:** Training requires immense computational power (thousands of GPUs/TPUs running for weeks/months).\n\n### 2. The \"Language\" (Functionality)\n*   **Input/Output:** They take text (prompts) as input and produce text as output.\n*   **Capabilities:** Because they learn the statistical structure of language, they can perform tasks like:\n    *   **Generation:** Writing essays, poems, code, emails, stories.\n    *   **Summarization:** Condensing long documents.\n    *   **Translation:** Converting between languages.\n    *   **Reasoning/Analysis:** Solving logic puzzles, analyzing sentiment, explaining concepts.\n    *   **Coding:** Writing, debugging, and explaining code in various programming languages.\n    *   **Conversation:** Powering chatbots (like me).\n\n### 3. The \"Model\" (Architecture)\n*   **Transformer Architecture:** Almost all modern LLMs (GPT, BERT, Llama, Gemini, Claude) are built on the **Transformer** architecture (introduced in the 2017 paper *\"Attention Is All You Need\"*).\n*   **Key Innovation — Self-Attention:** This mechanism allows the model to weigh the importance of different words in a sentence relative to each other, regardless of distance. This solves the \"long-term dependency\" problem older models (RNNs/LSTMs) had, allowing the model to understand context much better.\n\n---\n\n### How They Work (Simplified)\n\n1.  **Tokenization:** Text is chopped into chunks called **tokens** (words, parts of words, or characters).\n2.  **Pre-training (The \"Base\" Model):** The model plays a massive game of **\"Predict the Next Token\"** on the entire training dataset. It learns grammar, facts, reasoning patterns, and world knowledge purely by minimizing prediction error.\n3.  **Fine-tuning / Alignment (The \"Chat\" Model):** The base model is further trained on specific, high-quality datasets (instruction following, dialogue examples) and often optimized via **RLHF (Reinforcement Learning from Human Feedback)**. This teaches it to *follow instructions*, *be helpful*, and *refuse harmful requests* rather than just completing text.\n\n---\n\n### Common Examples\n*   **OpenAI:** GPT-4o, GPT-4, GPT-3.5 (powers ChatGPT)\n*   **Google:** Gemini (formerly Bard), PaLM\n*   **Anthropic:** Claude 3 (Opus, Sonnet, Haiku)\n*   **Meta:** Llama 3 (Open weights)\n*   **Mistral AI:** Mistral Large, Mixtral\n*   **Cohere:** Command R+\n\n---\n\n### Limitations & Risks\n*   **Hallucinations:** They confidently generate false or nonsensical information because they predict *plausible-sounding* text, not *verified* truth.\n*   **Bias:** They reflect biases present in their training data (gender, race, cultural, political).\n*   **No Real Understanding:** They do not \"know\" facts; they model statistical correlations. They lack consciousness, intent, or a grounded model of the physical world.\n*   **Context Window:** They have a limited \"short-term memory\" (context window), though this is growing rapidly (from 4k tokens to 1M–2M+ tokens in newer models).\n*   **Cutoff Date:** Their knowledge is frozen at the time of training (unless augmented with tools like Search/RAG).\n*   **Security/Privacy:** Risks include data leakage, prompt injection attacks, and generating malicious code/content.\n\n### Summary\nAn LLM is a **probabilistic text engine** trained on internet-scale data using the **Transformer architecture**. It is the foundational technology behind the current wave of **Generative AI**.",
+						"provider": "openrouter",
+						"model": "nvidia/nemotron-3-ultra-550b-a55b:free"
+					}
+				],
+				"provider": "openrouter",
+				"model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+				"part": 0
+			},
+			"id": "1787748998163",
+			"origin": [
+				0,
+				0
+			],
+			"position": {
+				"x": 760,
+				"y": 240
+			},
+			"measured": {
+				"width": 460,
+				"height": 340
+			},
+			"selected": false,
+			"dragging": false
+		}
+	],
+	"edges": [
+		{
+			"id": "1787748663303",
+			"source": "1787748663301",
+			"target": "1787748663302"
+		},
+		{
+			"source": "1787748663302",
+			"target": "1787748954746",
+			"id": "xy-edge__1787748663302-1787748954746"
+		},
+		{
+			"source": "1787748954746",
+			"target": "1787748998163",
+			"id": "1787748998164"
+		}
+	]
+}

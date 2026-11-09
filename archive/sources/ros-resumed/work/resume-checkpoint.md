@@ -1,0 +1,17 @@
+# ROS 2 / Gazebo project — October 8, 2026
+
+All user requests completed: modern executable launcher/controller/file browser; confirmed 70 mm wheel diameter, two NEMA 17 motors/two TB6600 drivers, Arduino Mega 2560, Orange Pi 5, RPLIDAR C1; motors below chassis; optional held drive button defaults OFF; 16 × 12 m room and 1.5 m/s forward simulator limit.
+
+Canonical workspace /home/robot/vacuum_ws, WSL distro VacuumRobot-24.04, user robot. Windows deliverables in this chat's outputs. Prior chat 01a0f23d-427b-7882-b4e2-567c8015c061, title “Plan ROS 2 and Gazebo setup”. ROS 2 Jazzy/Gazebo Harmonic installed in Ubuntu 24.04. WSL executable C:\Program Files\WSL\wsl.exe.
+
+Vacuum Lab.exe rebuilt version 2.0 from outputs/Executable-source/Build-Executable.ps1, embedded latest scripts/guides/images/reports/source archive. Uses existing Ubuntu/ROS installation. Extracts to %LOCALAPPDATA%/VacuumLab/app/35a9d733e43a01d5. Final executable SHA256 in executable-verification.json. Cache directories excluded. File browser has 15 locations for app/cache/profiles, packaged files, live/hidden workspace, models/config/tools/maps/logs/validation/backups, ROS installation, Ubuntu filesystem, both Windows projects, E: distro and F: backups. Recursive filename search, navigation, open/reveal/copy path. Read-only asynchronous WSL listing avoids UNC enumeration.
+
+Profile: forward 1.5 m/s, reverse 0.9, turn 2.4 rad/s, accel 6 m/s²/angular accel 14, 50 Hz input/forwarding, 5% dead zone, three odometry samples at 60 Hz. Arm once, center yoke to stop. STOP/disconnect/stale-input/lidar/obstacle protection active; binding changes disarm. Autonomous planner remains 0.20 m/s. Legacy input/profile compatibility retained.
+
+Model includes motors below acrylic decks, 0.035 m wheel radius matching controller, 0.22 m wheel separation, 0.30 m chassis. Motor/driver exact dimensions, dynamics and electronics placement are provisional; no physical motor firmware/control. C1 visual mounting stem added last; only visual change. Room has living/dining/kitchen/reading/office furniture, batched rendering. Final preview PNGs and source archive exported after this change.
+
+Passed: 6 controller logic tests; xacro/URDF/SDF; PowerShell/joystick/disarmed no-hold defaults; Windows bridge status/EOF cleanup; forward/reverse/steering/neutral/disarm/stale stops; directional guards/escape; Nav2 goal/map save; executable extraction/startup/files/list/search/hidden/error/path checks. Camera 60.779 wall FPS, forward 90% in 0.3398 s, reverse 0.2561 s, neutral forward stop 0.3714 s. Raw odometry peaks fluctuate above command cap; reports preserve these readings. UI screenshots visually inspected in work.
+
+Fixed orphan Gazebo cleanup in run_sim.py using verified owned child sessions/start identities and bounded signals, releasing simulator lock after cleanup. Uses fresh ROS node discovery instead of daemon cache. Shutdown/restart passed with no Gazebo/rqt or fresh ROS nodes after stop; shutdown-verification.json.
+
+Current session: simulation, command gate, collision guard and camera view running. Rebuilt EXE launched --drive PID 22148; GUI PowerShell PID 4456, responsive main window Vacuum Lab, Linux controller_bridge.py live. Alpha Flight Controls selected, Y drive/X steer, opens disarmed, RequireHold false. Do not start a second input bridge or motion tests while panel open. A concurrent status request during startup hit expected nonblocking controller lock; subsequent status shows four services running. No remaining task work.

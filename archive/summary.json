@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-09",
+  "original_source_records": 1449,
+  "total_records": 1488,
+  "represented_records": 1435,
+  "unique_files": 1244,
+  "gemini_chats": 3,
+  "images": 55,
+  "bytes": 397672352,
+  "omissions": {
+    "agent runtime or configuration": 7,
+    "local configuration or dependency lock": 2,
+    "generated component cache": 8,
+    "executable, package, dependency, or opaque binary; not published": 49,
+    "PDF needs manual privacy review; sanitized text provided": 1,
+    "opaque document container; readable extraction provided where available": 1
+  },
+  "redactions": {
+    "home-path": 272,
+    "secret-assignment": 2,
+    "email": 448,
+    "credential-url": 5,
+    "phone": 2
+  }
+}

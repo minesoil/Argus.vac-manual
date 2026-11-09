@@ -1,0 +1,50 @@
+// AIVac front caster
+// Swivel caster wheel assembly with bracket, fork cheeks, and small rubber roller.
+@settings(defaultLengthUnit = mm, kclVersion = 1.0)
+
+import unitBlock, unitSoftBlock, unitCylinder, unitSoftCylinder from "primitives.kcl"
+
+casterWheelRadius = 15mm
+casterWheelWidth = 18mm
+forkSpacing = 28mm
+
+mountPlate = clone(unitSoftBlock)
+  |> scale(x = 44mm / 1mm, y = 34mm / 1mm, z = 4mm / 1mm)
+  |> translate(z = 28mm, global = true)
+  |> appearance(color = "#2e3338", roughness = 54, metalness = 50)
+
+swivelStem = clone(unitCylinder)
+  |> scale(x = 6mm / 1mm, y = 6mm / 1mm, z = 18mm / 1mm)
+  |> translate(z = 18mm, global = true)
+  |> appearance(color = "#a8adb0", roughness = 30, metalness = 82)
+
+leftForkCheek = clone(unitSoftBlock)
+  |> scale(x = 4mm / 1mm, y = forkSpacing / 1mm, z = 28mm / 1mm)
+  |> translate(x = -12mm, z = 8mm, global = true)
+rightForkCheek = clone(leftForkCheek)
+  |> translate(x = 24mm, global = true)
+forkCheeks = appearance(
+  [leftForkCheek, rightForkCheek],
+  color = "#2e3338",
+  roughness = 52,
+  metalness = 55,
+)
+
+casterRoller = clone(unitCylinder)
+  |> scale(x = casterWheelRadius / 1mm, y = casterWheelRadius / 1mm, z = casterWheelWidth / 1mm)
+  |> rotate(axis = Y, angle = 90deg, global = false)
+  |> translate(z = 0mm, global = true)
+  |> appearance(color = "#090909", roughness = 96, metalness = 0)
+
+casterAxle = clone(unitCylinder)
+  |> scale(x = 2.5mm / 1mm, y = 2.5mm / 1mm, z = 34mm / 1mm)
+  |> rotate(axis = Y, angle = 90deg, global = false)
+  |> appearance(color = "#b6babd", roughness = 28, metalness = 88)
+
+casterWheel = flatten([
+  mountPlate,
+  swivelStem,
+  forkCheeks,
+  casterRoller,
+  casterAxle
+])

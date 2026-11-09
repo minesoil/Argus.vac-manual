@@ -1,0 +1,52 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import init from 'replicad-opencascadejs';
+import * as r from 'replicad';
+const oc=await init({wasmBinary:fs.readFileSync(new URL('./node_modules/replicad-opencascadejs/dist/replicad_single.wasm',import.meta.url))});
+r.setOC(oc);
+const original=await r.importSTEP(new Blob([fs.readFileSync('../original_output.step')]));
+const zJoin=11.166664, collarHeight=1.5, shaftLength=19.5, flatLength=15, flatDepth=.5, rootFillet=1, boreRadius=2.8;
+const zShaft=zJoin+collarHeight,zTip=zShaft+shaftLength;
+const lowerBox=()=>r.makeBox([-50,-50,-50],[50,50,zJoin]);
+const originalBase=original.clone().intersect(lowerBox());
+// Increase bore diameter by 0.2 mm without changing its original blind depth.
+const boreTool=()=>r.makeCylinder(boreRadius,zJoin+4.3,[0,0,-4.3]);
+const base=originalBase.clone().cut(boreTool());
+const collar=r.makeCylinder(3.999996,collarHeight,[0,0,zJoin]);
+let rod=r.makeCylinder(2.5,shaftLength,[0,0,zShaft]);
+rod=rod.chamfer(.25,e=>e.inPlane('XY',zTip));
+rod=rod.cut(r.makeBox([-10,2,zTip-flatLength],[10,10,zTip+1]));
+let part=base.clone().fuse(collar).fuse(rod).simplify();
+// A concave fillet adds material where the 5 mm shaft meets its shoulder.
+const beforeFilletVolume=r.measureVolume(part);
+part=part.fillet(rootFillet,e=>e.inPlane('XY',zShaft).ofLength(l=>Math.abs(l-5*Math.PI)<1e-5)).simplify();
+const reinforcementVolume=r.measureVolume(part)-beforeFilletVolume;
+assert(reinforcementVolume>0);
+const isValid=s=>{const a=new oc.BRepCheck_Analyzer(s.wrapped,true,false);const valid=a.IsValid();a.delete();return valid;};
+assert(isValid(part));assert.equal(part.solids.length,1);
+const removedBelow=r.measureVolume(base.clone().cut(part.clone()));
+const addedBelow=r.measureVolume(part.clone().intersect(lowerBox()).cut(base.clone()));
+assert(Math.abs(removedBelow)<1e-6);assert(Math.abs(addedBelow)<1e-6);
+const boreRemovedVolume=r.measureVolume(originalBase)-r.measureVolume(base);
+assert(Math.abs(boreRemovedVolume-Math.PI*(2.8**2-2.7**2)*(zJoin+4.2))<1e-4);
+// An 18 mm-long adapter with a nominal 5 mm bore must clear the root fillet.
+const adapterGauge=r.makeCylinder(6,18,[0,0,zTip-18]).cut(r.makeCylinder(2.5,18,[0,0,zTip-18]));
+const adapterInterference=r.measureVolume(part.clone().intersect(adapterGauge));
+assert(Math.abs(adapterInterference)<1e-6);
+const one=part.clone().translateZ(4.2);
+const two=one.clone().translateX(40);
+const pair=r.makeCompound([one.clone(),two.clone()]);
+assert.equal(pair.solids.length,2);assert(isValid(pair));
+const output='../../outputs';fs.mkdirSync(output,{recursive:true});
+const step=r.exportSTEP([{shape:one,name:'Shaft 1 - shorter reinforced 5mm D'},{shape:two,name:'Shaft 2 - shorter reinforced 5mm D'}],{unit:'MM',modelUnit:'MM'});
+fs.writeFileSync(`${output}/shaft_pair_shorter_reinforced.step`,Buffer.from(await step.arrayBuffer()));
+fs.writeFileSync(`${output}/shaft_pair_shorter_reinforced.stl`,Buffer.from(await pair.blobSTL({tolerance:.01,angularTolerance:.04,binary:true}).arrayBuffer()));
+const check=await r.importSTEP(step);
+assert.equal(check.solids.length,2);assert(isValid(check));
+assert(Math.abs(r.measureVolume(check)-r.measureVolume(pair))<1e-4);
+fs.writeFileSync('../pair_mesh_v2.json',JSON.stringify(pair.mesh({tolerance:.02,angularTolerance:.06})));
+// The underside preview verifies the wider bore and retained mounting holes.
+fs.writeFileSync('../underside_mesh_v2.json',JSON.stringify(one.clone().rotate(180,[0,0,0],[1,0,0]).mesh({tolerance:.02,angularTolerance:.06})));
+const report={source_body:'output (regular fit)',units:'mm',shaft_diameter:5,shaft_length:shaftLength,shortened_by:4.5,root_fillet_radius:rootFillet,straight_shaft_length_above_fillet:shaftLength-rootFillet,adapter_length:18,adapter_to_fillet_clearance:.5,adapter_interference_volume:adapterInterference,flat_depth:flatDepth,flat_length:flatLength,bore_diameter:2*boreRadius,previous_bore_diameter:5.4,bore_depth:zJoin+4.2,bore_removed_volume:boreRemovedVolume,root_reinforcement_volume:reinforcementVolume,collar_diameter:7.999992,collar_height:collarHeight,tip_chamfer:.25,copies:2,center_spacing:40,gap:40-one.boundingBox.width,part_bounds:one.boundingBox.bounds,part_volume:r.measureVolume(one),cad_valid:true,step_reimport_valid:true,unintended_geometry_removed_below_join:removedBelow,unintended_geometry_added_below_join:addedBelow,physical_fit_tested:false,load_tested:false};
+fs.writeFileSync('../validation_v2.json',JSON.stringify(report,null,2));
+console.log(JSON.stringify(report,null,2));

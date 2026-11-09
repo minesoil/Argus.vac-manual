@@ -1,0 +1,1002 @@
+<sdf version="1.9">
+  <world name="vacuum_room">
+    <physics name="physics" type="ignored">
+      <max_step_size>0.005555555555555556</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+    <gravity>0 0 -9.81</gravity>
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics" />
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands" />
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster" />
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <scene>
+      <ambient>.7 .7 .7 1</ambient>
+      <background>.69 .79 .85 1</background>
+      <shadows>false</shadows>
+    </scene>
+    <light name="afternoon_daylight" type="directional">
+      <pose>0 0 6 0 0 0</pose>
+      <diffuse>.75 .72 .65 1</diffuse>
+      <specular>.15 .15 .15 1</specular>
+      <direction>-.5 -.4 -1</direction>
+      <cast_shadows>false</cast_shadows>
+    </light>
+    <light name="soft_window_fill" type="directional">
+      <pose>0 0 6 0 0 0</pose>
+      <diffuse>.25 .28 .3 1</diffuse>
+      <specular>0 0 0 1</specular>
+      <direction>.4 .4 -1</direction>
+      <cast_shadows>false</cast_shadows>
+    </light>
+    <gui fullscreen="false">
+      <camera name="user_camera">
+        <pose>13 -16 13 0 .62 2.2</pose>
+      </camera>
+    </gui>
+    <model name="furnished_living_room">
+      <static>true</static>
+      <self_collide>false</self_collide>
+      <link name="room">
+        <collision name="architecture_proxy0">
+          <pose>0.0 0.0 -0.04 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>16.4 12.342857142857143 0.08</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="architecture_proxy1">
+          <pose>0.0 -6.0 1.4 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>16.4 0.2057142857142857 2.8</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="architecture_proxy2">
+          <pose>-8.0 0.0 1.4 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.24 12.0 2.8</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="architecture_proxy3">
+          <pose>8.0 0.0 1.4 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.24 12.0 2.8</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="architecture_proxy4">
+          <pose>0.0 6.0 0.45 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>16.4 0.2057142857142857 0.9</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="architecture_proxy5">
+          <pose>0.0 6.0 2.65 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>16.4 0.2057142857142857 0.3</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="architecture_proxy6">
+          <pose>-6.3 6.0 1.7 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>3.8 0.2057142857142857 1.6</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="architecture_proxy7">
+          <pose>6.3 6.0 1.7 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>3.8 0.2057142857142857 1.6</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="three_seat_sofa_proxy0">
+          <pose>-2.8 4.95 0.28 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.55 0.9 0.3</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="three_seat_sofa_proxy1">
+          <pose>-2.8 5.3100000000000005 0.65 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.55 0.21 0.75</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="three_seat_sofa_proxy2">
+          <pose>-4.01 4.92 0.53 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.18 0.87 0.56</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="three_seat_sofa_proxy3">
+          <pose>-1.5899999999999999 4.92 0.53 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.18 0.87 0.56</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="three_seat_sofa_proxy4">
+          <pose>-3.88 4.65 0.09 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.035</radius>
+              <length>0.18</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="three_seat_sofa_proxy5">
+          <pose>-1.7199999999999998 4.65 0.09 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.035</radius>
+              <length>0.18</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="three_seat_sofa_proxy6">
+          <pose>-3.88 5.25 0.09 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.035</radius>
+              <length>0.18</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="three_seat_sofa_proxy7">
+          <pose>-1.7199999999999998 5.25 0.09 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.035</radius>
+              <length>0.18</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="rounded_coffee_table_proxy0">
+          <pose>-2.8 3.65 0.4 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.25 0.63 0.07</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="rounded_coffee_table_proxy1">
+          <pose>-3.2699999999999996 3.44 0.2 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.035</radius>
+              <length>0.4</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="rounded_coffee_table_proxy2">
+          <pose>-3.2699999999999996 3.86 0.2 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.035</radius>
+              <length>0.4</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="rounded_coffee_table_proxy3">
+          <pose>-2.33 3.44 0.2 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.035</radius>
+              <length>0.4</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="rounded_coffee_table_proxy4">
+          <pose>-2.33 3.86 0.2 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.035</radius>
+              <length>0.4</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="oak_media_console_proxy0">
+          <pose>7.55 3.3 0.35 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.45 2.05 0.51</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="oak_media_console_proxy1">
+          <pose>7.55 2.48 0.075 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.035</radius>
+              <length>0.15</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="oak_media_console_proxy2">
+          <pose>7.55 4.12 0.075 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.035</radius>
+              <length>0.15</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="bookcase_proxy0">
+          <pose>-7.57 3.4 0.105 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.42 1.2 0.21</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="bookcase_proxy1">
+          <pose>-7.7 3.4 1.05 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.12 1.2 2.1</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="bookcase_proxy2">
+          <pose>-7.57 2.83 1.05 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.42 0.045 2.1</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="bookcase_proxy3">
+          <pose>-7.57 3.9699999999999998 1.05 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.42 0.045 2.1</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="bookcase_proxy4">
+          <pose>-7.57 3.4 0.06 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.42 1.2 0.035</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="bookcase_proxy5">
+          <pose>-7.57 3.4 0.5 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.42 1.2 0.035</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="bookcase_proxy6">
+          <pose>-7.57 3.4 0.96 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.42 1.2 0.035</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="bookcase_proxy7">
+          <pose>-7.57 3.4 1.42 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.42 1.2 0.035</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="bookcase_proxy8">
+          <pose>-7.57 3.4 1.88 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.42 1.2 0.035</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="bookcase_proxy9">
+          <pose>-7.57 3.4 2.12 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.42 1.2 0.035</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="dining_table_proxy0">
+          <pose>-4.2 -2.0 0.76 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.45 0.88 0.065</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="dining_table_proxy1">
+          <pose>-4.78 -2.3 0.37 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.045</radius>
+              <length>0.74</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="dining_table_proxy2">
+          <pose>-4.78 -1.7 0.37 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.045</radius>
+              <length>0.74</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="dining_table_proxy3">
+          <pose>-3.62 -2.3 0.37 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.045</radius>
+              <length>0.74</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="dining_table_proxy4">
+          <pose>-3.62 -1.7 0.37 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.045</radius>
+              <length>0.74</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="dining_chair_north_proxy0">
+          <pose>-4.2 -1.23 0.45 0 0 3.141592653589793</pose>
+          <geometry>
+            <box>
+              <size>0.45 0.45 0.065</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="dining_chair_north_proxy1">
+          <pose>-4.2 -1.425 0.72 0 0 3.141592653589793</pose>
+          <geometry>
+            <box>
+              <size>0.46 0.065 0.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="dining_chair_north_proxy2">
+          <pose>-4.04 -1.07 0.225 0 0 3.141592653589793</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="dining_chair_north_proxy3">
+          <pose>-4.04 -1.3900000000000001 0.225 0 0 3.141592653589793</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="dining_chair_north_proxy4">
+          <pose>-4.36 -1.0699999999999998 0.225 0 0 3.141592653589793</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="dining_chair_north_proxy5">
+          <pose>-4.36 -1.39 0.225 0 0 3.141592653589793</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="dining_chair_south_proxy0">
+          <pose>-4.2 -2.78 0.45 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.45 0.45 0.065</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="dining_chair_south_proxy1">
+          <pose>-4.2 -2.585 0.72 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.46 0.065 0.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="dining_chair_south_proxy2">
+          <pose>-4.36 -2.94 0.225 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="dining_chair_south_proxy3">
+          <pose>-4.36 -2.6199999999999997 0.225 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="dining_chair_south_proxy4">
+          <pose>-4.04 -2.94 0.225 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="dining_chair_south_proxy5">
+          <pose>-4.04 -2.6199999999999997 0.225 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="dining_chair_west_proxy0">
+          <pose>-5.27 -2.0 0.45 0 0 -1.5707963267948966</pose>
+          <geometry>
+            <box>
+              <size>0.45 0.45 0.065</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="dining_chair_west_proxy1">
+          <pose>-5.074999999999999 -2.0 0.72 0 0 -1.5707963267948966</pose>
+          <geometry>
+            <box>
+              <size>0.46 0.065 0.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="dining_chair_west_proxy2">
+          <pose>-5.43 -1.84 0.225 0 0 -1.5707963267948966</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="dining_chair_west_proxy3">
+          <pose>-5.109999999999999 -1.84 0.225 0 0 -1.5707963267948966</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="dining_chair_west_proxy4">
+          <pose>-5.43 -2.16 0.225 0 0 -1.5707963267948966</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="dining_chair_west_proxy5">
+          <pose>-5.109999999999999 -2.16 0.225 0 0 -1.5707963267948966</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="dining_chair_east_proxy0">
+          <pose>-3.13 -2.0 0.45 0 0 1.5707963267948966</pose>
+          <geometry>
+            <box>
+              <size>0.45 0.45 0.065</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="dining_chair_east_proxy1">
+          <pose>-3.3249999999999997 -2.0 0.72 0 0 1.5707963267948966</pose>
+          <geometry>
+            <box>
+              <size>0.46 0.065 0.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="dining_chair_east_proxy2">
+          <pose>-2.9699999999999998 -2.16 0.225 0 0 1.5707963267948966</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="dining_chair_east_proxy3">
+          <pose>-3.29 -2.16 0.225 0 0 1.5707963267948966</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="dining_chair_east_proxy4">
+          <pose>-2.9699999999999998 -1.84 0.225 0 0 1.5707963267948966</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="dining_chair_east_proxy5">
+          <pose>-3.29 -1.84 0.225 0 0 1.5707963267948966</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="home_office_desk_proxy0">
+          <pose>5.7 -5.55 0.76 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.65 0.65 0.055</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="home_office_desk_proxy1">
+          <pose>5.0 -5.78 0.37 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.045 0.045 0.74</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="home_office_desk_proxy2">
+          <pose>5.0 -5.319999999999999 0.37 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.045 0.045 0.74</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="home_office_desk_proxy3">
+          <pose>6.4 -5.78 0.37 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.045 0.045 0.74</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="home_office_desk_proxy4">
+          <pose>6.4 -5.319999999999999 0.37 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.045 0.045 0.74</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="office_chair_proxy0">
+          <pose>5.7 -4.65 0.45 0 0 3.141592653589793</pose>
+          <geometry>
+            <box>
+              <size>0.45 0.45 0.065</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="office_chair_proxy1">
+          <pose>5.7 -4.845000000000001 0.72 0 0 3.141592653589793</pose>
+          <geometry>
+            <box>
+              <size>0.46 0.065 0.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="office_chair_proxy2">
+          <pose>5.86 -4.49 0.225 0 0 3.141592653589793</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="office_chair_proxy3">
+          <pose>5.86 -4.8100000000000005 0.225 0 0 3.141592653589793</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="office_chair_proxy4">
+          <pose>5.54 -4.49 0.225 0 0 3.141592653589793</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="office_chair_proxy5">
+          <pose>5.54 -4.8100000000000005 0.225 0 0 3.141592653589793</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="floor_lamp_proxy0">
+          <pose>-0.9 4.95 0.105 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.2</radius>
+              <length>0.21</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="floor_lamp_proxy1">
+          <pose>-0.9 4.95 0.77 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.018</radius>
+              <length>1.5</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="window_plant_proxy0">
+          <pose>5.8 5.3 0.18 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.22</radius>
+              <length>0.36</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="entry_plant_proxy0">
+          <pose>-7.0 -5.25 0.18 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.22</radius>
+              <length>0.36</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="kitchen_wall_proxy0">
+          <pose>-2.0 -5.65 0.46 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.98 0.6 0.92</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="kitchen_wall_proxy1">
+          <pose>-1.0 -5.65 0.46 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.98 0.6 0.92</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="kitchen_wall_proxy2">
+          <pose>0.0 -5.65 0.46 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.98 0.6 0.92</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="kitchen_wall_proxy3">
+          <pose>1.0 -5.65 0.46 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.98 0.6 0.92</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="kitchen_wall_proxy4">
+          <pose>2.0 -5.65 0.46 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.98 0.6 0.92</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="kitchen_wall_proxy5">
+          <pose>0.0 -5.65 0.95 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>5.1 0.65 0.055</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="kitchen_island_proxy0">
+          <pose>1.3 -2.7 0.45 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.9 0.75 0.9</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="kitchen_island_proxy1">
+          <pose>1.3 -2.7 0.93 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.1 0.95 0.055</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="island_stool_left_proxy0">
+          <pose>0.75 -1.75 0.45 0 0 3.141592653589793</pose>
+          <geometry>
+            <box>
+              <size>0.45 0.45 0.065</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="island_stool_left_proxy1">
+          <pose>0.75 -1.945 0.72 0 0 3.141592653589793</pose>
+          <geometry>
+            <box>
+              <size>0.46 0.065 0.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="island_stool_left_proxy2">
+          <pose>0.91 -1.59 0.225 0 0 3.141592653589793</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="island_stool_left_proxy3">
+          <pose>0.9099999999999999 -1.9100000000000001 0.225 0 0 3.141592653589793</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="island_stool_left_proxy4">
+          <pose>0.5900000000000001 -1.5899999999999999 0.225 0 0 3.141592653589793</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="island_stool_left_proxy5">
+          <pose>0.59 -1.91 0.225 0 0 3.141592653589793</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="island_stool_right_proxy0">
+          <pose>1.9 -1.75 0.45 0 0 3.141592653589793</pose>
+          <geometry>
+            <box>
+              <size>0.45 0.45 0.065</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="island_stool_right_proxy1">
+          <pose>1.9 -1.945 0.72 0 0 3.141592653589793</pose>
+          <geometry>
+            <box>
+              <size>0.46 0.065 0.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="island_stool_right_proxy2">
+          <pose>2.06 -1.59 0.225 0 0 3.141592653589793</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="island_stool_right_proxy3">
+          <pose>2.06 -1.9100000000000001 0.225 0 0 3.141592653589793</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="island_stool_right_proxy4">
+          <pose>1.74 -1.5899999999999999 0.225 0 0 3.141592653589793</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="island_stool_right_proxy5">
+          <pose>1.7399999999999998 -1.91 0.225 0 0 3.141592653589793</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="reading_lounge_proxy0">
+          <pose>4.6 2.8 0.26 0 0 -0.35</pose>
+          <geometry>
+            <box>
+              <size>1.1 0.87 0.33</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="reading_lounge_proxy1">
+          <pose>4.709727298385744 3.100599268111161 0.65 0 0 -0.35</pose>
+          <geometry>
+            <box>
+              <size>1.1 0.2 0.62</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="reading_lounge_proxy2">
+          <pose>4.139707370704784 2.968019925653171 0.5 0 0 -0.35</pose>
+          <geometry>
+            <box>
+              <size>0.14 0.8 0.4</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="reading_lounge_proxy3">
+          <pose>5.0602926292952155 2.6319800743468287 0.5 0 0 -0.35</pose>
+          <geometry>
+            <box>
+              <size>0.14 0.8 0.4</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="reading_lounge_proxy4">
+          <pose>4.102594118367465 2.6622052652770756 0.065 0 0 -0.35</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.027</radius>
+              <length>0.13</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="reading_lounge_proxy5">
+          <pose>4.308332802840736 3.2258288929855032 0.065 0 0 -0.35</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.027</radius>
+              <length>0.13</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="reading_lounge_proxy6">
+          <pose>4.891667197159263 2.3741711070144964 0.065 0 0 -0.35</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.027</radius>
+              <length>0.13</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="reading_lounge_proxy7">
+          <pose>5.097405881632534 2.937794734722924 0.065 0 0 -0.35</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.027</radius>
+              <length>0.13</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="reading_side_table_proxy0">
+          <pose>5.6 2.6 0.49 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.3</radius>
+              <length>0.055</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="reading_side_table_proxy1">
+          <pose>5.6 2.6 0.23 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.045</radius>
+              <length>0.46</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="reading_plant_proxy0">
+          <pose>6.7 1.55 0.18 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.22</radius>
+              <length>0.36</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="entry_bench_proxy0">
+          <pose>-4.3 -5.6 0.42 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.4 0.45 0.14</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="entry_bench_proxy1">
+          <pose>-4.859999999999999 -5.6 0.19 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.045 0.37 0.38</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="entry_bench_proxy2">
+          <pose>-3.7399999999999998 -5.6 0.19 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.045 0.37 0.38</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="furnished_room">
+          <geometry>
+            <mesh>
+              <uri>/home/robot/vacuum_ws/src/vacuum_sim/worlds/furnished/living_room.dae</uri>
+            </mesh>
+          </geometry>
+          <cast_shadows>false</cast_shadows>
+        </visual>
+      </link>
+    </model>
+  </world>
+</sdf>

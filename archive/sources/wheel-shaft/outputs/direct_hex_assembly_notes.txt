@@ -1,0 +1,37 @@
+DIRECT HEX WHEEL MOUNT — TWO COPIES
+
+Use shaft_pair_direct_hex_M3.stl for slicing or the matching STEP for editing.
+Units: millimeters. Both files contain only the two shaft/hub pieces.
+
+The printed hex replaces the brass adapter and the old 5 mm shaft neck.
+The wheel mounts directly onto the new hex.
+
+FIT DIMENSIONS
+Hex: 11.8 mm across opposite flat faces; 5.8 mm long.
+Intended wheel recess: approximately 12 mm across flats and 6 mm deep.
+Bottom bore: 5.6 mm diameter, retaining its original 15.366664 mm depth.
+Other gearbox mounting features are retained.
+Two identical pieces, approximately 10 mm apart.
+
+HARDWARE PER WHEEL
+One standard M3 hex nut, 5.5 mm across flats and 2.4 mm thick.
+One M3 retaining screw; the existing 8 mm screw may be usable, subject to the check below.
+The nut pocket is not sized for a tall nylon-insert locknut.
+Nut dimensions reference: https://www.accu.co.uk/hexagon-nuts/766459-NUT203M3
+
+ASSEMBLY
+1. Clean the side opening and slide the M3 nut into its pocket until its hole aligns with the central screw hole.
+2. Test-fit the wheel over the hex. Do not force it or use the screw to pull an excessively tight hex into place.
+3. Seat the wheel against the support flange, covering the nut-loading opening.
+4. Pass the M3 screw through the wheel and thread it into the captive nut. Tighten gently.
+
+SCREW-LENGTH CHECK
+For nominal full engagement through the 2.4 mm nut, the screw should project at least 4.1 mm beyond the wheel's inner screw-hole surface into its hex recess.
+For an 8 mm screw, this corresponds to at most 3.9 mm between the underside of its seated head and that inner surface, including any washer.
+The actual wheel thickness is unknown, so fit of the 8 mm screw has not been confirmed.
+If it cannot reach fully through the nut, use a suitable longer M3 screw after checking that it will not bottom out.
+The hub has 8.3 mm of screw-tip clearance measured inward from its hex tip. This clearance is separate from the wider bottom bore.
+
+VALIDATION
+The STEP reopens as two valid solids. The nominal wheel recess, nut insertion path, and resistance to nut rotation were checked geometrically.
+Printed fit, retention strength, wheel clearance against the gearbox housing, and load capacity require a physical test. The wheel's overall shape was not supplied.

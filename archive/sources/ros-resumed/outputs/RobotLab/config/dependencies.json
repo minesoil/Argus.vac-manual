@@ -1,0 +1,5 @@
+{
+  "three_js": {"version": "0.180.0", "source": "https://registry.npmjs.org/three/-/three-0.180.0.tgz", "license": "MIT"},
+  "sllidar_ros2": {"commit": "34300099fadfc772965962dec837bf436706188f", "source": "https://github.com/Slamtec/sllidar_ros2", "license": "BSD-2-Clause"},
+  "arduino_avr": {"version": "1.8.8", "fqbn": "arduino:avr:mega"}
+}

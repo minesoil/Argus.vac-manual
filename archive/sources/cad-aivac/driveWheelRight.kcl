@@ -1,0 +1,57 @@
+// AIVac right drive wheel
+// Duplicate 65 mm rubber wheel used for the opposite drivetrain side.
+@settings(defaultLengthUnit = mm, kclVersion = 1.0)
+
+import unitBlock, unitSoftBlock, unitCylinder, unitSoftCylinder from "primitives.kcl"
+
+wheelRadius = 32.5mm
+wheelWidth = 24mm
+hubRadius = 18mm
+hubWidth = 28mm
+adapterRadius = 5.0mm
+adapterWidth = 30mm
+
+tire = clone(unitCylinder)
+  |> scale(x = wheelRadius / 1mm, y = wheelRadius / 1mm, z = wheelWidth / 1mm)
+  |> rotate(axis = Y, angle = 90deg, global = false)
+  |> appearance(color = "#080808", roughness = 96, metalness = 0)
+
+plasticHub = clone(unitCylinder)
+  |> scale(x = hubRadius / 1mm, y = hubRadius / 1mm, z = hubWidth / 1mm)
+  |> rotate(axis = Y, angle = 90deg, global = false)
+  |> appearance(color = "#2f3338", roughness = 62, metalness = 0)
+
+shaftAdapter = clone(unitCylinder)
+  |> scale(x = adapterRadius / 1mm, y = adapterRadius / 1mm, z = adapterWidth / 1mm)
+  |> rotate(axis = Y, angle = 90deg, global = false)
+  |> appearance(color = "#b4a577", roughness = 36, metalness = 72)
+
+firstTread = clone(unitSoftBlock)
+  |> scale(x = (wheelWidth + 2mm) / 1mm, y = 5mm / 1mm, z = 4mm / 1mm)
+  |> translate(
+       x = 0mm,
+       y = 0mm,
+       z = wheelRadius + 1.5mm,
+       global = true,
+     )
+treadBlocks = patternCircular3d(
+  firstTread,
+  instances = 18,
+  axis = X,
+  center = [0mm, 0mm, 0mm],
+  arcDegrees = 360deg,
+  rotateDuplicates = true,
+)
+rubberTreads = appearance(
+  treadBlocks,
+  color = "#111111",
+  roughness = 97,
+  metalness = 0,
+)
+
+driveWheelRight = flatten([
+  tire,
+  plasticHub,
+  shaftAdapter,
+  rubberTreads
+])

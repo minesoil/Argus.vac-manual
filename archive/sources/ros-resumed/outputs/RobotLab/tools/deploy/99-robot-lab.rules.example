@@ -1,0 +1,4 @@
+# Replace ATTRS{serial} with each device's actual serial from udevadm.
+# Two devices with the same vendor/product still need distinct serial numbers.
+SUBSYSTEM=="tty", ATTRS{serial}=="REPLACE_ME_MEGA", SYMLINK+="robot_mega", GROUP="dialout", MODE="0660"
+SUBSYSTEM=="tty", ATTRS{serial}=="REPLACE_ME_LIDAR", SYMLINK+="robot_lidar", GROUP="dialout", MODE="0660"

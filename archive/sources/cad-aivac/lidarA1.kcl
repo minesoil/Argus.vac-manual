@@ -1,0 +1,84 @@
+// AIVac LiDAR scanner
+// Slamtec RPLIDAR A1-style 360 degree sensor with puck, base, windows, and cable.
+@settings(defaultLengthUnit = mm, kclVersion = 1.0)
+
+import unitBlock, unitSoftBlock, unitCylinder, unitSoftCylinder from "primitives.kcl"
+
+baseLength = 96.8mm
+baseWidth = 70.3mm
+height = 55mm
+
+baseSled = clone(unitSoftBlock)
+  |> scale(x = baseLength / 1mm, y = baseWidth / 1mm, z = 8mm / 1mm)
+  |> translate(z = -height / 2 + 4mm, global = true)
+  |> appearance(color = "#161719", roughness = 58, metalness = 10)
+
+rotorLower = clone(unitCylinder)
+  |> scale(x = 36mm / 1mm, y = 36mm / 1mm, z = 28mm / 1mm)
+  |> translate(z = -7mm, global = true)
+  |> appearance(color = "#1f2124", roughness = 50, metalness = 15)
+rotorTop = clone(unitCylinder)
+  |> scale(x = 32mm / 1mm, y = 32mm / 1mm, z = 18mm / 1mm)
+  |> translate(z = 16mm, global = true)
+  |> appearance(color = "#0f1012", roughness = 44, metalness = 20)
+
+scanWindowFront = clone(unitSoftBlock)
+  |> scale(x = 18mm / 1mm, y = 2mm / 1mm, z = 8mm / 1mm)
+  |> translate(
+       x = 18mm,
+       y = -36mm,
+       z = 4mm,
+       global = true,
+     )
+scanWindowSide = clone(unitSoftBlock)
+  |> scale(x = 15mm / 1mm, y = 2mm / 1mm, z = 7mm / 1mm)
+  |> rotate(axis = Z, angle = 24deg, global = true)
+  |> translate(
+       x = -26mm,
+       y = -28mm,
+       z = 3mm,
+       global = true,
+     )
+scanWindows = appearance(
+  [scanWindowFront, scanWindowSide],
+  color = "#06101c",
+  roughness = 12,
+  metalness = 0,
+  opacity = 66,
+)
+
+mountEarLeft = clone(unitSoftBlock)
+  |> scale(x = 12mm / 1mm, y = 18mm / 1mm, z = 5mm / 1mm)
+  |> translate(
+       x = -53mm,
+       y = 0mm,
+       z = -19mm,
+       global = true,
+     )
+mountEarRight = clone(mountEarLeft)
+  |> translate(x = 106mm, global = true)
+mountEars = appearance(
+  [mountEarLeft, mountEarRight],
+  color = "#202225",
+  roughness = 56,
+  metalness = 20,
+)
+
+lidarCable = clone(unitBlock)
+  |> scale(x = 36mm / 1mm, y = 2.2mm / 1mm, z = 2.2mm / 1mm)
+  |> translate(
+       x = -58mm,
+       y = 20mm,
+       z = -20mm,
+       global = true,
+     )
+  |> appearance(color = "#111111", roughness = 72, metalness = 0)
+
+lidarA1 = flatten([
+  baseSled,
+  rotorLower,
+  rotorTop,
+  scanWindows,
+  mountEars,
+  lidarCable
+])

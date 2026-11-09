@@ -1,0 +1,7 @@
+# local-extra-162
+
+Historical source collection. Older instructions are reference material, not current wiring guidance.
+
+| Record | Date | Available copy |
+| --- | --- | --- |
+| rplidar_driver.vcxproj | 2026-06-06 | [File](../../archive/sources/local-extra-162/rplidar_driver.vcxproj) |

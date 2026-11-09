@@ -1,0 +1,9 @@
+﻿{
+    "Started":  "2026-09-30T20:31:26.4348898+08:00",
+    "BootTime":  "2026-09-30T19:05:32.5000000+08:00",
+    "Status":  "InstallerNeedsReview",
+    "ExitCode":  1,
+    "VirtualMachinePlatform":  "Disabled",
+    "Error":  null,
+    "Finished":  "2026-09-30T20:34:15.5871436+08:00"
+}

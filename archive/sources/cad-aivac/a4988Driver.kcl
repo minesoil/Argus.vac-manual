@@ -1,0 +1,113 @@
+// AIVac A4988 driver
+// Pololu-style 0.6 by 0.8 inch stepper driver with headers, chip, potentiometer, and heatsink.
+@settings(defaultLengthUnit = mm, kclVersion = 1.0)
+
+import unitBlock, unitSoftBlock, unitCylinder, unitSoftCylinder from "primitives.kcl"
+
+boardLength = 20.3mm
+boardWidth = 15.2mm
+boardThickness = 1.6mm
+
+carrierPcb = clone(unitBlock)
+  |> scale(x = boardLength / 1mm, y = boardWidth / 1mm, z = boardThickness / 1mm)
+  |> appearance(color = "#9e252b", roughness = 68, metalness = 0)
+
+driverIc = clone(unitBlock)
+  |> scale(x = 5.4mm / 1mm, y = 5.4mm / 1mm, z = 1.4mm / 1mm)
+  |> translate(
+       x = 0mm,
+       y = 0mm,
+       z = 1.5mm,
+       global = true,
+     )
+  |> appearance(color = "#111315", roughness = 50, metalness = 0)
+
+heatSinkBase = clone(unitSoftBlock)
+  |> scale(x = 8mm / 1mm, y = 8mm / 1mm, z = 2mm / 1mm)
+  |> translate(
+       x = 0mm,
+       y = 0mm,
+       z = 3.4mm,
+       global = true,
+     )
+heatSinkFinOne = clone(unitBlock)
+  |> scale(x = 8mm / 1mm, y = 1mm / 1mm, z = 4mm / 1mm)
+  |> translate(
+       x = 0mm,
+       y = -3mm,
+       z = 5mm,
+       global = true,
+     )
+heatSinkFinTwo = clone(heatSinkFinOne)
+  |> translate(y = 3mm, global = true)
+heatSinkFinThree = clone(heatSinkFinOne)
+  |> translate(y = 6mm, global = true)
+heatSink = appearance(
+  [
+    heatSinkBase,
+    heatSinkFinOne,
+    heatSinkFinTwo,
+    heatSinkFinThree
+  ],
+  color = "#d9d4cc",
+  roughness = 25,
+  metalness = 88,
+)
+
+trimPot = clone(unitCylinder)
+  |> scale(x = 2.4mm / 1mm, y = 2.4mm / 1mm, z = 1.6mm / 1mm)
+  |> translate(
+       x = -6mm,
+       y = 4.3mm,
+       z = 2.1mm,
+       global = true,
+     )
+  |> appearance(color = "#c5a13b", roughness = 35, metalness = 72)
+
+cap = clone(unitCylinder)
+  |> scale(x = 2.1mm / 1mm, y = 2.1mm / 1mm, z = 5mm / 1mm)
+  |> translate(
+       x = 6mm,
+       y = -4.4mm,
+       z = 3mm,
+       global = true,
+     )
+  |> appearance(color = "#202020", roughness = 45, metalness = 20)
+
+firstPinLeft = clone(unitCylinder)
+  |> scale(x = 0.45mm / 1mm, y = 0.45mm / 1mm, z = 6mm / 1mm)
+  |> translate(
+       x = -7.6mm,
+       y = -6.35mm,
+       z = 3.3mm,
+       global = true,
+     )
+leftPins = patternLinear3d(
+  firstPinLeft,
+  instances = 8,
+  distance = 2.54mm,
+  axis = Y,
+)
+firstPinRight = clone(firstPinLeft)
+  |> translate(x = 15.2mm, global = true)
+rightPins = patternLinear3d(
+  firstPinRight,
+  instances = 8,
+  distance = 2.54mm,
+  axis = Y,
+)
+headerPins = appearance(
+  flatten([leftPins, rightPins]),
+  color = "#d7ad4b",
+  roughness = 32,
+  metalness = 76,
+)
+
+a4988Driver = flatten([
+  carrierPcb,
+  driverIc,
+  heatSink,
+  trimPot,
+  cap,
+  headerPins
+])

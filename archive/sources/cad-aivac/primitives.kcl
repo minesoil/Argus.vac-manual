@@ -1,0 +1,51 @@
+// AIVac primitive solids
+// Reusable solver-sketch unit bodies for scaled product parts.
+@settings(defaultLengthUnit = mm, kclVersion = 1.0)
+
+unitSquareSketch = sketch(on = XY) {
+  s1 = line(start = [var -0.5mm, var -0.5mm], end = [var 0.5mm, var -0.5mm])
+  s2 = line(start = [var 0.5mm, var -0.5mm], end = [var 0.5mm, var 0.5mm])
+  s3 = line(start = [var 0.5mm, var 0.5mm], end = [var -0.5mm, var 0.5mm])
+  s4 = line(start = [var -0.5mm, var 0.5mm], end = [var -0.5mm, var -0.5mm])
+
+  coincident([s1.end, s2.start])
+  coincident([s2.end, s3.start])
+  coincident([s3.end, s4.start])
+  coincident([s4.end, s1.start])
+  coincident([s1.start, [-0.5mm, -0.5mm]])
+  horizontal(s1)
+  vertical(s2)
+  horizontal(s3)
+  vertical(s4)
+  horizontalDistance([s1.start, s1.end]) == 1mm
+  verticalDistance([s1.start, s4.start]) == 1mm
+}
+unitSquareRegion = region(point = [0mm, 0mm], sketch = unitSquareSketch)
+export unitBlock = extrude(unitSquareRegion, length = 1mm, symmetric = true)
+unitSoftBlockBase = clone(unitBlock)
+export unitSoftBlock = chamfer(
+  unitSoftBlockBase,
+  length = 0.05mm,
+  tags = [
+    getOppositeEdge(unitSoftBlockBase.sketch.tags.s1),
+    getOppositeEdge(unitSoftBlockBase.sketch.tags.s2),
+    getOppositeEdge(unitSoftBlockBase.sketch.tags.s3),
+    getOppositeEdge(unitSoftBlockBase.sketch.tags.s4)
+  ],
+)
+hide(unitSquareSketch)
+
+unitCircleSketch = sketch(on = XY) {
+  radiusGuide = line(start = [var 0mm, var 0mm], end = [var 1mm, var 0mm], construction = true)
+  c = circle(start = [var 1mm, var 0mm], center = [var 0mm, var 0mm])
+
+  coincident([radiusGuide.start, ORIGIN])
+  coincident([radiusGuide.start, c.center])
+  coincident([radiusGuide.end, c.start])
+  horizontal(radiusGuide)
+  horizontalDistance([radiusGuide.start, radiusGuide.end]) == 1mm
+}
+unitCircleRegion = region(point = [0mm, 0mm], sketch = unitCircleSketch)
+export unitCylinder = extrude(unitCircleRegion, length = 1mm, symmetric = true)
+export unitSoftCylinder = unitCylinder
+hide(unitCircleSketch)

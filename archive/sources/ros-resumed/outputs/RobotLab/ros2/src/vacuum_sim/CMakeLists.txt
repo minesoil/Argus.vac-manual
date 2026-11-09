@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.8)
+project(vacuum_sim)
+find_package(ament_cmake REQUIRED)
+install(DIRECTORY urdf config launch worlds meshes DESTINATION share/${PROJECT_NAME})
+install(PROGRAMS scripts/twist_adapter.py DESTINATION lib/${PROJECT_NAME})
+ament_package()

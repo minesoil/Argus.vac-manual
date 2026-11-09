@@ -21,8 +21,8 @@ network access. Never put a GitHub token into the browser code.
 from the repository tree when publishing a dashboard release. It is only a
 fallback; normal operation discovers files automatically.
 
-Update dated milestone cards in index.html and PROJECT-STATUS.md when physical
-validation changes. The cards are recorded progress, never live robot telemetry.
+Update the dated progress note in index.html and PROJECT-STATUS.md when physical
+validation changes. It is recorded progress, never live robot telemetry.
 Add reviewed descriptions to `explanations` in dashboard.js for important new
 files. New files without one receive a clearly labeled general explanation.
 

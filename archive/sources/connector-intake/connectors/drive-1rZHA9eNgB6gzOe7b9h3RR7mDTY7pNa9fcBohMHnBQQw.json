@@ -1,0 +1,37 @@
+{
+  "content": "﻿Computer: 4350 NTD\r\n* Raspberry Pi 4 4GB - 3700\r\n* Arduino Mega 2560 - 650\r\n\r\n\r\n\r\n\r\nSensors: 4300 NTD\r\n* 360-degree LIDAR scanner - 2900\r\n* Raspberry Pi Camera Module 3 NoIR 120 degree - 1400\r\n\r\n\r\nMotors: 980 NTD\r\n* Nema 17 stepper motors—400 * 2 = 800\r\n* A4988 Stepper Motor Drivers - 60 * 2 = 120 + 運費 60\r\n\r\n\r\nPower System: 1000 NTD\r\n* JFLY Lithium Polymer Battery 3S 11.1V 2200 mAh - 610\r\n* B3 Lithium Battery Balancing Charger 20W 2S/3S - 260\r\n* Buck Regulator - 130\r\n* Low Voltage Alarm - 60\r\n\r\n\r\nVacuum: 580 NTD\r\n* Driver - 185\r\n* Vacuum - 395\r\n\r\n\r\nTotal Price: 11,272 NTD",
+  "title": "機器人材料費",
+  "url": "https://docs.google.com/document/d/1rZHA9eNgB6gzOe7b9h3RR7mDTY7pNa9fcBohMHnBQQw/edit?usp=drivesdk",
+  "file_name": null,
+  "mime_type": "text/plain",
+  "file_ext": null,
+  "b64_string": null,
+  "id": "1rZHA9eNgB6gzOe7b9h3RR7mDTY7pNa9fcBohMHnBQQw",
+  "parent_ids": [
+    "0AG6CQ6G9JrrCUk9PVA"
+  ],
+  "drive_id": null,
+  "created_time": "2026-05-28T13:02:15.267Z",
+  "modified_time": "2026-05-31T12:08:00.846Z",
+  "is_empty": false,
+  "file_uri": null,
+  "file_size_bytes": null,
+  "display_url": "https://docs.google.com/document/d/1rZHA9eNgB6gzOe7b9h3RR7mDTY7pNa9fcBohMHnBQQw/edit?usp=drivesdk",
+  "display_title": "機器人材料費",
+  "structuredContent": {
+    "title": "機器人材料費",
+    "content": "﻿Computer: 4350 NTD\r\n* Raspberry Pi 4 4GB - 3700\r\n* Arduino Mega 2560 - 650\r\n\r\n\r\n\r\n\r\nSensors: 4300 NTD\r\n* 360-degree LIDAR scanner - 2900\r\n* Raspberry Pi Camera Module 3 NoIR 120 degree - 1400\r\n\r\n\r\nMotors: 980 NTD\r\n* Nema 17 stepper motors—400 * 2 = 800\r\n* A4988 Stepper Motor Drivers - 60 * 2 = 120 + 運費 60\r\n\r\n\r\nPower System: 1000 NTD\r\n* JFLY Lithium Polymer Battery 3S 11.1V 2200 mAh - 610\r\n* B3 Lithium Battery Balancing Charger 20W 2S/3S - 260\r\n* Buck Regulator - 130\r\n* Low Voltage Alarm - 60\r\n\r\n\r\nVacuum: 580 NTD\r\n* Driver - 185\r\n* Vacuum - 395\r\n\r\n\r\nTotal Price: 11,272 NTD",
+    "id": "1rZHA9eNgB6gzOe7b9h3RR7mDTY7pNa9fcBohMHnBQQw",
+    "parent_ids": [
+      "0AG6CQ6G9JrrCUk9PVA"
+    ],
+    "drive_id": null,
+    "created_time": "2026-05-28T13:02:15.267Z",
+    "modified_time": "2026-05-31T12:08:00.846Z",
+    "is_empty": false,
+    "mime_type": "text/plain",
+    "file_name": null,
+    "file_size_bytes": null,
+    "url": "https://drive.google.com/file/d/1rZHA9eNgB6gzOe7b9h3RR7mDTY7pNa9fcBohMHnBQQw"
+  }
+}

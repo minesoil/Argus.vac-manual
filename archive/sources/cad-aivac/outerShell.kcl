@@ -1,0 +1,120 @@
+// AIVac outer shell
+// Translucent production-style top cover with service hatch and LiDAR collar.
+@settings(defaultLengthUnit = mm, kclVersion = 1.0)
+
+import unitBlock, unitSoftBlock, unitCylinder, unitSoftCylinder from "primitives.kcl"
+
+shellRadius = 148mm
+shellSkirtHeight = 38mm
+lidRadius = 128mm
+lidHeight = 16mm
+collarOuterRadius = 55mm
+collarInnerRadius = 37mm
+collarHeight = 7mm
+
+lowerShell = clone(unitSoftCylinder)
+  |> scale(x = shellRadius / 1mm, y = shellRadius / 1mm, z = shellSkirtHeight / 1mm)
+  |> translate(z = -4mm, global = true)
+  |> appearance(
+       color = "#e7ecef",
+       roughness = 58,
+       metalness = 0,
+       opacity = 68,
+     )
+
+topLid = clone(unitSoftCylinder)
+  |> scale(x = lidRadius / 1mm, y = lidRadius / 1mm, z = lidHeight / 1mm)
+  |> translate(z = 23mm, global = true)
+  |> appearance(
+       color = "#f5f7f7",
+       roughness = 52,
+       metalness = 0,
+       opacity = 78,
+     )
+
+lidarCollar = clone(unitSoftCylinder)
+  |> scale(x = collarOuterRadius / 1mm, y = collarOuterRadius / 1mm, z = collarHeight / 1mm)
+  |> translate(z = 36mm, global = true)
+  |> appearance(color = "#17191c", roughness = 44, metalness = 8)
+lidarOpeningCue = clone(unitCylinder)
+  |> scale(x = collarInnerRadius / 1mm, y = collarInnerRadius / 1mm, z = 1.2mm / 1mm)
+  |> translate(z = 40mm, global = true)
+  |> appearance(color = "#050608", roughness = 48, metalness = 0)
+
+frontCameraBezel = clone(unitSoftBlock)
+  |> scale(x = 42mm / 1mm, y = 5mm / 1mm, z = 18mm / 1mm)
+  |> translate(
+       x = 0mm,
+       y = -149mm,
+       z = 11mm,
+       global = true,
+     )
+  |> appearance(color = "#101316", roughness = 38, metalness = 0)
+
+statusButton = clone(unitSoftCylinder)
+  |> scale(x = 11mm / 1mm, y = 11mm / 1mm, z = 3mm / 1mm)
+  |> translate(
+       x = -22mm,
+       y = -16mm,
+       z = 33mm,
+       global = true,
+     )
+  |> appearance(color = "#35d6c7", roughness = 35, metalness = 0)
+stopButton = clone(unitSoftCylinder)
+  |> scale(x = 11mm / 1mm, y = 11mm / 1mm, z = 3mm / 1mm)
+  |> translate(
+       x = 22mm,
+       y = -16mm,
+       z = 33mm,
+       global = true,
+     )
+  |> appearance(color = "#ff7a45", roughness = 35, metalness = 0)
+
+rearDustbinWindow = clone(unitSoftBlock)
+  |> scale(x = 92mm / 1mm, y = 38mm / 1mm, z = 4mm / 1mm)
+  |> translate(
+       x = 0mm,
+       y = 87mm,
+       z = 31mm,
+       global = true,
+     )
+  |> appearance(
+       color = "#9fd7ea",
+       roughness = 18,
+       metalness = 0,
+       opacity = 42,
+     )
+
+shellServiceScrews = patternCircular3d(
+  clone(unitCylinder)
+    |> scale(x = 2.2mm / 1mm, y = 2.2mm / 1mm, z = 2mm / 1mm)
+    |> translate(
+         x = 108mm,
+         y = 0mm,
+         z = 33mm,
+         global = true,
+       ),
+  instances = 8,
+  axis = Z,
+  center = [0mm, 0mm, 33mm],
+  arcDegrees = 360deg,
+  rotateDuplicates = true,
+)
+shellScrewHeads = appearance(
+  shellServiceScrews,
+  color = "#2e3338",
+  roughness = 40,
+  metalness = 65,
+)
+
+outerShell = flatten([
+  lowerShell,
+  topLid,
+  lidarCollar,
+  lidarOpeningCue,
+  frontCameraBezel,
+  statusButton,
+  stopButton,
+  rearDustbinWindow,
+  shellScrewHeads
+])

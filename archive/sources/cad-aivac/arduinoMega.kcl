@@ -1,0 +1,125 @@
+// AIVac Arduino Mega
+// Blue Arduino Mega 2560 board with USB, barrel jack, headers, and controller ICs.
+@settings(defaultLengthUnit = mm, kclVersion = 1.0)
+
+import unitBlock, unitSoftBlock, unitCylinder, unitSoftCylinder from "primitives.kcl"
+
+boardLength = 101.52mm
+boardWidth = 53.3mm
+boardThickness = 1.6mm
+
+megaBoard = clone(unitBlock)
+  |> scale(x = boardLength / 1mm, y = boardWidth / 1mm, z = boardThickness / 1mm)
+  |> appearance(color = "#0d4f9c", roughness = 70, metalness = 0)
+
+usbBPort = clone(unitSoftBlock)
+  |> scale(x = 16mm / 1mm, y = 18mm / 1mm, z = 11mm / 1mm)
+  |> translate(
+       x = -45mm,
+       y = -8mm,
+       z = 6mm,
+       global = true,
+     )
+barrelJack = clone(unitCylinder)
+  |> scale(x = 5.5mm / 1mm, y = 5.5mm / 1mm, z = 12mm / 1mm)
+  |> rotate(axis = Y, angle = 90deg, global = false)
+  |> translate(
+       x = -43mm,
+       y = 19mm,
+       z = 5.6mm,
+       global = true,
+     )
+ports = appearance(
+  [usbBPort, barrelJack],
+  color = "#d0d3d5",
+  roughness = 34,
+  metalness = 78,
+)
+jackSleeve = clone(unitCylinder)
+  |> scale(x = 3.6mm / 1mm, y = 3.6mm / 1mm, z = 13mm / 1mm)
+  |> rotate(axis = Y, angle = 90deg, global = false)
+  |> translate(
+       x = -43mm,
+       y = 19mm,
+       z = 5.6mm,
+       global = true,
+     )
+  |> appearance(color = "#101010", roughness = 48, metalness = 0)
+
+leftHeader = clone(unitSoftBlock)
+  |> scale(x = 78mm / 1mm, y = 5mm / 1mm, z = 7mm / 1mm)
+  |> translate(
+       x = 4mm,
+       y = 24.5mm,
+       z = 4.2mm,
+       global = true,
+     )
+rightHeader = clone(leftHeader)
+  |> translate(y = -49mm, global = true)
+rearHeader = clone(unitSoftBlock)
+  |> scale(x = 5mm / 1mm, y = 36mm / 1mm, z = 7mm / 1mm)
+  |> translate(
+       x = 46mm,
+       y = 0mm,
+       z = 4.2mm,
+       global = true,
+     )
+headers = appearance(
+  [leftHeader, rightHeader, rearHeader],
+  color = "#0a0a0a",
+  roughness = 72,
+  metalness = 0,
+)
+
+mainChip = clone(unitBlock)
+  |> scale(x = 15mm / 1mm, y = 15mm / 1mm, z = 1.7mm / 1mm)
+  |> translate(
+       x = 4mm,
+       y = -3mm,
+       z = 1.7mm,
+       global = true,
+     )
+usbChip = clone(unitBlock)
+  |> scale(x = 9mm / 1mm, y = 9mm / 1mm, z = 1.3mm / 1mm)
+  |> translate(
+       x = -26mm,
+       y = -9mm,
+       z = 1.5mm,
+       global = true,
+     )
+chips = appearance(
+  [mainChip, usbChip],
+  color = "#15191d",
+  roughness = 50,
+  metalness = 0,
+)
+
+resetButton = clone(unitSoftBlock)
+  |> scale(x = 6mm / 1mm, y = 4mm / 1mm, z = 2mm / 1mm)
+  |> translate(
+       x = -32mm,
+       y = 9mm,
+       z = 2.4mm,
+       global = true,
+     )
+  |> appearance(color = "#c8c8c8", roughness = 32, metalness = 50)
+crystalCan = clone(unitSoftCylinder)
+  |> scale(x = 3.5mm / 1mm, y = 3.5mm / 1mm, z = 8mm / 1mm)
+  |> rotate(axis = Y, angle = 90deg, global = false)
+  |> translate(
+       x = -12mm,
+       y = 8mm,
+       z = 2.4mm,
+       global = true,
+     )
+  |> appearance(color = "#c7cdd0", roughness = 28, metalness = 80)
+
+arduinoMega = flatten([
+  megaBoard,
+  ports,
+  jackSleeve,
+  headers,
+  chips,
+  resetButton,
+  crystalCan
+])

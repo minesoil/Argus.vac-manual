@@ -1,0 +1,120 @@
+// AIVac wiring harness
+// Color-coded power, signal, camera, motor, and LiDAR cable runs routed through the robot.
+@settings(defaultLengthUnit = mm, kclVersion = 1.0)
+
+import unitBlock, unitSoftBlock, unitCylinder, unitSoftCylinder from "primitives.kcl"
+
+cameraRibbonA = clone(unitSoftBlock)
+  |> scale(x = 17mm / 1mm, y = 86mm / 1mm, z = 0.7mm / 1mm)
+  |> translate(
+       x = -44mm,
+       y = -82mm,
+       z = 57mm,
+       global = true,
+     )
+cameraRibbonB = clone(unitSoftBlock)
+  |> scale(x = 48mm / 1mm, y = 17mm / 1mm, z = 0.7mm / 1mm)
+  |> translate(
+       x = -22mm,
+       y = -42mm,
+       z = 57mm,
+       global = true,
+     )
+cameraRibbon = appearance(
+  [cameraRibbonA, cameraRibbonB],
+  color = "#f4e9c7",
+  roughness = 62,
+  metalness = 0,
+)
+
+piToArduinoSignal = clone(unitBlock)
+  |> scale(x = 82mm / 1mm, y = 1.4mm / 1mm, z = 1.4mm / 1mm)
+  |> translate(
+       x = 16mm,
+       y = 38mm,
+       z = 73mm,
+       global = true,
+     )
+piToArduinoSignalTwo = clone(piToArduinoSignal)
+  |> translate(y = 4mm, global = true)
+logicWires = appearance(
+  [
+    piToArduinoSignal,
+    piToArduinoSignalTwo
+  ],
+  color = "#35d6c7",
+  roughness = 72,
+  metalness = 0,
+)
+
+batteryPowerRed = clone(unitBlock)
+  |> scale(x = 54mm / 1mm, y = 2.4mm / 1mm, z = 2.4mm / 1mm)
+  |> translate(
+       x = 24mm,
+       y = 83mm,
+       z = 66mm,
+       global = true,
+     )
+batteryPowerBlack = clone(batteryPowerRed)
+  |> translate(y = -6mm, global = true)
+powerWireRed = appearance(
+  batteryPowerRed,
+  color = "#d51f1f",
+  roughness = 70,
+  metalness = 0,
+)
+powerWireBlack = appearance(
+  batteryPowerBlack,
+  color = "#111111",
+  roughness = 70,
+  metalness = 0,
+)
+
+leftMotorBundle = clone(unitBlock)
+  |> scale(x = 70mm / 1mm, y = 2.2mm / 1mm, z = 2.2mm / 1mm)
+  |> translate(
+       x = -92mm,
+       y = -14mm,
+       z = 52mm,
+       global = true,
+     )
+rightMotorBundle = clone(leftMotorBundle)
+  |> translate(x = 184mm, global = true)
+motorHarness = appearance(
+  [leftMotorBundle, rightMotorBundle],
+  color = "#ff7a45",
+  roughness = 70,
+  metalness = 0,
+)
+
+lidarCableRun = clone(unitBlock)
+  |> scale(x = 2mm / 1mm, y = 54mm / 1mm, z = 2mm / 1mm)
+  |> translate(
+       x = 0mm,
+       y = 8mm,
+       z = 86mm,
+       global = true,
+     )
+lidarCableTail = clone(unitBlock)
+  |> scale(x = 44mm / 1mm, y = 2mm / 1mm, z = 2mm / 1mm)
+  |> translate(
+       x = -22mm,
+       y = -17mm,
+       z = 86mm,
+       global = true,
+     )
+lidarHarness = appearance(
+  [lidarCableRun, lidarCableTail],
+  color = "#111111",
+  roughness = 72,
+  metalness = 0,
+)
+
+wiringHarness = flatten([
+  cameraRibbon,
+  logicWires,
+  powerWireRed,
+  powerWireBlack,
+  motorHarness,
+  lidarHarness
+])

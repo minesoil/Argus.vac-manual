@@ -1,0 +1,3 @@
+[INFO] [1791380755.338203050] [vacuum_manual_controller]: Guard ready=False; manual speed=0.000, turn=0.000
+[INFO] [1791380756.911561485] [vacuum_manual_controller]: Guard ready=True; manual speed=0.000, turn=0.000
+

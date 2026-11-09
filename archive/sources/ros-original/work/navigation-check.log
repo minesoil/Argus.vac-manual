@@ -1,0 +1,57 @@
+[lifecycle_manager-11] [INFO] [1790778089.362018737] [lifecycle_manager_navigation]: Server smoother_server connected with bond.
+[lifecycle_manager-11] [INFO] [1790778089.362137149] [lifecycle_manager_navigation]: [34m[1mActivating planner_server[0m[0m
+[planner_server-3] [INFO] [1790778089.363464744] [planner_server]: Activating
+[planner_server-3] [INFO] [1790778089.363510093] [global_costmap.global_costmap]: Activating
+[planner_server-3] [INFO] [1790778089.363518322] [global_costmap.global_costmap]: Checking transform
+[planner_server-3] [INFO] [1790778089.363760974] [global_costmap.global_costmap]: start
+[planner_server-3] [INFO] [1790778090.366535999] [planner_server]: Activating plugin GridBased of type NavfnPlanner
+[planner_server-3] [INFO] [1790778090.375663611] [planner_server]: Creating bond (planner_server) to lifecycle manager.
+[lifecycle_manager-11] [INFO] [1790778090.505106068] [lifecycle_manager_navigation]: Server planner_server connected with bond.
+[lifecycle_manager-11] [INFO] [1790778090.505329460] [lifecycle_manager_navigation]: [34m[1mActivating route_server[0m[0m
+[route_server-4] [INFO] [1790778090.506979087] [route_server]: Activating
+[route_server-4] [INFO] [1790778090.507384967] [route_server]: Creating bond (route_server) to lifecycle manager.
+[lifecycle_manager-11] [INFO] [1790778090.643097621] [lifecycle_manager_navigation]: Server route_server connected with bond.
+[lifecycle_manager-11] [INFO] [1790778090.643187822] [lifecycle_manager_navigation]: [34m[1mActivating behavior_server[0m[0m
+[behavior_server-5] [INFO] [1790778090.647106298] [behavior_server]: Activating
+[behavior_server-5] [INFO] [1790778090.647480187] [behavior_server]: Activating spin
+[behavior_server-5] [INFO] [1790778090.647510220] [behavior_server]: Activating backup
+[behavior_server-5] [INFO] [1790778090.647523297] [behavior_server]: Activating drive_on_heading
+[behavior_server-5] [INFO] [1790778090.647535671] [behavior_server]: Activating assisted_teleop
+[behavior_server-5] [INFO] [1790778090.647567573] [behavior_server]: Activating wait
+[behavior_server-5] [INFO] [1790778090.647592359] [behavior_server]: Creating bond (behavior_server) to lifecycle manager.
+[lifecycle_manager-11] [INFO] [1790778090.773049859] [lifecycle_manager_navigation]: Server behavior_server connected with bond.
+[lifecycle_manager-11] [INFO] [1790778090.773133886] [lifecycle_manager_navigation]: [34m[1mActivating velocity_smoother[0m[0m
+[velocity_smoother-8] [INFO] [1790778090.774148443] [velocity_smoother]: Activating
+[velocity_smoother-8] [INFO] [1790778090.774272585] [velocity_smoother]: Creating bond (velocity_smoother) to lifecycle manager.
+[lifecycle_manager-11] [INFO] [1790778090.907869457] [lifecycle_manager_navigation]: Server velocity_smoother connected with bond.
+[lifecycle_manager-11] [INFO] [1790778090.907982760] [lifecycle_manager_navigation]: [34m[1mActivating collision_monitor[0m[0m
+[collision_monitor-9] [INFO] [1790778090.909756140] [collision_monitor]: Activating
+[collision_monitor-9] [INFO] [1790778090.909832781] [collision_monitor]: Creating bond (collision_monitor) to lifecycle manager.
+[lifecycle_manager-11] [INFO] [1790778091.020663938] [lifecycle_manager_navigation]: Server collision_monitor connected with bond.
+[lifecycle_manager-11] [INFO] [1790778091.020752676] [lifecycle_manager_navigation]: [34m[1mActivating bt_navigator[0m[0m
+[bt_navigator-6] [INFO] [1790778091.022355617] [bt_navigator]: Activating
+[bt_navigator-6] [INFO] [1790778091.604504519] [bt_navigator]: Creating bond (bt_navigator) to lifecycle manager.
+[lifecycle_manager-11] [INFO] [1790778091.733054125] [lifecycle_manager_navigation]: Server bt_navigator connected with bond.
+[lifecycle_manager-11] [INFO] [1790778091.733126856] [lifecycle_manager_navigation]: [34m[1mActivating waypoint_follower[0m[0m
+[waypoint_follower-7] [INFO] [1790778091.734941130] [waypoint_follower]: Activating
+[waypoint_follower-7] [INFO] [1790778091.735057838] [waypoint_follower]: Creating bond (waypoint_follower) to lifecycle manager.
+[lifecycle_manager-11] [INFO] [1790778091.873935180] [lifecycle_manager_navigation]: Server waypoint_follower connected with bond.
+[lifecycle_manager-11] [INFO] [1790778091.874046854] [lifecycle_manager_navigation]: [34m[1mActivating docking_server[0m[0m
+[opennav_docking-10] [INFO] [1790778091.887127941] [docking_server]: Activating docking_server
+[opennav_docking-10] [INFO] [1790778091.973606820] [docking_server]: Creating bond (docking_server) to lifecycle manager.
+[lifecycle_manager-11] [INFO] [1790778092.107210370] [lifecycle_manager_navigation]: Server docking_server connected with bond.
+[lifecycle_manager-11] [INFO] [1790778092.107278773] [lifecycle_manager_navigation]: [34m[1mManaged nodes are active[0m[0m
+[lifecycle_manager-11] [INFO] [1790778092.107293426] [lifecycle_manager_navigation]: [34m[1mCreating bond timer...[0m[0m
+[planner_server-3] [INFO] [1790778091.914294940] [global_costmap.global_costmap]: Message Filter dropping message: frame 'lidar_link' at time 1119.400 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+{
+  "map_width": 119,
+  "map_height": 119,
+  "known_cells": 1504,
+  "occupied_cells": 36,
+  "goal": [
+    1.0,
+    0.0
+  ],
+  "status": 4,
+  "error_code": 0
+}

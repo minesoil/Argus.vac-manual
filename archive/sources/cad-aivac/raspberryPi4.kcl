@@ -1,0 +1,167 @@
+// AIVac Raspberry Pi 4
+// Detailed 85 by 56 mm SBC with ports, SoC, GPIO header, and mounting pads.
+@settings(defaultLengthUnit = mm, kclVersion = 1.0)
+
+import unitBlock, unitSoftBlock, unitCylinder, unitSoftCylinder from "primitives.kcl"
+
+boardLength = 85mm
+boardWidth = 56mm
+boardThickness = 1.6mm
+
+pcb = clone(unitBlock)
+  |> scale(x = boardLength / 1mm, y = boardWidth / 1mm, z = boardThickness / 1mm)
+  |> appearance(color = "#0f8a4a", roughness = 72, metalness = 0)
+
+holePadOne = clone(unitCylinder)
+  |> scale(x = 2.6mm / 1mm, y = 2.6mm / 1mm, z = 0.5mm / 1mm)
+  |> translate(
+       x = -29mm,
+       y = -24.5mm,
+       z = 1.05mm,
+       global = true,
+     )
+holePadTwo = clone(holePadOne)
+  |> translate(x = 58mm, global = true)
+holePadThree = clone(holePadOne)
+  |> translate(y = 49mm, global = true)
+holePadFour = clone(holePadTwo)
+  |> translate(y = 49mm, global = true)
+mountPads = appearance(
+  [
+    holePadOne,
+    holePadTwo,
+    holePadThree,
+    holePadFour
+  ],
+  color = "#d7ad4b",
+  roughness = 35,
+  metalness = 76,
+)
+
+soc = clone(unitBlock)
+  |> scale(x = 14mm / 1mm, y = 14mm / 1mm, z = 1.8mm / 1mm)
+  |> translate(
+       x = -5mm,
+       y = 0mm,
+       z = 1.7mm,
+       global = true,
+     )
+  |> appearance(color = "#111316", roughness = 52, metalness = 0)
+ram = clone(unitBlock)
+  |> scale(x = 12mm / 1mm, y = 10mm / 1mm, z = 1.5mm / 1mm)
+  |> translate(
+       x = 12mm,
+       y = 6mm,
+       z = 1.6mm,
+       global = true,
+     )
+  |> appearance(color = "#1a1e22", roughness = 52, metalness = 0)
+wifiShield = clone(unitBlock)
+  |> scale(x = 14mm / 1mm, y = 10mm / 1mm, z = 1.2mm / 1mm)
+  |> translate(
+       x = -23mm,
+       y = 15mm,
+       z = 1.5mm,
+       global = true,
+     )
+  |> appearance(color = "#c5c9ca", roughness = 36, metalness = 70)
+
+gpioHeader = clone(unitSoftBlock)
+  |> scale(x = 51mm / 1mm, y = 5mm / 1mm, z = 6mm / 1mm)
+  |> translate(
+       x = 3mm,
+       y = 24.3mm,
+       z = 3.8mm,
+       global = true,
+     )
+  |> appearance(color = "#090909", roughness = 70, metalness = 0)
+firstGpioPin = clone(unitBlock)
+  |> scale(x = 0.7mm / 1mm, y = 0.7mm / 1mm, z = 7mm / 1mm)
+  |> translate(
+       x = -22mm,
+       y = 23.1mm,
+       z = 7mm,
+       global = true,
+     )
+firstGpioPinB = clone(firstGpioPin)
+  |> translate(y = 2.54mm, global = true)
+gpioPinRowA = patternLinear3d(
+  firstGpioPin,
+  instances = 20,
+  distance = 2.54mm,
+  axis = X,
+)
+gpioPinRowB = patternLinear3d(
+  firstGpioPinB,
+  instances = 20,
+  distance = 2.54mm,
+  axis = X,
+)
+gpioPins = appearance(
+  flatten([gpioPinRowA, gpioPinRowB]),
+  color = "#d7ad4b",
+  roughness = 35,
+  metalness = 76,
+)
+
+ethernetPort = clone(unitSoftBlock)
+  |> scale(x = 16.5mm / 1mm, y = 18mm / 1mm, z = 13.5mm / 1mm)
+  |> translate(
+       x = 33mm,
+       y = -33mm,
+       z = 7mm,
+       global = true,
+     )
+usbPortOne = clone(unitSoftBlock)
+  |> scale(x = 15mm / 1mm, y = 17mm / 1mm, z = 15mm / 1mm)
+  |> translate(
+       x = 10mm,
+       y = -33mm,
+       z = 7.5mm,
+       global = true,
+     )
+usbPortTwo = clone(usbPortOne)
+  |> translate(x = 16mm, global = true)
+metalPorts = appearance(
+  [ethernetPort, usbPortOne, usbPortTwo],
+  color = "#d6d9db",
+  roughness = 32,
+  metalness = 82,
+)
+
+usbCPort = clone(unitSoftBlock)
+  |> scale(x = 9mm / 1mm, y = 8mm / 1mm, z = 3.2mm / 1mm)
+  |> translate(
+       x = -36mm,
+       y = -31.5mm,
+       z = 2.5mm,
+       global = true,
+     )
+microHdmiOne = clone(unitSoftBlock)
+  |> scale(x = 8mm / 1mm, y = 7mm / 1mm, z = 3mm / 1mm)
+  |> translate(
+       x = -22mm,
+       y = -31.5mm,
+       z = 2.5mm,
+       global = true,
+     )
+microHdmiTwo = clone(microHdmiOne)
+  |> translate(x = 12mm, global = true)
+sidePorts = appearance(
+  [usbCPort, microHdmiOne, microHdmiTwo],
+  color = "#babfc2",
+  roughness = 34,
+  metalness = 80,
+)
+
+raspberryPi4 = flatten([
+  pcb,
+  mountPads,
+  soc,
+  ram,
+  wifiShield,
+  gpioHeader,
+  gpioPins,
+  metalPorts,
+  sidePorts
+])

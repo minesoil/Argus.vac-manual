@@ -1,0 +1,167 @@
+// AIVac assembly
+// AI vision robot vacuum assembly with real-scale electronics, drivetrain, LiDAR, camera, suction, and dustbin.
+@settings(defaultLengthUnit = mm, kclVersion = 1.0)
+
+import "chassisBase.kcl" as chassisBase
+import "outerShell.kcl" as outerShell
+import "bumper.kcl" as bumper
+import "driveWheel.kcl" as driveWheel
+import "driveWheelRight.kcl" as driveWheelRight
+import "nema17Stepper.kcl" as nema17Stepper
+import "nema17StepperRight.kcl" as nema17StepperRight
+import "casterWheel.kcl" as casterWheel
+import "raspberryPi4.kcl" as raspberryPi4
+import "arduinoMega.kcl" as arduinoMega
+import "a4988Driver.kcl" as a4988Driver
+import "a4988DriverRight.kcl" as a4988DriverRight
+import "batteryPack.kcl" as batteryPack
+import "buckConverter.kcl" as buckConverter
+import "piCameraV2.kcl" as piCameraV2
+import "lidarA1.kcl" as lidarA1
+import "vacuumModule.kcl" as vacuumModule
+import "wiringHarness.kcl" as wiringHarness
+
+rightDriveTangentX = 151mm
+leftDriveTangentX = -151mm
+rightDriveMotorX = 101mm
+leftDriveMotorX = -101mm
+driveAxleY = 0mm
+driveWheelZ = 18mm
+driveMotorZ = 25mm
+
+chassis = chassisBase
+  |> translate(z = 18mm, global = true)
+shell = outerShell
+  |> translate(z = 49mm, global = true)
+rubberBumper = bumper
+  |> translate(z = 39mm, global = true)
+
+rightDriveWheel = driveWheelRight
+  |> translate(
+       x = rightDriveTangentX,
+       y = driveAxleY,
+       z = driveWheelZ,
+       global = true,
+     )
+leftDriveWheel = driveWheel
+  |> translate(
+       x = leftDriveTangentX,
+       y = driveAxleY,
+       z = driveWheelZ,
+       global = true,
+     )
+frontCaster = casterWheel
+  |> translate(
+       x = 0mm,
+       y = -104mm,
+       z = 2mm,
+       global = true,
+     )
+
+rightStepperMotor = nema17StepperRight
+  |> rotate(axis = Z, angle = 180deg, global = false)
+  |> translate(
+       x = rightDriveMotorX,
+       y = driveAxleY,
+       z = driveMotorZ,
+       global = true,
+     )
+leftStepperMotor = nema17Stepper
+  |> translate(
+       x = leftDriveMotorX,
+       y = driveAxleY,
+       z = driveMotorZ,
+       global = true,
+     )
+
+suctionSystem = vacuumModule
+  |> translate(
+       x = 0mm,
+       y = 0mm,
+       z = 34mm,
+       global = true,
+     )
+
+raspberryPiBoard = raspberryPi4
+  |> translate(
+       x = -46mm,
+       y = 36mm,
+       z = 66mm,
+       global = true,
+     )
+arduinoBoard = arduinoMega
+  |> translate(
+       x = 52mm,
+       y = 38mm,
+       z = 64mm,
+       global = true,
+     )
+rightStepperDriver = a4988DriverRight
+  |> translate(
+       x = 82mm,
+       y = -2mm,
+       z = 58mm,
+       global = true,
+     )
+leftStepperDriver = a4988Driver
+  |> translate(
+       x = -82mm,
+       y = -2mm,
+       z = 58mm,
+       global = true,
+     )
+
+mainBattery = batteryPack
+  |> rotate(axis = Z, angle = 90deg, global = false)
+  |> translate(
+       x = 0mm,
+       y = 82mm,
+       z = 46mm,
+       global = true,
+     )
+powerConverter = buckConverter
+  |> translate(
+       x = 0mm,
+       y = 96mm,
+       z = 68mm,
+       global = true,
+     )
+
+frontCamera = piCameraV2
+  |> rotate(axis = X, angle = 90deg, global = false)
+  |> translate(
+       x = 0mm,
+       y = -153mm,
+       z = 61mm,
+       global = true,
+     )
+topLidar = lidarA1
+  |> translate(
+       x = 0mm,
+       y = 0mm,
+       z = 93mm,
+       global = true,
+     )
+
+harness = wiringHarness
+
+aiVacAssembly = flatten([
+  chassis,
+  shell,
+  rubberBumper,
+  leftDriveWheel,
+  rightDriveWheel,
+  frontCaster,
+  leftStepperMotor,
+  rightStepperMotor,
+  suctionSystem,
+  raspberryPiBoard,
+  arduinoBoard,
+  leftStepperDriver,
+  rightStepperDriver,
+  mainBattery,
+  powerConverter,
+  frontCamera,
+  topLidar,
+  harness
+])

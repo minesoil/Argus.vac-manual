@@ -1,0 +1,866 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.9">
+  <world name="vacuum_room">
+    <physics name="physics" type="ignored">
+      <max_step_size>0.005555555555555556</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+    <gravity>0 0 -9.81</gravity>
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics" />
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands" />
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster" />
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <scene>
+      <ambient>.7 .7 .7 1</ambient>
+      <background>.69 .79 .85 1</background>
+      <shadows>true</shadows>
+    </scene>
+    <light name="afternoon_daylight" type="directional">
+      <pose>0 0 6 0 0 0</pose>
+      <diffuse>.75 .72 .65 1</diffuse>
+      <specular>.15 .15 .15 1</specular>
+      <direction>-.5 -.4 -1</direction>
+      <cast_shadows>true</cast_shadows>
+    </light>
+    <light name="soft_window_fill" type="directional">
+      <pose>0 0 6 0 0 0</pose>
+      <diffuse>.25 .28 .3 1</diffuse>
+      <specular>0 0 0 1</specular>
+      <direction>.4 .4 -1</direction>
+      <cast_shadows>false</cast_shadows>
+    </light>
+    <gui fullscreen="false">
+      <camera name="user_camera">
+        <pose>7 -9 8 0 .60 2.2</pose>
+      </camera>
+    </gui>
+    <model name="architecture">
+      <static>true</static>
+      <pose>0 0 0 0 0 0</pose>
+      <link name="body">
+        <visual name="furniture">
+          <geometry>
+            <mesh>
+              <uri>/home/robot/vacuum_ws/src/vacuum_sim/worlds/furnished/architecture.dae</uri>
+            </mesh>
+          </geometry>
+          <cast_shadows>true</cast_shadows>
+        </visual>
+        <collision name="proxy0">
+          <pose>0 0 -0.04 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8.2 7.2 0.08</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy1">
+          <pose>0 -3.5 1.4 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8.2 0.12 2.8</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy2">
+          <pose>-4 0 1.4 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.12 7 2.8</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy3">
+          <pose>4 0 1.4 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.12 7 2.8</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy4">
+          <pose>0 3.5 0.45 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8.2 0.12 0.9</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy5">
+          <pose>0 3.5 2.65 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>8.2 0.12 0.3</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy6">
+          <pose>-3.15 3.5 1.7 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.9 0.12 1.6</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy7">
+          <pose>3.15 3.5 1.7 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.9 0.12 1.6</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="three_seat_sofa">
+      <static>true</static>
+      <pose>-0.65 2.72 0 0 0 0</pose>
+      <link name="body">
+        <visual name="furniture">
+          <geometry>
+            <mesh>
+              <uri>/home/robot/vacuum_ws/src/vacuum_sim/worlds/furnished/three_seat_sofa.dae</uri>
+            </mesh>
+          </geometry>
+          <cast_shadows>true</cast_shadows>
+        </visual>
+        <collision name="proxy0">
+          <pose>0 0 0.28 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.55 0.9 0.3</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy1">
+          <pose>0 0.36 0.65 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.55 0.21 0.75</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy2">
+          <pose>-1.21 -0.03 0.53 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.18 0.87 0.56</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy3">
+          <pose>1.21 -0.03 0.53 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.18 0.87 0.56</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy4">
+          <pose>-1.08 -0.3 0.09 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.035</radius>
+              <length>0.18</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="proxy5">
+          <pose>1.08 -0.3 0.09 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.035</radius>
+              <length>0.18</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="proxy6">
+          <pose>-1.08 0.3 0.09 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.035</radius>
+              <length>0.18</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="proxy7">
+          <pose>1.08 0.3 0.09 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.035</radius>
+              <length>0.18</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="woven_living_room_rug">
+      <static>true</static>
+      <pose>-0.65 1.1 0 0 0 0</pose>
+      <link name="body">
+        <visual name="furniture">
+          <geometry>
+            <mesh>
+              <uri>/home/robot/vacuum_ws/src/vacuum_sim/worlds/furnished/woven_living_room_rug.dae</uri>
+            </mesh>
+          </geometry>
+          <cast_shadows>true</cast_shadows>
+        </visual>
+      </link>
+    </model>
+    <model name="rounded_coffee_table">
+      <static>true</static>
+      <pose>-0.65 1.32 0 0 0 0</pose>
+      <link name="body">
+        <visual name="furniture">
+          <geometry>
+            <mesh>
+              <uri>/home/robot/vacuum_ws/src/vacuum_sim/worlds/furnished/rounded_coffee_table.dae</uri>
+            </mesh>
+          </geometry>
+          <cast_shadows>true</cast_shadows>
+        </visual>
+        <collision name="proxy0">
+          <pose>0 0 0.4 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.25 0.63 0.07</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy1">
+          <pose>-0.47 -0.21 0.2 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.035</radius>
+              <length>0.4</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="proxy2">
+          <pose>-0.47 0.21 0.2 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.035</radius>
+              <length>0.4</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="proxy3">
+          <pose>0.47 -0.21 0.2 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.035</radius>
+              <length>0.4</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="proxy4">
+          <pose>0.47 0.21 0.2 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.035</radius>
+              <length>0.4</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="oak_media_console">
+      <static>true</static>
+      <pose>3.65 0.7 0 0 0 0</pose>
+      <link name="body">
+        <visual name="furniture">
+          <geometry>
+            <mesh>
+              <uri>/home/robot/vacuum_ws/src/vacuum_sim/worlds/furnished/oak_media_console.dae</uri>
+            </mesh>
+          </geometry>
+          <cast_shadows>true</cast_shadows>
+        </visual>
+        <collision name="proxy0">
+          <pose>0 0 0.35 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.45 2.05 0.51</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy1">
+          <pose>0 -0.82 0.075 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.035</radius>
+              <length>0.15</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="proxy2">
+          <pose>0 0.82 0.075 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.035</radius>
+              <length>0.15</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="bookcase">
+      <static>true</static>
+      <pose>-3.7 1.55 0 0 0 0</pose>
+      <link name="body">
+        <visual name="furniture">
+          <geometry>
+            <mesh>
+              <uri>/home/robot/vacuum_ws/src/vacuum_sim/worlds/furnished/bookcase.dae</uri>
+            </mesh>
+          </geometry>
+          <cast_shadows>true</cast_shadows>
+        </visual>
+        <collision name="proxy0">
+          <pose>-0.05 0 1.05 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.12 1.2 2.1</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy1">
+          <pose>0.08 -0.57 1.05 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.42 0.045 2.1</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy2">
+          <pose>0.08 0.57 1.05 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.42 0.045 2.1</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy3">
+          <pose>0.08 0 0.06 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.42 1.2 0.035</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy4">
+          <pose>0.08 0 0.5 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.42 1.2 0.035</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy5">
+          <pose>0.08 0 0.96 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.42 1.2 0.035</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy6">
+          <pose>0.08 0 1.42 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.42 1.2 0.035</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy7">
+          <pose>0.08 0 1.88 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.42 1.2 0.035</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy8">
+          <pose>0.08 0 2.12 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.42 1.2 0.035</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="dining_table">
+      <static>true</static>
+      <pose>-2.4 -1.55 0 0 0 0</pose>
+      <link name="body">
+        <visual name="furniture">
+          <geometry>
+            <mesh>
+              <uri>/home/robot/vacuum_ws/src/vacuum_sim/worlds/furnished/dining_table.dae</uri>
+            </mesh>
+          </geometry>
+          <cast_shadows>true</cast_shadows>
+        </visual>
+        <collision name="proxy0">
+          <pose>0 0 0.76 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.45 0.88 0.065</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy1">
+          <pose>-0.58 -0.3 0.37 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.045</radius>
+              <length>0.74</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="proxy2">
+          <pose>-0.58 0.3 0.37 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.045</radius>
+              <length>0.74</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="proxy3">
+          <pose>0.58 -0.3 0.37 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.045</radius>
+              <length>0.74</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="proxy4">
+          <pose>0.58 0.3 0.37 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.045</radius>
+              <length>0.74</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="dining_chair_north">
+      <static>true</static>
+      <pose>-2.4 -0.78 0 0 0 3.141592653589793</pose>
+      <link name="body">
+        <visual name="furniture">
+          <geometry>
+            <mesh>
+              <uri>/home/robot/vacuum_ws/src/vacuum_sim/worlds/furnished/dining_chair_north.dae</uri>
+            </mesh>
+          </geometry>
+          <cast_shadows>true</cast_shadows>
+        </visual>
+        <collision name="proxy0">
+          <pose>0 0 0.45 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.45 0.45 0.065</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy1">
+          <pose>0 0.195 0.72 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.46 0.065 0.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy2">
+          <pose>-0.16 -0.16 0.225 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="proxy3">
+          <pose>-0.16 0.16 0.225 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="proxy4">
+          <pose>0.16 -0.16 0.225 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="proxy5">
+          <pose>0.16 0.16 0.225 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="dining_chair_south">
+      <static>true</static>
+      <pose>-2.4 -2.33 0 0 0 0</pose>
+      <link name="body">
+        <visual name="furniture">
+          <geometry>
+            <mesh>
+              <uri>/home/robot/vacuum_ws/src/vacuum_sim/worlds/furnished/dining_chair_south.dae</uri>
+            </mesh>
+          </geometry>
+          <cast_shadows>true</cast_shadows>
+        </visual>
+        <collision name="proxy0">
+          <pose>0 0 0.45 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.45 0.45 0.065</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy1">
+          <pose>0 0.195 0.72 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.46 0.065 0.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy2">
+          <pose>-0.16 -0.16 0.225 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="proxy3">
+          <pose>-0.16 0.16 0.225 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="proxy4">
+          <pose>0.16 -0.16 0.225 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="proxy5">
+          <pose>0.16 0.16 0.225 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="dining_chair_west">
+      <static>true</static>
+      <pose>-3.47 -1.55 0 0 0 -1.5707963267948966</pose>
+      <link name="body">
+        <visual name="furniture">
+          <geometry>
+            <mesh>
+              <uri>/home/robot/vacuum_ws/src/vacuum_sim/worlds/furnished/dining_chair_west.dae</uri>
+            </mesh>
+          </geometry>
+          <cast_shadows>true</cast_shadows>
+        </visual>
+        <collision name="proxy0">
+          <pose>0 0 0.45 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.45 0.45 0.065</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy1">
+          <pose>0 0.195 0.72 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.46 0.065 0.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy2">
+          <pose>-0.16 -0.16 0.225 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="proxy3">
+          <pose>-0.16 0.16 0.225 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="proxy4">
+          <pose>0.16 -0.16 0.225 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="proxy5">
+          <pose>0.16 0.16 0.225 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="home_office_desk">
+      <static>true</static>
+      <pose>2.2 -2.95 0 0 0 0</pose>
+      <link name="body">
+        <visual name="furniture">
+          <geometry>
+            <mesh>
+              <uri>/home/robot/vacuum_ws/src/vacuum_sim/worlds/furnished/home_office_desk.dae</uri>
+            </mesh>
+          </geometry>
+          <cast_shadows>true</cast_shadows>
+        </visual>
+        <collision name="proxy0">
+          <pose>0 0 0.76 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.65 0.65 0.055</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy1">
+          <pose>-0.7 -0.23 0.37 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.045 0.045 0.74</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy2">
+          <pose>-0.7 0.23 0.37 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.045 0.045 0.74</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy3">
+          <pose>0.7 -0.23 0.37 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.045 0.045 0.74</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy4">
+          <pose>0.7 0.23 0.37 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.045 0.045 0.74</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="office_chair">
+      <static>true</static>
+      <pose>2.2 -2.1 0 0 0 3.141592653589793</pose>
+      <link name="body">
+        <visual name="furniture">
+          <geometry>
+            <mesh>
+              <uri>/home/robot/vacuum_ws/src/vacuum_sim/worlds/furnished/office_chair.dae</uri>
+            </mesh>
+          </geometry>
+          <cast_shadows>true</cast_shadows>
+        </visual>
+        <collision name="proxy0">
+          <pose>0 0 0.45 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.45 0.45 0.065</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy1">
+          <pose>0 0.195 0.72 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.46 0.065 0.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="proxy2">
+          <pose>-0.16 -0.16 0.225 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="proxy3">
+          <pose>-0.16 0.16 0.225 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="proxy4">
+          <pose>0.16 -0.16 0.225 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="proxy5">
+          <pose>0.16 0.16 0.225 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.025</radius>
+              <length>0.45</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="floor_lamp">
+      <static>true</static>
+      <pose>1.3 2.72 0 0 0 0</pose>
+      <link name="body">
+        <visual name="furniture">
+          <geometry>
+            <mesh>
+              <uri>/home/robot/vacuum_ws/src/vacuum_sim/worlds/furnished/floor_lamp.dae</uri>
+            </mesh>
+          </geometry>
+          <cast_shadows>true</cast_shadows>
+        </visual>
+        <collision name="proxy0">
+          <pose>0 0 0.026 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.2</radius>
+              <length>0.05</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <collision name="proxy1">
+          <pose>0 0 0.77 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.018</radius>
+              <length>1.5</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="window_plant">
+      <static>true</static>
+      <pose>2.9 2.82 0 0 0 0</pose>
+      <link name="body">
+        <visual name="furniture">
+          <geometry>
+            <mesh>
+              <uri>/home/robot/vacuum_ws/src/vacuum_sim/worlds/furnished/window_plant.dae</uri>
+            </mesh>
+          </geometry>
+          <cast_shadows>true</cast_shadows>
+        </visual>
+        <collision name="proxy0">
+          <pose>0 0 0.18 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.22</radius>
+              <length>0.36</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="entry_plant">
+      <static>true</static>
+      <pose>-3.45 -2.87 0 0 0 0</pose>
+      <link name="body">
+        <visual name="furniture">
+          <geometry>
+            <mesh>
+              <uri>/home/robot/vacuum_ws/src/vacuum_sim/worlds/furnished/entry_plant.dae</uri>
+            </mesh>
+          </geometry>
+          <cast_shadows>true</cast_shadows>
+        </visual>
+        <collision name="proxy0">
+          <pose>0 0 0.18 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.22</radius>
+              <length>0.36</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="framed_wall_art">
+      <static>true</static>
+      <pose>0 0 0 0 0 0</pose>
+      <link name="body">
+        <visual name="furniture">
+          <geometry>
+            <mesh>
+              <uri>/home/robot/vacuum_ws/src/vacuum_sim/worlds/furnished/framed_wall_art.dae</uri>
+            </mesh>
+          </geometry>
+          <cast_shadows>true</cast_shadows>
+        </visual>
+      </link>
+    </model>
+  </world>
+</sdf>

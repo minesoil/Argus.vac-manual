@@ -1,0 +1,7 @@
+image: room-20261007-235926-520113.pgm
+mode: trinary
+resolution: 0.050
+origin: [-7.931, -5.944, 0]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196

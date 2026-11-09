@@ -1,0 +1,8 @@
+﻿{
+    "Device":  "ROOT\\VID\\0000",
+    "InitialStatus":  "Error",
+    "InitialProblem":  "CM_PROB_DISABLED",
+    "FinalStatus":  "OK",
+    "FinalProblem":  "CM_PROB_NONE",
+    "Error":  null
+}

@@ -1,0 +1,2 @@
+﻿App files: [REDACTED_HOME_PATH]
+{"Title":"Vacuum Lab","Controls":33,"FileBrowser":true,"Armed":false}

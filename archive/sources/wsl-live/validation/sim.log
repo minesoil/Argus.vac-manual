@@ -1,0 +1,284 @@
+[INFO] [launch]: All log files can be found below /home/robot/.ros/log/2026-09-30-23-43-02-424790-Justin-1261
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [gz-1]: process started with pid [1287]
+[INFO] [gz-2]: process started with pid [1288]
+[INFO] [robot_state_publisher-3]: process started with pid [1289]
+[INFO] [parameter_bridge-4]: process started with pid [1290]
+[INFO] [create-5]: process started with pid [1291]
+[INFO] [twist_adapter.py-6]: process started with pid [1292]
+[INFO] [rviz2-7]: process started with pid [1293]
+[robot_state_publisher-3] [INFO] [1790782982.684651227] [robot_state_publisher]: Robot initialized
+[create-5] [INFO] [1790782982.696559721] [ros_gz_sim]: Waiting messages on topic [/robot_description].
+[create-5] [INFO] [1790782983.239466832] [ros_gz_sim]: Entity creation successful.
+[INFO] [create-5]: process has finished cleanly [pid 1291]
+[INFO] [spawner-8]: process started with pid [1408]
+[parameter_bridge-4] [INFO] [1790782983.718306703] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/clock (gz.msgs.Clock) -> /clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1790782983.720770444] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/scan (gz.msgs.LaserScan) -> /scan (sensor_msgs/msg/LaserScan)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1790782983.726280497] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/camera/image_raw (gz.msgs.Image) -> /camera/image_raw (sensor_msgs/msg/Image)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1790782983.727816469] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/camera/camera_info (gz.msgs.CameraInfo) -> /camera/camera_info (sensor_msgs/msg/CameraInfo)] (Lazy 0)
+[spawner-8] [INFO] [1790782984.036261674] [spawner_joint_state_broadcaster]: waiting for service /controller_manager/list_controllers to become available...
+[rviz2-7] [INFO] [1790782984.491004559] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-7] [INFO] [1790782984.491122869] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[rviz2-7] [INFO] [1790782984.598956100] [rviz2]: Stereo is NOT SUPPORTED
+[gz-2] [1;33m[GUI] [Wrn] [Application.cc:908] [0m[1;33m[QT] file::/WorldStats/WorldStats.qml:53:3: QML RowLayout: Binding loop detected for property "x"[0m[1;33m[0m
+[parameter_bridge-4] [WARN] [1790782984.682129437] [ros_gz_bridge]: New subscription discovered on topic '/scan', requesting incompatible QoS. No messages will be sent to it. Last incompatible policy: RELIABILITY_QOS_POLICY
+[parameter_bridge-4] [WARN] [1790782984.692713008] [ros_gz_bridge]: New subscription discovered on topic '/camera/image_raw', requesting incompatible QoS. No messages will be sent to it. Last incompatible policy: RELIABILITY_QOS_POLICY
+[rviz2-7] [INFO] [1790782984.914005347] [rviz2]: Stereo is NOT SUPPORTED
+[gz-1] [1;33mWarning [Utils.cc:132][0m [/sdf/model[@name="vacuum"]/link[@name="camera_link"]/sensor[@name="camera"]/gz_frame_id:<urdf-string>:L0]: XML Element[gz_frame_id], child of element[sensor], not defined in SDF. Copying[gz_frame_id] as children of [sensor].
+[gz-1] [1;33mWarning [Utils.cc:132][0m [/sdf/model[@name="vacuum"]/link[@name="lidar_link"]/sensor[@name="lidar"]/gz_frame_id:<urdf-string>:L0]: XML Element[gz_frame_id], child of element[sensor], not defined in SDF. Copying[gz_frame_id] as children of [sensor].
+[gz-1] [INFO] [1790782985.094789078] [gz_ros_control]: [gz_ros2_control] Fixed joint ['camera_joint'] (Entity='53') is skipped.
+[gz-1] [INFO] [1790782985.095322901] [gz_ros_control]: [gz_ros2_control] Fixed joint ['caster_joint'] (Entity='54') is skipped.
+[gz-1] [INFO] [1790782985.095357484] [gz_ros_control]: [gz_ros2_control] Fixed joint ['lidar_joint'] (Entity='56') is skipped.
+[gz-1] [INFO] [1790782985.096229565] [gz_ros_control]: Loading controller_manager
+[gz-1] [INFO] [1790782985.119446169] [controller_manager]: Using ROS clock for triggering controller manager cycles.
+[gz-1] [WARN] [1790782985.119532044] [controller_manager]: The resource manager is not yet initialized, will wait for the robot description to initialize it..
+[gz-1] [INFO] [1790782985.136942218] [controller_manager]: Subscribing to '/robot_description' topic for robot description.
+[gz-1] [WARN] [1790782985.137340064] [gz_ros_control]: Waiting RM to load and initialize hardware...
+[gz-2] D3D12: Removing Device.
+[gz-2] libEGL warning: egl: failed to create dri2 screen
+[gz-1] [INFO] [1790782985.584191323] [controller_manager]: Received robot description from topic.
+[gz-1] [INFO] [1790782985.584336545] [controller_manager]: Enforcing command limits is disabled. Command limits from URDF will be ignored.
+[gz-1] [INFO] [1790782985.590149229] [gz_ros_control]: The position_proportional_gain has been set to: 0.1
+[gz-1] [INFO] [1790782985.590317553] [gz_ros_control]: Loading joint: left_wheel_joint
+[gz-1] [INFO] [1790782985.590332869] [gz_ros_control]: 	State:
+[gz-1] [INFO] [1790782985.590340725] [gz_ros_control]: 		 position
+[gz-1] [INFO] [1790782985.590345714] [gz_ros_control]: 		 velocity
+[gz-1] [INFO] [1790782985.590354132] [gz_ros_control]: 	Command:
+[gz-1] [INFO] [1790782985.590357440] [gz_ros_control]: 		 velocity
+[gz-1] [INFO] [1790782985.590371838] [gz_ros_control]: Loading joint: right_wheel_joint
+[gz-1] [INFO] [1790782985.590375596] [gz_ros_control]: 	State:
+[gz-1] [INFO] [1790782985.590379485] [gz_ros_control]: 		 position
+[gz-1] [INFO] [1790782985.590383372] [gz_ros_control]: 		 velocity
+[gz-1] [INFO] [1790782985.590386900] [gz_ros_control]: 	Command:
+[gz-1] [INFO] [1790782985.590390083] [gz_ros_control]: 		 velocity
+[gz-1] [INFO] [1790782985.590558333] [controller_manager]: Initialize hardware 'VacuumSimulation' 
+[gz-1] [WARN] [1790782985.590578958] [controller_manager.hardware_component.system.VacuumSimulation]: Executor is not available during hardware component initialization for 'VacuumSimulation'. Skipping node creation!
+[gz-1] [INFO] [1790782985.590646177] [controller_manager]: Successful initialization of hardware 'VacuumSimulation'
+[gz-1] [INFO] [1790782985.590811816] [controller_manager]: Activating component 'VacuumSimulation'.
+[gz-1] [INFO] [1790782985.590848789] [resource_manager]: 'configure' hardware 'VacuumSimulation' 
+[gz-1] [INFO] [1790782985.590857217] [gz_ros_control]: System Successfully configured!
+[gz-1] [INFO] [1790782985.590865709] [resource_manager]: Successful 'configure' of hardware 'VacuumSimulation'
+[gz-1] [INFO] [1790782985.590872973] [resource_manager]: 'activate' hardware 'VacuumSimulation' 
+[gz-1] [INFO] [1790782985.590894085] [resource_manager]: Successful 'activate' of hardware 'VacuumSimulation'
+[gz-1] [WARN] [1790782985.591053846] [controller_manager]: Component 'VacuumSimulation' does not have read or write statistics initialized, skipping registration.
+[gz-1] [INFO] [1790782985.591069671] [controller_manager]: Resource Manager has been successfully initialized. Starting Controller Manager services...
+[gz-1] [INFO] [1790782985.793783594] [controller_manager]: Loading controller : 'joint_state_broadcaster' of type 'joint_state_broadcaster/JointStateBroadcaster'
+[gz-1] [INFO] [1790782985.794041168] [controller_manager]: Loading controller 'joint_state_broadcaster'
+[gz-1] [WARN] [1790782985.804312082] [controller_manager]: The use of remapping arguments to the controller_manager node is deprecated. Please use the '--controller-ros-args' argument of the spawner to pass remapping arguments to the controller node.
+[gz-1] [INFO] [1790782985.804586754] [controller_manager]: Controller 'joint_state_broadcaster' node arguments: --ros-args --params-file /home/robot/vacuum_ws/install/vacuum_sim/share/vacuum_sim/config/controllers.yaml --ros-args --remap /diff_drive_controller/odom:=/odom -p use_sim_time:=true --param use_sim_time:=true 
+[spawner-8] [INFO] [1790782985.865965066] [spawner_joint_state_broadcaster]: Loaded joint_state_broadcaster
+[gz-1] [INFO] [1790782985.872173653] [controller_manager]: Configuring controller: 'joint_state_broadcaster'
+[gz-1] [INFO] [1790782985.872783474] [joint_state_broadcaster]: 'joints' or 'interfaces' parameter is empty. All available state interfaces will be published
+[gz-1] [INFO] [1790782985.908317099] [controller_manager]: Activating controllers: [ joint_state_broadcaster ]
+[gz-1] [WARN] [1790782987.248400416] [gz_ros_control]:  Desired controller update period (0.02 s) is slower than the gazebo simulation period (0.002 s).
+[gz-2] [1;33mWarning [Utils.cc:132][0m [/sdf/model[@name="vacuum"]/link[@name="camera_link"]/sensor[@name="camera"]/gz_frame_id:<data-string>:L134]: XML Element[gz_frame_id], child of element[sensor], not defined in SDF. Copying[gz_frame_id] as children of [sensor].
+[gz-2] [1;33mWarning [Utils.cc:132][0m [/sdf/model[@name="vacuum"]/link[@name="lidar_link"]/sensor[@name="lidar"]/gz_frame_id:<data-string>:L370]: XML Element[gz_frame_id], child of element[sensor], not defined in SDF. Copying[gz_frame_id] as children of [sensor].
+[gz-1] [1;33m[Wrn] [Ogre2Camera.cc:423] [0m[1;33mOgre2Camera::SetVisibilityMask: Mask bits [0m[1;33mc0000000[0m[1;33m are set but will be ignored as they conflict with the [0m[1;33mreserved bits used internally by the ogre2 backend.[0m[1;33m[0m
+[gz-1] [INFO] [1790782988.895295214] [controller_manager]: Successfully switched controllers!
+[spawner-8] [INFO] [1790782988.918434447] [spawner_joint_state_broadcaster]: Configured and activated joint_state_broadcaster
+[gz-1] [INFO] [1790782988.925598307] [controller_manager]: Loading controller : 'diff_drive_controller' of type 'diff_drive_controller/DiffDriveController'
+[gz-1] [INFO] [1790782988.925707858] [controller_manager]: Loading controller 'diff_drive_controller'
+[gz-1] [WARN] [1790782988.942710997] [controller_manager]: The use of remapping arguments to the controller_manager node is deprecated. Please use the '--controller-ros-args' argument of the spawner to pass remapping arguments to the controller node.
+[gz-1] [INFO] [1790782988.944736864] [controller_manager]: Controller 'diff_drive_controller' node arguments: --ros-args --params-file /home/robot/vacuum_ws/install/vacuum_sim/share/vacuum_sim/config/controllers.yaml --ros-args --remap /diff_drive_controller/odom:=/odom -p use_sim_time:=true --param use_sim_time:=true 
+[spawner-8] [INFO] [1790782989.021896959] [spawner_joint_state_broadcaster]: Loaded diff_drive_controller
+[gz-1] [INFO] [1790782989.024474769] [controller_manager]: Configuring controller: 'diff_drive_controller'
+[gz-1] [INFO] [1790782989.065117147] [controller_manager]: Activating controllers: [ diff_drive_controller ]
+[gz-1] [INFO] [1790782989.082121800] [controller_manager]: Successfully switched controllers!
+[spawner-8] [INFO] [1790782989.110715811] [spawner_joint_state_broadcaster]: Configured and activated diff_drive_controller
+[INFO] [spawner-8]: process has finished cleanly [pid 1408]
+[gz-1] [WARN] [1790782989.954734522] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790782990.992193288] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790782992.020549720] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790782993.122396702] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790782994.289496672] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790782995.386962906] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790782996.532160730] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790782997.594415644] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790782998.655015133] [diff_drive_controller]: Velocity command timed out. Braking.
+[rviz2-7] [INFO] [1790782999.811644486] [rviz]: Message Filter dropping message: frame 'lidar_link' at time 0.004 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[gz-1] [WARN] [1790782999.859765968] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783000.979602151] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783002.117928912] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783003.269866260] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783004.337798590] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783005.396495756] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783004.818866015] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783005.871525039] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783006.912245480] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783008.056467172] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783009.094662667] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783010.134540609] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783011.146460541] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783012.194497462] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783013.229034748] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783014.259073965] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783015.270124391] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783016.293343933] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783021.150690143] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783022.191698728] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783023.254807725] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783024.567808745] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783025.582757843] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783026.663346638] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783027.687723478] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783028.701814816] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783029.717499238] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783030.725080015] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783032.211829187] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783033.366264871] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783034.505826611] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783035.671122390] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783035.073521787] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783036.191849751] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783037.230474279] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783038.268198964] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783039.307389335] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783040.345931385] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783041.367285597] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783042.375058314] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783043.382883202] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783044.441164712] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783045.476196300] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783046.505501536] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783047.540509763] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783048.562011183] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783049.571246141] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783050.585639209] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783051.600364691] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783052.622255326] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783053.743585761] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783054.826434184] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783055.831652809] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783056.916528528] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783057.945865778] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783058.955865191] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783059.979342235] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783060.991293749] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783062.021043668] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783063.026533553] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783064.078206071] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783065.086972591] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783066.097915041] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783065.474063515] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783066.588632484] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783067.604223507] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783068.610183240] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783069.687564602] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783070.716769259] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783071.733179434] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783072.740093447] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783073.770764914] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783074.785632872] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783075.799962660] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783076.836606671] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783077.871587717] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783078.883352363] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783079.883145399] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783080.889282163] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783081.902550465] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783082.926258975] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783084.200026427] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783085.497224186] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783086.643816093] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783087.795751753] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783088.877847116] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783090.054270405] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783091.239777086] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783092.732858411] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783094.060286532] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783095.551526227] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783096.661440170] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783097.771828578] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783097.167848065] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783098.183331619] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783099.231807514] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783100.282023719] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783101.307714071] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783102.347386357] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783103.358971327] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783104.385159275] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783105.406687210] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783106.440159656] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783107.460418714] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783108.495314729] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783109.508190648] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783110.515304958] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783111.530669523] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783112.539646554] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783113.648932976] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783114.708846457] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783115.717639505] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783116.730321433] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783117.813902518] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783118.824246321] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783119.838153782] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783120.857592185] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783121.875757060] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783122.905023715] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783123.954843510] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783124.974980577] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783125.991305269] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783127.008593384] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783128.038899854] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783127.477972400] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783128.499389084] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783129.520771667] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783130.534124318] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783131.544277283] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783132.558989735] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783133.566506052] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783134.574571157] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783135.594614370] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783136.602033129] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783137.638642890] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783138.646572626] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783139.664235410] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783140.698045910] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783141.712974450] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783142.721923208] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783143.857784502] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783144.922547045] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783145.933463694] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783146.974828476] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783148.015551324] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783149.037447809] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783150.045341390] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783151.251308773] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783152.380232124] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783153.473435363] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783154.781291117] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783156.011477784] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783157.181079722] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783158.237712112] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783159.296059800] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783158.803730988] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783159.829453572] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783160.840985526] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783161.843394308] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783162.902399107] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783163.926213763] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783164.958632777] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783165.976295840] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783167.001874952] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783168.059039393] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783169.064700267] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783170.067433097] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783171.117996165] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783172.159633572] [diff_drive_controller]: Velocity command timed out. Braking.
+[gz-1] [WARN] [1790783173.454018593] [diff_drive_controller]: Velocity command timed out. Braking.
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[INFO] [rviz2-7]: sending signal 'SIGINT' to process[rviz2-7]
+[INFO] [twist_adapter.py-6]: sending signal 'SIGINT' to process[twist_adapter.py-6]
+[INFO] [parameter_bridge-4]: sending signal 'SIGINT' to process[parameter_bridge-4]
+[INFO] [robot_state_publisher-3]: sending signal 'SIGINT' to process[robot_state_publisher-3]
+[INFO] [gz-2]: sending signal 'SIGINT' to process[gz-2]
+[INFO] [gz-1]: sending signal 'SIGINT' to process[gz-1]
+[rviz2-7] [INFO] [1790783173.484601116] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-4] [INFO] [1790783173.499206591] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[robot_state_publisher-3] [INFO] [1790783173.499455435] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [parameter_bridge-4]: process has finished cleanly [pid 1290]
+[INFO] [robot_state_publisher-3]: process has finished cleanly [pid 1289]
+[INFO] [twist_adapter.py-6]: process has finished cleanly [pid 1292]
+[INFO] [rviz2-7]: process has finished cleanly [pid 1293]
+[INFO] [gz-2]: process has finished cleanly [pid 1288]
+[ERROR] [gz-1]: process has died [pid 1287, exit code -11, cmd 'gz sim -r -s -v 2 /home/robot/vacuum_ws/install/vacuum_sim/share/vacuum_sim/worlds/room.sdf'].

@@ -1,0 +1,37 @@
+{
+  "content": "﻿Hardware Specs(Not Listed in CSV)\r\nRPLidar C1\r\n\r\n\r\nUSB Camera\r\n\r\n\r\nOrangepi 5 8GB\r\n\r\n\r\n2200Mah 3s 11.1V 30C Lip Battery\r\n\r\n5000mah portable charger\r\n\r\n\r\n\r\n\r\nWiring and Pinouts\r\n\r\n\r\nTroubleshooting Log\r\n\r\n\r\nSlight Background Info\r\nI am building a autonomous vacuum cleaner robot\r\n\r\n\r\nROS 2\r\n\r\nI have installed ROS 2 on my orangepi\r\n\r\n\r\nThe chassis is also finished. I have 2 acrylic plates separated by metal spacers\r\n\r\nThe acrylic plates are 30cm by 30 cm by 1cm. The nema is mountained in between the plates, but it is mounted with hot glue and popsicle sticks to fit thye nema in between the acrylic. I have also mounted the san ace right above the top of the acrylic board, but turns out the sunction is very weak, so I am working on changing the san ace to in between the acrylic plates, as well as turning it 90 degrees, so it is facing forwards(relative to the robot, and right behind a bag where all the dust goes), and have 2 N20 motors, add some bristles on it, and brush the dust up. I also have a castor wheel in front\r\n\r\n\r\nI plan on making thew robot autonomous by having it map out the room using the rplidar c1, also have the usb camera and when it sees an obstacle such as socks or something, it moves away from it.\r\n\r\n\r\nMy orangepi 5 does not have a wifi/bleutooth module\r\n\r\nCurrentloy my battery is 2200 mah, but planning on upgrading to 5000 mah in the future.\r\n\r\n\r\nRN, i have all the parts except the 7.5amp blade fuse. 12 awg inline fuse holder, wagos, N20 motors, and capacitors",
+  "title": "ROBOT_MASTER",
+  "url": "https://docs.google.com/document/d/1q6D5DyZkiy5OSMA9Va4YALiVRFb-_k7qrIXbBWVtTgs/edit?usp=drivesdk",
+  "file_name": null,
+  "mime_type": "text/plain",
+  "file_ext": null,
+  "b64_string": null,
+  "id": "1q6D5DyZkiy5OSMA9Va4YALiVRFb-_k7qrIXbBWVtTgs",
+  "parent_ids": [
+    "1QJp4BG7FYXhRmEM8DHH-u1eUcUxIfKBT"
+  ],
+  "drive_id": null,
+  "created_time": "2026-08-23T09:55:23.595Z",
+  "modified_time": "2026-09-05T10:04:10.706Z",
+  "is_empty": false,
+  "file_uri": null,
+  "file_size_bytes": null,
+  "display_url": "https://docs.google.com/document/d/1q6D5DyZkiy5OSMA9Va4YALiVRFb-_k7qrIXbBWVtTgs/edit?usp=drivesdk",
+  "display_title": "ROBOT_MASTER",
+  "structuredContent": {
+    "title": "ROBOT_MASTER",
+    "content": "﻿Hardware Specs(Not Listed in CSV)\r\nRPLidar C1\r\n\r\n\r\nUSB Camera\r\n\r\n\r\nOrangepi 5 8GB\r\n\r\n\r\n2200Mah 3s 11.1V 30C Lip Battery\r\n\r\n5000mah portable charger\r\n\r\n\r\n\r\n\r\nWiring and Pinouts\r\n\r\n\r\nTroubleshooting Log\r\n\r\n\r\nSlight Background Info\r\nI am building a autonomous vacuum cleaner robot\r\n\r\n\r\nROS 2\r\n\r\nI have installed ROS 2 on my orangepi\r\n\r\n\r\nThe chassis is also finished. I have 2 acrylic plates separated by metal spacers\r\n\r\nThe acrylic plates are 30cm by 30 cm by 1cm. The nema is mountained in between the plates, but it is mounted with hot glue and popsicle sticks to fit thye nema in between the acrylic. I have also mounted the san ace right above the top of the acrylic board, but turns out the sunction is very weak, so I am working on changing the san ace to in between the acrylic plates, as well as turning it 90 degrees, so it is facing forwards(relative to the robot, and right behind a bag where all the dust goes), and have 2 N20 motors, add some bristles on it, and brush the dust up. I also have a castor wheel in front\r\n\r\n\r\nI plan on making thew robot autonomous by having it map out the room using the rplidar c1, also have the usb camera and when it sees an obstacle such as socks or something, it moves away from it.\r\n\r\n\r\nMy orangepi 5 does not have a wifi/bleutooth module\r\n\r\nCurrentloy my battery is 2200 mah, but planning on upgrading to 5000 mah in the future.\r\n\r\n\r\nRN, i have all the parts except the 7.5amp blade fuse. 12 awg inline fuse holder, wagos, N20 motors, and capacitors",
+    "id": "1q6D5DyZkiy5OSMA9Va4YALiVRFb-_k7qrIXbBWVtTgs",
+    "parent_ids": [
+      "1QJp4BG7FYXhRmEM8DHH-u1eUcUxIfKBT"
+    ],
+    "drive_id": null,
+    "created_time": "2026-08-23T09:55:23.595Z",
+    "modified_time": "2026-09-05T10:04:10.706Z",
+    "is_empty": false,
+    "mime_type": "text/plain",
+    "file_name": null,
+    "file_size_bytes": null,
+    "url": "https://drive.google.com/file/d/1q6D5DyZkiy5OSMA9Va4YALiVRFb-_k7qrIXbBWVtTgs"
+  }
+}

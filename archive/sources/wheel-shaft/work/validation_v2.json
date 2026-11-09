@@ -1,0 +1,44 @@
+{
+  "source_body": "output (regular fit)",
+  "units": "mm",
+  "shaft_diameter": 5,
+  "shaft_length": 19.5,
+  "shortened_by": 4.5,
+  "root_fillet_radius": 1,
+  "straight_shaft_length_above_fillet": 18.5,
+  "adapter_length": 18,
+  "adapter_to_fillet_clearance": 0.5,
+  "adapter_interference_volume": 0,
+  "flat_depth": 0.5,
+  "flat_length": 15,
+  "bore_diameter": 5.6,
+  "previous_bore_diameter": 5.4,
+  "bore_depth": 15.366664,
+  "bore_removed_volume": 26.55168930290597,
+  "root_reinforcement_volume": 3.6721433220350264,
+  "collar_diameter": 7.999992,
+  "collar_height": 1.5,
+  "tip_chamfer": 0.25,
+  "copies": 2,
+  "center_spacing": 40,
+  "gap": 10.003226646000002,
+  "part_bounds": [
+    [
+      -14.998386677,
+      -14.998386677,
+      0
+    ],
+    [
+      14.998386677,
+      14.998386677,
+      36.366664
+    ]
+  ],
+  "part_volume": 1713.5724877491953,
+  "cad_valid": true,
+  "step_reimport_valid": true,
+  "unintended_geometry_removed_below_join": 0,
+  "unintended_geometry_added_below_join": 0,
+  "physical_fit_tested": false,
+  "load_tested": false
+}

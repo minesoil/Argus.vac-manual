@@ -1,0 +1,14 @@
+[INFO] [launch]: All log files can be found below /home/robot/.ros/log/2026-10-06-00-35-27-915042-Justin-622
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [async_slam_toolbox_node-1]: process started with pid [637]
+[async_slam_toolbox_node-1] [INFO] [1791218128.551699373] [slam_toolbox]: Configuring
+[async_slam_toolbox_node-1] [INFO] [1791218128.581914820] [slam_toolbox]: Using solver plugin solver_plugins::CeresSolver
+[async_slam_toolbox_node-1] [INFO] [1791218128.582420874] [slam_toolbox]: CeresSolver: Using SCHUR_JACOBI preconditioner.
+[INFO] [launch.user]: [LifecycleLaunch] Slamtoolbox node is activating.
+[async_slam_toolbox_node-1] [INFO] [1791218128.632536578] [slam_toolbox]: Activating
+[async_slam_toolbox_node-1] Registering sensor: [Custom Described Lidar]
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[INFO] [async_slam_toolbox_node-1]: sending signal 'SIGINT' to process[async_slam_toolbox_node-1]
+[INFO] [async_slam_toolbox_node-1]: process has finished cleanly [pid 637]
+[async_slam_toolbox_node-1] [INFO] [1791218162.903563667] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[async_slam_toolbox_node-1] Unregistering sensor: Custom Described Lidar

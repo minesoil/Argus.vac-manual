@@ -1,0 +1,15 @@
+{
+  "scope": "isolated test topics; no robot command output",
+  "tests": {
+    "clear_fast_forward": 0.5,
+    "forward_slow_front": 0.2,
+    "forward_stop_front": 0.0,
+    "reverse_away_from_front": -0.3,
+    "reverse_stop_rear": 0.0,
+    "forward_away_from_rear": 0.5,
+    "padded_body_contact_stop": 0.0,
+    "clear_before_timeout": 0.5,
+    "stale_lidar_stop": 0.0
+  },
+  "passed": true
+}

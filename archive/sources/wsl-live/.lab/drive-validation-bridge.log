@@ -1,0 +1,61 @@
+{"ready": false, "reason": "Lidar data missing or stale; guard stops motion", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": 0.0, "actual_w": 0.0}
+{"ready": false, "reason": "Waiting for collision guard health; commands stopped", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": 0.0, "actual_w": 0.0}
+{"ready": false, "reason": "Waiting for collision guard health; commands stopped", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": 0.0, "actual_w": 0.0}
+{"ready": false, "reason": "Waiting for collision guard health; commands stopped", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": 0.0, "actual_w": 0.0}
+{"ready": false, "reason": "Waiting for collision guard health; commands stopped", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": 0.0, "actual_w": 0.0}
+{"ready": false, "reason": "Waiting for collision guard health; commands stopped", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": -9.58332079487367e-16, "actual_w": 2.294638601106879e-26}
+{"ready": false, "reason": "Waiting for collision guard health; commands stopped", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": -9.58332079487367e-16, "actual_w": 2.294638601106879e-26}
+{"ready": false, "reason": "Waiting for collision guard health; commands stopped", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": -9.58332079487367e-16, "actual_w": 2.294638601106879e-26}
+{"ready": true, "reason": "Ready", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": -9.58332079487367e-16, "actual_w": 2.294638601106879e-26}
+{"ready": true, "reason": "Ready", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": -9.58332079487367e-16, "actual_w": 2.294638601106879e-26}
+{"ready": true, "reason": "Ready", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": -9.58332079487367e-16, "actual_w": 2.294638601106879e-26}
+{"ready": true, "reason": "Ready", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": -9.58332079487367e-16, "actual_w": 2.294638601106879e-26}
+{"ready": true, "reason": "Driving", "polygon": "", "requested_v": 1.5, "output_v": 1.5, "output_w": 0.0, "actual_v": -9.58332079487367e-16, "actual_w": 2.294638601106879e-26}
+{"ready": true, "reason": "Driving", "polygon": "", "requested_v": 1.5, "output_v": 1.5, "output_w": 0.0, "actual_v": 1.2096295070039804, "actual_w": -9.440933828040794e-12}
+{"ready": true, "reason": "Driving", "polygon": "", "requested_v": 1.5, "output_v": 1.5, "output_w": 0.0, "actual_v": 1.5666666659883932, "actual_w": 1.677446228587134e-12}
+{"ready": true, "reason": "Driving", "polygon": "", "requested_v": 1.5, "output_v": 1.5, "output_w": 0.0, "actual_v": 1.566666665988379, "actual_w": 1.3429662766293707e-11}
+{"ready": true, "reason": "Driving", "polygon": "", "requested_v": 1.5, "output_v": 1.5, "output_w": 0.0, "actual_v": 1.5666666659895485, "actual_w": 3.704915533033714e-11}
+{"ready": true, "reason": "Driving", "polygon": "", "requested_v": 1.5, "output_v": 1.5, "output_w": 0.0, "actual_v": 1.4999999993506048, "actual_w": 3.542621096474586e-11}
+{"ready": true, "reason": "Driving", "polygon": "", "requested_v": 1.5, "output_v": 1.5, "output_w": 0.0, "actual_v": 1.5666666659883683, "actual_w": 3.738020368348513e-11}
+{"ready": true, "reason": "Driving", "polygon": "", "requested_v": 1.5, "output_v": 1.5, "output_w": 0.0, "actual_v": 1.499999999350565, "actual_w": 3.578955671823044e-11}
+{"ready": true, "reason": "Ready", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": 1.2933333608791153, "actual_w": 6.4715915870658194e-12}
+{"ready": true, "reason": "Ready", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": 0.011111160011237317, "actual_w": 6.05576255807831e-14}
+{"ready": true, "reason": "Ready", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": -2.415414480534795e-10, "actual_w": 7.993606576660623e-12}
+{"ready": true, "reason": "Ready", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": -1.9352651788300491e-10, "actual_w": -2.422305023230463e-12}
+{"ready": true, "reason": "Driving", "polygon": "", "requested_v": -0.9, "output_v": -0.9, "output_w": 0.0, "actual_v": -0.24888886320339076, "actual_w": 6.52811203760982e-12}
+{"ready": true, "reason": "Driving", "polygon": "", "requested_v": -0.9, "output_v": -0.9, "output_w": 0.0, "actual_v": -0.839999998242598, "actual_w": 3.506286521127245e-11}
+{"ready": true, "reason": "Driving", "polygon": "", "requested_v": -0.9, "output_v": -0.9, "output_w": 0.0, "actual_v": -0.8999999993343802, "actual_w": 2.7662117789036335e-09}
+{"ready": true, "reason": "Driving", "polygon": "", "requested_v": -0.9, "output_v": -0.9, "output_w": 0.0, "actual_v": -0.9399999993036138, "actual_w": 2.8982677744200817e-09}
+{"ready": true, "reason": "Driving", "polygon": "", "requested_v": -0.9, "output_v": -0.9, "output_w": 0.0, "actual_v": -0.9999999992573416, "actual_w": 3.341448664295294e-09}
+{"ready": true, "reason": "Driving", "polygon": "", "requested_v": -0.9, "output_v": -0.9, "output_w": 0.0, "actual_v": -0.8999999993310933, "actual_w": 2.7946133053022033e-09}
+{"ready": true, "reason": "Driving", "polygon": "", "requested_v": -0.9, "output_v": -0.9, "output_w": 0.0, "actual_v": -0.8999999993304272, "actual_w": 2.799942376353312e-09}
+{"ready": true, "reason": "Driving", "polygon": "", "requested_v": -0.9, "output_v": -0.9, "output_w": 0.0, "actual_v": -0.9399999992998634, "actual_w": 2.928090386431089e-09}
+{"ready": true, "reason": "Driving", "polygon": "", "requested_v": -0.9, "output_v": -0.9, "output_w": 0.0, "actual_v": -0.8999999993293342, "actual_w": 2.8056045143439207e-09}
+{"ready": true, "reason": "Driving", "polygon": "", "requested_v": -0.9, "output_v": -0.9, "output_w": 0.0, "actual_v": -0.9399999992995928, "actual_w": 2.9318792752056923e-09}
+{"ready": true, "reason": "Driving", "polygon": "", "requested_v": -0.9, "output_v": -0.9, "output_w": 0.0, "actual_v": -0.939999999299892, "actual_w": 2.9330964834812274e-09}
+{"ready": true, "reason": "Ready", "polygon": "", "requested_v": 0.0, "output_v": -0.9, "output_w": 0.0, "actual_v": -0.9999999992544236, "actual_w": 3.1208977919301603e-09}
+{"ready": true, "reason": "Ready", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": 8.217500543862008e-11, "actual_w": -8.599182832441412e-13}
+{"ready": true, "reason": "Ready", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": -3.5548707836745605e-12, "actual_w": -3.8274437954558345e-11}
+{"ready": true, "reason": "Ready", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": -3.7309521729882224e-12, "actual_w": -4.023044926081697e-11}
+{"ready": true, "reason": "Ready", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": -3.683212578155387e-12, "actual_w": -3.979645294415484e-11}
+{"ready": true, "reason": "Ready", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": -2.8456602446238886e-12, "actual_w": -3.3433865083145865e-11}
+{"ready": true, "reason": "Driving", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 2.4, "actual_v": -3.473380405518046e-12, "actual_w": -1.8571005178097714e-11}
+{"ready": true, "reason": "Driving", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 2.4, "actual_v": -8.44651391933953e-12, "actual_w": 1.4311109639472264}
+{"ready": true, "reason": "Driving", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 2.4, "actual_v": -3.354332994527106e-11, "actual_w": 2.5066666630416474}
+{"ready": true, "reason": "Driving", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 2.4, "actual_v": -3.896610382902676e-11, "actual_w": 2.399999996755622}
+{"ready": true, "reason": "Ready", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": -3.272776002982455e-11, "actual_w": 2.296296304712685}
+{"ready": true, "reason": "Ready", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": -6.07894492412355e-13, "actual_w": 3.1292460261714804e-13}
+{"ready": true, "reason": "Ready", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": -2.088802974607133e-13, "actual_w": 2.66497089671897e-13}
+{"ready": true, "reason": "Ready", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": -1.0052251942153626e-13, "actual_w": 2.022941231013102e-14}
+{"ready": true, "reason": "Driving", "polygon": "", "requested_v": 0.2, "output_v": 0.2, "output_w": 0.0, "actual_v": 0.17777777266051473, "actual_w": 7.215445441679921e-11}
+{"ready": true, "reason": "Driving", "polygon": "", "requested_v": 0.2, "output_v": 0.2, "output_w": 0.0, "actual_v": 0.18666666658210504, "actual_w": 1.2153958991175504e-11}
+{"ready": true, "reason": "Driving", "polygon": "", "requested_v": 0.2, "output_v": 0.2, "output_w": 0.0, "actual_v": 0.18666666658210232, "actual_w": 1.217818204140781e-11}
+{"ready": true, "reason": "Driving", "polygon": "", "requested_v": 0.2, "output_v": 0.2, "output_w": 0.0, "actual_v": 0.20888888879425974, "actual_w": 1.36073420051138e-11}
+{"ready": true, "reason": "Driving", "polygon": "", "requested_v": 0.2, "output_v": 0.2, "output_w": 0.0, "actual_v": 0.20888888879438858, "actual_w": 1.3163252750860258e-11}
+{"ready": true, "reason": "Ready", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": 0.02222222717072932, "actual_w": 4.733631270012782e-12}
+{"ready": true, "reason": "Ready", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": -4.290456181739527e-12, "actual_w": 1.2959375411399636e-11}
+{"ready": true, "reason": "Ready", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": -4.535815494720868e-12, "actual_w": 1.3147104050709498e-11}
+{"ready": true, "reason": "Ready", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": -3.8021800466818424e-12, "actual_w": 1.3643676580462246e-11}
+{"ready": true, "reason": "Ready", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": -3.084753856426554e-12, "actual_w": 2.0044617604348808e-11}
+{"ready": true, "reason": "Ready", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": -1.2129176497257497e-12, "actual_w": 7.872534862619256e-12}
+{"ready": true, "reason": "Ready", "polygon": "", "requested_v": 0.0, "output_v": 0.0, "output_w": 0.0, "actual_v": -5.112566279960988e-13, "actual_w": 3.092519616774126e-12}

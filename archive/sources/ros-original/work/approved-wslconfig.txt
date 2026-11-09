@@ -1,0 +1,9 @@
+[wsl2]
+memory=10GB
+processors=6
+swap=2GB
+swapFile=E:\\WSL\\VacuumRobot\\swap.vhdx
+defaultVhdSize=40GB
+guiApplications=true
+networkingMode=nat
+firewall=true

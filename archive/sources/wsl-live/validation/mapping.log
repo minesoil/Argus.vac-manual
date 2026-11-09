@@ -1,0 +1,15 @@
+[INFO] [launch]: All log files can be found below /home/robot/.ros/log/2026-09-30-22-19-41-193720-Justin-843
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [async_slam_toolbox_node-1]: process started with pid [921]
+[async_slam_toolbox_node-1] [INFO] [1790777982.916504610] [slam_toolbox]: Configuring
+[async_slam_toolbox_node-1] [INFO] [1790777982.966260893] [slam_toolbox]: Using solver plugin solver_plugins::CeresSolver
+[async_slam_toolbox_node-1] [INFO] [1790777982.966732564] [slam_toolbox]: CeresSolver: Using SCHUR_JACOBI preconditioner.
+[INFO] [launch.user]: [LifecycleLaunch] Slamtoolbox node is activating.
+[async_slam_toolbox_node-1] [INFO] [1790777983.056904245] [slam_toolbox]: Activating
+[async_slam_toolbox_node-1] Registering sensor: [Custom Described Lidar]
+[async_slam_toolbox_node-1] [INFO] [1790778332.210711867] [slam_toolbox]: Message Filter dropping message: frame 'lidar_link' at time 1236.400 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[INFO] [async_slam_toolbox_node-1]: sending signal 'SIGINT' to process[async_slam_toolbox_node-1]
+[async_slam_toolbox_node-1] [INFO] [1790778340.167571392] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[async_slam_toolbox_node-1] Unregistering sensor: Custom Described Lidar
+[INFO] [async_slam_toolbox_node-1]: process has finished cleanly [pid 921]

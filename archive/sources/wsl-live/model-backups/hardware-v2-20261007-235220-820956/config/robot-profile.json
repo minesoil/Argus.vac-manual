@@ -1,0 +1,40 @@
+{
+  "version": 2,
+  "scope": "simulation",
+  "hardware": {
+    "drive_motors": "2 x NEMA 17, mounted beneath the chassis",
+    "stepper_drivers": "2 x TB6600 modules",
+    "microcontroller": "Arduino Mega 2560",
+    "computer": "Orange Pi 5",
+    "lidar": "RPLIDAR C1",
+    "wheel_diameter_m": 0.07,
+    "wheel_separation_m": 0.22,
+    "chassis_diameter_m": 0.3,
+    "motor_body_m": [
+      0.0423,
+      0.04,
+      0.0423
+    ],
+    "estimated_geometry": "Motor length, driver enclosure, mount height, mass and chassis layout are provisional; exact motor/driver variants were not supplied."
+  },
+  "drive": {
+    "forward_m_s": 1.5,
+    "reverse_m_s": 0.9,
+    "turn_rad_s": 2.4,
+    "acceleration_m_s2": 6.0,
+    "angular_acceleration_rad_s2": 14.0,
+    "input_period_s": 0.02,
+    "require_hold_button": false
+  },
+  "room": {
+    "width_m": 16.0,
+    "depth_m": 12.0
+  },
+  "lidar": {
+    "min_range_m": 0.05,
+    "max_range_m": 12.0,
+    "scan_hz": 10.0,
+    "samples": 500,
+    "serial_baud": 460800
+  }
+}

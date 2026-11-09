@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-08",
+  "scope": "simulator only",
+  "tests": {
+    "camera": {
+      "target_fps": 60,
+      "simulation_fps": 62.44186670930299,
+      "wall_fps": 37.21017421453795,
+      "frames": 180
+    }
+  },
+  "passed": false,
+  "error": "Camera delivery too slow: 37.21017421453795"
+}

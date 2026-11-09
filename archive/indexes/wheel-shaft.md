@@ -1,0 +1,87 @@
+# wheel-shaft
+
+Historical source collection. Older instructions are reference material, not current wiring guidance.
+
+| Record | Date | Available copy |
+| --- | --- | --- |
+| direct_hex_40mm_13mm_base_assembly_notes.txt | 2026-10-06 | [File](../../archive/sources/wheel-shaft/outputs/direct_hex_40mm_13mm_base_assembly_notes.txt) |
+| direct_hex_40mm_assembly_notes.txt | 2026-10-06 | [File](../../archive/sources/wheel-shaft/outputs/direct_hex_40mm_assembly_notes.txt) |
+| direct_hex_40mm_reinforced_assembly_notes.txt | 2026-10-06 | [File](../../archive/sources/wheel-shaft/outputs/direct_hex_40mm_reinforced_assembly_notes.txt) |
+| direct_hex_40mm_uniform13_assembly_notes.txt | 2026-10-06 | [File](../../archive/sources/wheel-shaft/outputs/direct_hex_40mm_uniform13_assembly_notes.txt) |
+| direct_hex_assembly_notes.txt | 2026-10-06 | [File](../../archive/sources/wheel-shaft/outputs/direct_hex_assembly_notes.txt) |
+| shaft_pair_5mm_D.step | 2026-10-05 | [File](../../archive/sources/wheel-shaft/outputs/shaft_pair_5mm_D.step) |
+| shaft_pair_5mm_D.stl | 2026-10-05 | [File](../../archive/sources/wheel-shaft/outputs/shaft_pair_5mm_D.stl) |
+| shaft_pair_direct_hex_M3.png | 2026-10-06 | [File](../../archive/sources/wheel-shaft/outputs/shaft_pair_direct_hex_M3.png) |
+| shaft_pair_direct_hex_M3.step | 2026-10-06 | [File](../../archive/sources/wheel-shaft/outputs/shaft_pair_direct_hex_M3.step) |
+| shaft_pair_direct_hex_M3.stl | 2026-10-06 | [File](../../archive/sources/wheel-shaft/outputs/shaft_pair_direct_hex_M3.stl) |
+| shaft_pair_direct_hex_M3_40mm.png | 2026-10-06 | [File](../../archive/sources/wheel-shaft/outputs/shaft_pair_direct_hex_M3_40mm.png) |
+| shaft_pair_direct_hex_M3_40mm.step | 2026-10-06 | [File](../../archive/sources/wheel-shaft/outputs/shaft_pair_direct_hex_M3_40mm.step) |
+| shaft_pair_direct_hex_M3_40mm.stl | 2026-10-06 | [File](../../archive/sources/wheel-shaft/outputs/shaft_pair_direct_hex_M3_40mm.stl) |
+| shaft_pair_direct_hex_M3_40mm_13mm_base.png | 2026-10-06 | [File](../../archive/sources/wheel-shaft/outputs/shaft_pair_direct_hex_M3_40mm_13mm_base.png) |
+| shaft_pair_direct_hex_M3_40mm_13mm_base.step | 2026-10-06 | [File](../../archive/sources/wheel-shaft/outputs/shaft_pair_direct_hex_M3_40mm_13mm_base.step) |
+| shaft_pair_direct_hex_M3_40mm_13mm_base.stl | 2026-10-06 | [File](../../archive/sources/wheel-shaft/outputs/shaft_pair_direct_hex_M3_40mm_13mm_base.stl) |
+| shaft_pair_direct_hex_M3_40mm_reinforced.png | 2026-10-06 | [File](../../archive/sources/wheel-shaft/outputs/shaft_pair_direct_hex_M3_40mm_reinforced.png) |
+| shaft_pair_direct_hex_M3_40mm_reinforced.step | 2026-10-06 | [File](../../archive/sources/wheel-shaft/outputs/shaft_pair_direct_hex_M3_40mm_reinforced.step) |
+| shaft_pair_direct_hex_M3_40mm_reinforced.stl | 2026-10-06 | [File](../../archive/sources/wheel-shaft/outputs/shaft_pair_direct_hex_M3_40mm_reinforced.stl) |
+| shaft_pair_direct_hex_M3_40mm_uniform13.png | 2026-10-06 | [File](../../archive/sources/wheel-shaft/outputs/shaft_pair_direct_hex_M3_40mm_uniform13.png) |
+| shaft_pair_direct_hex_M3_40mm_uniform13.step | 2026-10-06 | [File](../../archive/sources/wheel-shaft/outputs/shaft_pair_direct_hex_M3_40mm_uniform13.step) |
+| shaft_pair_direct_hex_M3_40mm_uniform13.stl | 2026-10-06 | [File](../../archive/sources/wheel-shaft/outputs/shaft_pair_direct_hex_M3_40mm_uniform13.stl) |
+| shaft_pair_preview.png | 2026-10-05 | [File](../../archive/sources/wheel-shaft/outputs/shaft_pair_preview.png) |
+| shaft_pair_shorter_reinforced.png | 2026-10-06 | [File](../../archive/sources/wheel-shaft/outputs/shaft_pair_shorter_reinforced.png) |
+| shaft_pair_shorter_reinforced.step | 2026-10-06 | [File](../../archive/sources/wheel-shaft/outputs/shaft_pair_shorter_reinforced.step) |
+| shaft_pair_shorter_reinforced.stl | 2026-10-06 | [File](../../archive/sources/wheel-shaft/outputs/shaft_pair_shorter_reinforced.stl) |
+| analyze_cad.py | 2026-10-05 | [File](../../archive/sources/wheel-shaft/work/analyze_cad.py) |
+| build_shafts.py | 2026-10-05 | [File](../../archive/sources/wheel-shaft/work/build_shafts.py) |
+| build.mjs | 2026-10-05 | [File](../../archive/sources/wheel-shaft/work/cadnode/build.mjs) |
+| build_hex.mjs | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/cadnode/build_hex.mjs) |
+| build_v2.mjs | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/cadnode/build_v2.mjs) |
+| check_widebase_fit.mjs | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/cadnode/check_widebase_fit.mjs) |
+| hex_external.mjs | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/cadnode/hex_external.mjs) |
+| hex_widebase.mjs | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/cadnode/hex_widebase.mjs) |
+| inspect.mjs | 2026-10-05 | [File](../../archive/sources/wheel-shaft/work/cadnode/inspect.mjs) |
+| inspect_hex.mjs | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/cadnode/inspect_hex.mjs) |
+| package-lock.json | 2026-10-05 | local configuration or dependency lock |
+| package.json | 2026-10-05 | [File](../../archive/sources/wheel-shaft/work/cadnode/package.json) |
+| check_stl.py | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/check_stl.py) |
+| detail_mesh_hex.json | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/detail_mesh_hex.json) |
+| detail_mesh_hex_35mm.json | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/detail_mesh_hex_35mm.json) |
+| detail_mesh_hex_40mm.json | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/detail_mesh_hex_40mm.json) |
+| detail_mesh_hex_40mm_13mm_base.json | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/detail_mesh_hex_40mm_13mm_base.json) |
+| detail_mesh_hex_40mm_reinforced.json | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/detail_mesh_hex_40mm_reinforced.json) |
+| detail_mesh_hex_40mm_uniform13.json | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/detail_mesh_hex_40mm_uniform13.json) |
+| hex_detail.png | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/hex_detail.png) |
+| hex_external.step | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/hex_external.step) |
+| hex_external_mesh.json | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/hex_external_mesh.json) |
+| inspect_faces.py | 2026-10-05 | [File](../../archive/sources/wheel-shaft/work/inspect_faces.py) |
+| inspect_step.py | 2026-10-05 | [File](../../archive/sources/wheel-shaft/work/inspect_step.py) |
+| original_mesh.json | 2026-10-05 | [File](../../archive/sources/wheel-shaft/work/original_mesh.json) |
+| original_output.step | 2026-10-05 | [File](../../archive/sources/wheel-shaft/work/original_output.step) |
+| original_preview.png | 2026-10-05 | [File](../../archive/sources/wheel-shaft/work/original_preview.png) |
+| pair_mesh.json | 2026-10-05 | [File](../../archive/sources/wheel-shaft/work/pair_mesh.json) |
+| pair_mesh_hex.json | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/pair_mesh_hex.json) |
+| pair_mesh_hex_35mm.json | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/pair_mesh_hex_35mm.json) |
+| pair_mesh_hex_40mm.json | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/pair_mesh_hex_40mm.json) |
+| pair_mesh_hex_40mm_13mm_base.json | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/pair_mesh_hex_40mm_13mm_base.json) |
+| pair_mesh_hex_40mm_reinforced.json | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/pair_mesh_hex_40mm_reinforced.json) |
+| pair_mesh_hex_40mm_uniform13.json | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/pair_mesh_hex_40mm_uniform13.json) |
+| pair_mesh_v2.json | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/pair_mesh_v2.json) |
+| render_mesh.py | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/render_mesh.py) |
+| stl_validation.json | 2026-10-05 | [File](../../archive/sources/wheel-shaft/work/stl_validation.json) |
+| stl_validation_shaft_pair_direct_hex_M3.json | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/stl_validation_shaft_pair_direct_hex_M3.json) |
+| stl_validation_shaft_pair_direct_hex_M3_40mm.json | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/stl_validation_shaft_pair_direct_hex_M3_40mm.json) |
+| stl_validation_shaft_pair_direct_hex_M3_40mm_13mm_base.json | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/stl_validation_shaft_pair_direct_hex_M3_40mm_13mm_base.json) |
+| stl_validation_shaft_pair_direct_hex_M3_40mm_reinforced.json | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/stl_validation_shaft_pair_direct_hex_M3_40mm_reinforced.json) |
+| stl_validation_shaft_pair_direct_hex_M3_40mm_uniform13.json | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/stl_validation_shaft_pair_direct_hex_M3_40mm_uniform13.json) |
+| stl_validation_v2.json | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/stl_validation_v2.json) |
+| underside_mesh_v2.json | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/underside_mesh_v2.json) |
+| underside_preview_v2.png | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/underside_preview_v2.png) |
+| validation.json | 2026-10-05 | [File](../../archive/sources/wheel-shaft/work/validation.json) |
+| validation_hex.json | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/validation_hex.json) |
+| validation_hex_35mm.json | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/validation_hex_35mm.json) |
+| validation_hex_40mm.json | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/validation_hex_40mm.json) |
+| validation_hex_40mm_13mm_base.json | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/validation_hex_40mm_13mm_base.json) |
+| validation_hex_40mm_reinforced.json | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/validation_hex_40mm_reinforced.json) |
+| validation_hex_40mm_uniform13.json | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/validation_hex_40mm_uniform13.json) |
+| validation_v2.json | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/validation_v2.json) |
+| widebase_housing_check.json | 2026-10-06 | [File](../../archive/sources/wheel-shaft/work/widebase_housing_check.json) |
+| workspace | 2026-10-05 | executable, package, dependency, or opaque binary; not published |

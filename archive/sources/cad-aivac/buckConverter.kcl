@@ -1,0 +1,70 @@
+// AIVac buck converter
+// Waterproof 12 V to 5 V 5 A DC-DC module with input/output leads and label bands.
+@settings(defaultLengthUnit = mm, kclVersion = 1.0)
+
+import unitBlock, unitSoftBlock, unitCylinder, unitSoftCylinder from "primitives.kcl"
+
+converterBody = clone(unitSoftBlock)
+  |> scale(x = 52mm / 1mm, y = 31mm / 1mm, z = 18mm / 1mm)
+  |> appearance(color = "#1f2225", roughness = 78, metalness = 0)
+
+labelPlate = clone(unitSoftBlock)
+  |> scale(x = 38mm / 1mm, y = 24mm / 1mm, z = 0.8mm / 1mm)
+  |> translate(z = 9.4mm, global = true)
+  |> appearance(color = "#f2f2ea", roughness = 50, metalness = 0)
+labelStripeOne = clone(unitBlock)
+  |> scale(x = 25mm / 1mm, y = 1.3mm / 1mm, z = 1mm / 1mm)
+  |> translate(
+       x = 0mm,
+       y = 3mm,
+       z = 10mm,
+       global = true,
+     )
+labelStripeTwo = clone(labelStripeOne)
+  |> translate(y = -6mm, global = true)
+labelMarks = appearance(
+  [labelStripeOne, labelStripeTwo],
+  color = "#111111",
+  roughness = 60,
+  metalness = 0,
+)
+
+inputRed = clone(unitBlock)
+  |> scale(x = 28mm / 1mm, y = 2.2mm / 1mm, z = 2.2mm / 1mm)
+  |> translate(
+       x = -40mm,
+       y = 5mm,
+       z = 0mm,
+       global = true,
+     )
+inputBlack = clone(inputRed)
+  |> translate(y = -10mm, global = true)
+outputYellow = clone(inputRed)
+  |> translate(x = 80mm, y = -2mm, global = true)
+inputRedStyled = appearance(
+  inputRed,
+  color = "#d51f1f",
+  roughness = 70,
+  metalness = 0,
+)
+inputBlackStyled = appearance(
+  inputBlack,
+  color = "#101010",
+  roughness = 70,
+  metalness = 0,
+)
+outputYellowStyled = appearance(
+  outputYellow,
+  color = "#ffd52b",
+  roughness = 70,
+  metalness = 0,
+)
+
+buckConverter = flatten([
+  converterBody,
+  labelPlate,
+  labelMarks,
+  inputRedStyled,
+  inputBlackStyled,
+  outputYellowStyled
+])

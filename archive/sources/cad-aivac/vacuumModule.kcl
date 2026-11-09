@@ -1,0 +1,160 @@
+// AIVac vacuum module
+// DIY dustbin, sealed intake duct, impeller, high RPM DC motor, and pleated filter.
+@settings(defaultLengthUnit = mm, kclVersion = 1.0)
+
+import unitBlock, unitSoftBlock, unitCylinder, unitSoftCylinder from "primitives.kcl"
+
+fanRadius = 38mm
+motorRadius = 17.9mm
+motorLength = 57mm
+
+dustbinBox = clone(unitSoftBlock)
+  |> scale(x = 105mm / 1mm, y = 70mm / 1mm, z = 45mm / 1mm)
+  |> translate(
+       x = 0mm,
+       y = 48mm,
+       z = 7mm,
+       global = true,
+     )
+  |> appearance(
+       color = "#b8e6f4",
+       roughness = 20,
+       metalness = 0,
+       opacity = 42,
+     )
+dustbinSeal = clone(unitSoftBlock)
+  |> scale(x = 108mm / 1mm, y = 5mm / 1mm, z = 8mm / 1mm)
+  |> translate(
+       x = 0mm,
+       y = 10mm,
+       z = 10mm,
+       global = true,
+     )
+  |> appearance(color = "#151515", roughness = 92, metalness = 0)
+
+filterPleatOne = clone(unitBlock)
+  |> scale(x = 2mm / 1mm, y = 8mm / 1mm, z = 36mm / 1mm)
+  |> translate(
+       x = -44mm,
+       y = 13mm,
+       z = 8mm,
+       global = true,
+     )
+filterPleats = patternLinear3d(
+  filterPleatOne,
+  instances = 23,
+  distance = 4mm,
+  axis = X,
+)
+filter = appearance(
+  filterPleats,
+  color = "#f5f2e8",
+  roughness = 76,
+  metalness = 0,
+)
+
+fanHousing = clone(unitCylinder)
+  |> scale(x = fanRadius / 1mm, y = fanRadius / 1mm, z = 16mm / 1mm)
+  |> translate(
+       x = 0mm,
+       y = -36mm,
+       z = 4mm,
+       global = true,
+     )
+  |> appearance(color = "#30363b", roughness = 46, metalness = 55)
+impellerDisc = clone(unitCylinder)
+  |> scale(x = 30mm / 1mm, y = 30mm / 1mm, z = 3mm / 1mm)
+  |> translate(
+       x = 0mm,
+       y = -36mm,
+       z = 14mm,
+       global = true,
+     )
+  |> appearance(color = "#bfc5c9", roughness = 30, metalness = 85)
+impellerBladeOne = clone(unitBlock)
+  |> scale(x = 18mm / 1mm, y = 4mm / 1mm, z = 3mm / 1mm)
+  |> rotate(axis = Z, angle = 18deg, global = true)
+  |> translate(
+       x = 14mm,
+       y = -36mm,
+       z = 18mm,
+       global = true,
+     )
+impellerBlades = patternCircular3d(
+  impellerBladeOne,
+  instances = 9,
+  axis = Z,
+  center = [0mm, -36mm, 18mm],
+  arcDegrees = 360deg,
+  rotateDuplicates = true,
+)
+impeller = appearance(
+  impellerBlades,
+  color = "#d5d9dc",
+  roughness = 28,
+  metalness = 88,
+)
+
+motorBody = clone(unitCylinder)
+  |> scale(x = motorRadius / 1mm, y = motorRadius / 1mm, z = motorLength / 1mm)
+  |> rotate(axis = Y, angle = 90deg, global = false)
+  |> translate(
+       x = 0mm,
+       y = -36mm,
+       z = 42mm,
+       global = true,
+     )
+  |> appearance(color = "#c8cdd0", roughness = 32, metalness = 82)
+motorRearCap = clone(unitCylinder)
+  |> scale(x = 18.5mm / 1mm, y = 18.5mm / 1mm, z = 5mm / 1mm)
+  |> rotate(axis = Y, angle = 90deg, global = false)
+  |> translate(
+       x = 31mm,
+       y = -36mm,
+       z = 42mm,
+       global = true,
+     )
+  |> appearance(color = "#303236", roughness = 48, metalness = 35)
+motorPinion = clone(unitCylinder)
+  |> scale(x = 4mm / 1mm, y = 4mm / 1mm, z = 13mm / 1mm)
+  |> rotate(axis = Y, angle = 90deg, global = false)
+  |> translate(
+       x = -35mm,
+       y = -36mm,
+       z = 42mm,
+       global = true,
+     )
+  |> appearance(color = "#a6aaad", roughness = 25, metalness = 90)
+
+intakeDuct = clone(unitSoftBlock)
+  |> scale(x = 122mm / 1mm, y = 24mm / 1mm, z = 12mm / 1mm)
+  |> translate(
+       x = 0mm,
+       y = -102mm,
+       z = -6mm,
+       global = true,
+     )
+  |> appearance(color = "#111315", roughness = 78, metalness = 0)
+nozzleLip = clone(unitSoftBlock)
+  |> scale(x = 132mm / 1mm, y = 8mm / 1mm, z = 6mm / 1mm)
+  |> translate(
+       x = 0mm,
+       y = -118mm,
+       z = -8mm,
+       global = true,
+     )
+  |> appearance(color = "#050505", roughness = 96, metalness = 0)
+
+vacuumModule = flatten([
+  dustbinBox,
+  dustbinSeal,
+  filter,
+  fanHousing,
+  impellerDisc,
+  impeller,
+  motorBody,
+  motorRearCap,
+  motorPinion,
+  intakeDuct,
+  nozzleLip
+])

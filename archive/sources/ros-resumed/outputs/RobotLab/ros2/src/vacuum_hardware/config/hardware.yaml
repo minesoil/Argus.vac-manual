@@ -1,0 +1,38 @@
+motor_bridge:
+  ros__parameters:
+    serial_port: /dev/robot_mega
+    serial_baud: 115200
+    motion_enabled: false
+    wheel_radius_m: 0.035
+    wheel_separation_m: 0.22
+    steps_per_revolution: 1600 # 200 full steps × 8 microsteps; match both driver DIP switches.
+    forward_m_s: 0.15
+    reverse_m_s: 0.08
+    turn_rad_s: 0.8
+    acceleration_m_s2: 0.4
+    angular_acceleration_rad_s2: 1.5
+    command_timeout_s: 0.25
+    scan_timeout_s: 0.5
+collision_monitor:
+  ros__parameters:
+    base_frame_id: base_link
+    odom_frame_id: odom
+    cmd_vel_in_topic: /cmd_vel_raw
+    cmd_vel_out_topic: /cmd_vel
+    state_topic: /collision_monitor_state
+    transform_tolerance: 0.2
+    source_timeout: 0.5
+    stop_pub_timeout: 1.0
+    polygons: [StopZone]
+    StopZone:
+      type: polygon
+      points: '[[0.30, 0.22], [0.30, -0.22], [-0.30, -0.22], [-0.30, 0.22]]'
+      action_type: stop
+      min_points: 1
+      visualize: true
+      polygon_pub_topic: /hardware_stop_zone
+    observation_sources: [scan]
+    scan:
+      type: scan
+      topic: /scan
+      enabled: true

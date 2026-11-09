@@ -1,0 +1,20 @@
+{
+  "counts": {
+    "scan": 127,
+    "camera_info": 127,
+    "odom": 378,
+    "image": 54
+  },
+  "distance_m": 0.46804799993045726,
+  "stopped_linear_m_s": 7.367153764537104e-17,
+  "stopped_yaw_rad_s": 0.0,
+  "scan_samples": 360,
+  "finite_scan_samples": 360,
+  "scan_frame": "lidar_link",
+  "image_frame": "camera_optical_frame",
+  "image_size": [
+    640,
+    480
+  ],
+  "camera_info_frame": "camera_optical_frame"
+}

@@ -1,0 +1,46 @@
+[INFO] [1791218153.261503466] [autonomy_guard_test.collision_monitor]: 
+	collision_monitor lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1791218153.669908906] [autonomy_guard_test.collision_monitor]: Configuring
+[INFO] [1791218153.690206255] [collision_monitor]: [scan]: Creating Scan
+[INFO] [1791218153.696715478] [collision_monitor]: [StopZone]: Creating Polygon
+[INFO] [1791218153.702243347] [collision_monitor]: [SlowZone]: Creating Polygon
+[INFO] [1791218153.754463026] [autonomy_guard_test.collision_monitor]: Activating
+[INFO] [1791218153.754655862] [autonomy_guard_test.collision_monitor]: Creating bond (collision_monitor) to lifecycle manager.
+[WARN] [1791218153.792823983] [autonomy_guard_test.collision_monitor]: Robot to stop due to invalid source. Either due to data not published yet, or to lack of new data received within the sensor timeout, or if impossible to transform data to base frame
+[INFO] [1791218153.853243716] [autonomy_guard_test.collision_monitor]: Robot to continue normal operation
+[INFO] [1791218155.365476670] [autonomy_guard_test.collision_monitor]: Robot to slowdown for 40.000000 percents due to SlowZone polygon
+[INFO] [1791218156.881052786] [autonomy_guard_test.collision_monitor]: Robot to stop due to StopZone polygon
+[INFO] [1791218158.402719323] [autonomy_guard_test.collision_monitor]: Robot to continue normal operation
+[WARN] [1791218160.316880767] [collision_monitor]: [scan]: Latest source and current collision monitor node timestamps differ on 0.532000 seconds. Ignoring the source.
+[WARN] [1791218160.316934060] [autonomy_guard_test.collision_monitor]: Robot to stop due to invalid source. Either due to data not published yet, or to lack of new data received within the sensor timeout, or if impossible to transform data to base frame
+[WARN] [1791218160.368665193] [collision_monitor]: [scan]: Latest source and current collision monitor node timestamps differ on 0.584000 seconds. Ignoring the source.
+[WARN] [1791218160.420295057] [collision_monitor]: [scan]: Latest source and current collision monitor node timestamps differ on 0.636000 seconds. Ignoring the source.
+[WARN] [1791218160.473047762] [collision_monitor]: [scan]: Latest source and current collision monitor node timestamps differ on 0.688000 seconds. Ignoring the source.
+[WARN] [1791218160.524829290] [collision_monitor]: [scan]: Latest source and current collision monitor node timestamps differ on 0.740000 seconds. Ignoring the source.
+[WARN] [1791218160.576634633] [collision_monitor]: [scan]: Latest source and current collision monitor node timestamps differ on 0.792000 seconds. Ignoring the source.
+[WARN] [1791218160.626893439] [collision_monitor]: [scan]: Latest source and current collision monitor node timestamps differ on 0.842000 seconds. Ignoring the source.
+[WARN] [1791218160.679654476] [collision_monitor]: [scan]: Latest source and current collision monitor node timestamps differ on 0.894000 seconds. Ignoring the source.
+[WARN] [1791218160.730702912] [collision_monitor]: [scan]: Latest source and current collision monitor node timestamps differ on 0.946000 seconds. Ignoring the source.
+[WARN] [1791218160.781266403] [collision_monitor]: [scan]: Latest source and current collision monitor node timestamps differ on 0.996000 seconds. Ignoring the source.
+[WARN] [1791218160.832456640] [collision_monitor]: [scan]: Latest source and current collision monitor node timestamps differ on 1.046000 seconds. Ignoring the source.
+[WARN] [1791218160.883418305] [collision_monitor]: [scan]: Latest source and current collision monitor node timestamps differ on 1.098000 seconds. Ignoring the source.
+[WARN] [1791218160.934804267] [collision_monitor]: [scan]: Latest source and current collision monitor node timestamps differ on 1.150000 seconds. Ignoring the source.
+[WARN] [1791218160.988603151] [collision_monitor]: [scan]: Latest source and current collision monitor node timestamps differ on 1.202000 seconds. Ignoring the source.
+[WARN] [1791218161.040853364] [collision_monitor]: [scan]: Latest source and current collision monitor node timestamps differ on 1.256000 seconds. Ignoring the source.
+[WARN] [1791218161.091277028] [collision_monitor]: [scan]: Latest source and current collision monitor node timestamps differ on 1.306000 seconds. Ignoring the source.
+[WARN] [1791218161.142395044] [collision_monitor]: [scan]: Latest source and current collision monitor node timestamps differ on 1.358000 seconds. Ignoring the source.
+[WARN] [1791218161.193683701] [collision_monitor]: [scan]: Latest source and current collision monitor node timestamps differ on 1.408000 seconds. Ignoring the source.
+[WARN] [1791218161.244690297] [collision_monitor]: [scan]: Latest source and current collision monitor node timestamps differ on 1.460000 seconds. Ignoring the source.
+[WARN] [1791218161.297141976] [collision_monitor]: [scan]: Latest source and current collision monitor node timestamps differ on 1.512000 seconds. Ignoring the source.
+[INFO] [1791218161.341375540] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [1791218161.341550218] [autonomy_guard_test.collision_monitor]: Running Nav2 LifecycleNode rcl preshutdown (collision_monitor)
+[INFO] [1791218161.341667498] [autonomy_guard_test.collision_monitor]: Deactivating
+[INFO] [1791218161.341699219] [autonomy_guard_test.collision_monitor]: Destroying bond (collision_monitor) to lifecycle manager.
+[INFO] [1791218161.352941378] [autonomy_guard_test.collision_monitor]: Cleaning up
+[INFO] [1791218161.353014819] [collision_monitor]: [StopZone]: Destroying Polygon
+[INFO] [1791218161.353021255] [collision_monitor]: [SlowZone]: Destroying Polygon
+[INFO] [1791218161.353025778] [collision_monitor]: [scan]: Destroying Scan
+[INFO] [1791218161.363920866] [autonomy_guard_test.collision_monitor]: Destroying bond (collision_monitor) to lifecycle manager.
+[INFO] [1791218161.406383323] [autonomy_guard_test.collision_monitor]: Destroying

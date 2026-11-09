@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-06",
+  "scope": "Ubuntu vacuum simulator only",
+  "tests": {
+    "free_space_goal": {
+      "status": 4,
+      "error_code": 0
+    },
+    "goal_beyond_wall": {
+      "status": 6,
+      "movement_m": 0.002205473557006596
+    },
+    "isolated_guard": {
+      "clear_m_s": 0.2,
+      "slow_m_s": 0.08000000000000002,
+      "stop_m_s": 0.0,
+      "scan_timeout_m_s": 0.0
+    }
+  },
+  "passed": true
+}

@@ -1,0 +1,48 @@
+{
+	"version": 2,
+	"nodes": [
+		{
+			"id": "1787748664765",
+			"type": "textInput",
+			"position": {
+				"x": 20,
+				"y": 0
+			},
+			"data": {
+				"value": "What is LLM?"
+			},
+			"width": 180,
+			"height": 100,
+			"measured": {
+				"width": 180,
+				"height": 100
+			}
+		},
+		{
+			"id": "1787748664766",
+			"type": "generate",
+			"position": {
+				"x": 240,
+				"y": 0
+			},
+			"width": 460,
+			"height": 340,
+			"data": {
+				"results": [],
+				"model": "gemini-3-flash-preview",
+				"provider": "google"
+			},
+			"measured": {
+				"width": 460,
+				"height": 340
+			}
+		}
+	],
+	"edges": [
+		{
+			"id": "1787748664767",
+			"source": "1787748664765",
+			"target": "1787748664766"
+		}
+	]
+}

@@ -1,0 +1,78 @@
+// AIVac front bumper
+// Compliant rubber bumper with glossy obstacle sensor windows.
+@settings(defaultLengthUnit = mm, kclVersion = 1.0)
+
+import unitBlock, unitSoftBlock, unitCylinder, unitSoftCylinder from "primitives.kcl"
+
+frontBumperPad = clone(unitSoftBlock)
+  |> scale(x = 124mm / 1mm, y = 13mm / 1mm, z = 18mm / 1mm)
+  |> translate(
+       x = 0mm,
+       y = -151mm,
+       z = 0mm,
+       global = true,
+     )
+leftBumperPad = clone(unitSoftBlock)
+  |> scale(x = 76mm / 1mm, y = 13mm / 1mm, z = 18mm / 1mm)
+  |> rotate(axis = Z, angle = -34deg, global = true)
+  |> translate(
+       x = -96mm,
+       y = -128mm,
+       z = 0mm,
+       global = true,
+     )
+rightBumperPad = clone(unitSoftBlock)
+  |> scale(x = 76mm / 1mm, y = 13mm / 1mm, z = 18mm / 1mm)
+  |> rotate(axis = Z, angle = 34deg, global = true)
+  |> translate(
+       x = 96mm,
+       y = -128mm,
+       z = 0mm,
+       global = true,
+     )
+rubberBand = appearance(
+  [
+    frontBumperPad,
+    leftBumperPad,
+    rightBumperPad
+  ],
+  color = "#171717",
+  roughness = 90,
+  metalness = 0,
+)
+
+frontWindow = clone(unitSoftBlock)
+  |> scale(x = 50mm / 1mm, y = 2.4mm / 1mm, z = 9mm / 1mm)
+  |> translate(
+       x = 0mm,
+       y = -159mm,
+       z = 2mm,
+       global = true,
+     )
+leftWindow = clone(unitSoftBlock)
+  |> scale(x = 30mm / 1mm, y = 2.4mm / 1mm, z = 8mm / 1mm)
+  |> rotate(axis = Z, angle = -32deg, global = true)
+  |> translate(
+       x = -100mm,
+       y = -136mm,
+       z = 2mm,
+       global = true,
+     )
+rightWindow = clone(unitSoftBlock)
+  |> scale(x = 30mm / 1mm, y = 2.4mm / 1mm, z = 8mm / 1mm)
+  |> rotate(axis = Z, angle = 32deg, global = true)
+  |> translate(
+       x = 100mm,
+       y = -136mm,
+       z = 2mm,
+       global = true,
+     )
+sensorWindows = appearance(
+  [frontWindow, leftWindow, rightWindow],
+  color = "#05080c",
+  roughness = 15,
+  metalness = 0,
+  opacity = 72,
+)
+
+bumper = flatten([rubberBand, sensorWindows])

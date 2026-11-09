@@ -1,0 +1,51 @@
+/autonomy_guard_test/collision_monitor:
+  ros__parameters:
+    FootprintApproach:
+      action_type: approach
+      enabled: true
+      footprint_topic: /local_costmap/published_footprint
+      min_points: 1
+      simulation_time_step: 0.1
+      time_before_collision: 1.2
+      type: polygon
+      visualize: false
+    SlowZone:
+      action_type: slowdown
+      enabled: true
+      min_points: 1
+      points: '[[-0.37,-0.33],[0.42,-0.33],[0.42,0.33],[-0.37,0.33]]'
+      polygon_pub_topic: /autonomy_guard_test/slow_polygon
+      slowdown_ratio: 0.4
+      type: polygon
+      visualize: true
+    StopZone:
+      action_type: stop
+      enabled: true
+      min_points: 1
+      points: '[[-0.29,-0.25],[0.22,-0.25],[0.22,0.25],[-0.29,0.25]]'
+      polygon_pub_topic: /autonomy_guard_test/stop_polygon
+      type: polygon
+      visualize: true
+    base_frame_id: base_footprint
+    base_shift_correction: true
+    cmd_vel_in_topic: /autonomy_guard_test/input
+    cmd_vel_out_topic: /autonomy_guard_test/output
+    enable_stamped_cmd_vel: false
+    observation_sources:
+    - scan
+    odom_frame_id: odom
+    polygons:
+    - StopZone
+    - SlowZone
+    scan:
+      enabled: true
+      max_height: 2.0
+      min_height: 0.0
+      source_timeout: 0.5
+      topic: /autonomy_guard_test/scan
+      type: scan
+    source_timeout: 0.5
+    state_topic: /autonomy_guard_test/state
+    stop_pub_timeout: 2.0
+    transform_tolerance: 0.2
+    use_sim_time: true

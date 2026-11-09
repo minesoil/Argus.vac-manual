@@ -1,0 +1,1197 @@
+{
+  "responses": [
+    {
+      "id": "19f173f236e6c4ad",
+      "thread_id": "19f173f236e6c4ad",
+      "label_ids": [
+        "CATEGORY_UPDATES",
+        "INBOX"
+      ],
+      "snippet": "Roboflow Your Model is Ready to Use Your ArgusVac Object Detection (2026-06-30 1:15pm) model finished training in an hour and achieved: 99.5% mAP, 99.1% Precision, and 100.0% Recall . Build Deployment-",
+      "history_id": "3652536",
+      "internal_date": "1782801441000",
+      "payload": {
+        "part_id": "",
+        "mime_type": "multipart/alternative",
+        "filename": "",
+        "headers": [
+          {
+            "name": "Delivered-To",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "Received",
+            "value": "by 2002:a05:6214:20a8:b0:8d0:bb0d:50e4 with SMTP id 8csp347597qvd;        Mon, 29 Jun 2026 23:37:22 -0700 (PDT)"
+          },
+          {
+            "name": "X-Received",
+            "value": "by 2002:ac8:5992:0:b0:51c:478:329e with SMTP id d75a77b69052e-51c10876600mr31813171cf.46.1782801441634;        Mon, 29 Jun 2026 23:37:21 -0700 (PDT)"
+          },
+          {
+            "name": "ARC-Seal",
+            "value": "i=1; a=rsa-sha256; t=1782801441; cv=none;        d=google.com; s=arc-20260327;        b=hky1XB8DlzvmdgEjI07ffPWk2AG4vnDT8VjgEU0+5ZPdE64kmLAWuOL/6+PrdM6Nx1         a5UWIlAa3PGOGu2l5qxlRczyH/xFvHd/TQq8ONJaKacx3oiivQKzbnfNhj8OnA+k0REd         uV8NrAWh6ulyOkZl8xb1hTivBjg6kq7XM6ESmLzXiFmum2Bks0mjBlV8lp0Uwu0eIu1i         F7RiqnOjEOHMsnmkdT7E/huievP7ufi/Wwzm9tupSnhsLKxQL/43eSHX7mIQwQE90Rmf         y6TW3KGFK7QIp7TIVFuCG1f6OHUky5kouWgWWA0C0zfhEbjNrJcek9hmF0BEnCuMmSoW         9okQ=="
+          },
+          {
+            "name": "ARC-Message-Signature",
+            "value": "i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;        h=message-id:list-unsubscribe-post:list-unsubscribe:to:from:subject         :mime-version:date:dkim-signature:dkim-signature;        bh=uZKJjKtNz6agtiS7nB7QHc4l1PS568XCICcEWGbuen4=;        fh=mIxgd0LdvtaKJGPW2R1e2NXVnRN1FDvuim7vt6rqlGY=;        b=B1m0adIKBWWFTZNmXARHKgDwr7opFCKm9Sgl9+vPCWrb4ixT71mRq7EWDKNzYwYgTn         eMkHD++OPODsNnpqBABE9NBrsLVdRxfJinkv2PEUyC3phqhADCibvwQzaahl3/lIiJh1         sQjW8G7tZ0Afy+OKAgZhJBsEtscwb+nHov06XE9Bs/zzQ2vo38Ckj43YohsOTCyaMgT1         VjHelh3TDOatdAq5wYs5SIDFFrmG854LF5Xxu2inoxXfPYzmEDZUCJT6BALpaV7GDto6         OWTxSPqP61Y9/ElV1pUE9SiPpDSText0L9+H+81QEe/tAmPxysn4oSr5WYZSAEGl8htu         glAw==;        dara=google.com"
+          },
+          {
+            "name": "ARC-Authentication-Results",
+            "value": "i=1; mx.google.com;       dkim=pass header.i=@cio55018.roboflow.com header.s=pic header.b=sFNZ06Hw;       dkim=pass header.i=@mailgun.org header.s=mg header.b=AyR2q35A;       spf=pass (google.com: domain of [REDACTED_EMAIL] designates 161.38.193.4 as permitted sender) smtp.mailfrom=[REDACTED_EMAIL];       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=roboflow.com"
+          },
+          {
+            "name": "Return-Path",
+            "value": "<[REDACTED_EMAIL]>"
+          },
+          {
+            "name": "Received",
+            "value": "from v54.v56f0a4e3.use4.send.mailgun.net (v54.v56f0a4e3.use4.send.mailgun.net. [161.38.193.4])        by mx.google.com with UTF8SMTPS id 6a1803df08f44-8f1a6f8ce36si23572376d6.335.2026.06.29.23.37.21        for <[REDACTED_EMAIL]>        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);        Mon, 29 Jun 2026 23:37:21 -0700 (PDT)"
+          },
+          {
+            "name": "Received-SPF",
+            "value": "pass (google.com: domain of [REDACTED_EMAIL] designates 161.38.193.4 as permitted sender) client-ip=161.38.193.4;"
+          },
+          {
+            "name": "Authentication-Results",
+            "value": "mx.google.com;       dkim=pass header.i=@cio55018.roboflow.com header.s=pic header.b=sFNZ06Hw;       dkim=pass header.i=@mailgun.org header.s=mg header.b=AyR2q35A;       spf=pass (google.com: domain of [REDACTED_EMAIL] designates 161.38.193.4 as permitted sender) smtp.mailfrom=[REDACTED_EMAIL];       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=roboflow.com"
+          },
+          {
+            "name": "DKIM-Signature",
+            "value": "a=rsa-sha256; v=1; c=relaxed/relaxed; d=cio55018.roboflow.com; q=dns/txt; s=pic; t=1782801441; x=1782808641; h=Message-Id: List-Unsubscribe-Post: List-Unsubscribe: To: To: From: From: Subject: Subject: Content-Type: Mime-Version: Date: X-Feedback-Id: Sender; bh=uZKJjKtNz6agtiS7nB7QHc4l1PS568XCICcEWGbuen4=; b=sFNZ06HwlxWoaIUMci5z4QEa2kZDpj1b9ipzN9M0kZkPrNmK7cD6fS1z23oMljBaXHtDcuTyFdZAn/u5Uz+YGUyHG7QssXTtJazVV+/BINoajZ4V4QxAfBPPtaObdwTDO0RnZAUdx+k6BkQRprevpx9VkZFr1OcuSqLlf2PloqE="
+          },
+          {
+            "name": "DKIM-Signature",
+            "value": "a=rsa-sha256; v=1; c=relaxed/relaxed; d=mailgun.org; q=dns/txt; s=mg; t=1782801441; x=1782808641; h=Message-Id: List-Unsubscribe-Post: List-Unsubscribe: To: To: From: From: Subject: Subject: Content-Type: Mime-Version: Date: X-Feedback-Id: Sender; bh=uZKJjKtNz6agtiS7nB7QHc4l1PS568XCICcEWGbuen4=; b=AyR2q35AF0Nvod8noO4vGFE7dTdVpampfcQFBXWO2C76btrXS6PhBeSJ4Ml166DKov2QCge/iOKW3/IWVt/JM/U9kG1aa6hzkvZUcuQ73XyMhvyr8zSUC5G2B3vquuaQY6fhr11+63tpx5Ruyz9TMHYrGDT5lwEHy4gxA21iHrs="
+          },
+          {
+            "name": "X-Mailgun-Sid",
+            "value": "WyJhM2ZkYSIsImp1c3RpbnR1YW4xMjAxQGdtYWlsLmNvbSIsIjY5Y2ZhMyJd"
+          },
+          {
+            "name": "X-Feedback-Id",
+            "value": "[REDACTED_EMAIL]::5ffa191573a9cd524e685e7c:mailgun"
+          },
+          {
+            "name": "Received",
+            "value": "by ab94040b3e6bda48759854012e98bafc2aa4bc7eaba1ab35bc526195d4d31158 with HTTP id 6a4364216b456d0f6add2dcf; Tue, 30 Jun 2026 06:37:21 GMT"
+          },
+          {
+            "name": "X-Mailgun-Sending-Ip",
+            "value": "161.38.193.4"
+          },
+          {
+            "name": "Date",
+            "value": "Tue, 30 Jun 2026 06:37:21 +0000"
+          },
+          {
+            "name": "Mime-Version",
+            "value": "1.0"
+          },
+          {
+            "name": "Content-Type",
+            "value": "multipart/alternative; boundary=\"91fc0122fc0c704ca7ee4ea7728fac0d79591592a22024430ffe167cb3d8\""
+          },
+          {
+            "name": "Subject",
+            "value": "ArgusVac Object Detection (2026-06-30 1:15pm) is finished training!"
+          },
+          {
+            "name": "From",
+            "value": "Roboflow <[REDACTED_EMAIL]>"
+          },
+          {
+            "name": "To",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "X-Mailgun-Dkim",
+            "value": "true"
+          },
+          {
+            "name": "X-Mailgun-Native-Send",
+            "value": "true"
+          },
+          {
+            "name": "X-Mailgun-Track-Clicks",
+            "value": "false"
+          },
+          {
+            "name": "X-Mailgun-Track-Opens",
+            "value": "false"
+          },
+          {
+            "name": "X-Report-Abuse-To",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "List-Unsubscribe",
+            "value": "<mailto:[REDACTED_EMAIL]>, <[REDACTED_EMAIL_LINK]>"
+          },
+          {
+            "name": "List-Unsubscribe-Post",
+            "value": "List-Unsubscribe=One-Click"
+          },
+          {
+            "name": "X-Mailer",
+            "value": "Customer.io (dgSAyQUBAPGfcfCfcQGfFz8hJPdyjjnev7jXYMc=; +[REDACTED_EMAIL_LINK])"
+          },
+          {
+            "name": "X-Mailgun-Variables",
+            "value": "{\"email_id\": \"dgSAyQUBAPGfcfCfcQGfFz8hJPdyjjnev7jXYMc=\"}"
+          },
+          {
+            "name": "Message-Id",
+            "value": "<[REDACTED_EMAIL]>"
+          }
+        ],
+        "body": {
+          "size": 0,
+          "base64_url_content": null,
+          "content": null,
+          "attachment_id": null
+        },
+        "read_attachment_supported": null,
+        "parts": [
+          {
+            "part_id": "0",
+            "mime_type": "text/plain",
+            "filename": "",
+            "headers": [
+              {
+                "name": "Content-Transfer-Encoding",
+                "value": "quoted-printable"
+              },
+              {
+                "name": "Content-Type",
+                "value": "text/plain; charset=\"utf-8\""
+              }
+            ],
+            "body": {
+              "size": 5123,
+              "base64_url_content": null,
+              "content": "Your Model is Ready\r\n\r\nRoboflow ( [REDACTED_EMAIL_LINK] )\r\n\r\nYour Model is Ready to Use\r\n\r\nYour ArgusVac Object Detection (2026-06-30 1:15pm) model finished training in an hour and achieved:\r\n\r\n99.5% mAP ( [REDACTED_EMAIL_LINK] ),\r\n99.1% Precision ( [REDACTED_EMAIL_LINK] ),\r\nand 100.0% Recall ( [REDACTED_EMAIL_LINK] ) .\r\n\r\n \r\n\r\nBuild Deployment-Ready Pipelines\r\n\r\nCombine your trained model with computer vision logic, foundation models, and other integrations with Roboflow Workflows.\r\n\r\nUse My Model Now ( [REDACTED_EMAIL_LINK] Object Detection&utm_campaign=Model+Finished+Training+Flow&utm_content=New+Model+Training&utm_medium=email_action&utm_source=email )\r\n\r\nOr start with a template:\r\n\r\nActive Learning\r\nActive Learning\r\n\r\nContinuously improve your model while deploying. ( [REDACTED_EMAIL_LINK] Object Detection&utm_campaign=Model+Finished+Training+Flow&utm_content=New+Model+Training&utm_medium=email_action&utm_source=email )\r\n\r\nOCR\r\nOCR\r\n\r\nRun text recognition on your detections. ( [REDACTED_EMAIL_LINK] Object Detection&utm_campaign=Model+Finished+Training+Flow&utm_content=New+Model+Training&utm_medium=email_action&utm_source=email )\r\n\r\nCount\r\nDetect & Count\r\n\r\nCount detections and visualize outputs. ( [REDACTED_EMAIL_LINK] Object Detection&utm_campaign=Model+Finished+Training+Flow&utm_content=New+Model+Training&utm_medium=email_action&utm_source=email )\r\n\r\n \r\n\r\nUse Roboflow Agent\r\n\r\nJust Describe the Deployment You Want\r\n\r\nOpen Roboflow Agent, point it at this model, and tell it where you want to run inference using text prompts: hosted API, edge device, or live video stream. It'll build the workflow, generate the code, and deploy it for you.\r\n\r\nTry Agent on This Model ( [REDACTED_EMAIL_LINK] )\r\n\r\nServerless V2 API\r\n\r\nWant to deploy directly? We've already hosted your model for you. Learn more in our API documentation ( [REDACTED_EMAIL_LINK] ).\r\n\r\nfrom inference_sdk import InferenceHTTPClient\r\n\r\n# create an inference client\r\nCLIENT = InferenceHTTPClient\r\n( api_url=\"[REDACTED_EMAIL_LINK]",\r\napi_key=\"YOUR_API_KEY\" )\r\n # run inference on a local image\r\nprint(CLIENT.infer( \"your_image.jpg\",\r\nmodel_id=\"argusvac-object-detection/1\" )\r\n)\r\n\r\nDon't forget to swap in your API Key ( [REDACTED_EMAIL_LINK] ).\r\n\r\n \r\n\r\nNeed help?\r\n\r\nWhether you need help with Roboflow, or computer vision in general, we have a variety of resources for you.\r\n\r\nRoboflow Documentation ( [REDACTED_EMAIL_LINK] )\r\nView an overview of Roboflow's functionalities with examples and code snippets.\r\n\r\nRoboflow Forum ( [REDACTED_EMAIL_LINK] )\r\nAsk questions and get help from the Roboflow team and other users in the community.\r\n\r\nWeekly Webinar ( [REDACTED_EMAIL_LINK] )\r\nJoin our team for a live product webinar and Q&A session every Tuesday.\r\n\r\nContact Sales ( [REDACTED_EMAIL_LINK] )\r\nNeed more flexible plan options or curious about bulk discounts? Get in touch.\r\n\r\n \r\n\r\n© 2026 Roboflow, Inc. All rights reserved.\r\n\r\nManage Preferences ( [REDACTED_EMAIL_LINK] ) |\r\nUnsubscribe ( [REDACTED_EMAIL_LINK] )",
+              "attachment_id": null
+            },
+            "read_attachment_supported": null,
+            "parts": null
+          },
+          {
+            "part_id": "1",
+            "mime_type": "text/html",
+            "filename": "",
+            "headers": [
+              {
+                "name": "Content-Transfer-Encoding",
+                "value": "quoted-printable"
+              },
+              {
+                "name": "Content-Type",
+                "value": "text/html; charset=\"utf-8\""
+              }
+            ],
+            "body": {
+              "size": 27425,
+              "base64_url_content": null,
+              "content": "<!DOCTYPE html><html><head>\r\n  </head>\r\n  <body class=\"body\" style=\"margin: 0; padding: 0; width: 100%; background-color: #FFFFFF; font-family: Helvetica, Arial, sans-serif; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;\">\r\n    <!-- We'll replace this content tag with whatever you write in your email  -->\r\n    \r\n\r\n\r\n  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>\r\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\r\n  <meta name=\"color-scheme\" content=\"light dark\"/>\r\n  <meta name=\"supported-color-schemes\" content=\"light dark\"/>\r\n  <title>Your Model is Ready</title>\r\n  <style type=\"text/css\">\r\n@media (prefers-color-scheme: dark) {\r\n  .dark-body {\r\n    background-color: #111827 !important;\r\n  }\r\n\r\n  .dark-text {\r\n    color: #FFFFFF !important;\r\n  }\r\n\r\n  .dark-text-secondary {\r\n    color: #A1A1AA !important;\r\n  }\r\n\r\n  .dark-text-muted {\r\n    color: #71717A !important;\r\n  }\r\n\r\n  .dark-bg-card {\r\n    background-color: #27272A !important;\r\n  }\r\n\r\n  .dark-link {\r\n    color: #A78BFA !important;\r\n  }\r\n\r\n  .dark-border {\r\n    border-color: #3F3F46 !important;\r\n  }\r\n\r\n  .dark-code-bg {\r\n    background-color: #000000 !important;\r\n    border: 1px solid #3F3F46 !important;\r\n  }\r\n}\r\n.button-hover:hover {\r\n  filter: brightness(1.1);\r\n}\r\n.card-link:hover {\r\n  opacity: 0.9;\r\n}\r\n</style>\r\n  \r\n\r\n\r\n  <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\r\n    <tbody><tr>\r\n      <td align=\"center\" style=\"padding: 0;\">\r\n\r\n        <table role=\"presentation\" width=\"580\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"max-width: 580px; width: 100%;\">\r\n\r\n          <tbody><tr>\r\n            <td align=\"center\" style=\"padding: 32px 24px 24px 24px;\">\r\n              <a href=\"[REDACTED_EMAIL_LINK]" target=\"_blank\">\r\n                <img src=\"[REDACTED_EMAIL_LINK]" width=\"150\" alt=\"Roboflow\" style=\"display: block; width: 150px; border: 0;\"/>\r\n              </a>\r\n            </td>\r\n          </tr>\r\n\r\n          <tr>\r\n            <td align=\"center\" style=\"padding: 0 16px;\">\r\n              <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" class=\"dark-bg-card\" style=\"background-color: #F9FAFB; border-radius: 24px;\">\r\n                <tbody><tr>\r\n                  <td align=\"left\" style=\"padding: 32px;\">\r\n                    \r\n                    <table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\">\r\n                      <tbody><tr>\r\n                        <td valign=\"middle\" style=\"padding-bottom: 16px;\">\r\n                           <p class=\"dark-text\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 20px; font-weight: 700; color: #111827; margin: 0; padding: 0;\">\r\n                             Your Model is Ready to Use\r\n                           </p>\r\n                        </td>\r\n                      </tr>\r\n                    </tbody></table>\r\n\r\n                    <div class=\"dark-text-secondary\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 15px; color: #6B7280; line-height: 1.6; margin: 0;\">\r\n                      \r\n                      \r\n                        Your <strong class=\"dark-text\" style=\"color: #111827;\">ArgusVac Object Detection (2026-06-30 1:15pm)</strong> model finished training in <strong class=\"dark-text\" style=\"color: #111827;\">an hour</strong> and achieved:\r\n                        <br/>\r\n                        <span class=\"dark-text\" style=\"color: #111827; font-weight: 600;\">\r\n                          99.5% <a href=\"[REDACTED_EMAIL_LINK]" class=\"dark-link\" style=\"color: #6D29D9; text-decoration: none;\">mAP</a>, \r\n                          99.1% <a href=\"[REDACTED_EMAIL_LINK]" class=\"dark-link\" style=\"color: #6D29D9; text-decoration: none;\">Precision</a>, \r\n                          and 100.0% <a href=\"[REDACTED_EMAIL_LINK]" class=\"dark-link\" style=\"color: #6D29D9; text-decoration: none;\">Recall</a>\r\n                        </span>.\r\n\r\n                      \r\n                      \r\n                    </div>\r\n\r\n                  </td>\r\n                </tr>\r\n              </tbody></table>\r\n            </td>\r\n          </tr>\r\n\r\n          <tr><td style=\"height: 24px;\"> </td></tr>\r\n\r\n          <tr>\r\n            <td align=\"center\" style=\"padding: 0 16px;\">\r\n              <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" class=\"dark-bg-card\" style=\"background-color: #F9FAFB; border-radius: 24px;\">\r\n                <tbody><tr>\r\n                  <td align=\"left\" style=\"padding: 32px;\">\r\n                    \r\n                    <p class=\"dark-text\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; color: #111827; margin: 0 0 12px 0; padding: 0;\">\r\n                      Build Deployment-Ready Pipelines\r\n                    </p>\r\n                    <p class=\"dark-text-secondary\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 15px; color: #6B7280; margin: 0 0 24px 0; padding: 0; line-height: 1.5;\">\r\n                      Combine your trained model with computer vision logic, foundation models, and other integrations with Roboflow Workflows.\r\n                    </p>\r\n\r\n                    <table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\" width=\"100%\">\r\n                      <tbody><tr>\r\n                        <td align=\"center\" class=\"button-hover\" style=\"background: linear-gradient(135deg, #6D29D9 0%, #8B5CF6 100%); background-color: #6D29D9; border-radius: 8px;\">\r\n                          <a href=\"[REDACTED_EMAIL_LINK]" target=\"_blank\" style=\"display: block; padding: 14px 32px; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: bold; color: #FFFFFF; text-decoration: none;\">\r\n                            Use My Model Now\r\n                          </a>\r\n                        </td>\r\n                      </tr>\r\n                    </tbody></table>\r\n\r\n                    <div class=\"dark-border\" style=\"border-top: 1px solid #E5E7EB; margin: 24px 0;\"></div>\r\n\r\n                    <p class=\"dark-text\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 600; color: #374151; margin: 0 0 16px 0; text-transform: uppercase; letter-spacing: 0.5px;\">\r\n                      Or start with a template:\r\n                    </p>\r\n\r\n                    <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\r\n                      <tbody><tr>\r\n                        <td width=\"33%\" valign=\"top\" style=\"padding-right: 8px;\">\r\n                          <a href=\"[REDACTED_EMAIL_LINK]" style=\"text-decoration: none; display: block;\" class=\"card-link\">\r\n                            <img src=\"[REDACTED_EMAIL_LINK]" width=\"100%\" alt=\"Active Learning\" style=\"display: block; border-radius: 8px; margin-bottom: 8px;\"/>\r\n                            <p class=\"dark-text\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 700; color: #6D29D9; margin: 0 0 4px 0;\">Active Learning</p>\r\n                            <p class=\"dark-text-secondary\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 12px; color: #6B7280; margin: 0; line-height: 1.4;\">Continuously improve your model while deploying.</p>\r\n                          </a>\r\n                        </td>\r\n                        <td width=\"33%\" valign=\"top\" style=\"padding: 0 4px;\">\r\n                          <a href=\"[REDACTED_EMAIL_LINK]" style=\"text-decoration: none; display: block;\" class=\"card-link\">\r\n                            <img src=\"[REDACTED_EMAIL_LINK]" width=\"100%\" alt=\"OCR\" style=\"display: block; border-radius: 8px; margin-bottom: 8px;\"/>\r\n                            <p class=\"dark-text\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 700; color: #6D29D9; margin: 0 0 4px 0;\">OCR</p>\r\n                            <p class=\"dark-text-secondary\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 12px; color: #6B7280; margin: 0; line-height: 1.4;\">Run text recognition on your detections.</p>\r\n                          </a>\r\n                        </td>\r\n                        <td width=\"33%\" valign=\"top\" style=\"padding-left: 8px;\">\r\n                          <a href=\"[REDACTED_EMAIL_LINK]" style=\"text-decoration: none; display: block;\" class=\"card-link\">\r\n                            <img src=\"[REDACTED_EMAIL_LINK]" width=\"100%\" alt=\"Count\" style=\"display: block; border-radius: 8px; margin-bottom: 8px;\"/>\r\n                            <p class=\"dark-text\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 700; color: #6D29D9; margin: 0 0 4px 0;\">Detect &amp; Count</p>\r\n                            <p class=\"dark-text-secondary\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 12px; color: #6B7280; margin: 0; line-height: 1.4;\">Count detections and visualize outputs.</p>\r\n                          </a>\r\n                        </td>\r\n                      </tr>\r\n                    </tbody></table>\r\n\r\n                  </td>\r\n                </tr>\r\n              </tbody></table>\r\n            </td>\r\n          </tr>\r\n\r\n          <tr><td style=\"height: 24px;\"> </td></tr>\r\n\r\n           <!-- ===== NEW: Roboflow Agent card ===== -->\r\n          <tr><td style=\"height: 24px;\"> </td></tr>\r\n          <tr>\r\n            <td align=\"center\" style=\"padding: 0 16px;\">\r\n              <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" class=\"dark-bg-card\" style=\"background-color: #F9FAFB; border-radius: 24px;\">\r\n                <tbody><tr>\r\n                  <td align=\"left\" style=\"padding: 32px;\">\r\n                    <p class=\"dark-text\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 700; color: #6D29D9; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 1.5px;\">\r\n                      Use Roboflow Agent\r\n                    </p>\r\n                    <p class=\"dark-text\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; color: #111827; margin: 0 0 12px 0; padding: 0;\">\r\n                      Just Describe the Deployment You Want\r\n                    </p>\r\n                    <p class=\"dark-text-secondary\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 15px; color: #6B7280; margin: 0 0 24px 0; padding: 0; line-height: 1.6;\">\r\n                      Open Roboflow Agent, point it at this model, and tell it where you want to run inference using text prompts: hosted API, edge device, or live video stream. It'll build the workflow, generate the code, and deploy it for you.\r\n                    </p>\r\n                    <table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\" width=\"100%\">\r\n                      <tbody><tr>\r\n                        <td align=\"center\" style=\"border: 2px solid #6D29D9; border-radius: 8px;\" class=\"dark-border\">\r\n                          <a href=\"[REDACTED_EMAIL_LINK]" target=\"_blank\" style=\"display: block; padding: 12px 24px; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; color: #6D29D9; text-decoration: none;\" class=\"dark-link\">\r\n                            Try Agent on This Model\r\n                          </a>\r\n                        </td>\r\n                      </tr>\r\n                    </tbody></table>\r\n                  </td>\r\n                </tr>\r\n              </tbody></table>\r\n            </td>\r\n          </tr>\r\n          <!-- ===== END: Roboflow Agent card ===== -->\r\n        \r\n<tr><td style=\"height: 24px;\"> </td></tr>\r\n\r\n          <tr>\r\n            <td align=\"center\" style=\"padding: 0 16px;\">\r\n              <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" class=\"dark-bg-card\" style=\"background-color: #F9FAFB; border-radius: 24px;\">\r\n                <tbody><tr>\r\n                  <td align=\"left\" style=\"padding: 32px;\">\r\n                    \r\n                    <p class=\"dark-text\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; color: #111827; margin: 0 0 12px 0; padding: 0;\">\r\n                      Serverless V2 API\r\n                    </p>\r\n                    <p class=\"dark-text-secondary\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 15px; color: #6B7280; margin: 0 0 24px 0; padding: 0; line-height: 1.5;\">\r\n                      Want to deploy directly? We've already hosted your model for you. Learn more in our <a href=\"[REDACTED_EMAIL_LINK]" class=\"dark-link\" style=\"color: #6D29D9; text-decoration: none; font-weight: 600;\">API documentation</a>.\r\n                    </p>\r\n\r\n                    <div class=\"dark-code-bg\" style=\"background-color: #1F2937; border-radius: 12px; padding: 20px; text-align: left; overflow-x: auto;\">\r\n                      <pre style=\"margin: 0; font-family: 'Consolas', 'Monaco', monospace; font-size: 13px; color: #E5E7EB; line-height: 1.6;\">from inference_sdk import InferenceHTTPClient\r\n\r\n<span style=\"color: #9CA3AF;\"># create an inference client</span>\r\nCLIENT = InferenceHTTPClient(\r\n    api_url=&#34;[REDACTED_EMAIL_LINK]    api_key=<span style=\"color: #A78BFA;\">&#34;YOUR_API_KEY&#34;</span>\r\n)\r\n\r\n<span style=\"color: #9CA3AF;\"># run inference on a local image</span>\r\nprint(CLIENT.infer(\r\n    <span style=\"color: #A78BFA;\">&#34;your_image.jpg&#34;</span>,\r\n    model_id=&#34;argusvac-object-detection/1&#34;\r\n))\r\n                      </pre>\r\n                    </div>\r\n\r\n                    <p class=\"dark-text-secondary\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 13px; color: #6B7280; margin: 16px 0 0 0; padding: 0; text-align: center;\">\r\n                      Don't forget to swap in your <a href=\"[REDACTED_EMAIL_LINK]" class=\"dark-link\" style=\"color: #6D29D9;\">API Key</a>.\r\n                    </p>\r\n\r\n                  </td>\r\n                </tr>\r\n              </tbody></table>\r\n            </td>\r\n          </tr>\r\n\r\n          <tr><td style=\"height: 24px;\"> </td></tr>\r\n\r\n          <tr>\r\n            <td align=\"center\" style=\"padding: 0 16px;\">\r\n              <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" class=\"dark-bg-card\" style=\"background-color: #F9FAFB; border-radius: 24px;\">\r\n                <tbody><tr>\r\n                  <td align=\"left\" style=\"padding: 32px;\">\r\n                    \r\n                    <p class=\"dark-text\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; color: #111827; margin: 0 0 12px 0; padding: 0;\">\r\n                      Need help?\r\n                    </p>\r\n                    <p class=\"dark-text-secondary\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 15px; color: #6B7280; margin: 0 0 24px 0; padding: 0; line-height: 1.5;\">\r\n                      Whether you need help with Roboflow, or computer vision in general, we have a variety of resources for you.\r\n                    </p>\r\n\r\n                    <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\r\n                      <tbody><tr>\r\n                        <td width=\"50%\" valign=\"top\" style=\"padding: 0 12px 20px 0;\">\r\n                          <a class=\"dark-link\" href=\"[REDACTED_EMAIL_LINK]" target=\"_blank\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 15px; font-weight: 700; color: #6D29D9; text-decoration: none; display: block; margin-bottom: 4px;\">Roboflow Documentation</a>\r\n                          <p class=\"dark-text-secondary\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #374151; margin: 0; padding: 0; line-height: 1.5;\">View an overview of Roboflow's functionalities with examples and code snippets.</p>\r\n                        </td>\r\n                        <td width=\"50%\" valign=\"top\" style=\"padding: 0 0 20px 12px;\">\r\n                          <a class=\"dark-link\" href=\"[REDACTED_EMAIL_LINK]" target=\"_blank\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 15px; font-weight: 700; color: #6D29D9; text-decoration: none; display: block; margin-bottom: 4px;\">Roboflow Forum</a>\r\n                          <p class=\"dark-text-secondary\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #374151; margin: 0; padding: 0; line-height: 1.5;\">Ask questions and get help from the Roboflow team and other users in the community.</p>\r\n                        </td>\r\n                      </tr>\r\n                      <tr>\r\n                        <td width=\"50%\" valign=\"top\" style=\"padding: 0 12px 0 0;\">\r\n                          <a class=\"dark-link\" href=\"[REDACTED_EMAIL_LINK]" target=\"_blank\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 15px; font-weight: 700; color: #6D29D9; text-decoration: none; display: block; margin-bottom: 4px;\">Weekly Webinar</a>\r\n                          <p class=\"dark-text-secondary\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #374151; margin: 0; padding: 0; line-height: 1.5;\">Join our team for a live product webinar and Q&amp;A session every Tuesday.</p>\r\n                        </td>\r\n                        <td width=\"50%\" valign=\"top\" style=\"padding: 0 0 0 12px;\">\r\n                          <a class=\"dark-link\" href=\"[REDACTED_EMAIL_LINK]" target=\"_blank\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 15px; font-weight: 700; color: #6D29D9; text-decoration: none; display: block; margin-bottom: 4px;\">Contact Sales</a>\r\n                          <p class=\"dark-text-secondary\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #374151; margin: 0; padding: 0; line-height: 1.5;\">Need more flexible plan options or curious about bulk discounts? Get in touch.</p>\r\n                        </td>\r\n                      </tr>\r\n                    </tbody></table>\r\n\r\n                  </td>\r\n                </tr>\r\n              </tbody></table>\r\n            </td>\r\n          </tr>\r\n          \r\n          <tr><td style=\"height: 40px;\"> </td></tr>\r\n\r\n          <tr>\r\n            <td align=\"center\" style=\"padding: 0 24px 40px 24px;\">\r\n              <p class=\"dark-text-muted\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 12px; color: #9CA3AF; margin: 0 0 8px 0; text-align: center;\">\r\n                © 2026 Roboflow, Inc. All rights reserved.\r\n              </p>\r\n              <p class=\"dark-text-muted\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 12px; color: #9CA3AF; margin: 0; text-align: center;\">\r\n                <a href=\"[REDACTED_EMAIL_LINK]" class=\"dark-link\" style=\"color: #6D29D9; text-decoration: underline;\">Manage Preferences</a> | \r\n                <a href=\"[REDACTED_EMAIL_LINK]" class=\"dark-link\" style=\"color: #6D29D9; text-decoration: underline;\">Unsubscribe</a>\r\n              </p>\r\n            </td>\r\n          </tr>\r\n\r\n        </tbody></table>\r\n      </td>\r\n    </tr>\r\n  </tbody></table>\r\n\r\n\r\n\r\n\r\n  \r\n<img src=\"[REDACTED_EMAIL_LINK]" style=\"height: 1px !important; max-height: 1px !important; max-width: 1px !important; width: 1px !important; display: none !important;\" alt=\"\"/></body></html>",
+              "attachment_id": null
+            },
+            "read_attachment_supported": null,
+            "parts": null
+          }
+        ]
+      },
+      "size_estimate": 40090,
+      "classification_label_values": null
+    },
+    {
+      "id": "19e8d13b4298a034",
+      "thread_id": "19e8d13b4298a034",
+      "label_ids": [
+        "CATEGORY_PROMOTIONS",
+        "UNREAD",
+        "INBOX"
+      ],
+      "snippet": "Using chats to improve features and experiences How business chats work on Instagram Direct Hi Justin Tuan&#39;s Vacuum Cleaner, We wanted to let you know we have introduced a new label on business",
+      "history_id": "3653049",
+      "internal_date": "1780483335000",
+      "payload": {
+        "part_id": "",
+        "mime_type": "text/html",
+        "filename": "",
+        "headers": [
+          {
+            "name": "Delivered-To",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "Received",
+            "value": "by 2002:a05:6214:83:b0:8ca:10b7:dd71 with SMTP id n3csp2268616qvr;        Wed, 3 Jun 2026 03:42:19 -0700 (PDT)"
+          },
+          {
+            "name": "X-Received",
+            "value": "by 2002:a05:6820:8184:b0:69e:3e6b:c07 with SMTP id 006d021491bc7-69e47e77bfbmr1591286eaf.5.1780483339335;        Wed, 03 Jun 2026 03:42:19 -0700 (PDT)"
+          },
+          {
+            "name": "ARC-Seal",
+            "value": "i=1; a=rsa-sha256; t=1780483339; cv=none;        d=google.com; s=arc-20240605;        b=DFUtjrmKO48w5MI0s1hT0Q7ytjvKeGuXJe7rd67vYVeQZtO2VEeGod3jfY9xIuLcCI         AZhD+fwMnki5ruta9PGupzsIdkI9qchCYTpDJxsUpdFaafhEVNVqLlA/ydcAXPSCGdA2         tofcRbeo/LVx6kgAe6w6rk0dJyWAW41dPyw5AEjQc09rD8s+1pmJv2y9R0UjB0yuN50g         TPLOAKyxU0N0P0NS7XBCaLSeEutLQ9X91DDZfeLNLMNkRVJmOlcSmWIrOkKrVYXoRcei         Q09FT9TfCCsjrSv2wgdtK4AP7pZAOa0U6XIsjNZyiBdZAxoJg5o73VTcpb0bUd3MqVoW         wVAw=="
+          },
+          {
+            "name": "ARC-Message-Signature",
+            "value": "i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;        h=message-id:content-transfer-encoding:mime-version:feedback-id         :bimi-selector:list-unsubscribe:errors-to:reply-to:from:subject:to         :date:dkim-signature;        bh=a5pMZI2QUjImEgn7udRGOFakXo6W8955+1RgwBNDiKU=;        fh=mIxgd0LdvtaKJGPW2R1e2NXVnRN1FDvuim7vt6rqlGY=;        b=lFhok1ApnJW6gUP9oaUVPTF8CeuNri+8au7GMRpmTfjIIy3tnE9lxizZFn6c2NaWKh         11qtLVDe758U+zU2vLyWt3GL03WcZMWUpyep5YzsFLwA/Rnx2/JJKs5nGbvNnUsWJW22         5xZCqfHwAvyrcrNIsBQ4T5RFyqY3MUo/qPkXnoeefHHk+OnOx5C/xhqEd/QN5Gz4pQn7         Zf1GiBQ7JiiDt+RXY6b+CagLg8mHG9La1ccjv1fWlvUWWy9S5c/up7nHJqHSuwa/XyUi         +z1nf6nr2D2zP16u7kuyUFpithHEFLFSgWbM1PdCb/TOTETAzXOHVDK8R0T83ovKUhRR         H1kQ==;        dara=google.com"
+          },
+          {
+            "name": "ARC-Authentication-Results",
+            "value": "i=1; mx.google.com;       dkim=pass header.i=@mail.instagram.com header.s=s1024-2013-q3 header.b=\"BBzG/GEx\";       spf=pass (google.com: domain of [REDACTED_EMAIL] designates 69.171.232.144 as permitted sender) smtp.mailfrom=[REDACTED_EMAIL];       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=mail.instagram.com"
+          },
+          {
+            "name": "Return-Path",
+            "value": "<[REDACTED_EMAIL]>"
+          },
+          {
+            "name": "Received",
+            "value": "from 69-171-232-144.mail-mail.facebook.com (69-171-232-144.mail-mail.facebook.com. [69.171.232.144])        by mx.google.com with ESMTPS id 006d021491bc7-69e4626c653si1593094eaf.19.2026.06.03.03.42.18        for <[REDACTED_EMAIL]>        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);        Wed, 03 Jun 2026 03:42:19 -0700 (PDT)"
+          },
+          {
+            "name": "Received-SPF",
+            "value": "pass (google.com: domain of [REDACTED_EMAIL] designates 69.171.232.144 as permitted sender) client-ip=69.171.232.144;"
+          },
+          {
+            "name": "Authentication-Results",
+            "value": "mx.google.com;       dkim=pass header.i=@mail.instagram.com header.s=s1024-2013-q3 header.b=\"BBzG/GEx\";       spf=pass (google.com: domain of [REDACTED_EMAIL] designates 69.171.232.144 as permitted sender) smtp.mailfrom=[REDACTED_EMAIL];       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=mail.instagram.com"
+          },
+          {
+            "name": "DKIM-Signature",
+            "value": "v=1; a=rsa-sha256; c=relaxed/simple; d=mail.instagram.com; s=s1024-2013-q3; t=1780483335; bh=a5pMZI2QUjImEgn7udRGOFakXo6W8955+1RgwBNDiKU=; h=Date:To:Subject:From:MIME-Version:Content-Type; b=BBzG/GExrBmLhzBH8J9y8C6hf2toFXZpLLEySYrH1UrDkfcqOi8xkw2RuiQpZXKF6\t hJ2FUQ2Ilz4LbYvdXDh2XXbY98cbe/2Pko2RwAKpRh8ihdMKu5hXu8cXUw4O5W4FAa\t PgN1b0Ywuin+ulRczbn8CyrrOcCn8Ku7qyiWx7RQ="
+          },
+          {
+            "name": "X-Facebook",
+            "value": "from 2803:6080:3164:4d7d:97f0:a803:1551:a00 ([MTI3LjAuMC4x]) by thrift.internalfb.com with HTTPS (ZuckMail);"
+          },
+          {
+            "name": "Date",
+            "value": "Wed, 3 Jun 2026 03:42:15 -0700"
+          },
+          {
+            "name": "To",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "Subject",
+            "value": "How business chats work on Instagram Direct"
+          },
+          {
+            "name": "X-Priority",
+            "value": "3"
+          },
+          {
+            "name": "X-Mailer",
+            "value": "ZuckMail [version 1.00]"
+          },
+          {
+            "name": "Return-Path",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "From",
+            "value": "Instagram Business <[REDACTED_EMAIL]>"
+          },
+          {
+            "name": "Reply-to",
+            "value": "Instagram Business <[REDACTED_EMAIL]>"
+          },
+          {
+            "name": "Errors-To",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "X-Facebook-Notify",
+            "value": "aymt_ig_universal_consumer_disclosure_email_notif; mailid=HMTc4MDQ4MjA5ODAzOTQ4NTpqdXN0aW50dWFuMTIwMUBnbWFpbC5jb206MzgzNTM"
+          },
+          {
+            "name": "List-Unsubscribe",
+            "value": "</aymt/instagram/unsubscribed/?tip_id=27094993973495917&channel_id=27267648989536198&notif_id=1780483332607375&mac=Adrspz3CaVjDJDQFBc1I1jk9&unsubscribe_uri=aHR0cHM6Ly9pbnN0YWdyYW0uY29tL2VtYWlscy91bnN1YnNjcmliZS90dXRvcmlhbD91c2VyX2lkPTM3NDIxMzc0OTQwJnNpZz1BVlJBM3RzME1YdTJRVThPQXdnJm5vdGlmaWNhdGlvbl90eXBlPTYwMw%3D%3D>"
+          },
+          {
+            "name": "X-FB-Internal-Notiftype",
+            "value": "aymt_ig_universal_consumer_disclosure_email_notif"
+          },
+          {
+            "name": "BIMI-Selector",
+            "value": "v=BIMI1; s=fb2025q1v1;"
+          },
+          {
+            "name": "Feedback-ID",
+            "value": "aymt_ig_universal_consumer_disclosure_email_notif:Facebook"
+          },
+          {
+            "name": "X-FB-Internal-MID",
+            "value": "Y39YMTc4MDQ4MjA5ODAzOTQ4NTpqdXN0aW50dWFuMTIwMUBnbWFpbC5jb206MzgzNTM"
+          },
+          {
+            "name": "X-FACEBOOK-PRIORITY",
+            "value": "0"
+          },
+          {
+            "name": "X-Auto-Response-Suppress",
+            "value": "All"
+          },
+          {
+            "name": "MIME-Version",
+            "value": "1.0"
+          },
+          {
+            "name": "Content-Transfer-Encoding",
+            "value": "quoted-printable"
+          },
+          {
+            "name": "Content-Type",
+            "value": "text/html; charset=\"UTF-8\""
+          },
+          {
+            "name": "Message-ID",
+            "value": "<[REDACTED_EMAIL]>"
+          }
+        ],
+        "body": {
+          "size": 13338,
+          "base64_url_content": null,
+          "content": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional //EN\"><html><head><title>Facebook</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" /><style nonce=\"RZe1wDxx\">@media all and (max-width: 480px){*[class].ib_t{min-width:100%!important}*[class].ib_row{display:block!important}*[class].ib_ext{display:block!important;padding:10px 0 5px;vertical-align:top!important;width:100%!important}*[class].ib_img,*[class].ib_mid{vertical-align:top!important}*[class].mb_blk{display:block!important;padding-bottom:10px;width:100%!important}*[class].mb_hide{display:none!important}*[class].mb_inl{display:inline!important}*[class].d_mb_flex{display:block!important}}.d_mb_show{display:none}.d_mb_flex{display:flex}@media only screen and (max-device-width: 480px){.d_mb_hide{display:none!important}.d_mb_show,.d_mb_flex{display:block!important}}.mb_text h1,.mb_text h2,.mb_text h3,.mb_text h4,.mb_text h5,.mb_text h6{line-height:normal}.mb_work_text h1{font-size:18px;line-height:normal;margin-top:4px}.mb_work_text h2,.mb_work_text h3{font-size:16px;line-height:normal;margin-top:4px}.mb_work_text h4,.mb_work_text h5,.mb_work_text h6{font-size:14px;line-height:normal}.mb_work_text a{color:#1270e9}.mb_work_text p{margin-top:4px}\r\n</style></head><table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse:collapse;\"><tr><td width=\"100%\" align=\"center\" style=\"\"><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" style=\"border-collapse:collapse;\"><tr><td width=\"1000\" align=\"center\" style=\"\"><body style=\"max-width:500px;margin:0 auto;\" dir=\"ltr\" bgcolor=\"#ffffff\"><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" id=\"email_table\" style=\"border-collapse:collapse;max-width:500px;margin:0 auto;\"><tr><td id=\"email_content\" style=\"font-family:Helvetica Neue,Helvetica,Lucida Grande,tahoma,verdana,arial,sans-serif;background:#ffffff;\"><table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse:collapse;\"><tr style=\"\"><td height=\"20\" style=\"line-height:20px;\" colspan=\"3\">&nbsp;</td></tr><tr><td height=\"1\" colspan=\"3\" style=\"line-height:1px;\"><span style=\"color:#FFFFFF;font-size:1px;\">Using chats to improve features and experiences</span></td></tr><tr><td style=\"\"><table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse:collapse;text-align:center;html_width:100%;width:100%;\"><tr><td width=\"15px\" style=\"width:15px;\"></td><td style=\"line-height:0px;max-width:600px;padding:0 0 15px 0;\"><table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse:collapse;\"><tr><td style=\"width:100%;text-align:left;height:33px;\"><a style=\"color:#1b74e4;text-decoration:none;\"><img height=\"33\" src=\"[REDACTED_EMAIL_LINK]" style=\"border:0;\" /></a></td><td align=\"right\" style=\"line-height:18px;min-width:60px;text-align:right;\"><a style=\"color:#1b74e4;text-decoration:none;\"><img width=\"33\" src=\"[REDACTED_EMAIL_LINK]" height=\"33\" style=\"border:solid 1px rgba(0, 0, 0, .15);background-color:#ebe9e7;border-radius:50%;\" /></a></td></tr></table></td><td width=\"15px\" style=\"width:15px;\"></td></tr></table></td></tr><tr><td style=\"\"><table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse:collapse;\"><tr style=\"\"><td height=\"28\" style=\"line-height:28px;\">&nbsp;</td></tr><tr><td style=\"\"><section style=\"background-color:#FFFFFF;\"><span class=\"mb_text\"><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"width:100%;\"><tr align=\"center\"><td style=\"border-spacing:0;color:#1C2B33;font-family:ArialMT, Arial, sans-serif;font-size:15px;width:100%;font-size:27px;font-family:ArialMT, Arial, sans-serif;font-weight:light;line-height:36px;text-align:center;font-size:27px;line-height:20px;line-height:32px;\" class=\"tp_headline\">How business chats work on Instagram Direct</td></tr><tr align=\"center\"><td style=\"width:100%;height:24px;\"></td></tr></table></span><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"width:100%;\"><tr align=\"center\"><td style=\"border-spacing:0;color:#1C2B33;font-family:ArialMT, Arial, sans-serif;font-size:15px;width:100%;font-size:27px;font-family:ArialMT, Arial, sans-serif;font-weight:light;line-height:36px;text-align:left;font-size:15px;line-height:20px;\" class=\"tp_headline\">Hi Justin Tuan’s Vacuum Cleaner,</td></tr><tr align=\"center\"><td style=\"width:100%;height:24px;\"></td></tr></table><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"width:100%;\"><tr align=\"center\"><td style=\"border-spacing:0;color:#1C2B33;font-family:ArialMT, Arial, sans-serif;font-size:15px;width:100%;font-size:27px;font-family:ArialMT, Arial, sans-serif;font-weight:light;line-height:36px;text-align:left;font-size:15px;line-height:20px;\" class=\"tp_headline\">We wanted to let you know we have introduced a new label on business chats in Instagram Direct that helps people understand what it means to be chatting with businesses. Some people who engage with businesses on Instagram Direct will see a new screen explaining how information from that chat, such as messages and actions, might be used by Meta to improve their experience. This may include improving response times, ads and features like translations and AI. However, this doesn&#039;t change our long-standing policy that we do not sell people&#039;s information and never will.</td></tr><tr align=\"center\"><td style=\"width:100%;height:24px;\"></td></tr></table><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"width:100%;\"><tr align=\"center\"><td style=\"border-spacing:0;color:#1C2B33;font-family:ArialMT, Arial, sans-serif;font-size:15px;width:100%;font-size:27px;font-family:ArialMT, Arial, sans-serif;font-weight:light;line-height:36px;text-align:left;font-size:15px;line-height:20px;\" class=\"tp_headline\">People can access information about their business chat privacy and data use any time by tapping on the business&#039; name at the top of a chat and selecting Privacy &amp; safety.</td></tr><tr align=\"center\"><td style=\"width:100%;height:24px;\"></td></tr></table><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"width:100%;\"><tr align=\"center\"><td style=\"border-spacing:0;color:#1C2B33;font-family:ArialMT, Arial, sans-serif;font-size:15px;width:100%;font-size:27px;font-family:ArialMT, Arial, sans-serif;font-weight:light;line-height:36px;text-align:left;font-size:15px;line-height:20px;\" class=\"tp_headline\">The information described in the new disclosure is different from <a href=\"[REDACTED_EMAIL_LINK]" style=\"color:#1b74e4;text-decoration:none;\">business activities</a>, such as lead status and labels, which businesses can choose to share with Meta through Meta Business Suite or other business tools.</td></tr><tr align=\"center\"><td style=\"width:100%;height:24px;\"></td></tr></table><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"width:100%;\"><tr align=\"center\"><td style=\"border-spacing:0;color:#1C2B33;font-family:ArialMT, Arial, sans-serif;font-size:15px;width:100%;font-size:27px;font-family:ArialMT, Arial, sans-serif;font-weight:light;line-height:36px;text-align:left;font-size:15px;line-height:20px;\" class=\"tp_headline\">Read more about how chats between businesses and people work on Instagram.</td></tr><tr align=\"center\"><td style=\"width:100%;height:24px;\"></td></tr></table></section></td></tr><tr style=\"\"><td height=\"28\" style=\"line-height:28px;\">&nbsp;</td></tr><tr><td style=\"\"><section><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"width:100%;\"><tr align=\"center\"><td style=\"border-spacing:0;color:#1C2B33;font-family:ArialMT, Arial, sans-serif;font-size:15px;width:100%;width:343px;display:block;line-height:26px;\"><a href=\"[REDACTED_EMAIL_LINK]" style=\"color:#0095F6;text-decoration:none;\"><table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" bgcolor=\"#0095F6\" style=\"border-collapse:collapse;height:36;vertical-align:middle;border-width:1px;border-style:solid;display:block;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px;font-size:14px;border-color:#f6f7f9;\" class=\"btn_default\"><tr><td height=\"7\" colspan=\"3\" style=\"line-height:7px;\">&nbsp;</td></tr><tr><td width=\"16\" style=\"display:block;width:16px;\">&nbsp;</td><td width=\"100%\" style=\"text-align:center;\"><a href=\"[REDACTED_EMAIL_LINK]" style=\"color:#1b74e4;text-decoration:none;display:block;\"><center><font size=\"3\"><span style=\"font-family:Helvetica Neue,Helvetica,Lucida Grande,tahoma,verdana,arial,sans-serif;font-weight:bold;font-size:14px;font-size:14px;color:#ffffff;\">Go&nbsp;to&nbsp;Help&nbsp;Center</span></font></center></a></td><td width=\"16\" style=\"display:block;width:16px;\">&nbsp;</td></tr><tr><td height=\"7\" colspan=\"3\" style=\"line-height:7px;\">&nbsp;</td></tr></table></a></td></tr><tr align=\"center\"><td style=\"width:100%;height:15px;\"></td></tr></table></section></td></tr><tr style=\"\"><td height=\"28\" style=\"line-height:28px;\">&nbsp;</td></tr><tr><td style=\"\"><section><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"width:100%;\"><tr align=\"center\"><td style=\"text-align:center;border-spacing:0;color:#1C2B33;font-family:ArialMT, Arial, sans-serif;font-size:15px;width:100%;\"><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"width:100%;\"><tr align=\"center\"><td style=\"border-spacing:0;color:#1C2B33;font-family:ArialMT, Arial, sans-serif;font-size:15px;width:100%;font-size:27px;font-family:ArialMT, Arial, sans-serif;font-weight:light;line-height:36px;text-align:left;font-size:15px;line-height:20px;\" class=\"tp_headline\">Thank you,<br />The Meta Team</td></tr><tr align=\"center\"><td style=\"width:100%;height:24px;\"></td></tr></table></td></tr><tr align=\"center\"><td style=\"width:100%;height:0px;\"></td></tr></table></section></td></tr><tr style=\"\"><td height=\"28\" style=\"line-height:28px;\">&nbsp;</td></tr><tr><td style=\"\"><table style=\"width:100%;\" align=\"center\"><tr align=\"center\"><td><table align=\"center\" style=\"max-width:600px;width:100%;\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr align=\"center\"><td style=\"max-width:600px;padding:50px 40px 40px 40px;width:100%;color: #000000;background-color:inherit;padding:20px 0px 0px 0px;\" class=\"tp_footer\"><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"width:100%;\"><tr align=\"center\"><td style=\"border-spacing:0;color:#1C2B33;font-family:ArialMT, Arial, sans-serif;font-size:15px;width:100%;color:#8f949b;font-size:12px;padding:0 20px;\"><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse:collapse;\"><tr style=\"\"><td height=\"30\" style=\"line-height:30px;\" colspan=\"3\">&nbsp;</td></tr><tr align=\"left\"><td width=\"0\" style=\"display:block;width:0px;\">&nbsp;&nbsp;&nbsp;</td><td style=\"text-align:center;\"><img width=\"52\" height=\"26\" src=\"[REDACTED_EMAIL_LINK]" style=\"border:0;padding-top:10px;max-width:100%;\" alt=\"Meta Logo\" class=\"\" title=\"Image\" /><div style=\"height:10px;\"></div><div style=\"color:#abadae;font-size:11px;margin:0 auto 5px auto;\">© Instagram. Meta Platforms, Inc., 1601 Willow Road, Menlo Park, CA 94025</div><div style=\"color:#abadae;font-size:11px;margin:0 auto 5px auto;\">This message was sent to <a style=\"color:rgb(151, 151, 151);text-decoration:underline;max-width:600px;\">justintuan1201&#064;gmail.com</a> and intended for argus.vac. If you don&#039;t want to receive these emails from Instagram in the future, please <a href=\"[REDACTED_EMAIL_LINK]" style=\"color:rgb(151, 151, 151);text-decoration:underline;max-width:600px;\">unsubscribe.</a><br /></div></td><td width=\"0\" style=\"display:block;width:0px;\">&nbsp;&nbsp;&nbsp;</td></tr></table></td></tr><tr align=\"center\"><td style=\"width:100%;height:15px;\"></td></tr></table></td></tr><tr align=\"center\"><td style=\"width:100%;height:5px;\"></td></tr></table></td></tr></table></td></tr><tr style=\"\"><td height=\"28\" style=\"line-height:28px;\">&nbsp;</td></tr></table></td></tr><tr style=\"\"><td height=\"20\" style=\"line-height:20px;\" colspan=\"3\">&nbsp;</td></tr></table><span style=\"\"><img src=\"[REDACTED_EMAIL_LINK]" style=\"border:0;width:1px;height:1px;\" /></span></td></tr></table></body></td></tr></table></td></tr></table></html>\r\n\r\n",
+          "attachment_id": null
+        },
+        "read_attachment_supported": null,
+        "parts": null
+      },
+      "size_estimate": 19502,
+      "classification_label_values": null
+    },
+    {
+      "id": "19e6c086d56fbc3e",
+      "thread_id": "19e6c086d56fbc3e",
+      "label_ids": [
+        "UNREAD",
+        "CATEGORY_UPDATES",
+        "INBOX"
+      ],
+      "snippet": "We noticed a new login, argus.vac We noticed a login from a device you don&#39;t usually use. Apple iPad · Instagram · Tainan, Taiwan May 27 at 5:42 PM (PDT) If this was you, you won&#39;t be able to",
+      "history_id": "3653233",
+      "internal_date": "1779928951000",
+      "payload": {
+        "part_id": "",
+        "mime_type": "text/html",
+        "filename": "",
+        "headers": [
+          {
+            "name": "Delivered-To",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "Received",
+            "value": "by 2002:ad4:44ad:0:b0:8ca:10b7:dd71 with SMTP id n13csp592821qvt;        Wed, 27 May 2026 17:42:32 -0700 (PDT)"
+          },
+          {
+            "name": "X-Received",
+            "value": "by 2002:a05:6820:3081:b0:69d:93b7:6bef with SMTP id 006d021491bc7-69d93b775ffmr10488018eaf.49.1779928951926;        Wed, 27 May 2026 17:42:31 -0700 (PDT)"
+          },
+          {
+            "name": "ARC-Seal",
+            "value": "i=1; a=rsa-sha256; t=1779928951; cv=none;        d=google.com; s=arc-20240605;        b=TEsRgdKpXwwwiY1VKZIGLhKhCksQguUzumIlCgD+L+3/g3BCFQjzEtn3a3Gs5Ei3Ed         UAuotyJabxBkkKl0gRTN2aPaB4pxrl83I2tEp/+mf0uWCDlAwzTbwBKa7v68EFy0U6t/         Va1XhjkwiKXNZgRIW2YCu0QYUV0jzroZrNehpx2yGlTgoH3VQ0qJu6W6hDsZyLGgN9mA         BauaXoSSbfsxiL0aTs6t9y3owzjmaaPOfq9K+2rq6nRHsdO44WEIOuVII0hGJ6Ihg133         tqpHIHphW7jW4BVeA/cl4fCE8mbyCGLNnvYquuszEj/tyYw8xJibITkFytwwvuoFYqR4         G4JQ=="
+          },
+          {
+            "name": "ARC-Message-Signature",
+            "value": "i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;        h=message-id:content-transfer-encoding:mime-version:feedback-id         :bimi-selector:list-unsubscribe-post:list-unsubscribe:errors-to         :reply-to:from:subject:to:date:dkim-signature;        bh=lktBGpGA7+bOhnhJkpxuEcjcPxwKF7S399WprlC6050=;        fh=mIxgd0LdvtaKJGPW2R1e2NXVnRN1FDvuim7vt6rqlGY=;        b=ZDAnPMnUd6SCri7iPO8jq6Vmi24iZ626VumYFqqvAVgdiiGy8ZvPMequlobHNx2lxj         C6o7W59HLKrzXAfXXq3uHpWX9cNA4IG8Pna/wkL36sgLTmR4t+oGTsxHt9R0ERkzK8Y3         0J9kpTAGcAYfa7WLIPYt8OyhVL3i03VsQFomxAq+3q6tpXV76F7dUXtEjfnzk6ewuSQr         Zn+Q1vSFEBLX+huLJa71/joG+idBAMQlcfdgL7xCARd6dKPvnfJa0s05+QwYZpVL/5fz         BkZs9xikyZOE4hOgVchK02qmftsue7A4TkpTvQsavPeTbNc+i25n8Kpdie9lC3EuwzyG         4+bw==;        dara=google.com"
+          },
+          {
+            "name": "ARC-Authentication-Results",
+            "value": "i=1; mx.google.com;       dkim=pass header.i=@mail.instagram.com header.s=s1024-2013-q3 header.b=\"G1aKp/uX\";       spf=pass (google.com: domain of [REDACTED_EMAIL] designates 69.171.232.148 as permitted sender) smtp.mailfrom=[REDACTED_EMAIL];       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=mail.instagram.com"
+          },
+          {
+            "name": "Return-Path",
+            "value": "<[REDACTED_EMAIL]>"
+          },
+          {
+            "name": "Received",
+            "value": "from 69-171-232-148.mail-mail.facebook.com (69-171-232-148.mail-mail.facebook.com. [69.171.232.148])        by mx.google.com with ESMTPS id 586e51a60fabf-43b63c5248csi14292350fac.262.2026.05.27.17.42.31        for <[REDACTED_EMAIL]>        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);        Wed, 27 May 2026 17:42:31 -0700 (PDT)"
+          },
+          {
+            "name": "Received-SPF",
+            "value": "pass (google.com: domain of [REDACTED_EMAIL] designates 69.171.232.148 as permitted sender) client-ip=69.171.232.148;"
+          },
+          {
+            "name": "Authentication-Results",
+            "value": "mx.google.com;       dkim=pass header.i=@mail.instagram.com header.s=s1024-2013-q3 header.b=\"G1aKp/uX\";       spf=pass (google.com: domain of [REDACTED_EMAIL] designates 69.171.232.148 as permitted sender) smtp.mailfrom=[REDACTED_EMAIL];       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=mail.instagram.com"
+          },
+          {
+            "name": "DKIM-Signature",
+            "value": "v=1; a=rsa-sha256; c=relaxed/simple; d=mail.instagram.com; s=s1024-2013-q3; t=1779928951; bh=lktBGpGA7+bOhnhJkpxuEcjcPxwKF7S399WprlC6050=; h=Date:To:Subject:From:MIME-Version:Content-Type; b=G1aKp/uXiGn1W41/3zQojzi2ouqjK2NVec5rSrb5nFFrt3gSiMXz8H4aS3/GVUHJt\t H34W6TK2NjY/lX8Gu3MfLg4alSO1+vf5oX8/AC9qgqUEgWlTRzvAobYJFJpN/B1mvi\t 5C3O6W4tw14h2yDtZ1CBSCXYlBspHUCnWel0uRKU="
+          },
+          {
+            "name": "X-Facebook",
+            "value": "from 2803:6084:40a4:9a29:542d:4b04:1520:a00 ([MTI3LjAuMC4x]) by thrift.facebook.com with HTTPS (ZuckMail);"
+          },
+          {
+            "name": "Date",
+            "value": "Wed, 27 May 2026 17:42:31 -0700"
+          },
+          {
+            "name": "To",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "Subject",
+            "value": "New login to Instagram from Instagram on Apple iPad"
+          },
+          {
+            "name": "X-Priority",
+            "value": "3"
+          },
+          {
+            "name": "X-Mailer",
+            "value": "ZuckMail [version 1.00]"
+          },
+          {
+            "name": "Return-Path",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "From",
+            "value": "Instagram <[REDACTED_EMAIL]>"
+          },
+          {
+            "name": "Reply-to",
+            "value": "Instagram <[REDACTED_EMAIL]>"
+          },
+          {
+            "name": "Errors-To",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "X-Facebook-Notify",
+            "value": "ig_suspicious_login; mailid=U2U652d5b742a86aG24bc3591771ddcG652d600d8ab3cG9e4"
+          },
+          {
+            "name": "List-Unsubscribe",
+            "value": "<[REDACTED_EMAIL_LINK]>"
+          },
+          {
+            "name": "List-Unsubscribe-Post",
+            "value": "List-Unsubscribe=One-Click"
+          },
+          {
+            "name": "X-FB-Internal-Notiftype",
+            "value": "ig_suspicious_login"
+          },
+          {
+            "name": "BIMI-Selector",
+            "value": "v=BIMI1; s=fb2025q1v1;"
+          },
+          {
+            "name": "Feedback-ID",
+            "value": "ig_suspicious_login:Facebook"
+          },
+          {
+            "name": "X-FB-Internal-MID",
+            "value": "U2U652d5b742a86aG24bc3591771ddcG652d600d8ab3cG9e4"
+          },
+          {
+            "name": "X-FB-Internal-RecipID",
+            "value": "37421374940"
+          },
+          {
+            "name": "X-FACEBOOK-PRIORITY",
+            "value": "0"
+          },
+          {
+            "name": "X-Auto-Response-Suppress",
+            "value": "All"
+          },
+          {
+            "name": "MIME-Version",
+            "value": "1.0"
+          },
+          {
+            "name": "Content-Transfer-Encoding",
+            "value": "quoted-printable"
+          },
+          {
+            "name": "Content-Type",
+            "value": "text/html; charset=\"UTF-8\""
+          },
+          {
+            "name": "Message-ID",
+            "value": "<[REDACTED_EMAIL]>"
+          }
+        ],
+        "body": {
+          "size": 10520,
+          "base64_url_content": null,
+          "content": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional //EN\"><html><head><title>Facebook</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" /><style nonce=\"x8zU91pl\">@media all and (max-width: 480px){*[class].ib_t{min-width:100%!important}*[class].ib_row{display:block!important}*[class].ib_ext{display:block!important;padding:10px 0 5px;vertical-align:top!important;width:100%!important}*[class].ib_img,*[class].ib_mid{vertical-align:top!important}*[class].mb_blk{display:block!important;padding-bottom:10px;width:100%!important}*[class].mb_hide{display:none!important}*[class].mb_inl{display:inline!important}*[class].d_mb_flex{display:block!important}}.d_mb_show{display:none}.d_mb_flex{display:flex}@media only screen and (max-device-width: 480px){.d_mb_hide{display:none!important}.d_mb_show,.d_mb_flex{display:block!important}}.mb_text h1,.mb_text h2,.mb_text h3,.mb_text h4,.mb_text h5,.mb_text h6{line-height:normal}.mb_work_text h1{font-size:18px;line-height:normal;margin-top:4px}.mb_work_text h2,.mb_work_text h3{font-size:16px;line-height:normal;margin-top:4px}.mb_work_text h4,.mb_work_text h5,.mb_work_text h6{font-size:14px;line-height:normal}.mb_work_text a{color:#1270e9}.mb_work_text p{margin-top:4px}\r\n</style></head><body style=\"margin:0;padding:0;\" dir=\"ltr\" bgcolor=\"#ffffff\"><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" id=\"email_table\" style=\"border-collapse:collapse;\"><tr><td id=\"email_content\" style=\"font-family:Helvetica Neue,Helvetica,Lucida Grande,tahoma,verdana,arial,sans-serif;background:#ffffff;\"><table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse:collapse;\"><tr style=\"\"><td height=\"20\" style=\"line-height:20px;\" colspan=\"3\">&nbsp;</td></tr><tr><td height=\"1\" colspan=\"3\" style=\"line-height:1px;\"></td></tr><tr><td style=\"\"><table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse:collapse;text-align:center;html_width:100%;width:100%;\"><tr><td width=\"16px\" style=\"width:16px;\"></td><td style=\"line-height:0px;max-width:600px;padding:0 0 15px 0;\"><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse:collapse;\"><tr><td style=\"width:100%;text-align:left;height:33px;\"><a href=\"[REDACTED_EMAIL_LINK]" style=\"color:#1b74e4;text-decoration:none;\"><img height=\"30\" src=\"[REDACTED_EMAIL_LINK]" style=\"border:0;\" /></a></td><td style=\"line-height:18px;min-width:60px;text-align:right;\"><a href=\"[REDACTED_EMAIL_LINK]" style=\"color:#1b74e4;text-decoration:none;\"><img width=\"30\" src=\"[REDACTED_EMAIL_LINK]" height=\"30\" style=\"border:0px;border-radius:18px;vertical-align:middle;\" /></a></td></tr></table></td><td width=\"16px\" style=\"width:16px;\"></td></tr></table></td></tr><tr><td style=\"\"><table border=\"0\" width=\"430\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse:collapse;margin:0 auto 0 auto;\"><tr><td style=\"\"><table border=\"0\" width=\"430px\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" style=\"border-collapse:collapse;margin:0 auto 0 auto;text-align:center;\"><tr style=\"\"><td height=\"16\" style=\"line-height:16px;\">&nbsp;</td></tr><tr><table border=\"0\" width=\"300px\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" style=\"border-collapse:collapse;text-align:center;margin:0 auto 0 auto;\"><td style=\"width:300px;padding:0;margin:0;text-align:center;color:#262626;font-size:18px;font-family:Helvetica Neue,Helvetica,Roboto,Arial,sans-serif;\">We noticed a new login, argus.vac</td></table></tr><tr style=\"\"><td height=\"4\" style=\"line-height:4px;\">&nbsp;</td></tr><tr><table border=\"0\" width=\"300px\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" style=\"border-collapse:collapse;text-align:center;margin:0 auto 0 auto;\"><td style=\"width:300px;padding:0;margin:0;text-align:center;color:#999999;font-size:14px;font-family:Helvetica Neue,Helvetica,Roboto,Arial,sans-serif;\">We noticed a login from a device you don&#039;t usually use.</td></table></tr><tr style=\"\"><td height=\"16\" style=\"line-height:16px;\">&nbsp;</td></tr></table></td></tr><tr><td style=\"\"><table border=\"0\" width=\"430px\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" style=\"border-collapse:collapse;margin:0 auto 0 auto;text-align:center;width:430px;\"><tr style=\"\"><td height=\"16\" style=\"line-height:16px;\">&nbsp;</td></tr><td align=\"center\" style=\"\"><img width=\"76\" src=\"[REDACTED_EMAIL_LINK]" height=\"76\" style=\"border:0;\" /></td><tr style=\"\"><td height=\"16\" style=\"line-height:16px;\">&nbsp;</td></tr></table></td></tr><tr><td style=\"\"><table border=\"0\" width=\"430px\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" style=\"border-collapse:collapse;margin:0 auto 0 auto;text-align:center;width:430px;\"><tr><table border=\"0\" width=\"300px\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" style=\"border-collapse:collapse;text-align:center;margin:0 auto 0 auto;\"><td align=\"center\" style=\"width:300px;padding:0;margin:0;text-align:center;color:#262626;font-size:16px;font-family:Helvetica Neue,Helvetica,Roboto,Arial,sans-serif;\">Apple iPad · Instagram · Tainan, Taiwan</td></table></tr><tr style=\"\"><td height=\"4\" style=\"line-height:4px;\">&nbsp;</td></tr><tr><table border=\"0\" width=\"300px\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" style=\"border-collapse:collapse;text-align:center;margin:0 auto 0 auto;\"><td align=\"center\" style=\"width:300px;padding:0;margin:0;text-align:center;color:#999999;font-size:14px;font-family:Helvetica Neue,Helvetica,Roboto,Arial,sans-serif;\">May 27 at 5:42 PM (PDT)</td></table></tr></table></td></tr><tr><td style=\"\"><table border=\"0\" width=\"430px\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" style=\"border-collapse:collapse;margin:0 auto 0 auto;text-align:center;width:430px;\"><tr style=\"\"><td height=\"16\" style=\"line-height:16px;\">&nbsp;</td></tr><td style=\"border-top:solid 1px #DBDBDB;\"></td><tr style=\"\"><td height=\"16\" style=\"line-height:16px;\">&nbsp;</td></tr></table></td></tr><tr><td style=\"\"><table border=\"0\" width=\"430px\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" style=\"border-collapse:collapse;margin:0 auto 0 auto;text-align:center;width:430px;\"><tr style=\"\"><td height=\"24\" style=\"line-height:24px;\">&nbsp;</td></tr><tr><table border=\"0\" width=\"300px\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" style=\"border-collapse:collapse;text-align:center;margin:0 auto 0 auto;\"><td style=\"width:300px;padding:0;margin:0;text-align:center;color:#999999;font-size:14px;font-family:Helvetica Neue,Helvetica,Roboto,Arial,sans-serif;\">If this was you, you won’t be able to access certain security and account settings for a few days. You can still access these settings from a device you’ve logged in with in the past.</td></table></tr></table></td></tr><tr><td style=\"\"><table border=\"0\" width=\"430px\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" style=\"border-collapse:collapse;margin:0 auto 0 auto;text-align:center;width:430px;\"><tr style=\"\"><td height=\"16\" style=\"line-height:16px;\">&nbsp;</td></tr><tr><table border=\"0\" width=\"300px\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" style=\"border-collapse:collapse;text-align:center;margin:0 auto 0 auto;\"><td style=\"width:300px;padding:0;margin:0;text-align:center;color:#999999;font-size:14px;font-family:Helvetica Neue,Helvetica,Roboto,Arial,sans-serif;\">If this wasn’t you, you can <a href=\"[REDACTED_EMAIL_LINK]" style=\"color:#1b74e4;text-decoration:none;\">secure your account</a> from a device you’ve logged in with in the past. <a href=\"[REDACTED_EMAIL_LINK]" style=\"color:#1b74e4;text-decoration:none;\">Learn more</a></td></table></tr><tr style=\"\"><td height=\"16\" style=\"line-height:16px;\">&nbsp;</td></tr></table></td></tr></table></td></tr><tr><td style=\"\"><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse:collapse;margin:0 auto 0 auto;width:100%;max-width:600px;\"><tr style=\"\"><td height=\"4\" style=\"line-height:4px;\" colspan=\"3\">&nbsp;</td></tr><tr><td width=\"15px\" style=\"width:15px;\"></td><td width=\"20\" style=\"display:block;width:20px;\">&nbsp;&nbsp;&nbsp;</td><td style=\"text-align:center;\"><div style=\"padding-top:10px;display:flex;\"><div style=\"margin:auto;\"><img width=\"52\" alt=\"Meta\" src=\"[REDACTED_EMAIL_LINK]" height=\"26\" style=\"border:0;\" /></div><br /></div><div style=\"height:10px;\"></div><div style=\"color:#abadae;font-size:11px;margin:0 auto 5px auto;\">© Instagram. Meta Platforms, Inc., 1601 Willow Road, Menlo Park, CA 94025<br /></div><div style=\"color:#abadae;font-size:11px;margin:0 auto 5px auto;\">This message was sent to <a style=\"color:rgb(151, 151, 151);text-decoration:underline;max-width:600px;\">justintuan1201&#064;gmail.com</a> and intended for argus.vac. Not your account? <a href=\"[REDACTED_EMAIL_LINK]" style=\"color:rgb(151, 151, 151);text-decoration:underline;max-width:600px;\">Remove your email</a> from this account.<br /></div></td><td width=\"20\" style=\"display:block;width:20px;\">&nbsp;&nbsp;&nbsp;</td><td width=\"15px\" style=\"width:15px;\"></td></tr><tr style=\"\"><td height=\"32\" style=\"line-height:32px;\" colspan=\"3\">&nbsp;</td></tr></table></td></tr><tr style=\"\"><td height=\"20\" style=\"line-height:20px;\" colspan=\"3\">&nbsp;</td></tr></table><span style=\"\"><img src=\"[REDACTED_EMAIL_LINK]" style=\"border:0;width:1px;height:1px;\" /></span></td></tr></table></body></html>\r\n\r\n",
+          "attachment_id": null
+        },
+        "read_attachment_supported": null,
+        "parts": null
+      },
+      "size_estimate": 16696,
+      "classification_label_values": null
+    },
+    {
+      "id": "19e69b57fdfdc2d1",
+      "thread_id": "19e69b57fdfdc2d1",
+      "label_ids": [
+        "UNREAD",
+        "CATEGORY_SOCIAL",
+        "INBOX"
+      ],
+      "snippet": "Hi argus.vac, You recently changed your Instagram account from private to public. This means anyone will be able to see your photos and videos, and you won&#39;t have to approve new followers anymore.",
+      "history_id": "3653225",
+      "internal_date": "1779889959000",
+      "payload": {
+        "part_id": "",
+        "mime_type": "text/html",
+        "filename": "",
+        "headers": [
+          {
+            "name": "Delivered-To",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "Received",
+            "value": "by 2002:ad4:44ad:0:b0:8ca:10b7:dd71 with SMTP id n13csp323432qvt;        Wed, 27 May 2026 06:52:42 -0700 (PDT)"
+          },
+          {
+            "name": "X-Received",
+            "value": "by 2002:a05:6871:a205:b0:43b:867c:5579 with SMTP id 586e51a60fabf-43b867c5e30mr8989236fac.18.1779889962598;        Wed, 27 May 2026 06:52:42 -0700 (PDT)"
+          },
+          {
+            "name": "ARC-Seal",
+            "value": "i=1; a=rsa-sha256; t=1779889962; cv=none;        d=google.com; s=arc-20240605;        b=h41VN675hWZnPRe2kjZ/Z+iwVCzIpaIT2TdyxmIcbon8Ty4cRUQz6vhL9zIMqdx0wl         HF6ymC2YUHHHPJsBOWSJouZRXNkiQaJuKL3Zqo+d8PsZCRVhFGJRD/HT4uJfJN2lih7y         0cHm1cMRkd+pDPEM8CGVqPSJbGxmdIoehqPhaI35XaCE9ocBu2Ki7FcSupoRzksem8Kb         eaetbXo9LQwIythI5vUogvETuiE3+7xY0RHBmp4FAKb4dk25fkII8JrIxpK4Q2coMbgC         5AsvP4bX0SwpTH4bJKrzrsTyT1hBIK2GbK1HICfoVZowBvY4zWN83b4JjrRmYNurfS1c         1ntQ=="
+          },
+          {
+            "name": "ARC-Message-Signature",
+            "value": "i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;        h=message-id:content-transfer-encoding:mime-version:feedback-id         :bimi-selector:errors-to:reply-to:from:subject:to:date         :dkim-signature;        bh=Nd/0W9xuXK6Rrx/J9iFeBet2GcETpPu0VuY8ZQFN54c=;        fh=mIxgd0LdvtaKJGPW2R1e2NXVnRN1FDvuim7vt6rqlGY=;        b=GlOtYKpe5ReRvDidjLQs/O7l+8be6O6dZhr4skZzGTPlqgQ3goeSwrDEsyd4FttGV3         zT7kgwJxkqkzaMomSHhiJSYqpOW4VzHG2dcEVq4KIQHt7TC9hT5mIcDCkP8zqnwNE3aX         YcT7w4z5SBYsWyU84O/4DOCDAaoG+89761XwFJMdljdkoaM9LR6X3Q3wJs+hiNdlOLiY         V9FXCQmiDzOHxSZsA8/1NKVmYfjRXV3em1ZUP/vmMFPPQ8xBstFyUjMfnCRRm1XFoV3G         c4DrIco5in8zsPvtu62UFRxvO889w9YCnlEBv6d3yLGJPrUzxIoxS6YQAFWEAEn3AZta         JQug==;        dara=google.com"
+          },
+          {
+            "name": "ARC-Authentication-Results",
+            "value": "i=1; mx.google.com;       dkim=pass header.i=@mail.instagram.com header.s=s1024-2013-q3 header.b=XLBfzquP;       spf=pass (google.com: domain of [REDACTED_EMAIL] designates 69.171.232.130 as permitted sender) smtp.mailfrom=[REDACTED_EMAIL];       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=mail.instagram.com"
+          },
+          {
+            "name": "Return-Path",
+            "value": "<[REDACTED_EMAIL]>"
+          },
+          {
+            "name": "Received",
+            "value": "from 69-171-232-130.mail-mail.facebook.com (69-171-232-130.mail-mail.facebook.com. [69.171.232.130])        by mx.google.com with ESMTPS id 586e51a60fabf-43c4cba4fbfsi110727fac.200.2026.05.27.06.52.42        for <[REDACTED_EMAIL]>        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);        Wed, 27 May 2026 06:52:42 -0700 (PDT)"
+          },
+          {
+            "name": "Received-SPF",
+            "value": "pass (google.com: domain of [REDACTED_EMAIL] designates 69.171.232.130 as permitted sender) client-ip=69.171.232.130;"
+          },
+          {
+            "name": "Authentication-Results",
+            "value": "mx.google.com;       dkim=pass header.i=@mail.instagram.com header.s=s1024-2013-q3 header.b=XLBfzquP;       spf=pass (google.com: domain of [REDACTED_EMAIL] designates 69.171.232.130 as permitted sender) smtp.mailfrom=[REDACTED_EMAIL];       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=mail.instagram.com"
+          },
+          {
+            "name": "DKIM-Signature",
+            "value": "v=1; a=rsa-sha256; c=relaxed/simple; d=mail.instagram.com; s=s1024-2013-q3; t=1779889959; bh=rMZUil34I1nljzSu2VoKYG6aIDxA3EW3TRd+rMriCLw=; h=Date:To:Subject:From:MIME-Version:Content-Type; b=XLBfzquPuawksJ8GbitJwObfq9T61gBwN0voE54fEFh5FibkJKLN8wAG8i2UwjB/K\t 8Kf8fzHXsmYHLxG10grA/QalqdIdu00FOhwcj8//tkUK7NE299jsXBKvRIvy/tfJ80\t JzzhXDx3ZQU9moG+FRkEKIposHlNbe/+sLwM62Io="
+          },
+          {
+            "name": "X-Facebook",
+            "value": "from 2803:6084:c154:514:311f:6600:1513:a00 ([MTI3LjAuMC4x]) by ig-thrift.facebook.com with HTTPS (ZuckMail);"
+          },
+          {
+            "name": "Date",
+            "value": "Wed, 27 May 2026 06:52:39 -0700"
+          },
+          {
+            "name": "To",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "Subject",
+            "value": "An important update about your Instagram account settings"
+          },
+          {
+            "name": "X-Priority",
+            "value": "3"
+          },
+          {
+            "name": "X-Mailer",
+            "value": "ZuckMail [version 1.00]"
+          },
+          {
+            "name": "Return-Path",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "From",
+            "value": "Instagram <[REDACTED_EMAIL]>"
+          },
+          {
+            "name": "Reply-to",
+            "value": "Instagram <[REDACTED_EMAIL]>"
+          },
+          {
+            "name": "Errors-To",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "X-Facebook-Notify",
+            "value": "account_privacy_change; mailid=U2U652cca3095234G24bc3591771ddcG652ccec9f5506G37d7"
+          },
+          {
+            "name": "X-FB-Internal-Notiftype",
+            "value": "account_privacy_change"
+          },
+          {
+            "name": "BIMI-Selector",
+            "value": "v=BIMI1; s=fb2025q1v1;"
+          },
+          {
+            "name": "Feedback-ID",
+            "value": "account_privacy_change:Facebook"
+          },
+          {
+            "name": "X-FB-Internal-MID",
+            "value": "U2U652cca3095234G24bc3591771ddcG652ccec9f5506G37d7"
+          },
+          {
+            "name": "X-FB-Internal-RecipID",
+            "value": "37421374940"
+          },
+          {
+            "name": "X-FACEBOOK-PRIORITY",
+            "value": "0"
+          },
+          {
+            "name": "X-Auto-Response-Suppress",
+            "value": "All"
+          },
+          {
+            "name": "MIME-Version",
+            "value": "1.0"
+          },
+          {
+            "name": "Content-Transfer-Encoding",
+            "value": "quoted-printable"
+          },
+          {
+            "name": "Content-Type",
+            "value": "text/html; charset=\"UTF-8\""
+          },
+          {
+            "name": "Message-ID",
+            "value": "<[REDACTED_EMAIL]>"
+          }
+        ],
+        "body": {
+          "size": 7305,
+          "base64_url_content": null,
+          "content": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional //EN\"><html><head><title>Facebook</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" /><style nonce=\"279e8s2A\">@media all and (max-width: 480px){*[class].ib_t{min-width:100%!important}*[class].ib_row{display:block!important}*[class].ib_ext{display:block!important;padding:10px 0 5px;vertical-align:top!important;width:100%!important}*[class].ib_img,*[class].ib_mid{vertical-align:top!important}*[class].mb_blk{display:block!important;padding-bottom:10px;width:100%!important}*[class].mb_hide{display:none!important}*[class].mb_inl{display:inline!important}*[class].d_mb_flex{display:block!important}}.d_mb_show{display:none}.d_mb_flex{display:flex}@media only screen and (max-device-width: 480px){.d_mb_hide{display:none!important}.d_mb_show,.d_mb_flex{display:block!important}}.mb_text h1,.mb_text h2,.mb_text h3,.mb_text h4,.mb_text h5,.mb_text h6{line-height:normal}.mb_work_text h1{font-size:18px;line-height:normal;margin-top:4px}.mb_work_text h2,.mb_work_text h3{font-size:16px;line-height:normal;margin-top:4px}.mb_work_text h4,.mb_work_text h5,.mb_work_text h6{font-size:14px;line-height:normal}.mb_work_text a{color:#1270e9}.mb_work_text p{margin-top:4px}\r\n</style></head><body style=\"margin:0;padding:0;\" dir=\"ltr\" bgcolor=\"#ffffff\"><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" id=\"email_table\" style=\"border-collapse:collapse;\"><tr><td id=\"email_content\" style=\"font-family:Helvetica Neue,Helvetica,Lucida Grande,tahoma,verdana,arial,sans-serif;background:#ffffff;\"><table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse:collapse;\"><tr style=\"\"><td height=\"20\" style=\"line-height:20px;\" colspan=\"3\">&nbsp;</td></tr><tr><td height=\"1\" colspan=\"3\" style=\"line-height:1px;\"></td></tr><tr><td style=\"\"><table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse:collapse;text-align:center;html_width:100%;width:100%;\"><tr><td style=\"line-height:0px;max-width:600px;padding:0 0 15px 0;\"><table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse:collapse;\"><tr><td style=\"width:100%;text-align:left;height:33px;\"><a href=\"[REDACTED_EMAIL_LINK]" style=\"color:#1b74e4;text-decoration:none;\"><img height=\"33\" src=\"[REDACTED_EMAIL_LINK]" style=\"border:0;\" /></a></td><td align=\"right\" style=\"line-height:18px;min-width:60px;text-align:right;\"><a href=\"[REDACTED_EMAIL_LINK]" style=\"color:#1b74e4;text-decoration:none;\"><img width=\"30\" src=\"[REDACTED_EMAIL_LINK]" height=\"30\" style=\"border:0px;border-radius:18px;vertical-align:middle;\" /></a></td></tr></table></td></tr></table></td></tr><tr><td style=\"\"><table border=\"0\" width=\"394px\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse:collapse;margin:0 auto 0 auto;\"><tr><td style=\"\"><table border=\"0\" width=\"396px\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\" style=\"border-collapse:collapse;margin-top:35px;margin-bottom:10px;margin-left:15px;margin-right:15px;\"><tr><td style=\"\"><span><span style=\"display:inline;font-size:18px;font-family:-apple-system,BlinkMacSystemFont,&#039;Segoe UI&#039;,Roboto,Helvetica,Arial,sans-serif;color:#262626\">Hi argus.vac,</span></span></td></tr><tr><td style=\"height:30px;width:100%;\"></td></tr><tr><td style=\"\"><span><span style=\"display:inline;font-size:18px;font-family:-apple-system,BlinkMacSystemFont,&#039;Segoe UI&#039;,Roboto,Helvetica,Arial,sans-serif;color:#262626\">You recently changed your Instagram account from private to public. This means anyone will be able to see your photos and videos, and you won&#039;t have to approve new followers anymore.</span></span></td></tr><tr><td style=\"height:30px;width:100%;\"></td></tr><tr><td style=\"\"><span><span style=\"display:inline;font-size:18px;font-family:-apple-system,BlinkMacSystemFont,&#039;Segoe UI&#039;,Roboto,Helvetica,Arial,sans-serif;color:#262626\">If you decide that you only want approved followers to see what you share, you can always make your account private again in your Instagram settings.</span></span></td></tr><tr><td style=\"height:30px;width:100%;\"></td></tr><tr><td style=\"\"><span><span style=\"display:inline;font-size:18px;font-family:-apple-system,BlinkMacSystemFont,&#039;Segoe UI&#039;,Roboto,Helvetica,Arial,sans-serif;color:#262626\">Thanks,</span></span></td></tr><tr><td style=\"\"><span><span style=\"display:inline;font-size:18px;font-family:-apple-system,BlinkMacSystemFont,&#039;Segoe UI&#039;,Roboto,Helvetica,Arial,sans-serif;color:#262626\">The Instagram Team</span></span></td></tr></table></td></tr></table></td></tr><tr><td style=\"\"><table border=\"0\" width=\"394px\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse:collapse;text-align:center;margin:0 auto 0 auto;width:394px;\"><tr style=\"\"><td height=\"5\" style=\"line-height:5px;\" colspan=\"3\">&nbsp;</td></tr><tr><td width=\"0\" style=\"display:block;width:0px;\">&nbsp;&nbsp;&nbsp;</td><td style=\"\"><div style=\"padding-top:10px;\"><img width=\"52\" alt=\"Meta\" src=\"[REDACTED_EMAIL_LINK]" height=\"26\" style=\"border:0;display:block;margin:0 auto;\" /><br /></div><div style=\"height:10px;\"></div><div style=\"color:#66717C;font-size:11px;font-family:SFProText-Regular, SFUIText-Regular, Roboto, Segoe, Helvetica Neue, Helvetica,\r\n    Arial, sans-serif;max-width:600px;text-align:left;font-weight:400;line-height:16px;margin:0 0 5px 0;\">This message was sent to <a style=\"color:#3849DA;text-decoration:none;\">justintuan1201&#064;gmail.com</a>. <br /></div><div style=\"color:#66717C;font-size:11px;font-family:SFProText-Regular, SFUIText-Regular, Roboto, Segoe, Helvetica Neue, Helvetica,\r\n    Arial, sans-serif;max-width:600px;text-align:left;font-weight:400;line-height:16px;margin:0 0 5px 0;\">Not your account? <a href=\"[REDACTED_EMAIL_LINK]" style=\"color:#3849DA;text-decoration:none;\">Remove your email</a> from this account.<br /></div><div style=\"color:#66717C;font-size:11px;font-family:SFProText-Regular, SFUIText-Regular, Roboto, Segoe, Helvetica Neue, Helvetica,\r\n    Arial, sans-serif;max-width:600px;text-align:left;font-weight:400;line-height:16px;margin:0 0 5px 0;\">Meta Platforms, Inc., Attention: Community Support, 1 Meta Way, Menlo Park, CA 94025<br /></div></td><td width=\"0\" style=\"display:block;width:0px;\">&nbsp;&nbsp;&nbsp;</td></tr></table></td></tr><tr style=\"\"><td height=\"20\" style=\"line-height:20px;\" colspan=\"3\">&nbsp;</td></tr></table><span style=\"\"><img src=\"[REDACTED_EMAIL_LINK]" style=\"border:0;width:1px;height:1px;\" /></span></td></tr></table></body></html>\r\n\r\n",
+          "attachment_id": null
+        },
+        "read_attachment_supported": null,
+        "parts": null
+      },
+      "size_estimate": 12328,
+      "classification_label_values": null
+    },
+    {
+      "id": "19ea0258a3bcf6c1",
+      "thread_id": "19ea0258a3bcf6c1",
+      "label_ids": [
+        "IMPORTANT",
+        "CATEGORY_UPDATES",
+        "INBOX"
+      ],
+      "snippet": "[飆機器人] #20260530160007051 送貨狀態 更新為: 已取貨 訂單狀態為：已確認 付款狀態為：已付款 送貨狀態為：已取貨 有關訂單的查詢或要聯絡飆機器人，請登入以下連結。如果還未設立帳戶，請按「忘記密碼」設立你的帳戶。 訂單連結 訂單日期 2026-05-31 00:00AM GMT+08:00 訂單號碼 20260530160007051 訂單狀態 已確認 商店 飆機器人 (",
+      "history_id": "3652996",
+      "internal_date": "1780803275000",
+      "payload": {
+        "part_id": "",
+        "mime_type": "text/html",
+        "filename": "",
+        "headers": [
+          {
+            "name": "Delivered-To",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "Received",
+            "value": "by 2002:a0c:bf47:0:b0:8ca:10b7:dd71 with SMTP id b7csp1134646qvj;        Sat, 6 Jun 2026 20:34:35 -0700 (PDT)"
+          },
+          {
+            "name": "X-Received",
+            "value": "by 2002:a05:6214:1eb:b0:8cb:e65d:bed5 with SMTP id 6a1803df08f44-8cee5fc97eemr130472636d6.13.1780803275624;        Sat, 06 Jun 2026 20:34:35 -0700 (PDT)"
+          },
+          {
+            "name": "ARC-Seal",
+            "value": "i=1; a=rsa-sha256; t=1780803275; cv=none;        d=google.com; s=arc-20240605;        b=CjL2Lk+TgnMMmuHFOoQf0I3Am/5x+bggB6lki4J3fGq4o5Oub1zEUAwn0dvg3/t0Ir         qq3Zsz2P5fvq8dU6Mxhhq9fugwJr8264/plDRDeVachkbVZoDkvj5oTUcxJLzvEU8SXY         q9rJK/f/4k4MfEFEefLaI2wlZrXmR8WFzh5aZIsnUvbRGv8LrQWFM1RqV7sJgZ3cHLrf         J2YiU7o5qLo0PtHcoVnXaa4tupnd9KdTvLZRfSrxZTe3sixaLlQqrtyKP+q8i42tjvOp         7REXN6owgh4mHAHVDhQGMvYlAaEtjETKZuMoMyXZyz5btbfTm+5mr9i1MDVDyKvRuDI3         Z5MQ=="
+          },
+          {
+            "name": "ARC-Message-Signature",
+            "value": "i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;        h=feedback-id:content-transfer-encoding:mime-version:subject         :message-id:cc:to:reply-to:from:date:dkim-signature:dkim-signature;        bh=JKJBR9gVu2Tc1IjVd8m5G3p1B/QkqjT68n+cpJCdxvs=;        fh=TIFBxxJUOTMnN9WO1PMzPbXGjlpyfszkV1b3V/xLU/4=;        b=JHnDvXKXNNUyxe5Uk1ZpiL7l+wJ0xHzcxNtWgZ5LUo/v2wFsEFCsPyB7KmXc4nN2Se         Uc1FjG1Argj7/ebWwB7dCgAMLYROGSDJs7zHpQmmOvU+zNeJAibLPjwZHinpPtECK9SK         IlHLZXQXEAJyMaLvqnDK3mLSlWV2Zc6CM70Gkz40plrl4jn2ajFGiV2rIwcSmupNGdUW         djb/Na7ocMCTtELvQjVExOSw7m0rqjhn/NTWFb4ReFItSIG2lXbGH/b1v0zlubQM3cQa         DTPX+BaXxUDikNpXJDDBbyBPo+06NHzLKR3PcAB1/KOV4oVHSjIItoN6ziraUoP6ssuC         ggNQ==;        dara=google.com"
+          },
+          {
+            "name": "ARC-Authentication-Results",
+            "value": "i=1; mx.google.com;       dkim=pass header.i=@shopline.com header.s=hrqiammghdmrwrbdwrkscjzp6gknyye7 header.b=Aaj9d8fi;       dkim=pass header.i=@amazonses.com header.s=224i4yxa5dv7c2xz3womw6peuasteono header.b=MEz5WghK;       spf=pass (google.com: domain of [REDACTED_EMAIL] designates 54.240.48.85 as permitted sender) smtp.mailfrom=[REDACTED_EMAIL];       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=shopline.com"
+          },
+          {
+            "name": "Return-Path",
+            "value": "<[REDACTED_EMAIL]>"
+          },
+          {
+            "name": "Received",
+            "value": "from a48-85.smtp-out.amazonses.com (a48-85.smtp-out.amazonses.com. [54.240.48.85])        by mx.google.com with ESMTPS id 6a1803df08f44-8cecd2b41acsi153612086d6.350.2026.06.06.20.34.35        for <[REDACTED_EMAIL]>        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);        Sat, 06 Jun 2026 20:34:35 -0700 (PDT)"
+          },
+          {
+            "name": "Received-SPF",
+            "value": "pass (google.com: domain of [REDACTED_EMAIL] designates 54.240.48.85 as permitted sender) client-ip=54.240.48.85;"
+          },
+          {
+            "name": "Authentication-Results",
+            "value": "mx.google.com;       dkim=pass header.i=@shopline.com header.s=hrqiammghdmrwrbdwrkscjzp6gknyye7 header.b=Aaj9d8fi;       dkim=pass header.i=@amazonses.com header.s=224i4yxa5dv7c2xz3womw6peuasteono header.b=MEz5WghK;       spf=pass (google.com: domain of [REDACTED_EMAIL] designates 54.240.48.85 as permitted sender) smtp.mailfrom=[REDACTED_EMAIL];       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=shopline.com"
+          },
+          {
+            "name": "DKIM-Signature",
+            "value": "v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple; s=hrqiammghdmrwrbdwrkscjzp6gknyye7; d=shopline.com; t=1780803275; h=Date:From:Reply-To:To:Cc:Message-ID:Subject:Mime-Version:Content-Type:Content-Transfer-Encoding; bh=rfdwqxB4w0GjjPt6bQBw9ySiXTbm21cGkS472jwU4DI=; b=Aaj9d8fiVJ6Q3CtdYdyzy1PORp1pAD+rtbBWMo8Kj2UxwWyq0NzAdtmsEoGz2YDw qc/+n7u2/0kio1Y7UZD8AnB+ECdYNxGKZsC4oilnNGyXNrH6R8RGpGGjTWcwsuGu+yo /NcLhYystFqyZqFCQt3jZHcSbwYzM5ocgP5Q5LP7+TMWd9N2jr8DGUyeD8+iBA9EmPf cYTlhPObfo2Cc6t4GCMc6Pzdyg3gDufJUh3k0cpvoyvMOSZGy7ABR+Z0X0tWy1vaS4d LKGM4f1ogXqFJny/MLEY+fgVUg/dgqlAZ/Xs0QN5th1mVO3K4CxKjb8qB0S/tFX1Rv5 dNxbWlfuOA=="
+          },
+          {
+            "name": "DKIM-Signature",
+            "value": "v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple; s=224i4yxa5dv7c2xz3womw6peuasteono; d=amazonses.com; t=1780803275; h=Date:From:Reply-To:To:Cc:Message-ID:Subject:Mime-Version:Content-Type:Content-Transfer-Encoding:Feedback-ID; bh=rfdwqxB4w0GjjPt6bQBw9ySiXTbm21cGkS472jwU4DI=; b=MEz5WghKENos6eVYLSxJSe4dd62SX/F9jfB8MuT2YW5lltwuji5hf6+OLnJD5Owo A+ASMwGZZPVSCld7HrffK9U8y6E1vnlC/uPfzZgD52VxO2aI5UfkIYaZGGTJG/zBJDx A0dBezAQMOXE7p/5h/Kb7UZ71AXRHcpYy7w0wC2k="
+          },
+          {
+            "name": "Date",
+            "value": "Sun, 7 Jun 2026 03:34:35 +0000"
+          },
+          {
+            "name": "From",
+            "value": "\"飆機器人\" <[REDACTED_EMAIL]>"
+          },
+          {
+            "name": "Reply-To",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "To",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "Cc",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "Message-ID",
+            "value": "<[REDACTED_EMAIL]>"
+          },
+          {
+            "name": "Subject",
+            "value": "[飆機器人] #20260530160007051 送貨狀態 更新為: 已取貨"
+          },
+          {
+            "name": "Mime-Version",
+            "value": "1.0"
+          },
+          {
+            "name": "Content-Type",
+            "value": "text/html; charset=UTF-8"
+          },
+          {
+            "name": "Content-Transfer-Encoding",
+            "value": "quoted-printable"
+          },
+          {
+            "name": "Feedback-ID",
+            "value": "::1.us-east-1.pVRXXx0ru023hhkF8ks+mhjZ9jJErjJTeUAHytuUnvI=:AmazonSES"
+          },
+          {
+            "name": "X-SES-Outgoing",
+            "value": "2026.06.07-54.240.48.85"
+          }
+        ],
+        "body": {
+          "size": 20226,
+          "base64_url_content": null,
+          "content": "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"[REDACTED_EMAIL_LINK]">\r\r\n<html lang=\"en\">\r\r\n  <head>\r\r\n    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\r\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\r\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\r\n    <meta name=\"format-detection\" content=\"telephone=no\">\r\r\n    <title>Order Email</title>\r\r\n    <style type=\"text/css\">\r\r\n      * {\r\r\n        font-family:Helvetica, Arial, sans-serif;\r\r\n      }\r\r\n      body {\r\r\n        margin: 0;\r\r\n        padding: 0;\r\r\n        -ms-text-size-adjust: 100%;\r\r\n        -webkit-text-size-adjust: 100%;\r\r\n      }\r\r\n      table {\r\r\n        border-spacing: 0;\r\r\n      }\r\r\n      table td {\r\r\n        border-collapse: collapse;\r\r\n      }\r\r\n      .ExternalClass {\r\r\n        width: 100%;\r\r\n      }\r\r\n      .ExternalClass,\r\r\n      .ExternalClass p,\r\r\n      .ExternalClass span,\r\r\n      .ExternalClass font,\r\r\n      .ExternalClass td,\r\r\n      .ExternalClass div {\r\r\n        line-height: 100%;\r\r\n      }\r\r\n      .ReadMsgBody {\r\r\n        width: 100%;\r\r\n        background-color: #ebebeb;\r\r\n      }\r\r\n      table {\r\r\n        mso-table-lspace: 0pt;\r\r\n        mso-table-rspace: 0pt;\r\r\n      }\r\r\n      img {\r\r\n        -ms-interpolation-mode: bicubic;\r\r\n      }\r\r\n      .yshortcuts a {\r\r\n        border-bottom: none !important;\r\r\n      }\r\r\n      @media screen and (max-width: 599px) {\r\r\n        table[class=\"force-row\"],\r\r\n        table[class=\"container\"] {\r\r\n          width: 100% !important;\r\r\n          max-width: 100% !important;\r\r\n        }\r\r\n      }\r\r\n      @media screen and (max-width: 400px) {\r\r\n        td[class*=\"container-padding\"] {\r\r\n          padding-left: 12px !important;\r\r\n          padding-right: 12px !important;\r\r\n        }\r\r\n      }\r\r\n      footer a {\r\r\n        color: #aaaaaa !important;\r\r\n        text-decoration: underline;\r\r\n      }\r\r\n    </style>\r\r\n  </head>\r\r\n  <body style=\"margin:0; padding:0;\" bgcolor=\"#F0F0F0\" leftmargin=\"0\" topmargin=\"0\" marginwidth=\"0\" marginheight=\"0\">\r\r\n    <table border=\"0\" width=\"100%\" height=\"100%\" cellpadding=\"0\" cellspacing=\"0\" bgcolor=\"#F0F0F0\">\r\r\n      <tr>\r\r\n        <td align=\"center\" valign=\"top\" bgcolor=\"#F0F0F0\" style=\"background-color: #F0F0F0;\">\r\r\n          <br>\r\r\n          <table border=\"0\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" class=\"container\" style=\"width: 600px; max-width: 600px;\">\r\r\n            <tr>\r\r\n              <td class=\"container-padding content\" align=\"left\" style=\"padding-left: 24px; padding-right: 24px; padding-top: 12px; padding-bottom: 12px; background-color: #ffffff;\">\r\r\n                <div style=\"min-height: auto; padding: 15px; text-align: center; max-height: 150px; max-width: 100%;\">\r\r\n                  <img style=\"max-height: 150px; max-width: 100%;\" src=\"[REDACTED_EMAIL_LINK]"/>\r\r\n                </div>\r\r\n                <br/>\r\r\n                <div style=\"height: 1px; border-bottom: 1px solid #cccccc; clear: both;\"></div>\r\r\n                <br/>\r\r\n                <p style=\"font-weight: bold; font-size: 18px; line-height: 24px; color: #1c2538;\">\r\r\n                  [飆機器人] #20260530160007051 送貨狀態 更新為: 已取貨\r\r\n                </p>\r\r\n                <p>訂單狀態為：已確認</p>\r\r\n                <p>付款狀態為：已付款</p>\r\r\n                <p>送貨狀態為：已取貨</p>\r\r\n                <p>有關訂單的查詢或要聯絡飆機器人，請登入以下連結。如果還未設立帳戶，請按「忘記密碼」設立你的帳戶。</p>\r\r\n                <a\r\r\n                  style=\";background-color: #90A7D1; color: #FFFFFF;; padding: 10px 30px; text-decoration: none; text-align: center; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; text-transform: uppercase; margin: 10px 0; display: block; font-size: 14px;\"\r\r\n                  href=\"[REDACTED_EMAIL_LINK]"\r\r\n                >\r\r\n                  訂單連結\r\r\n                </a>\r\r\n\r\r\n                \r\r\n                <p style=\"height: 1px; border-bottom: 1px solid #cccccc; clear: both;\"></p>\r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  訂單日期\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  2026-05-31 00:00AM GMT+08:00\r\r\n                </div>\r\r\n\r\r\n                \r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  訂單號碼\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  20260530160007051\r\r\n                </div>\r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  訂單狀態\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  已確認\r\r\n                </div>\r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  商店\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  飆機器人 (<span style=\"color: #5087e6\">[REDACTED_EMAIL]</span>)\r\r\n                </div>\r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  訂購人\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  Youlin \r\r\n                  \r\r\n                    (<span style=\"color: #5087e6\">[REDACTED_EMAIL]</span>)\r\r\n                  \r\r\n                </div>\r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  電話號碼\r\r\n                </div>\r\r\n                \r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    0960***071\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    性別\r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    男\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                 \r\r\n\r\r\n                \r\r\n                  \r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    訂單備註\r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    其他名字/稱呼: Justin 或者 段佑霖\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  付款方式\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  全家 取貨付款\r\r\n                </div>\r\r\n\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  付款狀態\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  已付款\r\r\n                  \r\r\n                </div>\r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  送貨方式\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  全家 取貨付款 (運費60元)\r\r\n                </div>\r\r\n\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    送貨詳情\r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    材積長＋寬＋高＜105公分；重量<5kg<br>選擇超商，若達1次未取付，將立即列入黑名單，日後一律僅能先匯款再出貨。\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    地址\r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 5px; font-size: 14px; color: #555555;\">\r\r\n                    Youlin\r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 5px; font-size: 14px; color: #555555;\">\r\r\n                    \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 5px; font-size: 14px; color: #555555;\">\r\r\n                    \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 5px; font-size: 14px; color: #555555;\">\r\r\n                    \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 5px; font-size: 14px; color: #555555;\">\r\r\n                    \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 5px; font-size: 14px; color: #555555;\">\r\r\n                    台灣\r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 5px; font-size: 14px; color: #555555;\">\r\r\n                    \r\r\n                  </div>\r\r\n                  <span style=\"height: 10px; display: block;\"></span>\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    收件人 \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    Youlin\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    收件人電話號碼 \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    0960***071\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    收件門市代號 \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    F022590\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    收件門市名稱 \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    全家善化蓮潭店\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    貨件追蹤號碼 \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    16340854442\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  送貨狀態\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  已取貨\r\r\n                </div>\r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  訂單詳情\r\r\n                </div>\r\r\n\r\r\n                <table style=\"width: 100%; font-size: 12px; color: #333333;\">\r\r\n                  \r\r\n                    <tr>\r\r\n                      <td>\r\r\n                        <table style=\"font-size: 12px; color:#333333;\">\r\r\n                          <tr>\r\r\n                            \r\r\n                              <td style=\"vertical-align: top; padding-right: 10px; padding-bottom: 15px;\">\r\r\n                                <a href=\"#\" target=\"_blank\">\r\r\n                                  <img\r\r\n                                    width=\"80\"\r\r\n                                    height=\"80\"\r\r\n                                    src=\"[REDACTED_EMAIL_LINK]"\r\r\n                                    alt=\"\"\r\r\n                                    style=\"object-fit: cover;\"\r\r\n                                  >\r\r\n                                </a>\r\r\n                              </td>\r\r\n                            \r\r\n                            <td style=\"vertical-align: top\">\r\r\n                              \r\r\n                                <div>\r\r\n                              \r\r\n                                \r\r\n                                  \r\r\n                                  \r\r\n                                  <p style=\"margin:0 3px 3px;\">\r\r\n                                    RPLIDAR C1 LiDAR 光達（12公尺 5000次/秒）\r\r\n                                  </p>\r\r\n                                \r\r\n                                \r\r\n                                <ul style=\"margin: 4px 12px 12px 8px; padding-left: 0;\">\r\r\n                                  \r\r\n                                </ul>\r\r\n\r\r\n                                <p style=\"margin:0 3px 15px;\">\r\r\n                                  \r\r\n                                    1 x NT$2,880\r\r\n                                  \r\r\n\r\r\n                                  \r\r\n\r\r\n                                  \r\r\n                                </p>\r\r\n                              </div>\r\r\n                            </td>\r\r\n                          </tr>\r\r\n                        </table>\r\r\n                      </td>\r\r\n                      <td style=\"vertical-align: top;\">\r\r\n                        <div style=\"text-align: right;\">\r\r\n                          <span>\r\r\n                            \r\r\n                              NT$2,880\r\r\n                            \r\r\n                          </span>\r\r\n                        </div>\r\r\n                      </td>\r\r\n                    </tr>\r\r\n                  \r\r\n                    <tr>\r\r\n                      <td>\r\r\n                        <table style=\"font-size: 12px; color:#333333;\">\r\r\n                          <tr>\r\r\n                            \r\r\n                              <td style=\"vertical-align: top; padding-right: 10px; padding-bottom: 15px;\">\r\r\n                                <a href=\"#\" target=\"_blank\">\r\r\n                                  <img\r\r\n                                    width=\"80\"\r\r\n                                    height=\"80\"\r\r\n                                    src=\"[REDACTED_EMAIL_LINK]"\r\r\n                                    alt=\"\"\r\r\n                                    style=\"object-fit: cover;\"\r\r\n                                  >\r\r\n                                </a>\r\r\n                              </td>\r\r\n                            \r\r\n                            <td style=\"vertical-align: top\">\r\r\n                              \r\r\n                                <div>\r\r\n                              \r\r\n                                \r\r\n                                  \r\r\n                                  \r\r\n                                  <p style=\"margin:0 3px 3px;\">\r\r\n                                    Raspberry Pi Camera Module 3 廣角版\r\r\n                                  </p>\r\r\n                                \r\r\n                                \r\r\n                                <ul style=\"margin: 4px 12px 12px 8px; padding-left: 0;\">\r\r\n                                  \r\r\n                                </ul>\r\r\n\r\r\n                                <p style=\"margin:0 3px 15px;\">\r\r\n                                  \r\r\n                                    1 x NT$1,460\r\r\n                                  \r\r\n\r\r\n                                  \r\r\n\r\r\n                                  \r\r\n                                </p>\r\r\n                              </div>\r\r\n                            </td>\r\r\n                          </tr>\r\r\n                        </table>\r\r\n                      </td>\r\r\n                      <td style=\"vertical-align: top;\">\r\r\n                        <div style=\"text-align: right;\">\r\r\n                          <span>\r\r\n                            \r\r\n                              NT$1,460\r\r\n                            \r\r\n                          </span>\r\r\n                        </div>\r\r\n                      </td>\r\r\n                    </tr>\r\r\n                  \r\r\n                  <tr>\r\r\n                    <td style=\"text-align: right; padding-bottom: 10px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                      小計:\r\r\n                    </td>\r\r\n                    <td style=\"text-align: right; padding-left: 16px; padding-bottom: 10px; font-size: 12px; color: #555555; white-space: nowrap;\">\r\r\n                      NT$4,340\r\r\n                    </td>\r\r\n                  </tr>\r\r\n                  \r\r\n                  \r\r\n                  \r\r\n                  \r\r\n                  <tr>\r\r\n                    <td style=\"text-align: right; padding-bottom: 10px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                      運費:\r\r\n                    </td>\r\r\n                    <td style=\"text-align: right; padding-left: 16px; padding-bottom: 10px; font-size: 12px; color: #555555; white-space: nowrap;\">\r\r\n                      NT$60\r\r\n                    </td>\r\r\n                  </tr>\r\r\n                  \r\r\n                  \r\r\n                  <tr>\r\r\n                    <td style=\"text-align: right; padding-bottom: 10px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                      合計:\r\r\n                    </td>\r\r\n                    <td style=\"text-align: right; padding-left: 16px; padding-bottom: 10px; font-size: 12px; color: #555555; white-space: nowrap;\">\r\r\n                      \r\r\n                        NT$4,400\r\r\n                      \r\r\n                    </td>\r\r\n                  </tr>\r\r\n                  \r\r\n                  \r\r\n\r\r\n                  \r\r\n                  \r\r\n\r\r\n                </table>\r\r\n<p>&nbsp;</p>\r\r\n                  <p>飆機器人</p>\r\r\n<p>營業時間：上午8：30至下午5：30</p>\r\r\n<p>客服信箱：[REDACTED_EMAIL]</p>\r\r\n<p>連絡電話：02-2880-5998</p>\r\r\n                <br/>\r\r\n              </td>\r\r\n            </tr>\r\r\n            <tr>\r\r\n              <td class=\"container-padding footer-text\" align=\"left\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 12px; line-height: 16px; color: #aaaaaa; padding-left: 24px; padding-right: 24px;\">\r\r\n                <br><br>\r\r\n                <strong>飆機器人</strong>\r\r\n                <br><br>\r\r\n                您會收到這封電郵是由於您使用這個電郵地址在飆機器人下了訂單。\r\r\n                <br><br>\r\r\n                <br><br>\r\r\n              </td>\r\r\n            </tr>\r\r\n          </table>\r\r\n        </td>\r\r\n      </tr>\r\r\n    </table>\r\r\n  </body>\r\r\n</html>\r\r\n",
+          "attachment_id": null
+        },
+        "read_attachment_supported": null,
+        "parts": null
+      },
+      "size_estimate": 29207,
+      "classification_label_values": null
+    },
+    {
+      "id": "19e8b6ff298aea83",
+      "thread_id": "19e8b6ff298aea83",
+      "label_ids": [
+        "IMPORTANT",
+        "CATEGORY_UPDATES",
+        "INBOX"
+      ],
+      "snippet": "[飆機器人] #20260530160007051 送貨狀態 更新為: 已到達 訂單狀態為：已確認 付款狀態為：未付款 送貨狀態為：已到達 有關訂單的查詢或要聯絡飆機器人，請登入以下連結。如果還未設立帳戶，請按「忘記密碼」設立你的帳戶。 訂單連結 訂單日期 2026-05-31 00:00AM GMT+08:00 訂單號碼 20260530160007051 訂單狀態 已確認 商店 飆機器人 (",
+      "history_id": "3653044",
+      "internal_date": "1780455829000",
+      "payload": {
+        "part_id": "",
+        "mime_type": "text/html",
+        "filename": "",
+        "headers": [
+          {
+            "name": "Delivered-To",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "Received",
+            "value": "by 2002:a05:6214:83:b0:8ca:10b7:dd71 with SMTP id n3csp2108802qvr;        Tue, 2 Jun 2026 20:03:50 -0700 (PDT)"
+          },
+          {
+            "name": "X-Received",
+            "value": "by 2002:ac8:5715:0:b0:516:e085:b76e with SMTP id d75a77b69052e-517783f4ae0mr29179081cf.0.1780455830332;        Tue, 02 Jun 2026 20:03:50 -0700 (PDT)"
+          },
+          {
+            "name": "ARC-Seal",
+            "value": "i=1; a=rsa-sha256; t=1780455830; cv=none;        d=google.com; s=arc-20240605;        b=TCNpR8XHkwz+tZV+RIM41R2xhCmyxZIgwd0SdMOJ5TvnhQHY1WTNZGHBZA4qDBWlIn         BC5MWxLAYQXIk2WbbrygZ1jZtQE3lEihvDX46WLc19ankd/Si5g3gTAdu57gYlPBbNWa         l6qvU9rITU6JUV618I96Rrsy4/4PtFO2xlh3LLQQ1Wgf7XrkN5HQ/4NmPp1kjlI0qx77         W7Oj3h2GVBCdMcFoi5vtfQVDRaLcr2U5bLav1qHc4+5+IcdKeNKNyfWKowEyTLvQ5emz         OOK9EA7nSOqOAxu8KAwrRVx+D1xICLtckmqqziao/YwqW9PH6aa6+kp8AYPfR7jjNoM1         ED1g=="
+          },
+          {
+            "name": "ARC-Message-Signature",
+            "value": "i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;        h=feedback-id:content-transfer-encoding:mime-version:subject         :message-id:cc:to:reply-to:from:date:dkim-signature:dkim-signature;        bh=ptM0Qy4aPQZ43VV2lP1s3B+w5EXrXG9MQIX4Nk/Or9U=;        fh=TIFBxxJUOTMnN9WO1PMzPbXGjlpyfszkV1b3V/xLU/4=;        b=Y0HRUQzMxsesqUG2SFkT5j8jHgVuKaufMykH4iWOQ0FpKFeaM/FM0GP03hlrav8bLA         Rq9yzVA7lFiE7HuKa18k4ZkfyuQnXcs0KM/p5gwgj1Uj/pPIskD7anvPJ1PHKdy5UYFw         5nvep1lkfp7qfdvCoAxoVSaLgx0/SPmqDBxQeeNBi6/WqGhbC7rggVC7OrV33cLoz9yX         KceRkACduGOM+CP3lKauu1h4jj608m1cEYtCt6qaoiDGFnuF75hBZstlWg//+DtQUnlE         w0wAZWt4VAQK0rK7O2UWB2VamCA3teeYDX2LQYEF9ca2s3gM0Nytspkqgx2488EfUaQE         F+Cw==;        dara=google.com"
+          },
+          {
+            "name": "ARC-Authentication-Results",
+            "value": "i=1; mx.google.com;       dkim=pass header.i=@shopline.com header.s=hrqiammghdmrwrbdwrkscjzp6gknyye7 header.b=s71K9Cng;       dkim=pass header.i=@amazonses.com header.s=224i4yxa5dv7c2xz3womw6peuasteono header.b=ltcl3vsE;       spf=pass (google.com: domain of [REDACTED_EMAIL] designates 54.240.11.41 as permitted sender) smtp.mailfrom=[REDACTED_EMAIL];       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=shopline.com"
+          },
+          {
+            "name": "Return-Path",
+            "value": "<[REDACTED_EMAIL]>"
+          },
+          {
+            "name": "Received",
+            "value": "from a11-41.smtp-out.amazonses.com (a11-41.smtp-out.amazonses.com. [54.240.11.41])        by mx.google.com with ESMTPS id d75a77b69052e-51775d7245bsi22254751cf.138.2026.06.02.20.03.50        for <[REDACTED_EMAIL]>        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);        Tue, 02 Jun 2026 20:03:50 -0700 (PDT)"
+          },
+          {
+            "name": "Received-SPF",
+            "value": "pass (google.com: domain of [REDACTED_EMAIL] designates 54.240.11.41 as permitted sender) client-ip=54.240.11.41;"
+          },
+          {
+            "name": "Authentication-Results",
+            "value": "mx.google.com;       dkim=pass header.i=@shopline.com header.s=hrqiammghdmrwrbdwrkscjzp6gknyye7 header.b=s71K9Cng;       dkim=pass header.i=@amazonses.com header.s=224i4yxa5dv7c2xz3womw6peuasteono header.b=ltcl3vsE;       spf=pass (google.com: domain of [REDACTED_EMAIL] designates 54.240.11.41 as permitted sender) smtp.mailfrom=[REDACTED_EMAIL];       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=shopline.com"
+          },
+          {
+            "name": "DKIM-Signature",
+            "value": "v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple; s=hrqiammghdmrwrbdwrkscjzp6gknyye7; d=shopline.com; t=1780455830; h=Date:From:Reply-To:To:Cc:Message-ID:Subject:Mime-Version:Content-Type:Content-Transfer-Encoding; bh=UHeQr//MR8y85IjsxPFtjs+QoDPQyulhNkairMJj6y4=; b=s71K9Cng48WdyU9vdJgDnw/Nw2g64i6h2reVNU8TNcWyFkV2RHPt717rtrmX2l4F Lu0xG742U7lkubqtPEb2l+JvXt5TGq+5BbHhKEtPCoeWYGAwz9ugHTQCH2KrXULtChu 668gtfaYwAZCD14/aiBvsQMUFmEUCAVY9CoguVUJPWi1BqBakU6TaTIQatf5o3lGr68 DTowaFfbr3o0A9TzjwEl9Ny7sSCrh+v0P4Rkerb98shAgLYc5FFDQQS/e4/sJzgi/Jf 4yPifv9RYerDA2nMs7ixnsvXm3p8Zluzmes6KTU4zuGyTRullUXeuKMcv3rcnEM94tX hviLlI8CaA=="
+          },
+          {
+            "name": "DKIM-Signature",
+            "value": "v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple; s=224i4yxa5dv7c2xz3womw6peuasteono; d=amazonses.com; t=1780455830; h=Date:From:Reply-To:To:Cc:Message-ID:Subject:Mime-Version:Content-Type:Content-Transfer-Encoding:Feedback-ID; bh=UHeQr//MR8y85IjsxPFtjs+QoDPQyulhNkairMJj6y4=; b=ltcl3vsEuOZhK/yvtkqlkmM+vfCFHFwXfWCstiQ+ko+FjXPqggj9AaOg8O+HdAEY DRBFl/RaD2n8QC6aloERapi94DF4Go5yvpS9L3+7FxYRNffuwkZfcB05WJufclSpIwW i9jOPrCBvCOL1wBXe3t0odbepCldevRBSfw8tubo="
+          },
+          {
+            "name": "Date",
+            "value": "Wed, 3 Jun 2026 03:03:49 +0000"
+          },
+          {
+            "name": "From",
+            "value": "\"飆機器人\" <[REDACTED_EMAIL]>"
+          },
+          {
+            "name": "Reply-To",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "To",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "Cc",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "Message-ID",
+            "value": "<[REDACTED_EMAIL]>"
+          },
+          {
+            "name": "Subject",
+            "value": "[飆機器人] #20260530160007051 送貨狀態 更新為: 已到達"
+          },
+          {
+            "name": "Mime-Version",
+            "value": "1.0"
+          },
+          {
+            "name": "Content-Type",
+            "value": "text/html; charset=UTF-8"
+          },
+          {
+            "name": "Content-Transfer-Encoding",
+            "value": "quoted-printable"
+          },
+          {
+            "name": "Feedback-ID",
+            "value": "::1.us-east-1.pVRXXx0ru023hhkF8ks+mhjZ9jJErjJTeUAHytuUnvI=:AmazonSES"
+          },
+          {
+            "name": "X-SES-Outgoing",
+            "value": "2026.06.03-54.240.11.41"
+          }
+        ],
+        "body": {
+          "size": 20226,
+          "base64_url_content": null,
+          "content": "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"[REDACTED_EMAIL_LINK]">\r\r\n<html lang=\"en\">\r\r\n  <head>\r\r\n    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\r\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\r\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\r\n    <meta name=\"format-detection\" content=\"telephone=no\">\r\r\n    <title>Order Email</title>\r\r\n    <style type=\"text/css\">\r\r\n      * {\r\r\n        font-family:Helvetica, Arial, sans-serif;\r\r\n      }\r\r\n      body {\r\r\n        margin: 0;\r\r\n        padding: 0;\r\r\n        -ms-text-size-adjust: 100%;\r\r\n        -webkit-text-size-adjust: 100%;\r\r\n      }\r\r\n      table {\r\r\n        border-spacing: 0;\r\r\n      }\r\r\n      table td {\r\r\n        border-collapse: collapse;\r\r\n      }\r\r\n      .ExternalClass {\r\r\n        width: 100%;\r\r\n      }\r\r\n      .ExternalClass,\r\r\n      .ExternalClass p,\r\r\n      .ExternalClass span,\r\r\n      .ExternalClass font,\r\r\n      .ExternalClass td,\r\r\n      .ExternalClass div {\r\r\n        line-height: 100%;\r\r\n      }\r\r\n      .ReadMsgBody {\r\r\n        width: 100%;\r\r\n        background-color: #ebebeb;\r\r\n      }\r\r\n      table {\r\r\n        mso-table-lspace: 0pt;\r\r\n        mso-table-rspace: 0pt;\r\r\n      }\r\r\n      img {\r\r\n        -ms-interpolation-mode: bicubic;\r\r\n      }\r\r\n      .yshortcuts a {\r\r\n        border-bottom: none !important;\r\r\n      }\r\r\n      @media screen and (max-width: 599px) {\r\r\n        table[class=\"force-row\"],\r\r\n        table[class=\"container\"] {\r\r\n          width: 100% !important;\r\r\n          max-width: 100% !important;\r\r\n        }\r\r\n      }\r\r\n      @media screen and (max-width: 400px) {\r\r\n        td[class*=\"container-padding\"] {\r\r\n          padding-left: 12px !important;\r\r\n          padding-right: 12px !important;\r\r\n        }\r\r\n      }\r\r\n      footer a {\r\r\n        color: #aaaaaa !important;\r\r\n        text-decoration: underline;\r\r\n      }\r\r\n    </style>\r\r\n  </head>\r\r\n  <body style=\"margin:0; padding:0;\" bgcolor=\"#F0F0F0\" leftmargin=\"0\" topmargin=\"0\" marginwidth=\"0\" marginheight=\"0\">\r\r\n    <table border=\"0\" width=\"100%\" height=\"100%\" cellpadding=\"0\" cellspacing=\"0\" bgcolor=\"#F0F0F0\">\r\r\n      <tr>\r\r\n        <td align=\"center\" valign=\"top\" bgcolor=\"#F0F0F0\" style=\"background-color: #F0F0F0;\">\r\r\n          <br>\r\r\n          <table border=\"0\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" class=\"container\" style=\"width: 600px; max-width: 600px;\">\r\r\n            <tr>\r\r\n              <td class=\"container-padding content\" align=\"left\" style=\"padding-left: 24px; padding-right: 24px; padding-top: 12px; padding-bottom: 12px; background-color: #ffffff;\">\r\r\n                <div style=\"min-height: auto; padding: 15px; text-align: center; max-height: 150px; max-width: 100%;\">\r\r\n                  <img style=\"max-height: 150px; max-width: 100%;\" src=\"[REDACTED_EMAIL_LINK]"/>\r\r\n                </div>\r\r\n                <br/>\r\r\n                <div style=\"height: 1px; border-bottom: 1px solid #cccccc; clear: both;\"></div>\r\r\n                <br/>\r\r\n                <p style=\"font-weight: bold; font-size: 18px; line-height: 24px; color: #1c2538;\">\r\r\n                  [飆機器人] #20260530160007051 送貨狀態 更新為: 已到達\r\r\n                </p>\r\r\n                <p>訂單狀態為：已確認</p>\r\r\n                <p>付款狀態為：未付款</p>\r\r\n                <p>送貨狀態為：已到達</p>\r\r\n                <p>有關訂單的查詢或要聯絡飆機器人，請登入以下連結。如果還未設立帳戶，請按「忘記密碼」設立你的帳戶。</p>\r\r\n                <a\r\r\n                  style=\";background-color: #90A7D1; color: #FFFFFF;; padding: 10px 30px; text-decoration: none; text-align: center; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; text-transform: uppercase; margin: 10px 0; display: block; font-size: 14px;\"\r\r\n                  href=\"[REDACTED_EMAIL_LINK]"\r\r\n                >\r\r\n                  訂單連結\r\r\n                </a>\r\r\n\r\r\n                \r\r\n                <p style=\"height: 1px; border-bottom: 1px solid #cccccc; clear: both;\"></p>\r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  訂單日期\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  2026-05-31 00:00AM GMT+08:00\r\r\n                </div>\r\r\n\r\r\n                \r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  訂單號碼\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  20260530160007051\r\r\n                </div>\r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  訂單狀態\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  已確認\r\r\n                </div>\r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  商店\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  飆機器人 (<span style=\"color: #5087e6\">[REDACTED_EMAIL]</span>)\r\r\n                </div>\r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  訂購人\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  Youlin \r\r\n                  \r\r\n                    (<span style=\"color: #5087e6\">[REDACTED_EMAIL]</span>)\r\r\n                  \r\r\n                </div>\r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  電話號碼\r\r\n                </div>\r\r\n                \r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    0960***071\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    性別\r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    男\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                 \r\r\n\r\r\n                \r\r\n                  \r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    訂單備註\r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    其他名字/稱呼: Justin 或者 段佑霖\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  付款方式\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  全家 取貨付款\r\r\n                </div>\r\r\n\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  付款狀態\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  未付款\r\r\n                  \r\r\n                </div>\r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  送貨方式\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  全家 取貨付款 (運費60元)\r\r\n                </div>\r\r\n\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    送貨詳情\r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    材積長＋寬＋高＜105公分；重量<5kg<br>選擇超商，若達1次未取付，將立即列入黑名單，日後一律僅能先匯款再出貨。\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    地址\r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 5px; font-size: 14px; color: #555555;\">\r\r\n                    Youlin\r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 5px; font-size: 14px; color: #555555;\">\r\r\n                    \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 5px; font-size: 14px; color: #555555;\">\r\r\n                    \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 5px; font-size: 14px; color: #555555;\">\r\r\n                    \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 5px; font-size: 14px; color: #555555;\">\r\r\n                    \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 5px; font-size: 14px; color: #555555;\">\r\r\n                    台灣\r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 5px; font-size: 14px; color: #555555;\">\r\r\n                    \r\r\n                  </div>\r\r\n                  <span style=\"height: 10px; display: block;\"></span>\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    收件人 \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    Youlin\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    收件人電話號碼 \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    0960***071\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    收件門市代號 \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    F022590\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    收件門市名稱 \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    全家善化蓮潭店\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    貨件追蹤號碼 \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    16340854442\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  送貨狀態\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  已到達\r\r\n                </div>\r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  訂單詳情\r\r\n                </div>\r\r\n\r\r\n                <table style=\"width: 100%; font-size: 12px; color: #333333;\">\r\r\n                  \r\r\n                    <tr>\r\r\n                      <td>\r\r\n                        <table style=\"font-size: 12px; color:#333333;\">\r\r\n                          <tr>\r\r\n                            \r\r\n                              <td style=\"vertical-align: top; padding-right: 10px; padding-bottom: 15px;\">\r\r\n                                <a href=\"#\" target=\"_blank\">\r\r\n                                  <img\r\r\n                                    width=\"80\"\r\r\n                                    height=\"80\"\r\r\n                                    src=\"[REDACTED_EMAIL_LINK]"\r\r\n                                    alt=\"\"\r\r\n                                    style=\"object-fit: cover;\"\r\r\n                                  >\r\r\n                                </a>\r\r\n                              </td>\r\r\n                            \r\r\n                            <td style=\"vertical-align: top\">\r\r\n                              \r\r\n                                <div>\r\r\n                              \r\r\n                                \r\r\n                                  \r\r\n                                  \r\r\n                                  <p style=\"margin:0 3px 3px;\">\r\r\n                                    RPLIDAR C1 LiDAR 光達（12公尺 5000次/秒）\r\r\n                                  </p>\r\r\n                                \r\r\n                                \r\r\n                                <ul style=\"margin: 4px 12px 12px 8px; padding-left: 0;\">\r\r\n                                  \r\r\n                                </ul>\r\r\n\r\r\n                                <p style=\"margin:0 3px 15px;\">\r\r\n                                  \r\r\n                                    1 x NT$2,880\r\r\n                                  \r\r\n\r\r\n                                  \r\r\n\r\r\n                                  \r\r\n                                </p>\r\r\n                              </div>\r\r\n                            </td>\r\r\n                          </tr>\r\r\n                        </table>\r\r\n                      </td>\r\r\n                      <td style=\"vertical-align: top;\">\r\r\n                        <div style=\"text-align: right;\">\r\r\n                          <span>\r\r\n                            \r\r\n                              NT$2,880\r\r\n                            \r\r\n                          </span>\r\r\n                        </div>\r\r\n                      </td>\r\r\n                    </tr>\r\r\n                  \r\r\n                    <tr>\r\r\n                      <td>\r\r\n                        <table style=\"font-size: 12px; color:#333333;\">\r\r\n                          <tr>\r\r\n                            \r\r\n                              <td style=\"vertical-align: top; padding-right: 10px; padding-bottom: 15px;\">\r\r\n                                <a href=\"#\" target=\"_blank\">\r\r\n                                  <img\r\r\n                                    width=\"80\"\r\r\n                                    height=\"80\"\r\r\n                                    src=\"[REDACTED_EMAIL_LINK]"\r\r\n                                    alt=\"\"\r\r\n                                    style=\"object-fit: cover;\"\r\r\n                                  >\r\r\n                                </a>\r\r\n                              </td>\r\r\n                            \r\r\n                            <td style=\"vertical-align: top\">\r\r\n                              \r\r\n                                <div>\r\r\n                              \r\r\n                                \r\r\n                                  \r\r\n                                  \r\r\n                                  <p style=\"margin:0 3px 3px;\">\r\r\n                                    Raspberry Pi Camera Module 3 廣角版\r\r\n                                  </p>\r\r\n                                \r\r\n                                \r\r\n                                <ul style=\"margin: 4px 12px 12px 8px; padding-left: 0;\">\r\r\n                                  \r\r\n                                </ul>\r\r\n\r\r\n                                <p style=\"margin:0 3px 15px;\">\r\r\n                                  \r\r\n                                    1 x NT$1,460\r\r\n                                  \r\r\n\r\r\n                                  \r\r\n\r\r\n                                  \r\r\n                                </p>\r\r\n                              </div>\r\r\n                            </td>\r\r\n                          </tr>\r\r\n                        </table>\r\r\n                      </td>\r\r\n                      <td style=\"vertical-align: top;\">\r\r\n                        <div style=\"text-align: right;\">\r\r\n                          <span>\r\r\n                            \r\r\n                              NT$1,460\r\r\n                            \r\r\n                          </span>\r\r\n                        </div>\r\r\n                      </td>\r\r\n                    </tr>\r\r\n                  \r\r\n                  <tr>\r\r\n                    <td style=\"text-align: right; padding-bottom: 10px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                      小計:\r\r\n                    </td>\r\r\n                    <td style=\"text-align: right; padding-left: 16px; padding-bottom: 10px; font-size: 12px; color: #555555; white-space: nowrap;\">\r\r\n                      NT$4,340\r\r\n                    </td>\r\r\n                  </tr>\r\r\n                  \r\r\n                  \r\r\n                  \r\r\n                  \r\r\n                  <tr>\r\r\n                    <td style=\"text-align: right; padding-bottom: 10px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                      運費:\r\r\n                    </td>\r\r\n                    <td style=\"text-align: right; padding-left: 16px; padding-bottom: 10px; font-size: 12px; color: #555555; white-space: nowrap;\">\r\r\n                      NT$60\r\r\n                    </td>\r\r\n                  </tr>\r\r\n                  \r\r\n                  \r\r\n                  <tr>\r\r\n                    <td style=\"text-align: right; padding-bottom: 10px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                      合計:\r\r\n                    </td>\r\r\n                    <td style=\"text-align: right; padding-left: 16px; padding-bottom: 10px; font-size: 12px; color: #555555; white-space: nowrap;\">\r\r\n                      \r\r\n                        NT$4,400\r\r\n                      \r\r\n                    </td>\r\r\n                  </tr>\r\r\n                  \r\r\n                  \r\r\n\r\r\n                  \r\r\n                  \r\r\n\r\r\n                </table>\r\r\n<p>&nbsp;</p>\r\r\n                  <p>飆機器人</p>\r\r\n<p>營業時間：上午8：30至下午5：30</p>\r\r\n<p>客服信箱：[REDACTED_EMAIL]</p>\r\r\n<p>連絡電話：02-2880-5998</p>\r\r\n                <br/>\r\r\n              </td>\r\r\n            </tr>\r\r\n            <tr>\r\r\n              <td class=\"container-padding footer-text\" align=\"left\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 12px; line-height: 16px; color: #aaaaaa; padding-left: 24px; padding-right: 24px;\">\r\r\n                <br><br>\r\r\n                <strong>飆機器人</strong>\r\r\n                <br><br>\r\r\n                您會收到這封電郵是由於您使用這個電郵地址在飆機器人下了訂單。\r\r\n                <br><br>\r\r\n                <br><br>\r\r\n              </td>\r\r\n            </tr>\r\r\n          </table>\r\r\n        </td>\r\r\n      </tr>\r\r\n    </table>\r\r\n  </body>\r\r\n</html>\r\r\n",
+          "attachment_id": null
+        },
+        "read_attachment_supported": null,
+        "parts": null
+      },
+      "size_estimate": 29203,
+      "classification_label_values": null
+    },
+    {
+      "id": "19e82db2335b2ba2",
+      "thread_id": "19e82db2335b2ba2",
+      "label_ids": [
+        "IMPORTANT",
+        "CATEGORY_UPDATES",
+        "INBOX"
+      ],
+      "snippet": "[飆機器人] #20260530160007051 送貨狀態 更新為: 已發貨 訂單狀態為：已確認 付款狀態為：未付款 送貨狀態為：已發貨 有關訂單的查詢或要聯絡飆機器人，請登入以下連結。如果還未設立帳戶，請按「忘記密碼」設立你的帳戶。 訂單連結 訂單日期 2026-05-31 00:00AM GMT+08:00 訂單號碼 20260530160007051 訂單狀態 已確認 商店 飆機器人 (",
+      "history_id": "3653124",
+      "internal_date": "1780311859000",
+      "payload": {
+        "part_id": "",
+        "mime_type": "text/html",
+        "filename": "",
+        "headers": [
+          {
+            "name": "Delivered-To",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "Received",
+            "value": "by 2002:a05:6214:83:b0:8ca:10b7:dd71 with SMTP id n3csp1060227qvr;        Mon, 1 Jun 2026 04:04:20 -0700 (PDT)"
+          },
+          {
+            "name": "X-Received",
+            "value": "by 2002:a05:6214:8001:b0:8cc:f0b9:1f26 with SMTP id 6a1803df08f44-8ccf0b92899mr153265556d6.15.1780311860081;        Mon, 01 Jun 2026 04:04:20 -0700 (PDT)"
+          },
+          {
+            "name": "ARC-Seal",
+            "value": "i=1; a=rsa-sha256; t=1780311860; cv=none;        d=google.com; s=arc-20240605;        b=jGN4tDLTMt/MFX50vJ91ioyF39CLLGQxmuZRQr+yt/Cl+b1w6BzBwdBHFkavNYRr2z         QPJUeBcrjhM25H4pE7m6XQn191WfAYyZODuFmOWtgAVXeXXtWLcn0kA7OUnx4RK+shHy         crkNnwU1ChrXPeIYeKw6oXKRKG73vhRU631l8xUU9q3a2rtvetqG6Y0SOXkN0XNEiEHg         1yNiVAXTwfYHl7CaELp6DjvndeLJ3Hzeq8suUSksHZHdmYv+xj3QPDMFGA1huVlVNenK         bpAbjx0V8In0XfkDFXJKY+JY/eOGKXtTY2Tj0pCIiEAzfiQxT4GjEnQpf6F7/ebDhLVJ         sA5A=="
+          },
+          {
+            "name": "ARC-Message-Signature",
+            "value": "i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;        h=feedback-id:content-transfer-encoding:mime-version:subject         :message-id:cc:to:reply-to:from:date:dkim-signature:dkim-signature;        bh=vbRFlJQVqh72sVSKh5jNz6FQGVXFugvEhXmTrSk0zFE=;        fh=TIFBxxJUOTMnN9WO1PMzPbXGjlpyfszkV1b3V/xLU/4=;        b=Ad75oHyZRLMAKXgZ/7jhj9ybe9UUcp9FxWPbNYGvDLeQmf/v/biwtRmmNjM+sNjB14         uitGqYjVRuB7Sids+W+iC5gTRFHIgnxyitAZRdwkDFiaKLnszysaokLQegeQh62TRaoK         cVRY7r0BtHwRfFvln/GLSC6mnHjReU91lr7xrQmvSbZd/ix7lb8PSABx417WG+T3cARj         +qoSGfuFw/9dsGw+5VtmVRVt1h14PLPtmOiXHcX1syqy9/HchM+iB9BpCS3Vu2T76xb/         Ozl0x5UciSS41pfL3B5q5h0t26TGrohmwRh8AgnneDnSnkLlHUCdArQq5FpQnHoin1kW         Yf0w==;        dara=google.com"
+          },
+          {
+            "name": "ARC-Authentication-Results",
+            "value": "i=1; mx.google.com;       dkim=pass header.i=@shopline.com header.s=hrqiammghdmrwrbdwrkscjzp6gknyye7 header.b=2y1x+WIO;       dkim=pass header.i=@amazonses.com header.s=224i4yxa5dv7c2xz3womw6peuasteono header.b=HJRdMFlf;       spf=pass (google.com: domain of [REDACTED_EMAIL] designates 54.240.11.130 as permitted sender) smtp.mailfrom=[REDACTED_EMAIL];       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=shopline.com"
+          },
+          {
+            "name": "Return-Path",
+            "value": "<[REDACTED_EMAIL]>"
+          },
+          {
+            "name": "Received",
+            "value": "from a11-130.smtp-out.amazonses.com (a11-130.smtp-out.amazonses.com. [54.240.11.130])        by mx.google.com with ESMTPS id 6a1803df08f44-8cce9fd5ea1si118821516d6.60.2026.06.01.04.04.19        for <[REDACTED_EMAIL]>        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);        Mon, 01 Jun 2026 04:04:20 -0700 (PDT)"
+          },
+          {
+            "name": "Received-SPF",
+            "value": "pass (google.com: domain of [REDACTED_EMAIL] designates 54.240.11.130 as permitted sender) client-ip=54.240.11.130;"
+          },
+          {
+            "name": "Authentication-Results",
+            "value": "mx.google.com;       dkim=pass header.i=@shopline.com header.s=hrqiammghdmrwrbdwrkscjzp6gknyye7 header.b=2y1x+WIO;       dkim=pass header.i=@amazonses.com header.s=224i4yxa5dv7c2xz3womw6peuasteono header.b=HJRdMFlf;       spf=pass (google.com: domain of [REDACTED_EMAIL] designates 54.240.11.130 as permitted sender) smtp.mailfrom=[REDACTED_EMAIL];       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=shopline.com"
+          },
+          {
+            "name": "DKIM-Signature",
+            "value": "v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple; s=hrqiammghdmrwrbdwrkscjzp6gknyye7; d=shopline.com; t=1780311859; h=Date:From:Reply-To:To:Cc:Message-ID:Subject:Mime-Version:Content-Type:Content-Transfer-Encoding; bh=QsTvvu3pPpNRFymbhiMZ8JJKGasbezR+izs9Gdw7lV8=; b=2y1x+WIOI+YvYM1mYpjGSmzpUqjnkhoOF9jQsyE1ucFJb18hqitWBdaCg1mcMD0j nzjE1h7ApjMTSIxLqY2zPHSArmoLNfo7BysR4nrjnMEjVEbh9VNPa4ztLsLXG7JXbSx SdPq5qm+krasExkBSYAABjtd2PVOnPykRsMDEppZVuLT1EntSzvIjH3yDgjuT+Mes09 FZyzzrJPOXGjHgb7NtLPB51yAgb23//41gEsi3fldvp59BBVrwXsCC+iAT/3YrL2JFN ZXk2yqeqY1BTFzq0S96iqPu+gm0trLQfMIGBNaPUEdWSKb+sM6cX+4XCl+BGOhomc29 EQWaDgENpQ=="
+          },
+          {
+            "name": "DKIM-Signature",
+            "value": "v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple; s=224i4yxa5dv7c2xz3womw6peuasteono; d=amazonses.com; t=1780311859; h=Date:From:Reply-To:To:Cc:Message-ID:Subject:Mime-Version:Content-Type:Content-Transfer-Encoding:Feedback-ID; bh=QsTvvu3pPpNRFymbhiMZ8JJKGasbezR+izs9Gdw7lV8=; b=HJRdMFlfoLam3wqoVt5k34OcuuupgYpTfDahodSWqIUXwkvHw2z1Kn/RO6N5RX1m vuysQ3/Fz1+DzScrUOzUbQf0/JHW4WpN/rciaQ8yaGEU3PX6QN1d9KLwNyqJYrfus0Z Hrjk4Y5ZYAjSRWsuG5Rv4wWjFLcJYrSPJxejD4DE="
+          },
+          {
+            "name": "Date",
+            "value": "Mon, 1 Jun 2026 11:04:19 +0000"
+          },
+          {
+            "name": "From",
+            "value": "\"飆機器人\" <[REDACTED_EMAIL]>"
+          },
+          {
+            "name": "Reply-To",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "To",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "Cc",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "Message-ID",
+            "value": "<[REDACTED_EMAIL]>"
+          },
+          {
+            "name": "Subject",
+            "value": "[飆機器人] #20260530160007051 送貨狀態 更新為: 已發貨"
+          },
+          {
+            "name": "Mime-Version",
+            "value": "1.0"
+          },
+          {
+            "name": "Content-Type",
+            "value": "text/html; charset=UTF-8"
+          },
+          {
+            "name": "Content-Transfer-Encoding",
+            "value": "quoted-printable"
+          },
+          {
+            "name": "Feedback-ID",
+            "value": "::1.us-east-1.pVRXXx0ru023hhkF8ks+mhjZ9jJErjJTeUAHytuUnvI=:AmazonSES"
+          },
+          {
+            "name": "X-SES-Outgoing",
+            "value": "2026.06.01-54.240.11.130"
+          }
+        ],
+        "body": {
+          "size": 20226,
+          "base64_url_content": null,
+          "content": "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"[REDACTED_EMAIL_LINK]">\r\r\n<html lang=\"en\">\r\r\n  <head>\r\r\n    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\r\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\r\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\r\n    <meta name=\"format-detection\" content=\"telephone=no\">\r\r\n    <title>Order Email</title>\r\r\n    <style type=\"text/css\">\r\r\n      * {\r\r\n        font-family:Helvetica, Arial, sans-serif;\r\r\n      }\r\r\n      body {\r\r\n        margin: 0;\r\r\n        padding: 0;\r\r\n        -ms-text-size-adjust: 100%;\r\r\n        -webkit-text-size-adjust: 100%;\r\r\n      }\r\r\n      table {\r\r\n        border-spacing: 0;\r\r\n      }\r\r\n      table td {\r\r\n        border-collapse: collapse;\r\r\n      }\r\r\n      .ExternalClass {\r\r\n        width: 100%;\r\r\n      }\r\r\n      .ExternalClass,\r\r\n      .ExternalClass p,\r\r\n      .ExternalClass span,\r\r\n      .ExternalClass font,\r\r\n      .ExternalClass td,\r\r\n      .ExternalClass div {\r\r\n        line-height: 100%;\r\r\n      }\r\r\n      .ReadMsgBody {\r\r\n        width: 100%;\r\r\n        background-color: #ebebeb;\r\r\n      }\r\r\n      table {\r\r\n        mso-table-lspace: 0pt;\r\r\n        mso-table-rspace: 0pt;\r\r\n      }\r\r\n      img {\r\r\n        -ms-interpolation-mode: bicubic;\r\r\n      }\r\r\n      .yshortcuts a {\r\r\n        border-bottom: none !important;\r\r\n      }\r\r\n      @media screen and (max-width: 599px) {\r\r\n        table[class=\"force-row\"],\r\r\n        table[class=\"container\"] {\r\r\n          width: 100% !important;\r\r\n          max-width: 100% !important;\r\r\n        }\r\r\n      }\r\r\n      @media screen and (max-width: 400px) {\r\r\n        td[class*=\"container-padding\"] {\r\r\n          padding-left: 12px !important;\r\r\n          padding-right: 12px !important;\r\r\n        }\r\r\n      }\r\r\n      footer a {\r\r\n        color: #aaaaaa !important;\r\r\n        text-decoration: underline;\r\r\n      }\r\r\n    </style>\r\r\n  </head>\r\r\n  <body style=\"margin:0; padding:0;\" bgcolor=\"#F0F0F0\" leftmargin=\"0\" topmargin=\"0\" marginwidth=\"0\" marginheight=\"0\">\r\r\n    <table border=\"0\" width=\"100%\" height=\"100%\" cellpadding=\"0\" cellspacing=\"0\" bgcolor=\"#F0F0F0\">\r\r\n      <tr>\r\r\n        <td align=\"center\" valign=\"top\" bgcolor=\"#F0F0F0\" style=\"background-color: #F0F0F0;\">\r\r\n          <br>\r\r\n          <table border=\"0\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" class=\"container\" style=\"width: 600px; max-width: 600px;\">\r\r\n            <tr>\r\r\n              <td class=\"container-padding content\" align=\"left\" style=\"padding-left: 24px; padding-right: 24px; padding-top: 12px; padding-bottom: 12px; background-color: #ffffff;\">\r\r\n                <div style=\"min-height: auto; padding: 15px; text-align: center; max-height: 150px; max-width: 100%;\">\r\r\n                  <img style=\"max-height: 150px; max-width: 100%;\" src=\"[REDACTED_EMAIL_LINK]"/>\r\r\n                </div>\r\r\n                <br/>\r\r\n                <div style=\"height: 1px; border-bottom: 1px solid #cccccc; clear: both;\"></div>\r\r\n                <br/>\r\r\n                <p style=\"font-weight: bold; font-size: 18px; line-height: 24px; color: #1c2538;\">\r\r\n                  [飆機器人] #20260530160007051 送貨狀態 更新為: 已發貨\r\r\n                </p>\r\r\n                <p>訂單狀態為：已確認</p>\r\r\n                <p>付款狀態為：未付款</p>\r\r\n                <p>送貨狀態為：已發貨</p>\r\r\n                <p>有關訂單的查詢或要聯絡飆機器人，請登入以下連結。如果還未設立帳戶，請按「忘記密碼」設立你的帳戶。</p>\r\r\n                <a\r\r\n                  style=\";background-color: #90A7D1; color: #FFFFFF;; padding: 10px 30px; text-decoration: none; text-align: center; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; text-transform: uppercase; margin: 10px 0; display: block; font-size: 14px;\"\r\r\n                  href=\"[REDACTED_EMAIL_LINK]"\r\r\n                >\r\r\n                  訂單連結\r\r\n                </a>\r\r\n\r\r\n                \r\r\n                <p style=\"height: 1px; border-bottom: 1px solid #cccccc; clear: both;\"></p>\r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  訂單日期\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  2026-05-31 00:00AM GMT+08:00\r\r\n                </div>\r\r\n\r\r\n                \r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  訂單號碼\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  20260530160007051\r\r\n                </div>\r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  訂單狀態\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  已確認\r\r\n                </div>\r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  商店\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  飆機器人 (<span style=\"color: #5087e6\">[REDACTED_EMAIL]</span>)\r\r\n                </div>\r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  訂購人\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  Youlin \r\r\n                  \r\r\n                    (<span style=\"color: #5087e6\">[REDACTED_EMAIL]</span>)\r\r\n                  \r\r\n                </div>\r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  電話號碼\r\r\n                </div>\r\r\n                \r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    0960***071\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    性別\r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    男\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                 \r\r\n\r\r\n                \r\r\n                  \r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    訂單備註\r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    其他名字/稱呼: Justin 或者 段佑霖\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  付款方式\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  全家 取貨付款\r\r\n                </div>\r\r\n\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  付款狀態\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  未付款\r\r\n                  \r\r\n                </div>\r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  送貨方式\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  全家 取貨付款 (運費60元)\r\r\n                </div>\r\r\n\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    送貨詳情\r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    材積長＋寬＋高＜105公分；重量<5kg<br>選擇超商，若達1次未取付，將立即列入黑名單，日後一律僅能先匯款再出貨。\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    地址\r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 5px; font-size: 14px; color: #555555;\">\r\r\n                    Youlin\r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 5px; font-size: 14px; color: #555555;\">\r\r\n                    \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 5px; font-size: 14px; color: #555555;\">\r\r\n                    \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 5px; font-size: 14px; color: #555555;\">\r\r\n                    \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 5px; font-size: 14px; color: #555555;\">\r\r\n                    \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 5px; font-size: 14px; color: #555555;\">\r\r\n                    台灣\r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 5px; font-size: 14px; color: #555555;\">\r\r\n                    \r\r\n                  </div>\r\r\n                  <span style=\"height: 10px; display: block;\"></span>\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    收件人 \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    Youlin\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    收件人電話號碼 \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    0960***071\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    收件門市代號 \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    F022590\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    收件門市名稱 \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    全家善化蓮潭店\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    貨件追蹤號碼 \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    16340854442\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  送貨狀態\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  已發貨\r\r\n                </div>\r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  訂單詳情\r\r\n                </div>\r\r\n\r\r\n                <table style=\"width: 100%; font-size: 12px; color: #333333;\">\r\r\n                  \r\r\n                    <tr>\r\r\n                      <td>\r\r\n                        <table style=\"font-size: 12px; color:#333333;\">\r\r\n                          <tr>\r\r\n                            \r\r\n                              <td style=\"vertical-align: top; padding-right: 10px; padding-bottom: 15px;\">\r\r\n                                <a href=\"#\" target=\"_blank\">\r\r\n                                  <img\r\r\n                                    width=\"80\"\r\r\n                                    height=\"80\"\r\r\n                                    src=\"[REDACTED_EMAIL_LINK]"\r\r\n                                    alt=\"\"\r\r\n                                    style=\"object-fit: cover;\"\r\r\n                                  >\r\r\n                                </a>\r\r\n                              </td>\r\r\n                            \r\r\n                            <td style=\"vertical-align: top\">\r\r\n                              \r\r\n                                <div>\r\r\n                              \r\r\n                                \r\r\n                                  \r\r\n                                  \r\r\n                                  <p style=\"margin:0 3px 3px;\">\r\r\n                                    RPLIDAR C1 LiDAR 光達（12公尺 5000次/秒）\r\r\n                                  </p>\r\r\n                                \r\r\n                                \r\r\n                                <ul style=\"margin: 4px 12px 12px 8px; padding-left: 0;\">\r\r\n                                  \r\r\n                                </ul>\r\r\n\r\r\n                                <p style=\"margin:0 3px 15px;\">\r\r\n                                  \r\r\n                                    1 x NT$2,880\r\r\n                                  \r\r\n\r\r\n                                  \r\r\n\r\r\n                                  \r\r\n                                </p>\r\r\n                              </div>\r\r\n                            </td>\r\r\n                          </tr>\r\r\n                        </table>\r\r\n                      </td>\r\r\n                      <td style=\"vertical-align: top;\">\r\r\n                        <div style=\"text-align: right;\">\r\r\n                          <span>\r\r\n                            \r\r\n                              NT$2,880\r\r\n                            \r\r\n                          </span>\r\r\n                        </div>\r\r\n                      </td>\r\r\n                    </tr>\r\r\n                  \r\r\n                    <tr>\r\r\n                      <td>\r\r\n                        <table style=\"font-size: 12px; color:#333333;\">\r\r\n                          <tr>\r\r\n                            \r\r\n                              <td style=\"vertical-align: top; padding-right: 10px; padding-bottom: 15px;\">\r\r\n                                <a href=\"#\" target=\"_blank\">\r\r\n                                  <img\r\r\n                                    width=\"80\"\r\r\n                                    height=\"80\"\r\r\n                                    src=\"[REDACTED_EMAIL_LINK]"\r\r\n                                    alt=\"\"\r\r\n                                    style=\"object-fit: cover;\"\r\r\n                                  >\r\r\n                                </a>\r\r\n                              </td>\r\r\n                            \r\r\n                            <td style=\"vertical-align: top\">\r\r\n                              \r\r\n                                <div>\r\r\n                              \r\r\n                                \r\r\n                                  \r\r\n                                  \r\r\n                                  <p style=\"margin:0 3px 3px;\">\r\r\n                                    Raspberry Pi Camera Module 3 廣角版\r\r\n                                  </p>\r\r\n                                \r\r\n                                \r\r\n                                <ul style=\"margin: 4px 12px 12px 8px; padding-left: 0;\">\r\r\n                                  \r\r\n                                </ul>\r\r\n\r\r\n                                <p style=\"margin:0 3px 15px;\">\r\r\n                                  \r\r\n                                    1 x NT$1,460\r\r\n                                  \r\r\n\r\r\n                                  \r\r\n\r\r\n                                  \r\r\n                                </p>\r\r\n                              </div>\r\r\n                            </td>\r\r\n                          </tr>\r\r\n                        </table>\r\r\n                      </td>\r\r\n                      <td style=\"vertical-align: top;\">\r\r\n                        <div style=\"text-align: right;\">\r\r\n                          <span>\r\r\n                            \r\r\n                              NT$1,460\r\r\n                            \r\r\n                          </span>\r\r\n                        </div>\r\r\n                      </td>\r\r\n                    </tr>\r\r\n                  \r\r\n                  <tr>\r\r\n                    <td style=\"text-align: right; padding-bottom: 10px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                      小計:\r\r\n                    </td>\r\r\n                    <td style=\"text-align: right; padding-left: 16px; padding-bottom: 10px; font-size: 12px; color: #555555; white-space: nowrap;\">\r\r\n                      NT$4,340\r\r\n                    </td>\r\r\n                  </tr>\r\r\n                  \r\r\n                  \r\r\n                  \r\r\n                  \r\r\n                  <tr>\r\r\n                    <td style=\"text-align: right; padding-bottom: 10px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                      運費:\r\r\n                    </td>\r\r\n                    <td style=\"text-align: right; padding-left: 16px; padding-bottom: 10px; font-size: 12px; color: #555555; white-space: nowrap;\">\r\r\n                      NT$60\r\r\n                    </td>\r\r\n                  </tr>\r\r\n                  \r\r\n                  \r\r\n                  <tr>\r\r\n                    <td style=\"text-align: right; padding-bottom: 10px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                      合計:\r\r\n                    </td>\r\r\n                    <td style=\"text-align: right; padding-left: 16px; padding-bottom: 10px; font-size: 12px; color: #555555; white-space: nowrap;\">\r\r\n                      \r\r\n                        NT$4,400\r\r\n                      \r\r\n                    </td>\r\r\n                  </tr>\r\r\n                  \r\r\n                  \r\r\n\r\r\n                  \r\r\n                  \r\r\n\r\r\n                </table>\r\r\n<p>&nbsp;</p>\r\r\n                  <p>飆機器人</p>\r\r\n<p>營業時間：上午8：30至下午5：30</p>\r\r\n<p>客服信箱：[REDACTED_EMAIL]</p>\r\r\n<p>連絡電話：02-2880-5998</p>\r\r\n                <br/>\r\r\n              </td>\r\r\n            </tr>\r\r\n            <tr>\r\r\n              <td class=\"container-padding footer-text\" align=\"left\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 12px; line-height: 16px; color: #aaaaaa; padding-left: 24px; padding-right: 24px;\">\r\r\n                <br><br>\r\r\n                <strong>飆機器人</strong>\r\r\n                <br><br>\r\r\n                您會收到這封電郵是由於您使用這個電郵地址在飆機器人下了訂單。\r\r\n                <br><br>\r\r\n                <br><br>\r\r\n              </td>\r\r\n            </tr>\r\r\n          </table>\r\r\n        </td>\r\r\n      </tr>\r\r\n    </table>\r\r\n  </body>\r\r\n</html>\r\r\n",
+          "attachment_id": null
+        },
+        "read_attachment_supported": null,
+        "parts": null
+      },
+      "size_estimate": 29216,
+      "classification_label_values": null
+    },
+    {
+      "id": "19e799d456189f4e",
+      "thread_id": "19e799d456189f4e",
+      "label_ids": [
+        "CATEGORY_UPDATES",
+        "INBOX"
+      ],
+      "snippet": "[飆機器人] 謝謝你的訂單 #20260530160007051!! 訂單狀態為：處理中 付款狀態為：未付款 送貨狀態為：備貨中 有關訂單的查詢或要聯絡飆機器人，請登入以下連結。如果還未設立帳戶，請按「忘記密碼」設立你的帳戶。 訂單連結 訂單日期 2026-05-31 00:00AM GMT+08:00 訂單號碼 20260530160007051 訂單狀態 處理中 商店 飆機器人 (sales@",
+      "history_id": "3653086",
+      "internal_date": "1780156809000",
+      "payload": {
+        "part_id": "",
+        "mime_type": "text/html",
+        "filename": "",
+        "headers": [
+          {
+            "name": "Delivered-To",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "Received",
+            "value": "by 2002:a05:6214:83:b0:8ca:10b7:dd71 with SMTP id n3csp321305qvr;        Sat, 30 May 2026 09:00:10 -0700 (PDT)"
+          },
+          {
+            "name": "X-Received",
+            "value": "by 2002:a05:620a:470d:b0:914:b31c:7001 with SMTP id af79cd13be357-9152f8ce09fmr874250185a.6.1780156810515;        Sat, 30 May 2026 09:00:10 -0700 (PDT)"
+          },
+          {
+            "name": "ARC-Seal",
+            "value": "i=1; a=rsa-sha256; t=1780156810; cv=none;        d=google.com; s=arc-20240605;        b=gUKn7Nx3j+ycVdeEZ0vJyjWKolIGOai/3caU+SxZUeX91/ZAx/xZYLzFvJxGvzPdCg         r9fMa3CntWIQgXgpJTy5nJtJNKX912SZ1FIrvY6Mbe0CzTKRWbWKKQ1HQ5cftN8JlX82         ZU9+WUGH+sr7ZQomIBfkVOMY6VQYjmFL6POswt6gkX/+2nTgGj33Jv+2ry1xYIZ/Lzq8         Qbg/4079ijpEEl8WUj4BgdY5qqEBZBkACdecq0toIvRuL4xIomSkJm95o8cebL8AWYsx         MG/gowla0BXn18iquR9XUjbnICdiP3cnYc0uuAuyQbQzxv9/z3DdzjJa99po/gfMQ75I         j+Ww=="
+          },
+          {
+            "name": "ARC-Message-Signature",
+            "value": "i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;        h=feedback-id:content-transfer-encoding:mime-version:subject         :message-id:cc:to:reply-to:from:date:dkim-signature:dkim-signature;        bh=kweI8LLaUVDajJGAslrR+uWdIe1sWtTzhRV6gAY17Mc=;        fh=TIFBxxJUOTMnN9WO1PMzPbXGjlpyfszkV1b3V/xLU/4=;        b=WBblZgdIf9mQc2buqbCUW1qVVylsvb9fQHWsDXcMPFSK0pXgs1BnPNA4d/oFNrE0M4         U1ORf07ZtaSrSTY7SsCBivkoOW0iFAoCNFRcnz0/Kau/opS84m9NXC8La9dPAn4hOxWQ         +6tf3u5IBfo0yEK+u+qCYYhan2XtvIsmXLaIfLQz7b92mbPv1y6ZQnxdkPr5BZPSrsgp         ji9iHU2w4pZ54vbedG1qQb3nrxSwLgrY//712OChimOwavoYuSuAw/G7R7zprLiDNGSn         qRCriK5mejAc6wJhrxAE+9QTDEnGBrG3nQf5wQx3vvhWS3TMdRb1/nbLQrgZK06yV6KY         j9Og==;        dara=google.com"
+          },
+          {
+            "name": "ARC-Authentication-Results",
+            "value": "i=1; mx.google.com;       dkim=pass header.i=@shopline.com header.s=hrqiammghdmrwrbdwrkscjzp6gknyye7 header.b=khoDcSfP;       dkim=pass header.i=@amazonses.com header.s=224i4yxa5dv7c2xz3womw6peuasteono header.b=LZC1XlGc;       spf=pass (google.com: domain of [REDACTED_EMAIL] designates 54.240.11.24 as permitted sender) smtp.mailfrom=[REDACTED_EMAIL];       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=shopline.com"
+          },
+          {
+            "name": "Return-Path",
+            "value": "<[REDACTED_EMAIL]>"
+          },
+          {
+            "name": "Received",
+            "value": "from a11-24.smtp-out.amazonses.com (a11-24.smtp-out.amazonses.com. [54.240.11.24])        by mx.google.com with ESMTPS id af79cd13be357-9153249efbfsi507810585a.35.2026.05.30.09.00.10        for <[REDACTED_EMAIL]>        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);        Sat, 30 May 2026 09:00:10 -0700 (PDT)"
+          },
+          {
+            "name": "Received-SPF",
+            "value": "pass (google.com: domain of [REDACTED_EMAIL] designates 54.240.11.24 as permitted sender) client-ip=54.240.11.24;"
+          },
+          {
+            "name": "Authentication-Results",
+            "value": "mx.google.com;       dkim=pass header.i=@shopline.com header.s=hrqiammghdmrwrbdwrkscjzp6gknyye7 header.b=khoDcSfP;       dkim=pass header.i=@amazonses.com header.s=224i4yxa5dv7c2xz3womw6peuasteono header.b=LZC1XlGc;       spf=pass (google.com: domain of [REDACTED_EMAIL] designates 54.240.11.24 as permitted sender) smtp.mailfrom=[REDACTED_EMAIL];       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=shopline.com"
+          },
+          {
+            "name": "DKIM-Signature",
+            "value": "v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple; s=hrqiammghdmrwrbdwrkscjzp6gknyye7; d=shopline.com; t=1780156810; h=Date:From:Reply-To:To:Cc:Message-ID:Subject:Mime-Version:Content-Type:Content-Transfer-Encoding; bh=9btz17cUloYD2NNTYeqja2kGZoHQRuisyGFeQmZRC7Q=; b=khoDcSfPaBiKKaRlQBimOc5DxVQoHTuxvO2S88PRfXj5jnzYHpHtyyGbcOEpHYPq MiX9418xiw9EQKjcqrBcA2V7cqDPjUO6yXF2pr1awUGXg57ac6razUxvpm/s0TI5DCS U5zfzHA2GC0yFDw85mPv/K/nco+pGMepXCDjJtkm46HBZrU5COCylJzyx1sX/uuwl+9 s/Mt8CzpNY4zx5Qn1N93YokB73+F0YanrzqbTWgLJD+Ihe/ABinMqHy7Nfz8myzX7+N bbnO1NUI2lmkBqODPimdVwzU9yVK2IHpVyBgF6TPcYq3gYXfLq41XHWSyDarsLCTHES md3ytLUe+g=="
+          },
+          {
+            "name": "DKIM-Signature",
+            "value": "v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple; s=224i4yxa5dv7c2xz3womw6peuasteono; d=amazonses.com; t=1780156810; h=Date:From:Reply-To:To:Cc:Message-ID:Subject:Mime-Version:Content-Type:Content-Transfer-Encoding:Feedback-ID; bh=9btz17cUloYD2NNTYeqja2kGZoHQRuisyGFeQmZRC7Q=; b=LZC1XlGcj69RRR2Z500q1/a2LOzElw5k5r5b1JOhyuPptuOYXPr4wyvl+JdqRWeN 3hr6FZAgdqrNinlx3XMqaprHeFN2yesr60qo/46KX5ohUR8+aH/DxC0vOuZegBDjaxZ vXf2DWHp+ABfqM5MarHeVq9FzTvrYZZNcDiTV3qk="
+          },
+          {
+            "name": "Date",
+            "value": "Sat, 30 May 2026 16:00:09 +0000"
+          },
+          {
+            "name": "From",
+            "value": "\"飆機器人\" <[REDACTED_EMAIL]>"
+          },
+          {
+            "name": "Reply-To",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "To",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "Cc",
+            "value": "[REDACTED_EMAIL]"
+          },
+          {
+            "name": "Message-ID",
+            "value": "<[REDACTED_EMAIL]>"
+          },
+          {
+            "name": "Subject",
+            "value": "[飆機器人] 謝謝你的訂單 #20260530160007051!"
+          },
+          {
+            "name": "Mime-Version",
+            "value": "1.0"
+          },
+          {
+            "name": "Content-Type",
+            "value": "text/html; charset=UTF-8"
+          },
+          {
+            "name": "Content-Transfer-Encoding",
+            "value": "quoted-printable"
+          },
+          {
+            "name": "Feedback-ID",
+            "value": "::1.us-east-1.pVRXXx0ru023hhkF8ks+mhjZ9jJErjJTeUAHytuUnvI=:AmazonSES"
+          },
+          {
+            "name": "X-SES-Outgoing",
+            "value": "2026.05.30-54.240.11.24"
+          }
+        ],
+        "body": {
+          "size": 19862,
+          "base64_url_content": null,
+          "content": "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"[REDACTED_EMAIL_LINK]">\r\r\n<html lang=\"en\">\r\r\n  <head>\r\r\n    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\r\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\r\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\r\n    <meta name=\"format-detection\" content=\"telephone=no\">\r\r\n    <title>Order Email</title>\r\r\n    <style type=\"text/css\">\r\r\n      * {\r\r\n        font-family:Helvetica, Arial, sans-serif;\r\r\n      }\r\r\n      body {\r\r\n        margin: 0;\r\r\n        padding: 0;\r\r\n        -ms-text-size-adjust: 100%;\r\r\n        -webkit-text-size-adjust: 100%;\r\r\n      }\r\r\n      table {\r\r\n        border-spacing: 0;\r\r\n      }\r\r\n      table td {\r\r\n        border-collapse: collapse;\r\r\n      }\r\r\n      .ExternalClass {\r\r\n        width: 100%;\r\r\n      }\r\r\n      .ExternalClass,\r\r\n      .ExternalClass p,\r\r\n      .ExternalClass span,\r\r\n      .ExternalClass font,\r\r\n      .ExternalClass td,\r\r\n      .ExternalClass div {\r\r\n        line-height: 100%;\r\r\n      }\r\r\n      .ReadMsgBody {\r\r\n        width: 100%;\r\r\n        background-color: #ebebeb;\r\r\n      }\r\r\n      table {\r\r\n        mso-table-lspace: 0pt;\r\r\n        mso-table-rspace: 0pt;\r\r\n      }\r\r\n      img {\r\r\n        -ms-interpolation-mode: bicubic;\r\r\n      }\r\r\n      .yshortcuts a {\r\r\n        border-bottom: none !important;\r\r\n      }\r\r\n      @media screen and (max-width: 599px) {\r\r\n        table[class=\"force-row\"],\r\r\n        table[class=\"container\"] {\r\r\n          width: 100% !important;\r\r\n          max-width: 100% !important;\r\r\n        }\r\r\n      }\r\r\n      @media screen and (max-width: 400px) {\r\r\n        td[class*=\"container-padding\"] {\r\r\n          padding-left: 12px !important;\r\r\n          padding-right: 12px !important;\r\r\n        }\r\r\n      }\r\r\n      footer a {\r\r\n        color: #aaaaaa !important;\r\r\n        text-decoration: underline;\r\r\n      }\r\r\n    </style>\r\r\n  </head>\r\r\n  <body style=\"margin:0; padding:0;\" bgcolor=\"#F0F0F0\" leftmargin=\"0\" topmargin=\"0\" marginwidth=\"0\" marginheight=\"0\">\r\r\n    <table border=\"0\" width=\"100%\" height=\"100%\" cellpadding=\"0\" cellspacing=\"0\" bgcolor=\"#F0F0F0\">\r\r\n      <tr>\r\r\n        <td align=\"center\" valign=\"top\" bgcolor=\"#F0F0F0\" style=\"background-color: #F0F0F0;\">\r\r\n          <br>\r\r\n          <table border=\"0\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" class=\"container\" style=\"width: 600px; max-width: 600px;\">\r\r\n            <tr>\r\r\n              <td class=\"container-padding content\" align=\"left\" style=\"padding-left: 24px; padding-right: 24px; padding-top: 12px; padding-bottom: 12px; background-color: #ffffff;\">\r\r\n                <div style=\"min-height: auto; padding: 15px; text-align: center; max-height: 150px; max-width: 100%;\">\r\r\n                  <img style=\"max-height: 150px; max-width: 100%;\" src=\"[REDACTED_EMAIL_LINK]"/>\r\r\n                </div>\r\r\n                <br/>\r\r\n                <div style=\"height: 1px; border-bottom: 1px solid #cccccc; clear: both;\"></div>\r\r\n                <br/>\r\r\n                <p style=\"font-weight: bold; font-size: 18px; line-height: 24px; color: #1c2538;\">\r\r\n                  [飆機器人] 謝謝你的訂單 #20260530160007051!!\r\r\n                </p>\r\r\n                <p>訂單狀態為：處理中</p>\r\r\n                <p>付款狀態為：未付款</p>\r\r\n                <p>送貨狀態為：備貨中</p>\r\r\n                <p>有關訂單的查詢或要聯絡飆機器人，請登入以下連結。如果還未設立帳戶，請按「忘記密碼」設立你的帳戶。</p>\r\r\n                <a\r\r\n                  style=\";background-color: #90A7D1; color: #FFFFFF;; padding: 10px 30px; text-decoration: none; text-align: center; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; text-transform: uppercase; margin: 10px 0; display: block; font-size: 14px;\"\r\r\n                  href=\"[REDACTED_EMAIL_LINK]"\r\r\n                >\r\r\n                  訂單連結\r\r\n                </a>\r\r\n\r\r\n                \r\r\n                <p style=\"height: 1px; border-bottom: 1px solid #cccccc; clear: both;\"></p>\r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  訂單日期\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  2026-05-31 00:00AM GMT+08:00\r\r\n                </div>\r\r\n\r\r\n                \r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  訂單號碼\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  20260530160007051\r\r\n                </div>\r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  訂單狀態\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  處理中\r\r\n                </div>\r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  商店\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  飆機器人 (<span style=\"color: #5087e6\">[REDACTED_EMAIL]</span>)\r\r\n                </div>\r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  訂購人\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  Youlin \r\r\n                  \r\r\n                    (<span style=\"color: #5087e6\">[REDACTED_EMAIL]</span>)\r\r\n                  \r\r\n                </div>\r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  電話號碼\r\r\n                </div>\r\r\n                \r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    0960***071\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    性別\r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    男\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                 \r\r\n\r\r\n                \r\r\n                  \r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    訂單備註\r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    其他名字/稱呼: Justin 或者 段佑霖\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  付款方式\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  全家 取貨付款\r\r\n                </div>\r\r\n\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  付款狀態\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  未付款\r\r\n                  \r\r\n                </div>\r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  送貨方式\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  全家 取貨付款 (運費60元)\r\r\n                </div>\r\r\n\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    送貨詳情\r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    材積長＋寬＋高＜105公分；重量<5kg<br>選擇超商，若達1次未取付，將立即列入黑名單，日後一律僅能先匯款再出貨。\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    地址\r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 5px; font-size: 14px; color: #555555;\">\r\r\n                    Youlin\r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 5px; font-size: 14px; color: #555555;\">\r\r\n                    \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 5px; font-size: 14px; color: #555555;\">\r\r\n                    \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 5px; font-size: 14px; color: #555555;\">\r\r\n                    \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 5px; font-size: 14px; color: #555555;\">\r\r\n                    \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 5px; font-size: 14px; color: #555555;\">\r\r\n                    台灣\r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 5px; font-size: 14px; color: #555555;\">\r\r\n                    \r\r\n                  </div>\r\r\n                  <span style=\"height: 10px; display: block;\"></span>\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    收件人 \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    Youlin\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    收件人電話號碼 \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    0960***071\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    收件門市代號 \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    F022590\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n                  <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                    收件門市名稱 \r\r\n                  </div>\r\r\n                  <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                    全家善化蓮潭店\r\r\n                  </div>\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                \r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  送貨狀態\r\r\n                </div>\r\r\n                <div style=\"margin-bottom: 15px; font-size: 14px; color: #555555;\">\r\r\n                  備貨中\r\r\n                </div>\r\r\n\r\r\n                <div style=\"margin-bottom: 5px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                  訂單詳情\r\r\n                </div>\r\r\n\r\r\n                <table style=\"width: 100%; font-size: 12px; color: #333333;\">\r\r\n                  \r\r\n                    <tr>\r\r\n                      <td>\r\r\n                        <table style=\"font-size: 12px; color:#333333;\">\r\r\n                          <tr>\r\r\n                            \r\r\n                              <td style=\"vertical-align: top; padding-right: 10px; padding-bottom: 15px;\">\r\r\n                                <a href=\"#\" target=\"_blank\">\r\r\n                                  <img\r\r\n                                    width=\"80\"\r\r\n                                    height=\"80\"\r\r\n                                    src=\"[REDACTED_EMAIL_LINK]"\r\r\n                                    alt=\"\"\r\r\n                                    style=\"object-fit: cover;\"\r\r\n                                  >\r\r\n                                </a>\r\r\n                              </td>\r\r\n                            \r\r\n                            <td style=\"vertical-align: top\">\r\r\n                              \r\r\n                                <div>\r\r\n                              \r\r\n                                \r\r\n                                  \r\r\n                                  \r\r\n                                  <p style=\"margin:0 3px 3px;\">\r\r\n                                    RPLIDAR C1 LiDAR 光達（12公尺 5000次/秒）\r\r\n                                  </p>\r\r\n                                \r\r\n                                \r\r\n                                <ul style=\"margin: 4px 12px 12px 8px; padding-left: 0;\">\r\r\n                                  \r\r\n                                </ul>\r\r\n\r\r\n                                <p style=\"margin:0 3px 15px;\">\r\r\n                                  \r\r\n                                    1 x NT$2,880\r\r\n                                  \r\r\n\r\r\n                                  \r\r\n\r\r\n                                  \r\r\n                                </p>\r\r\n                              </div>\r\r\n                            </td>\r\r\n                          </tr>\r\r\n                        </table>\r\r\n                      </td>\r\r\n                      <td style=\"vertical-align: top;\">\r\r\n                        <div style=\"text-align: right;\">\r\r\n                          <span>\r\r\n                            \r\r\n                              NT$2,880\r\r\n                            \r\r\n                          </span>\r\r\n                        </div>\r\r\n                      </td>\r\r\n                    </tr>\r\r\n                  \r\r\n                    <tr>\r\r\n                      <td>\r\r\n                        <table style=\"font-size: 12px; color:#333333;\">\r\r\n                          <tr>\r\r\n                            \r\r\n                              <td style=\"vertical-align: top; padding-right: 10px; padding-bottom: 15px;\">\r\r\n                                <a href=\"#\" target=\"_blank\">\r\r\n                                  <img\r\r\n                                    width=\"80\"\r\r\n                                    height=\"80\"\r\r\n                                    src=\"[REDACTED_EMAIL_LINK]"\r\r\n                                    alt=\"\"\r\r\n                                    style=\"object-fit: cover;\"\r\r\n                                  >\r\r\n                                </a>\r\r\n                              </td>\r\r\n                            \r\r\n                            <td style=\"vertical-align: top\">\r\r\n                              \r\r\n                                <div>\r\r\n                              \r\r\n                                \r\r\n                                  \r\r\n                                  \r\r\n                                  <p style=\"margin:0 3px 3px;\">\r\r\n                                    Raspberry Pi Camera Module 3 廣角版\r\r\n                                  </p>\r\r\n                                \r\r\n                                \r\r\n                                <ul style=\"margin: 4px 12px 12px 8px; padding-left: 0;\">\r\r\n                                  \r\r\n                                </ul>\r\r\n\r\r\n                                <p style=\"margin:0 3px 15px;\">\r\r\n                                  \r\r\n                                    1 x NT$1,460\r\r\n                                  \r\r\n\r\r\n                                  \r\r\n\r\r\n                                  \r\r\n                                </p>\r\r\n                              </div>\r\r\n                            </td>\r\r\n                          </tr>\r\r\n                        </table>\r\r\n                      </td>\r\r\n                      <td style=\"vertical-align: top;\">\r\r\n                        <div style=\"text-align: right;\">\r\r\n                          <span>\r\r\n                            \r\r\n                              NT$1,460\r\r\n                            \r\r\n                          </span>\r\r\n                        </div>\r\r\n                      </td>\r\r\n                    </tr>\r\r\n                  \r\r\n                  <tr>\r\r\n                    <td style=\"text-align: right; padding-bottom: 10px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                      小計:\r\r\n                    </td>\r\r\n                    <td style=\"text-align: right; padding-left: 16px; padding-bottom: 10px; font-size: 12px; color: #555555; white-space: nowrap;\">\r\r\n                      NT$4,340\r\r\n                    </td>\r\r\n                  </tr>\r\r\n                  \r\r\n                  \r\r\n                  \r\r\n                  \r\r\n                  <tr>\r\r\n                    <td style=\"text-align: right; padding-bottom: 10px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                      運費:\r\r\n                    </td>\r\r\n                    <td style=\"text-align: right; padding-left: 16px; padding-bottom: 10px; font-size: 12px; color: #555555; white-space: nowrap;\">\r\r\n                      NT$60\r\r\n                    </td>\r\r\n                  </tr>\r\r\n                  \r\r\n                  \r\r\n                  <tr>\r\r\n                    <td style=\"text-align: right; padding-bottom: 10px; font-size: 12px; color: #333333; text-transform: uppercase;\">\r\r\n                      合計:\r\r\n                    </td>\r\r\n                    <td style=\"text-align: right; padding-left: 16px; padding-bottom: 10px; font-size: 12px; color: #555555; white-space: nowrap;\">\r\r\n                      \r\r\n                        NT$4,400\r\r\n                      \r\r\n                    </td>\r\r\n                  </tr>\r\r\n                  \r\r\n                  \r\r\n\r\r\n                  \r\r\n                  \r\r\n\r\r\n                </table>\r\r\n<p>&nbsp;</p>\r\r\n                  <p>飆機器人</p>\r\r\n<p>營業時間：上午8：30至下午5：30</p>\r\r\n<p>客服信箱：[REDACTED_EMAIL]</p>\r\r\n<p>連絡電話：02-2880-5998</p>\r\r\n                <br/>\r\r\n              </td>\r\r\n            </tr>\r\r\n            <tr>\r\r\n              <td class=\"container-padding footer-text\" align=\"left\" style=\"font-family: Helvetica, Arial, sans-serif; font-size: 12px; line-height: 16px; color: #aaaaaa; padding-left: 24px; padding-right: 24px;\">\r\r\n                <br><br>\r\r\n                <strong>飆機器人</strong>\r\r\n                <br><br>\r\r\n                您會收到這封電郵是由於您使用這個電郵地址在飆機器人下了訂單。\r\r\n                <br><br>\r\r\n                <br><br>\r\r\n              </td>\r\r\n            </tr>\r\r\n          </table>\r\r\n        </td>\r\r\n      </tr>\r\r\n    </table>\r\r\n  </body>\r\r\n</html>\r\r\n",
+          "attachment_id": null
+        },
+        "read_attachment_supported": null,
+        "parts": null
+      },
+      "size_estimate": 28714,
+      "classification_label_values": null
+    }
+  ]
+}

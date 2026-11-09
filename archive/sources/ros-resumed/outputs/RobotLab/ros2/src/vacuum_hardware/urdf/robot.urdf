@@ -1,0 +1,683 @@
+<robot name="vacuum">
+  <material name="acrylic">
+    <color rgba=".17 .70 .77 .55" />
+  </material>
+  <material name="rubber">
+    <color rgba=".055 .065 .075 1" />
+  </material>
+  <material name="sensor">
+    <color rgba=".08 .10 .14 1" />
+  </material>
+  <link name="base_footprint" />
+  <joint name="base_joint" type="fixed">
+    <parent link="base_footprint" />
+    <child link="base_link" />
+    <origin xyz="-0.03 0 0.116" />
+  </joint>
+  <link name="base_link">
+    <inertial>
+      <mass value="3.0" />
+      <inertia ixx="0.018475000000000002" ixy="0" ixz="0" iyy="0.018475000000000002" iyz="0" izz="0.03375" />
+    </inertial>
+    <collision>
+      <origin xyz="0 0 0" />
+      <geometry>
+        <box size="0.3 0.3 0.08" />
+      </geometry>
+    </collision>
+    <visual name="lower_acrylic_chassis">
+      <origin xyz="0 0 -0.038" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.15" length="0.004" />
+      </geometry>
+      <material name="lower_acrylic_chassis_colour">
+        <color rgba="0.17 0.7 0.77 0.55" />
+      </material>
+    </visual>
+    <visual name="upper_acrylic_chassis">
+      <origin xyz="0 0 0.038" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.15" length="0.004" />
+      </geometry>
+      <material name="upper_acrylic_chassis_colour">
+        <color rgba="0.17 0.7 0.77 0.55" />
+      </material>
+    </visual>
+    <visual name="standoff_-0.08_-0.075">
+      <origin xyz="-0.08 -0.075 0" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.004" length="0.072" />
+      </geometry>
+      <material name="standoff_neg0_08_neg0_075_colour">
+        <color rgba="0.62 0.68 0.75 1" />
+      </material>
+    </visual>
+    <visual name="standoff_-0.08_0.075">
+      <origin xyz="-0.08 0.075 0" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.004" length="0.072" />
+      </geometry>
+      <material name="standoff_neg0_08_0_075_colour">
+        <color rgba="0.62 0.68 0.75 1" />
+      </material>
+    </visual>
+    <visual name="standoff_0.08_-0.075">
+      <origin xyz="0.08 -0.075 0" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.004" length="0.072" />
+      </geometry>
+      <material name="standoff_0_08_neg0_075_colour">
+        <color rgba="0.62 0.68 0.75 1" />
+      </material>
+    </visual>
+    <visual name="standoff_0.08_0.075">
+      <origin xyz="0.08 0.075 0" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.004" length="0.072" />
+      </geometry>
+      <material name="standoff_0_08_0_075_colour">
+        <color rgba="0.62 0.68 0.75 1" />
+      </material>
+    </visual>
+  </link>
+  <link name="left_wheel">
+    <inertial>
+      <mass value="0.12" />
+      <inertia ixx="4.2999999999999995e-05" ixy="0" ixz="0" iyy="7.350000000000001e-05" iyz="0" izz="4.2999999999999995e-05" />
+    </inertial>
+    <visual>
+      <origin rpy="1.5707963267948966 0 0" />
+      <geometry>
+        <cylinder length="0.025" radius="0.035" />
+      </geometry>
+      <material name="left_wheel_edited_2">
+        <color rgba="0.055 0.065 0.075 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="1.5707963267948966 0 0" />
+      <geometry>
+        <cylinder length="0.025" radius="0.035" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="left_wheel_joint" type="continuous">
+    <parent link="base_link" />
+    <child link="left_wheel" />
+    <origin xyz="0.03 0.11 -0.081" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+    <limit effort="3.0" velocity="70.0" />
+    <dynamics damping="0.01" friction="0.0" />
+  </joint>
+  <link name="right_wheel">
+    <inertial>
+      <mass value="0.12" />
+      <inertia ixx="4.2999999999999995e-05" ixy="0" ixz="0" iyy="7.350000000000001e-05" iyz="0" izz="4.2999999999999995e-05" />
+    </inertial>
+    <visual>
+      <origin rpy="1.5707963267948966 0 0" />
+      <geometry>
+        <cylinder length="0.025" radius="0.035" />
+      </geometry>
+      <material name="right_wheel_edited_2">
+        <color rgba="0.055 0.065 0.075 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="1.5707963267948966 0 0" />
+      <geometry>
+        <cylinder length="0.025" radius="0.035" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="right_wheel_joint" type="continuous">
+    <parent link="base_link" />
+    <child link="right_wheel" />
+    <origin xyz="0.03 -0.11 -0.081" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+    <limit effort="3.0" velocity="70.0" />
+    <dynamics damping="0.01" friction="0.0" />
+  </joint>
+  <joint name="caster_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="caster" />
+    <origin xyz="-0.105 0 -0.096" rpy="0 0 0" />
+  </joint>
+  <link name="caster">
+    <inertial>
+      <mass value="0.08" />
+      <inertia ixx="0.0000128" ixy="0" ixz="0" iyy="0.0000128" iyz="0" izz="0.0000128" />
+    </inertial>
+    <visual>
+      <geometry>
+        <sphere radius="0.02" />
+      </geometry>
+      <material name="caster_edited_1">
+        <color rgba="0.055 0.065 0.075 1" />
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.02" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="lidar_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="lidar_link" />
+    <origin xyz="0 0 0.085" rpy="0 0 0" />
+  </joint>
+  <link name="lidar_link">
+    <inertial>
+      <mass value="0.05" />
+      <inertia ixx="0.00001" ixy="0" ixz="0" iyy="0.00001" iyz="0" izz="0.00002" />
+    </inertial>
+    <collision>
+      <geometry>
+        <cylinder length="0.025" radius="0.03" />
+      </geometry>
+    </collision>
+    <visual name="rplidar_mount_standoff">
+      <origin xyz="0 0 -0.03" />
+      <geometry>
+        <cylinder length="0.032" radius="0.01" />
+      </geometry>
+      <material name="lidar_link_edited_2">
+        <color rgba="0.62 0.68 0.75 1" />
+      </material>
+    </visual>
+    <visual name="rplidar_c1_base">
+      <origin xyz="0 0 -0.009" />
+      <geometry>
+        <box size="0.054 0.054 0.012" />
+      </geometry>
+      <material name="lidar_link_edited_2">
+        <color rgba="0.08 0.1 0.14 1" />
+      </material>
+    </visual>
+    <visual name="rplidar_c1_scanner">
+      <origin xyz="0 0 0.005" />
+      <geometry>
+        <cylinder length="0.025" radius="0.027" />
+      </geometry>
+      <material name="lidar_link_edited_2">
+        <color rgba="0.08 0.1 0.14 1" />
+      </material>
+    </visual>
+    <visual name="rplidar_c1_accent">
+      <origin xyz="0 0 0.015" />
+      <geometry>
+        <cylinder length="0.004" radius="0.025" />
+      </geometry>
+      <material name="lidar_link_edited_2">
+        <color rgba="0.95 0.58 0.18 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="camera_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="camera_link" />
+    <origin xyz="0.1325 0 0.025" rpy="0 0 0" />
+  </joint>
+  <link name="camera_link">
+    <inertial>
+      <mass value="0.03" />
+      <inertia ixx="0.000004" ixy="0" ixz="0" iyy="0.000004" iyz="0" izz="0.000004" />
+    </inertial>
+    <visual>
+      <geometry>
+        <box size="0.015 0.04 0.025" />
+      </geometry>
+      <material name="camera_link_edited_1">
+        <color rgba="0.08 0.1 0.14 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="camera_optical_joint" type="fixed">
+    <parent link="camera_link" />
+    <child link="camera_optical_frame" />
+    <origin rpy="-1.5707963267948966 0 -1.5707963267948966" />
+  </joint>
+  <link name="camera_optical_frame" />
+  <material name="aluminium">
+    <color rgba=".62 .68 .75 1" />
+  </material>
+  <material name="pcb">
+    <color rgba=".06 .42 .25 1" />
+  </material>
+  <material name="pcb_blue">
+    <color rgba=".06 .25 .52 1" />
+  </material>
+  <material name="copper">
+    <color rgba=".95 .58 .18 1" />
+  </material>
+  <material name="terminal">
+    <color rgba=".15 .61 .29 1" />
+  </material>
+  <joint name="left_nema17_mount" type="fixed">
+    <parent link="base_link" />
+    <child link="left_nema17" />
+    <origin xyz="0.03 0.071 -0.081" rpy="0 0 0" />
+  </joint>
+  <link name="left_nema17">
+    <inertial>
+      <mass value="0.25" />
+      <inertia ixx="7.061020833333332e-05" ixy="0" ixz="0" iyy="7.455374999999999e-05" iyz="0" izz="7.061020833333332e-05" />
+    </inertial>
+    <visual name="left_nema17_body">
+      <origin xyz="0 0 0" />
+      <geometry>
+        <box size="0.0423 0.04 0.0423" />
+      </geometry>
+      <material name="left_nema17_edited_2">
+        <color rgba="0.08 0.1 0.14 1" />
+      </material>
+    </visual>
+    <visual name="endplate_-0.016">
+      <origin xyz="0 -0.016 0" />
+      <geometry>
+        <box size="0.0423 0.008 0.0423" />
+      </geometry>
+      <material name="left_nema17_edited_2">
+        <color rgba="0.62 0.68 0.75 1" />
+      </material>
+    </visual>
+    <visual name="endplate_0.016">
+      <origin xyz="0 0.016 0" />
+      <geometry>
+        <box size="0.0423 0.008 0.0423" />
+      </geometry>
+      <material name="left_nema17_edited_2">
+        <color rgba="0.62 0.68 0.75 1" />
+      </material>
+    </visual>
+    <visual name="shaft_and_hub">
+      <origin rpy="1.5707963267948966 0 0" xyz="0 0.031 0" />
+      <geometry>
+        <cylinder length="0.023" radius="0.004" />
+      </geometry>
+      <material name="left_nema17_edited_2">
+        <color rgba="0.62 0.68 0.75 1" />
+      </material>
+    </visual>
+    <visual name="under_chassis_mount">
+      <origin xyz="0 0 0.03" />
+      <geometry>
+        <box size="0.043 0.042 0.018" />
+      </geometry>
+      <material name="left_nema17_edited_2">
+        <color rgba="0.62 0.68 0.75 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="left_tb6600_mount" type="fixed">
+    <parent link="base_link" />
+    <child link="left_tb6600" />
+    <origin xyz="0.078 0.044 -0.021" rpy="0 0 0" />
+  </joint>
+  <link name="left_tb6600">
+    <inertial>
+      <mass value="0.1" />
+      <inertia ixx="1.7666666666666668e-05" ixy="0" ixz="0" iyy="5.504166666666667e-05" iyz="0" izz="6.144166666666668e-05" />
+    </inertial>
+    <visual name="left_tb6600_body">
+      <origin xyz="0 0 0" />
+      <geometry>
+        <box size="0.077 0.038 0.026" />
+      </geometry>
+      <material name="left_tb6600_edited_2">
+        <color rgba="0.08 0.1 0.14 1" />
+      </material>
+    </visual>
+    <visual name="cooling_fin_-0.025">
+      <origin xyz="-0.025 0 0.016" />
+      <geometry>
+        <box size="0.003 0.038 0.009" />
+      </geometry>
+      <material name="left_tb6600_edited_2">
+        <color rgba="0.62 0.68 0.75 1" />
+      </material>
+    </visual>
+    <visual name="cooling_fin_-0.015">
+      <origin xyz="-0.015 0 0.016" />
+      <geometry>
+        <box size="0.003 0.038 0.009" />
+      </geometry>
+      <material name="left_tb6600_edited_2">
+        <color rgba="0.62 0.68 0.75 1" />
+      </material>
+    </visual>
+    <visual name="cooling_fin_-0.005">
+      <origin xyz="-0.005 0 0.016" />
+      <geometry>
+        <box size="0.003 0.038 0.009" />
+      </geometry>
+      <material name="left_tb6600_edited_2">
+        <color rgba="0.62 0.68 0.75 1" />
+      </material>
+    </visual>
+    <visual name="cooling_fin_0.005">
+      <origin xyz="0.005 0 0.016" />
+      <geometry>
+        <box size="0.003 0.038 0.009" />
+      </geometry>
+      <material name="left_tb6600_edited_2">
+        <color rgba="0.62 0.68 0.75 1" />
+      </material>
+    </visual>
+    <visual name="cooling_fin_0.015">
+      <origin xyz="0.015 0 0.016" />
+      <geometry>
+        <box size="0.003 0.038 0.009" />
+      </geometry>
+      <material name="left_tb6600_edited_2">
+        <color rgba="0.62 0.68 0.75 1" />
+      </material>
+    </visual>
+    <visual name="cooling_fin_0.025">
+      <origin xyz="0.025 0 0.016" />
+      <geometry>
+        <box size="0.003 0.038 0.009" />
+      </geometry>
+      <material name="left_tb6600_edited_2">
+        <color rgba="0.62 0.68 0.75 1" />
+      </material>
+    </visual>
+    <visual name="screw_terminals">
+      <origin xyz="0 -0.022 0" />
+      <geometry>
+        <box size="0.065 0.01 0.018" />
+      </geometry>
+      <material name="left_tb6600_edited_2">
+        <color rgba="0.15 0.61 0.29 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="right_nema17_mount" type="fixed">
+    <parent link="base_link" />
+    <child link="right_nema17" />
+    <origin xyz="0.03 -0.071 -0.081" rpy="0 0 0" />
+  </joint>
+  <link name="right_nema17">
+    <inertial>
+      <mass value="0.25" />
+      <inertia ixx="7.061020833333332e-05" ixy="0" ixz="0" iyy="7.455374999999999e-05" iyz="0" izz="7.061020833333332e-05" />
+    </inertial>
+    <visual name="right_nema17_body">
+      <origin xyz="0 0 0" />
+      <geometry>
+        <box size="0.0423 0.04 0.0423" />
+      </geometry>
+      <material name="right_nema17_edited_2">
+        <color rgba="0.08 0.1 0.14 1" />
+      </material>
+    </visual>
+    <visual name="endplate_-0.016">
+      <origin xyz="0 -0.016 0" />
+      <geometry>
+        <box size="0.0423 0.008 0.0423" />
+      </geometry>
+      <material name="right_nema17_edited_2">
+        <color rgba="0.62 0.68 0.75 1" />
+      </material>
+    </visual>
+    <visual name="endplate_0.016">
+      <origin xyz="0 0.016 0" />
+      <geometry>
+        <box size="0.0423 0.008 0.0423" />
+      </geometry>
+      <material name="right_nema17_edited_2">
+        <color rgba="0.62 0.68 0.75 1" />
+      </material>
+    </visual>
+    <visual name="shaft_and_hub">
+      <origin rpy="1.5707963267948966 0 0" xyz="0 -0.031 0" />
+      <geometry>
+        <cylinder length="0.023" radius="0.004" />
+      </geometry>
+      <material name="right_nema17_edited_2">
+        <color rgba="0.62 0.68 0.75 1" />
+      </material>
+    </visual>
+    <visual name="under_chassis_mount">
+      <origin xyz="0 0 0.03" />
+      <geometry>
+        <box size="0.043 0.042 0.018" />
+      </geometry>
+      <material name="right_nema17_edited_2">
+        <color rgba="0.62 0.68 0.75 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="right_tb6600_mount" type="fixed">
+    <parent link="base_link" />
+    <child link="right_tb6600" />
+    <origin xyz="0.078 -0.044 -0.021" rpy="0 0 0" />
+  </joint>
+  <link name="right_tb6600">
+    <inertial>
+      <mass value="0.1" />
+      <inertia ixx="1.7666666666666668e-05" ixy="0" ixz="0" iyy="5.504166666666667e-05" iyz="0" izz="6.144166666666668e-05" />
+    </inertial>
+    <visual name="right_tb6600_body">
+      <origin xyz="0 0 0" />
+      <geometry>
+        <box size="0.077 0.038 0.026" />
+      </geometry>
+      <material name="right_tb6600_edited_2">
+        <color rgba="0.08 0.1 0.14 1" />
+      </material>
+    </visual>
+    <visual name="cooling_fin_-0.025">
+      <origin xyz="-0.025 0 0.016" />
+      <geometry>
+        <box size="0.003 0.038 0.009" />
+      </geometry>
+      <material name="right_tb6600_edited_2">
+        <color rgba="0.62 0.68 0.75 1" />
+      </material>
+    </visual>
+    <visual name="cooling_fin_-0.015">
+      <origin xyz="-0.015 0 0.016" />
+      <geometry>
+        <box size="0.003 0.038 0.009" />
+      </geometry>
+      <material name="right_tb6600_edited_2">
+        <color rgba="0.62 0.68 0.75 1" />
+      </material>
+    </visual>
+    <visual name="cooling_fin_-0.005">
+      <origin xyz="-0.005 0 0.016" />
+      <geometry>
+        <box size="0.003 0.038 0.009" />
+      </geometry>
+      <material name="right_tb6600_edited_2">
+        <color rgba="0.62 0.68 0.75 1" />
+      </material>
+    </visual>
+    <visual name="cooling_fin_0.005">
+      <origin xyz="0.005 0 0.016" />
+      <geometry>
+        <box size="0.003 0.038 0.009" />
+      </geometry>
+      <material name="right_tb6600_edited_2">
+        <color rgba="0.62 0.68 0.75 1" />
+      </material>
+    </visual>
+    <visual name="cooling_fin_0.015">
+      <origin xyz="0.015 0 0.016" />
+      <geometry>
+        <box size="0.003 0.038 0.009" />
+      </geometry>
+      <material name="right_tb6600_edited_2">
+        <color rgba="0.62 0.68 0.75 1" />
+      </material>
+    </visual>
+    <visual name="cooling_fin_0.025">
+      <origin xyz="0.025 0 0.016" />
+      <geometry>
+        <box size="0.003 0.038 0.009" />
+      </geometry>
+      <material name="right_tb6600_edited_2">
+        <color rgba="0.62 0.68 0.75 1" />
+      </material>
+    </visual>
+    <visual name="screw_terminals">
+      <origin xyz="0 0.022 0" />
+      <geometry>
+        <box size="0.065 0.01 0.018" />
+      </geometry>
+      <material name="right_tb6600_edited_2">
+        <color rgba="0.15 0.61 0.29 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="arduino_mega_mount" type="fixed">
+    <parent link="base_link" />
+    <child link="arduino_mega" />
+    <origin xyz="-0.044 0.056 -0.027" rpy="0 0 0" />
+  </joint>
+  <link name="arduino_mega">
+    <inertial>
+      <mass value="0.037" />
+      <inertia ixx="8.787160833333333e-06" ixy="0" ixz="0" iyy="3.1805540399999995e-05" iyz="0" izz="4.053720123333333e-05" />
+    </inertial>
+    <visual name="arduino_mega_body">
+      <origin xyz="0 0 0" />
+      <geometry>
+        <box size="0.10152 0.0533 0.003" />
+      </geometry>
+      <material name="arduino_mega_edited_2">
+        <color rgba="0.06 0.25 0.52 1" />
+      </material>
+    </visual>
+    <visual name="mega_processor">
+      <origin xyz="-0.009 0 0.004" />
+      <geometry>
+        <box size="0.014 0.014 0.005" />
+      </geometry>
+      <material name="arduino_mega_edited_2">
+        <color rgba="0.08 0.1 0.14 1" />
+      </material>
+    </visual>
+    <visual name="mega_pin_headers_-0.023">
+      <origin xyz="0 -0.023 0.005" />
+      <geometry>
+        <box size="0.079 0.004 0.007" />
+      </geometry>
+      <material name="arduino_mega_edited_2">
+        <color rgba="0.08 0.1 0.14 1" />
+      </material>
+    </visual>
+    <visual name="mega_pin_headers_0.023">
+      <origin xyz="0 0.023 0.005" />
+      <geometry>
+        <box size="0.079 0.004 0.007" />
+      </geometry>
+      <material name="arduino_mega_edited_2">
+        <color rgba="0.08 0.1 0.14 1" />
+      </material>
+    </visual>
+    <visual name="mega_usb">
+      <origin xyz="-0.046 0 0.007" />
+      <geometry>
+        <box size="0.015 0.013 0.012" />
+      </geometry>
+      <material name="arduino_mega_edited_2">
+        <color rgba="0.62 0.68 0.75 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="orange_pi5_mount" type="fixed">
+    <parent link="base_link" />
+    <child link="orange_pi5" />
+    <origin xyz="-0.044 -0.054 -0.027" rpy="0 0 0" />
+  </joint>
+  <link name="orange_pi5">
+    <inertial>
+      <mass value="0.046" />
+      <inertia ixx="1.476983333333333e-05" ixy="0" ixz="0" iyy="3.836783333333334e-05" iyz="0" izz="5.3068666666666676e-05" />
+    </inertial>
+    <visual name="orange_pi5_body">
+      <origin xyz="0 0 0" />
+      <geometry>
+        <box size="0.1 0.062 0.003" />
+      </geometry>
+      <material name="orange_pi5_edited_2">
+        <color rgba="0.06 0.42 0.25 1" />
+      </material>
+    </visual>
+    <visual name="rk3588s_heatsink">
+      <origin xyz="0 0 0.009" />
+      <geometry>
+        <box size="0.025 0.025 0.016" />
+      </geometry>
+      <material name="orange_pi5_edited_2">
+        <color rgba="0.62 0.68 0.75 1" />
+      </material>
+    </visual>
+    <visual name="heatsink_fin_-0.01">
+      <origin xyz="-0.01 0 0.019" />
+      <geometry>
+        <box size="0.002 0.025 0.006" />
+      </geometry>
+      <material name="orange_pi5_edited_2">
+        <color rgba="0.08 0.1 0.14 1" />
+      </material>
+    </visual>
+    <visual name="heatsink_fin_-0.005">
+      <origin xyz="-0.005 0 0.019" />
+      <geometry>
+        <box size="0.002 0.025 0.006" />
+      </geometry>
+      <material name="orange_pi5_edited_2">
+        <color rgba="0.08 0.1 0.14 1" />
+      </material>
+    </visual>
+    <visual name="heatsink_fin_0">
+      <origin xyz="0 0 0.019" />
+      <geometry>
+        <box size="0.002 0.025 0.006" />
+      </geometry>
+      <material name="orange_pi5_edited_2">
+        <color rgba="0.08 0.1 0.14 1" />
+      </material>
+    </visual>
+    <visual name="heatsink_fin_0.005">
+      <origin xyz="0.005 0 0.019" />
+      <geometry>
+        <box size="0.002 0.025 0.006" />
+      </geometry>
+      <material name="orange_pi5_edited_2">
+        <color rgba="0.08 0.1 0.14 1" />
+      </material>
+    </visual>
+    <visual name="heatsink_fin_0.01">
+      <origin xyz="0.01 0 0.019" />
+      <geometry>
+        <box size="0.002 0.025 0.006" />
+      </geometry>
+      <material name="orange_pi5_edited_2">
+        <color rgba="0.08 0.1 0.14 1" />
+      </material>
+    </visual>
+    <visual name="ethernet_port">
+      <origin xyz="-0.04 0 0.007" />
+      <geometry>
+        <box size="0.019 0.016 0.014" />
+      </geometry>
+      <material name="orange_pi5_edited_2">
+        <color rgba="0.62 0.68 0.75 1" />
+      </material>
+    </visual>
+    <visual name="gpio_header">
+      <origin xyz="0.009 0.026 0.006" />
+      <geometry>
+        <box size="0.05 0.005 0.009" />
+      </geometry>
+      <material name="orange_pi5_edited_2">
+        <color rgba="0.08 0.1 0.14 1" />
+      </material>
+    </visual>
+  </link>
+</robot>

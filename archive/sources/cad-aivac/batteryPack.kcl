@@ -1,0 +1,97 @@
+// AIVac battery pack
+// 3S1P 18650 lithium-ion pack with blue shrink wrap, BMS, XT60 connector, and leads.
+@settings(defaultLengthUnit = mm, kclVersion = 1.0)
+
+import unitBlock, unitSoftBlock, unitCylinder, unitSoftCylinder from "primitives.kcl"
+
+cellRadius = 9.3mm
+cellLength = 68mm
+cellPitch = 19mm
+
+cellOne = clone(unitCylinder)
+  |> scale(x = cellRadius / 1mm, y = cellRadius / 1mm, z = cellLength / 1mm)
+  |> rotate(axis = Y, angle = 90deg, global = false)
+  |> translate(y = -cellPitch, global = true)
+cells = patternLinear3d(
+  cellOne,
+  instances = 3,
+  distance = cellPitch,
+  axis = Y,
+)
+batteryCells = appearance(
+  cells,
+  color = "#2979d8",
+  roughness = 54,
+  metalness = 0,
+)
+
+shrinkWrap = clone(unitSoftBlock)
+  |> scale(x = 72mm / 1mm, y = 58mm / 1mm, z = 22mm / 1mm)
+  |> translate(z = 0mm, global = true)
+  |> appearance(
+       color = "#1f8dfa",
+       roughness = 38,
+       metalness = 0,
+       opacity = 48,
+     )
+
+bmsBoard = clone(unitBlock)
+  |> scale(x = 36mm / 1mm, y = 42mm / 1mm, z = 1.6mm / 1mm)
+  |> translate(
+       x = 38mm,
+       y = 0mm,
+       z = 2mm,
+       global = true,
+     )
+  |> appearance(color = "#1c6f35", roughness = 70, metalness = 0)
+bmsChip = clone(unitBlock)
+  |> scale(x = 8mm / 1mm, y = 8mm / 1mm, z = 1.2mm / 1mm)
+  |> translate(
+       x = 38mm,
+       y = 0mm,
+       z = 4mm,
+       global = true,
+     )
+  |> appearance(color = "#121416", roughness = 50, metalness = 0)
+
+redLead = clone(unitBlock)
+  |> scale(x = 46mm / 1mm, y = 2.2mm / 1mm, z = 2.2mm / 1mm)
+  |> translate(
+       x = 58mm,
+       y = 8mm,
+       z = 5mm,
+       global = true,
+     )
+blackLead = clone(redLead)
+  |> translate(y = -16mm, global = true)
+redLeadStyled = appearance(
+  redLead,
+  color = "#d51f1f",
+  roughness = 70,
+  metalness = 0,
+)
+blackLeadStyled = appearance(
+  blackLead,
+  color = "#101010",
+  roughness = 70,
+  metalness = 0,
+)
+xt60Body = clone(unitSoftBlock)
+  |> scale(x = 13mm / 1mm, y = 10mm / 1mm, z = 9mm / 1mm)
+  |> translate(
+       x = 84mm,
+       y = 0mm,
+       z = 5mm,
+       global = true,
+     )
+  |> appearance(color = "#efbd28", roughness = 52, metalness = 0)
+
+batteryPack = flatten([
+  batteryCells,
+  shrinkWrap,
+  bmsBoard,
+  bmsChip,
+  redLeadStyled,
+  blackLeadStyled,
+  xt60Body
+])

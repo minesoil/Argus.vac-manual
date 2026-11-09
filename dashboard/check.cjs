@@ -9,14 +9,21 @@ const files = [
   {path:'robot_control/follow.py',size:80},
   {path:'new-folder/new-note.md',size:100},
   {path:'tests/test_example.py',size:90},
-  {path:'README.md',size:60}
+  {path:'README.md',size:60},
+  {path:'archive/README.md',size:200},
+  {path:'archive/manifest.json',size:300},
+  {path:'archive/sources/obsidian-argus/chat.md',size:200},
+  {path:'archive/sources/obsidian-argus/photo.jpg',size:200}
 ];
 const contents = {
   'robot_control/PROJECT-STATUS.md':'# Project status\n\n**Tested** results.\n\n| Check | State |\n| --- | --- |\n| Stop | Passed |\n\n```python\nprint("hello")\n```\n\n<script>window.compromised=true</script>\n[Unsafe](javascript:alert(1))\n[Note](../new-folder/new-note.md)',
   'robot_control/follow.py':'# A comment\ndef follow():\n    return True\n',
   'new-folder/new-note.md':'# A new note\nAutomatically discovered.',
   'tests/test_example.py':'assert True',
-  'README.md':'# Readme'
+  'README.md':'# Readme',
+  'archive/README.md':'# Archive\n[Chat](sources/obsidian-argus/chat.md)',
+  'archive/sources/obsidian-argus/chat.md':'# Saved conversation\nHistorical notes.',
+  'archive/manifest.json':JSON.stringify({records:[{path:'archive/sources/obsidian-argus/chat.md',id:'test-record',title:'Saved Gemini chat',source:'obsidian-argus',date:'2026-08-26',status:'historical conversation',redactions:{email:1}}]})
 };
 const server = http.createServer((req,res)=>{
   if(req.url==='/catalog.json'){res.setHeader('Content-Type','application/json');res.end(JSON.stringify({ref:'abc1234',files}));return;}
@@ -55,6 +62,12 @@ const server = http.createServer((req,res)=>{
     await page.locator('[data-filter="tests"]').click();
     assert.equal(await page.locator('.file-link').count(),1);
     await page.locator('[data-filter="all"]').click();
+    await page.locator('[data-filter="archive"]').click();
+    assert.equal(await page.locator('.file-link').count(),4);
+    await page.goto(url+'/#file=archive%2Fsources%2Fobsidian-argus%2Fchat.md');
+    await page.waitForFunction(()=>document.getElementById('file-meta').textContent.includes('lines'));
+    assert.match(await page.locator('#file-explanation').innerText(),/Historical record from obsidian-argus/);
+    assert.match(await page.locator('#file-explanation').innerText(),/privacy redactions/);
     await page.goto(url+'/#file=robot_control%2Ffollow.py');
     await page.waitForFunction(()=>document.getElementById('file-meta').textContent.includes('lines'));
     assert.match(await page.locator('#file-content').innerText(),/def follow/);

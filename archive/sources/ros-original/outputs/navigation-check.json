@@ -1,0 +1,12 @@
+{
+  "map_width": 119,
+  "map_height": 119,
+  "known_cells": 1504,
+  "occupied_cells": 36,
+  "goal": [
+    1.0,
+    0.0
+  ],
+  "status": 4,
+  "error_code": 0
+}

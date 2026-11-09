@@ -1,0 +1,10 @@
+{
+  "triangles": 90264,
+  "watertight": true,
+  "consistent_orientation": true,
+  "separate_parts": 2,
+  "mesh_volumes_mm3": [
+    2261.459823376395,
+    2261.4599522800395
+  ]
+}

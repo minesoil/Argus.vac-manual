@@ -1,0 +1,124 @@
+collision_monitor:
+  ros__parameters:
+    base_frame_id: base_footprint
+    odom_frame_id: odom
+    cmd_vel_in_topic: /vacuum/selected_cmd_vel
+    cmd_vel_out_topic: cmd_vel
+    state_topic: collision_monitor_state
+    transform_tolerance: 0.2
+    source_timeout: 0.5
+    base_shift_correction: true
+    stop_pub_timeout: 2.0
+    polygons:
+    - StopZone
+    - SlowZone
+    - FootprintApproach
+    FootprintApproach:
+      type: polygon
+      action_type: approach
+      footprint_topic: /local_costmap/published_footprint
+      time_before_collision: 0.55
+      simulation_time_step: 0.02
+      min_points: 1
+      visualize: false
+      enabled: true
+      points: '[[0.140823, 0.0], [0.13754, 0.033326], [0.127819, 0.065371], [0.112034,
+        0.094904], [0.09079, 0.12079], [0.064904, 0.142034], [0.035371, 0.157819],
+        [0.003326, 0.16754], [-0.03, 0.170823], [-0.063326, 0.16754], [-0.095371,
+        0.157819], [-0.124904, 0.142034], [-0.15079, 0.12079], [-0.172034, 0.094904],
+        [-0.187819, 0.065371], [-0.19754, 0.033326], [-0.200823, 0.0], [-0.19754,
+        -0.033326], [-0.187819, -0.065371], [-0.172034, -0.094904], [-0.15079, -0.12079],
+        [-0.124904, -0.142034], [-0.095371, -0.157819], [-0.063326, -0.16754], [-0.03,
+        -0.170823], [0.003326, -0.16754], [0.035371, -0.157819], [0.064904, -0.142034],
+        [0.09079, -0.12079], [0.112034, -0.094904], [0.127819, -0.065371], [0.13754,
+        -0.033326]]'
+    observation_sources:
+    - scan
+    scan:
+      type: scan
+      topic: scan
+      min_height: 0.0
+      max_height: 2.0
+      enabled: true
+      source_timeout: 0.5
+    use_sim_time: true
+    enable_stamped_cmd_vel: false
+    StopZone:
+      type: velocity_polygon
+      action_type: stop
+      min_points: 1
+      visualize: true
+      polygon_pub_topic: vacuum_stopzone
+      enabled: true
+      holonomic: false
+      velocity_polygons:
+      - forward
+      - reverse
+      - rotation
+      forward:
+        points: '[[-0.03, 0.2], [-0.03, -0.2], [0.62, -0.2], [0.62, 0.2]]'
+        linear_min: 0.001
+        linear_max: 2.0
+        theta_min: -3.0
+        theta_max: 3.0
+      reverse:
+        points: '[[-0.6, 0.2], [-0.6, -0.2], [-0.03, -0.2], [-0.03, 0.2]]'
+        linear_min: -2.0
+        linear_max: -0.001
+        theta_min: -3.0
+        theta_max: 3.0
+      rotation:
+        points: '[[0.170968, 0.0], [0.167106, 0.039207], [0.15567, 0.076907], [0.137099,
+          0.111652], [0.112106, 0.142106], [0.081652, 0.167099], [0.046907, 0.18567],
+          [0.009207, 0.197106], [-0.03, 0.200968], [-0.069207, 0.197106], [-0.106907,
+          0.18567], [-0.141652, 0.167099], [-0.172106, 0.142106], [-0.197099, 0.111652],
+          [-0.21567, 0.076907], [-0.227106, 0.039207], [-0.230968, 0.0], [-0.227106,
+          -0.039207], [-0.21567, -0.076907], [-0.197099, -0.111652], [-0.172106, -0.142106],
+          [-0.141652, -0.167099], [-0.106907, -0.18567], [-0.069207, -0.197106], [-0.03,
+          -0.200968], [0.009207, -0.197106], [0.046907, -0.18567], [0.081652, -0.167099],
+          [0.112106, -0.142106], [0.137099, -0.111652], [0.15567, -0.076907], [0.167106,
+          -0.039207]]'
+        linear_min: -2.0
+        linear_max: 2.0
+        theta_min: -3.0
+        theta_max: 3.0
+    SlowZone:
+      type: velocity_polygon
+      action_type: slowdown
+      min_points: 1
+      visualize: true
+      polygon_pub_topic: vacuum_slowzone
+      enabled: true
+      holonomic: false
+      velocity_polygons:
+      - forward
+      - reverse
+      - rotation
+      slowdown_ratio: 0.4
+      forward:
+        points: '[[-0.03, 0.2], [-0.03, -0.2], [1.7, -0.2], [1.7, 0.2]]'
+        linear_min: 0.001
+        linear_max: 2.0
+        theta_min: -3.0
+        theta_max: 3.0
+      reverse:
+        points: '[[-1.2, 0.2], [-1.2, -0.2], [-0.03, -0.2], [-0.03, 0.2]]'
+        linear_min: -2.0
+        linear_max: -0.001
+        theta_min: -3.0
+        theta_max: 3.0
+      rotation:
+        points: '[[0.251355, 0.0], [0.245949, 0.05489], [0.229938, 0.10767], [0.203938,
+          0.156312], [0.168948, 0.198948], [0.126312, 0.233938], [0.07767, 0.259938],
+          [0.02489, 0.275949], [-0.03, 0.281355], [-0.08489, 0.275949], [-0.13767,
+          0.259938], [-0.186312, 0.233938], [-0.228948, 0.198948], [-0.263938, 0.156312],
+          [-0.289938, 0.10767], [-0.305949, 0.05489], [-0.311355, 0.0], [-0.305949,
+          -0.05489], [-0.289938, -0.10767], [-0.263938, -0.156312], [-0.228948, -0.198948],
+          [-0.186312, -0.233938], [-0.13767, -0.259938], [-0.08489, -0.275949], [-0.03,
+          -0.281355], [0.02489, -0.275949], [0.07767, -0.259938], [0.126312, -0.233938],
+          [0.168948, -0.198948], [0.203938, -0.156312], [0.229938, -0.10767], [0.245949,
+          -0.05489]]'
+        linear_min: -2.0
+        linear_max: 2.0
+        theta_min: -3.0
+        theta_max: 3.0
