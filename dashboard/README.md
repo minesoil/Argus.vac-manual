@@ -21,6 +21,14 @@ network access. Never put a GitHub token into the browser code.
 from the repository tree when publishing a dashboard release. It is only a
 fallback; normal operation discovers files automatically.
 
+The Archive filter and archive/README.md expose the historical collection.
+archive/manifest.json adds source/date/status explanations and aliases to the
+browser. Keep it with the collection when adding archive files. Raw HTML stays
+inert; office/CAD formats link to originals and extracted text where available.
+PDF/audio previews depend on browser support. The export script in
+archive/tools requires the private local knowledge base; it does not collect
+any cloud account automatically.
+
 Update the dated progress note in index.html and PROJECT-STATUS.md when physical
 validation changes. It is recorded progress, never live robot telemetry.
 Add reviewed descriptions to `explanations` in dashboard.js for important new
