@@ -1,0 +1,5 @@
+#pragma once
+
+// Copy this file to config.h and choose your hotspot settings before upload.
+const char* AP_SSID = "ArgusVac";
+const char* AP_PASS = "change-this-password";

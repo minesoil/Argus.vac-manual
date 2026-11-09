@@ -1,0 +1,10 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {"label": "Argus: Black tape preview", "type": "process", "command": "${workspaceFolder}/argus", "args": ["line-preview", "--tape", "black", "--seconds", "20"], "problemMatcher": []},
+    {"label": "Argus: Wall demo", "type": "process", "command": "${workspaceFolder}/argus", "args": ["demo"], "problemMatcher": []},
+    {"label": "Argus: Board status", "type": "process", "command": "${workspaceFolder}/argus", "args": ["status"], "problemMatcher": []},
+    {"label": "Argus: Software checks", "type": "process", "command": "${workspaceFolder}/argus", "args": ["check"], "problemMatcher": []},
+    {"label": "Argus: Listen to lidar", "type": "process", "command": "${workspaceFolder}/argus", "args": ["scan"], "problemMatcher": []}
+  ]
+}

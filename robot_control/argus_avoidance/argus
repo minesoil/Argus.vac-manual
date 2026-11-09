@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Commands for the Argus bench workspace on the Orange Pi.
+set -e
+cd -- "$(dirname -- "$(readlink -f -- "$0")")"
+case "${1:-help}" in
+  status|demo)
+    exec /usr/bin/python3 -m argus_avoidance.bench "$1" ;;
+  line-preview)
+    shift
+    exec /usr/bin/python3 -m argus_avoidance.line_preview "$@" ;;
+  follow)
+    shift
+    exec /usr/bin/python3 -m argus_avoidance.follow "$@" ;;
+  check)
+    exec /usr/bin/python3 -m unittest discover -s tests ;;
+  scan)
+    source /opt/ros/humble/setup.bash
+    exec /usr/bin/python3 -m argus_avoidance.bench scan ;;
+  preview)
+    source /opt/ros/humble/setup.bash
+    if [ ! -r .ros/install/local_setup.bash ]; then
+      echo "Build this workspace as described in START-HERE.md first." >&2
+      exit 1
+    fi
+    source .ros/install/local_setup.bash
+    exec ros2 launch argus_avoidance guarded_preview.launch.py enable_output:=false ;;
+  help|-h|--help)
+    cat <<'HELP'
+Argus on the Orange Pi
+  ./argus demo     Watch the decisions in a simulated wall approach
+  ./argus status   Show the Pi, Linux, ROS and serial devices
+  ./argus check    Run the software checks
+  ./argus scan     Listen for three real lidar scans (10 second limit)
+  ./argus line-preview  Print tape steering decisions from the live camera
+  ./argus follow   Preview the tape follower; --drive selects the prepared ESP32 session API
+  ./argus preview  Run the ROS controller with motor output disabled
+Read START-HERE.md for the first session. Ctrl+C stops a running command.
+HELP
+    ;;
+  *) echo "Unknown command. Run ./argus for the list." >&2; exit 2 ;;
+esac
