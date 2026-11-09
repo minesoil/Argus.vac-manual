@@ -1,5 +1,27 @@
 # Argus on your Orange Pi
 
+## Phone line following (firmware installed 9 November)
+
+Connect your phone to the ESP32 hotspot and open http://192.168.4.1. Refresh the
+page after a firmware update. START LINE FOLLOWING asks the Pi to run the camera
+follower for up to 30 seconds. Keep the phone page visible and unlocked: switching
+away or losing its connection stops the phone-started session. STOP ends the run;
+ENABLE MANUAL selects the joystick. A stopped run never restarts itself.
+
+The Pi sends commands over GPIO UART, so Ethernet is for setup/monitoring and is
+not needed by the follower. The camera, Pi, ESP32 and power supply stay on Argus.
+The bridge starts at boot but waits for an explicit Start request. If the camera
+cannot see a continuous strip of tape, it refuses to drive. Press STOP before
+retrying a failed start. No camera obstacle detection is installed in this demo.
+
+Commissioning status: the ESP32 upload is hash verified and all 88 software tests
+pass on the Pi. The real phone button, operator Stop and untethered floor checks
+still need to be completed. Keep motor power off for the first phone test.
+
+The current bridge uses `/dev/ttyS0`, not USB data. ESP USB is temporarily plugged
+into the Pi for the upload; the planned bank-powered arrangement needs restoring
+and checking before the untethered trial.
+
 In your connected VS Code window, choose **File → Open Folder** and enter
 `/home/orangepi/argus/avoidance`. Choose **Terminal → New Terminal**. Commands
 typed there run on the Pi over Ethernet. Use the everyday `orangepi` account.

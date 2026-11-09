@@ -1,5 +1,14 @@
 # Argus robot progress — 2026-11-09
 
+Latest commissioning update: Justin reconnects the Pi and ESP32 and confirms
+motor power OFF. ESP32 identity matches the recorded MAC. The prepared phone
+Start application uploads successfully, with esptool's data hash verified.
+All 88 tests pass using /usr/bin/python3 on the actual Pi. The restarted GPIO
+bridge reports STOPPED and zero wheel outputs. Camera preview receives fresh
+frames but rejects the initial view as too broadly dark. User phone Start/Stop
+and untethered floor tests remain pending. This supersedes the disconnected
+and upload-pending state in the earlier deployment section below.
+
 This folder records source, tests, wiring documentation and progress. The
 existing website/manual outside this folder preserves earlier project history.
 

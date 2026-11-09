@@ -1,6 +1,9 @@
 # Phone start for the tape follower
 
-Status, 2026-11-09: implemented and tested locally; ESP32 update and live commissioning pending.
+Status, 2026-11-09: ESP32 upload hash verified; 88 tests pass on the actual Pi.
+The GPIO bridge is restarted and reports stopped/zero. Live phone and floor
+commissioning remain pending. The camera is fresh but initially rejects the
+current dark/ambiguous tape view. The paragraphs below retain earlier history.
 
 The 88 Python tests, actual-sketch C++ tests and embedded browser tests passed.
 The ESP32 image compiled at 938244 bytes. The new Pi modules were copied to
