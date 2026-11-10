@@ -1,13 +1,21 @@
 {
-  "ref": "d230ad62add6f2432dd276a3d44c27950b3e555f",
+  "ref": "f8af59b0206a3fafab92a33b322c1a2d062e20e6",
   "files": [
     {
+      "path": ".gitattributes",
+      "size": 109
+    },
+    {
       "path": ".gitignore",
-      "size": 226
+      "size": 229
+    },
+    {
+      "path": ".nojekyll",
+      "size": 87
     },
     {
       "path": "README.md",
-      "size": 1419
+      "size": 1506
     },
     {
       "path": "archive/README.md",
@@ -1190,7 +1198,7 @@
       "size": 3989
     },
     {
-      "path": "archive/readable/614ace17f37c6b03b295-機器人材料費.md",
+      "path": "archive/readable/614ace17f37c6b03b295-\u6a5f\u5668\u4eba\u6750\u6599\u8cbb.md",
       "size": 731
     },
     {
@@ -1614,7 +1622,7 @@
       "size": 7274
     },
     {
-      "path": "archive/sources/connector-intake/drive/1rZHA9eNgB6gzOe7b9h3RR7mDTY7pNa9fcBohMHnBQQw/機器人材料費.docx",
+      "path": "archive/sources/connector-intake/drive/1rZHA9eNgB6gzOe7b9h3RR7mDTY7pNa9fcBohMHnBQQw/\u6a5f\u5668\u4eba\u6750\u6599\u8cbb.docx",
       "size": 8964
     },
     {
@@ -4990,8 +4998,12 @@
       "size": 18643
     },
     {
+      "path": "archive/tools/make_dashboard_catalog.py",
+      "size": 783
+    },
+    {
       "path": "catalog.json",
-      "size": 6037
+      "size": 146006
     },
     {
       "path": "dashboard.css",
@@ -4999,23 +5011,431 @@
     },
     {
       "path": "dashboard.js",
-      "size": 20593
+      "size": 22561
     },
     {
       "path": "dashboard/README.md",
-      "size": 2524
+      "size": 3232
+    },
+    {
+      "path": "dashboard/REPOSITORY-README.md",
+      "size": 1506
+    },
+    {
+      "path": "dashboard/REPOSITORY.gitignore",
+      "size": 229
+    },
+    {
+      "path": "dashboard/catalog.json",
+      "size": 151243
     },
     {
       "path": "dashboard/check.cjs",
       "size": 6517
     },
     {
+      "path": "dashboard/dashboard.css",
+      "size": 7870
+    },
+    {
+      "path": "dashboard/dashboard.js",
+      "size": 22561
+    },
+    {
+      "path": "dashboard/index.html",
+      "size": 3787
+    },
+    {
+      "path": "handbook/00_CURRENT_STATE.md",
+      "size": 3755
+    },
+    {
+      "path": "handbook/01_HOW_IT_WORKS.md",
+      "size": 4526
+    },
+    {
+      "path": "handbook/02_LINUX_AND_VSCODE.md",
+      "size": 3710
+    },
+    {
+      "path": "handbook/03_PI_SETUP.md",
+      "size": 9763
+    },
+    {
+      "path": "handbook/04_FIRMWARE.md",
+      "size": 5438
+    },
+    {
+      "path": "handbook/05_CODE_TOUR.md",
+      "size": 4454
+    },
+    {
+      "path": "handbook/06_CHECKS_AND_FIRST_TESTS.md",
+      "size": 4548
+    },
+    {
+      "path": "handbook/07_ROS_2_WITH_ARGUS.md",
+      "size": 17763
+    },
+    {
+      "path": "handbook/08_KEEPING_RECORDS.md",
+      "size": 2816
+    },
+    {
+      "path": "handbook/README.md",
+      "size": 3615
+    },
+    {
+      "path": "handbook/code/dashboard/README.md",
+      "size": 3232
+    },
+    {
+      "path": "handbook/code/dashboard/REPOSITORY-README.md",
+      "size": 1506
+    },
+    {
+      "path": "handbook/code/dashboard/REPOSITORY.gitignore",
+      "size": 229
+    },
+    {
+      "path": "handbook/code/dashboard/catalog.json",
+      "size": 151243
+    },
+    {
+      "path": "handbook/code/dashboard/check.cjs",
+      "size": 6517
+    },
+    {
+      "path": "handbook/code/dashboard/dashboard.css",
+      "size": 7870
+    },
+    {
+      "path": "handbook/code/dashboard/dashboard.js",
+      "size": 22561
+    },
+    {
+      "path": "handbook/code/dashboard/index.html",
+      "size": 3787
+    },
+    {
+      "path": "handbook/code/mega-reference/editable/Arduino_Mega_Manual_Control/Arduino_Mega_Manual_Control.ino",
+      "size": 5099
+    },
+    {
+      "path": "handbook/code/mega-reference/original/Arduino_Mega_Manual_Control/Arduino_Mega_Manual_Control.ino",
+      "size": 5702
+    },
+    {
+      "path": "handbook/code/robot_control/ASSISTED-MANUAL.md",
+      "size": 4372
+    },
+    {
+      "path": "handbook/code/robot_control/MANUAL-ASSIST-PLAN.md",
+      "size": 2423
+    },
+    {
+      "path": "handbook/code/robot_control/PROJECT-STATUS.md",
+      "size": 3768
+    },
+    {
+      "path": "handbook/code/robot_control/README.md",
+      "size": 780
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/.vscode/tasks.json",
+      "size": 780
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/PHONE-START-DESIGN.md",
+      "size": 2584
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/PI-ESP32-WIRING.md",
+      "size": 2896
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/README.md",
+      "size": 2650
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/Run-Checks.ps1",
+      "size": 1051
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/START-HERE.md",
+      "size": 3581
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/argus",
+      "size": 2068
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/argus_avoidance/__init__.py",
+      "size": 83
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/argus_avoidance/bench.py",
+      "size": 2823
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/argus_avoidance/core.py",
+      "size": 11804
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/argus_avoidance/follow.py",
+      "size": 8004
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/argus_avoidance/line_preview.py",
+      "size": 14039
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/argus_avoidance/manual_guard.py",
+      "size": 1992
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/argus_avoidance/node.py",
+      "size": 15770
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/argus_avoidance/obstacles.py",
+      "size": 10678
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/argus_avoidance/serial_control.py",
+      "size": 4687
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/argus_avoidance/simulate.py",
+      "size": 17320
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/argus_avoidance/usb_bridge.py",
+      "size": 5878
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/config/avoidance.yaml",
+      "size": 904
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/config/preview_guard.yaml",
+      "size": 699
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/config/preview_guard_humble.yaml",
+      "size": 615
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/config/simulation.yaml",
+      "size": 643
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/launch/avoidance.launch.py",
+      "size": 1795
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/launch/guarded_preview.launch.py",
+      "size": 2207
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/package.xml",
+      "size": 903
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/reports/CORNER-CHECK.md",
+      "size": 5323
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/reports/ORANGE-PI-CHECK.md",
+      "size": 2024
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/reports/TAPE-PREVIEW-CHECK.md",
+      "size": 6471
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/reports/VERIFICATION.md",
+      "size": 2863
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/reports/standalone-simulation.json",
+      "size": 235912
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/resource/argus_avoidance",
+      "size": 1
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/setup.cfg",
+      "size": 99
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/setup.py",
+      "size": 772
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/systemd/argus-bridge-avoidance.conf",
+      "size": 496
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/systemd/argus-obstacle-preview.service",
+      "size": 378
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/tests/test_adapter.py",
+      "size": 9647
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/tests/test_core.py",
+      "size": 8962
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/tests/test_follow.py",
+      "size": 9141
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/tests/test_line_preview.py",
+      "size": 9319
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/tests/test_manual_guard.py",
+      "size": 2053
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/tests/test_obstacles.py",
+      "size": 2736
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/tests/test_serial_control.py",
+      "size": 3473
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/tests/test_simulation.py",
+      "size": 3608
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/tests/test_usb_bridge.py",
+      "size": 3919
+    },
+    {
+      "path": "handbook/code/robot_control/argus_avoidance/tools/build_replay.py",
+      "size": 1275
+    },
+    {
+      "path": "handbook/code/robot_control/firmware/esp32_wifi_controlcam_auto/ControlPacketParser.h",
+      "size": 1510
+    },
+    {
+      "path": "handbook/code/robot_control/firmware/esp32_wifi_controlcam_auto/DriveControl.h",
+      "size": 2608
+    },
+    {
+      "path": "handbook/code/robot_control/firmware/esp32_wifi_controlcam_auto/ManualGuard.h",
+      "size": 1758
+    },
+    {
+      "path": "handbook/code/robot_control/firmware/esp32_wifi_controlcam_auto/PhoneStart.h",
+      "size": 1228
+    },
+    {
+      "path": "handbook/code/robot_control/firmware/esp32_wifi_controlcam_auto/README.md",
+      "size": 6906
+    },
+    {
+      "path": "handbook/code/robot_control/firmware/esp32_wifi_controlcam_auto/VERIFICATION.md",
+      "size": 2371
+    },
+    {
+      "path": "handbook/code/robot_control/firmware/esp32_wifi_controlcam_auto/config.h.example",
+      "size": 172
+    },
+    {
+      "path": "handbook/code/robot_control/firmware/esp32_wifi_controlcam_auto/esp32_wifi_controlcam_auto.ino",
+      "size": 32315
+    },
+    {
+      "path": "handbook/code/robot_control/firmware/esp32_wifi_controlcam_auto/tests/browser_check.js",
+      "size": 5606
+    },
+    {
+      "path": "handbook/code/robot_control/firmware/esp32_wifi_controlcam_auto/tests/host_check.cpp",
+      "size": 17505
+    },
+    {
+      "path": "handbook/code/robot_control/firmware/esp32_wifi_controlcam_auto/tests/phone_start_check.cpp",
+      "size": 1062
+    },
+    {
+      "path": "handbook/code/robot_control/firmware/esp32_wifi_controlcam_auto/tests/stubs/Arduino.h",
+      "size": 1374
+    },
+    {
+      "path": "handbook/code/robot_control/firmware/esp32_wifi_controlcam_auto/tests/stubs/WebServer.h",
+      "size": 1374
+    },
+    {
+      "path": "handbook/code/robot_control/firmware/esp32_wifi_controlcam_auto/tests/stubs/WiFi.h",
+      "size": 252
+    },
+    {
+      "path": "handbook/code/robot_control/firmware/esp32_wifi_controlcam_auto/tests/stubs/config.h",
+      "size": 150
+    },
+    {
+      "path": "handbook/commands/RECORDED_PI_COMMANDS.md",
+      "size": 19368
+    },
+    {
+      "path": "handbook/commands/templates/argus-bridge.RECONSTRUCTED.service",
+      "size": 644
+    },
+    {
+      "path": "handbook/commands/templates/argus-camera.RECONSTRUCTED.service",
+      "size": 555
+    },
+    {
+      "path": "handbook/evidence/FIRMWARE_PROVENANCE.md",
+      "size": 9692
+    },
+    {
+      "path": "handbook/evidence/OFFLINE_CHECKS_2026-11-10.md",
+      "size": 1413
+    },
+    {
+      "path": "handbook/evidence/OFFLINE_FIRMWARE_CHECKS.md",
+      "size": 5668
+    },
+    {
+      "path": "handbook/inventory/FILES.md",
+      "size": 14434
+    },
+    {
+      "path": "handbook/inventory/manifest.json",
+      "size": 26055
+    },
+    {
+      "path": "handbook/tools/export_snapshot.py",
+      "size": 7713
+    },
+    {
       "path": "index.html",
-      "size": 3800
+      "size": 3787
+    },
+    {
+      "path": "robot_control/ASSISTED-MANUAL.md",
+      "size": 4372
+    },
+    {
+      "path": "robot_control/MANUAL-ASSIST-PLAN.md",
+      "size": 2423
     },
     {
       "path": "robot_control/PROJECT-STATUS.md",
-      "size": 3397
+      "size": 3768
+    },
+    {
+      "path": "robot_control/README.md",
+      "size": 780
     },
     {
       "path": "robot_control/argus_avoidance/.vscode/tasks.json",
@@ -5023,7 +5443,7 @@
     },
     {
       "path": "robot_control/argus_avoidance/PHONE-START-DESIGN.md",
-      "size": 2622
+      "size": 2584
     },
     {
       "path": "robot_control/argus_avoidance/PI-ESP32-WIRING.md",
@@ -5031,7 +5451,7 @@
     },
     {
       "path": "robot_control/argus_avoidance/README.md",
-      "size": 7669
+      "size": 2650
     },
     {
       "path": "robot_control/argus_avoidance/Run-Checks.ps1",
@@ -5039,11 +5459,11 @@
     },
     {
       "path": "robot_control/argus_avoidance/START-HERE.md",
-      "size": 6882
+      "size": 3581
     },
     {
       "path": "robot_control/argus_avoidance/argus",
-      "size": 1597
+      "size": 2068
     },
     {
       "path": "robot_control/argus_avoidance/argus_avoidance/__init__.py",
@@ -5059,19 +5479,27 @@
     },
     {
       "path": "robot_control/argus_avoidance/argus_avoidance/follow.py",
-      "size": 7621
+      "size": 8004
     },
     {
       "path": "robot_control/argus_avoidance/argus_avoidance/line_preview.py",
-      "size": 13013
+      "size": 14039
+    },
+    {
+      "path": "robot_control/argus_avoidance/argus_avoidance/manual_guard.py",
+      "size": 1992
     },
     {
       "path": "robot_control/argus_avoidance/argus_avoidance/node.py",
       "size": 15770
     },
     {
+      "path": "robot_control/argus_avoidance/argus_avoidance/obstacles.py",
+      "size": 10678
+    },
+    {
       "path": "robot_control/argus_avoidance/argus_avoidance/serial_control.py",
-      "size": 4568
+      "size": 4687
     },
     {
       "path": "robot_control/argus_avoidance/argus_avoidance/simulate.py",
@@ -5079,7 +5507,7 @@
     },
     {
       "path": "robot_control/argus_avoidance/argus_avoidance/usb_bridge.py",
-      "size": 5325
+      "size": 5878
     },
     {
       "path": "robot_control/argus_avoidance/config/avoidance.yaml",
@@ -5108,6 +5536,10 @@
     {
       "path": "robot_control/argus_avoidance/package.xml",
       "size": 903
+    },
+    {
+      "path": "robot_control/argus_avoidance/reports/CORNER-CHECK.md",
+      "size": 5323
     },
     {
       "path": "robot_control/argus_avoidance/reports/ORANGE-PI-CHECK.md",
@@ -5139,7 +5571,11 @@
     },
     {
       "path": "robot_control/argus_avoidance/systemd/argus-bridge-avoidance.conf",
-      "size": 407
+      "size": 496
+    },
+    {
+      "path": "robot_control/argus_avoidance/systemd/argus-obstacle-preview.service",
+      "size": 378
     },
     {
       "path": "robot_control/argus_avoidance/tests/test_adapter.py",
@@ -5151,11 +5587,19 @@
     },
     {
       "path": "robot_control/argus_avoidance/tests/test_follow.py",
-      "size": 8483
+      "size": 9141
     },
     {
       "path": "robot_control/argus_avoidance/tests/test_line_preview.py",
-      "size": 8220
+      "size": 9319
+    },
+    {
+      "path": "robot_control/argus_avoidance/tests/test_manual_guard.py",
+      "size": 2053
+    },
+    {
+      "path": "robot_control/argus_avoidance/tests/test_obstacles.py",
+      "size": 2736
     },
     {
       "path": "robot_control/argus_avoidance/tests/test_serial_control.py",
@@ -5186,16 +5630,20 @@
       "size": 2608
     },
     {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/ManualGuard.h",
+      "size": 1758
+    },
+    {
       "path": "robot_control/firmware/esp32_wifi_controlcam_auto/PhoneStart.h",
       "size": 1228
     },
     {
       "path": "robot_control/firmware/esp32_wifi_controlcam_auto/README.md",
-      "size": 5498
+      "size": 6906
     },
     {
       "path": "robot_control/firmware/esp32_wifi_controlcam_auto/VERIFICATION.md",
-      "size": 1865
+      "size": 2371
     },
     {
       "path": "robot_control/firmware/esp32_wifi_controlcam_auto/config.h.example",
@@ -5203,15 +5651,15 @@
     },
     {
       "path": "robot_control/firmware/esp32_wifi_controlcam_auto/esp32_wifi_controlcam_auto.ino",
-      "size": 28184
+      "size": 32315
     },
     {
       "path": "robot_control/firmware/esp32_wifi_controlcam_auto/tests/browser_check.js",
-      "size": 5410
+      "size": 5606
     },
     {
       "path": "robot_control/firmware/esp32_wifi_controlcam_auto/tests/host_check.cpp",
-      "size": 13632
+      "size": 17505
     },
     {
       "path": "robot_control/firmware/esp32_wifi_controlcam_auto/tests/phone_start_check.cpp",
