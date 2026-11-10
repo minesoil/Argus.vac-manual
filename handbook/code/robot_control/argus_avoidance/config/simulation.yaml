@@ -1,0 +1,23 @@
+# Only use with a simulator whose +inf range explicitly denotes no hit.
+argus_avoidance:
+  ros__parameters:
+    enable_output: false
+    output_topic: /avoidance/preview_cmd_vel
+    scan_topic: /scan
+    base_frame: base_link
+    guard_service: /collision_monitor/get_state
+    robot_radius_m: 0.22
+    margin_m: 0.03
+    forward_m_s: 0.05
+    slow_m_s: 0.025
+    turn_rad_s: 0.30
+    slow_clearance_m: 0.60
+    stop_clearance_m: 0.30
+    resume_clearance_m: 0.40
+    scan_timeout_s: 0.50
+    clear_scans: 3
+    stop_hold_s: 0.25
+    turn_timeout_s: 15.0
+    min_coverage_ratio: 0.90
+    max_unknown_gap_rad: 0.15
+    no_return_is_clear: true

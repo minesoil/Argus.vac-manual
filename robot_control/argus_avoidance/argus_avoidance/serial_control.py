@@ -42,6 +42,8 @@ class SerialAutoClient(ESP32AutoClient):
         values = values or {}
         arguments = {
             "/state": ("state", ()),
+            "/guard/arm": ("garm", ("epoch",)),
+            "/guard/update": ("gupdate", ("session", "seq", "code")),
             "/follow/claim": ("claim", ("epoch", "token")),
             "/auto/arm": ("arm", ("epoch",)),
             "/auto/drive": ("drive", ("session", "seq", "l", "r")),
@@ -68,7 +70,7 @@ class SerialAutoClient(ESP32AutoClient):
                     if len(self.buffer) < 8:
                         break
                     length = struct.unpack("<I", self.buffer[4:8])[0]
-                    if not 1 <= length <= 512:
+                    if not 1 <= length <= 1024:
                         del self.buffer[0]
                         continue
                     if len(self.buffer) < length + 8:

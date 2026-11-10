@@ -100,6 +100,20 @@ function codeView(text, highlight) {
   });pre.append(code);return pre;
 }
 const explanations = {
+  '00_CURRENT_STATE.md': 'Dated installation and physical-test checkpoint. This separates code being installed from a real obstacle-stop result.',
+  '01_HOW_IT_WORKS.md': 'Follow a phone command or camera warning through Pi, ESP32, Mega and motor drivers, with the actual UART wiring.',
+  '02_LINUX_AND_VSCODE.md': 'SSH, Linux accounts, folders, services and localhost explained using this Pi setup.',
+  '03_PI_SETUP.md': 'Ordered reconstruction of the Pi installation. Historical commands are kept in a separate ledger; missing original setup history is labeled.',
+  '04_FIRMWARE.md': 'Build instructions and provenance for the current ESP32 source and recovered Mega references.',
+  '05_CODE_TOUR.md': 'A reading order for the code, with each file connected to its job in the robot.',
+  '06_CHECKS_AND_FIRST_TESTS.md': 'Offline software checks and separate future hardware commissioning steps, with recorded results.',
+  '07_ROS_2_WITH_ARGUS.md': 'ROS concepts connected to the actual optional Humble adapter. Current camera drive uses Python/UART outside ROS.',
+  '08_KEEPING_RECORDS.md': 'How to update maintained source, regenerate the teaching snapshot and keep test evidence beside changes.',
+  'RECORDED_PI_COMMANDS.md': 'Selected commands recovered from saved setup sessions, with evidence references and private values omitted. This is not a script to run all at once.',
+  'FIRMWARE_PROVENANCE.md': 'Source hashes, tool versions, pin assignments and the unresolved identity of the running Mega firmware.',
+  'ManualGuard.h': 'The ESP32 assisted-mode stop latch, forward bounds and independent camera-guard expiry. Clear reports never resume driving.',
+  'obstacles.py': 'Calibrated floor-appearance comparison and a local annotated preview. It does not measure distance or directly command motors.',
+  'manual_guard.py': 'Checks frame freshness and reports clear, blocked or fault over the single serial owner using a scoped token and increasing sequence.',
   'PROJECT-STATUS.md': 'The current progress report: physical results, incomplete deployment steps and the next camera milestone. Start here to distinguish tested behavior from planned work.',
   'PHONE-START-DESIGN.md': 'How a phone request reaches the Pi follower, how Stop invalidates it, and which installation and hardware checks still need to happen.',
   'PI-ESP32-WIRING.md': 'The GPIO serial connection between the Pi and ESP32. This keeps control on the robot while USB supplies power. Follow the documented pin numbers and power-off steps.',

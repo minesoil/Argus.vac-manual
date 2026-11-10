@@ -1,92 +1,70 @@
-# Argus robot progress — 2026-11-09
+# Argus progress — recorded 10 November 2026
 
-Phone Start firmware is installed and hash verified. All 93 tests pass on the
-actual Pi. The real phone Start/Stop and phone-lock stop checks pass; after
-restoring ESP USB power to the bank, both raised wheels turn forward from
-phone Start and stop on command. The Pi camera/bridge start automatically.
+The camera-assisted manual prototype is installed on the Pi and ESP32.
+Latest robot evidence is from November9; today's work is documentation while
+Justin is at school, without connecting to Argus.
 
-A phone-started floor trial, with Ethernet still connected, stops automatically
-near the angled tape. Logs confirm tape-continuity loss, not a session timer.
-A stationary frame shows separate straight/diagonal tape components; the lower
-piece covers 60.3% of the 116-row analysis band, below the required 70%.
-Justin keeps the sharp corner and overlaps the joins; the stationary tape view
-then passes at confidence 1.0. Another tethered run starts turning but stops
-early: the next image has too little floor visible and tape leaving the lower
-right edge. User confirms the camera also holds the caster and cannot tilt.
-A bounded background-band framing adjustment passes 92 tests but another run
-still stops on a deep dark band. Tighter, slower large-error turns are now
-installed and pass 93 tests. The next physical trial turns more sharply but
-still stops early on excessive dark coverage. Justin leaves the decision on
-further tape testing to the assistant; we stop tape commissioning here and
-prioritize assisted manual driving. See
-[corner test report](argus_avoidance/reports/CORNER-CHECK.md). A completed
-untethered floor trial remains unverified.
+## Latest assisted-manual checkpoint
 
-This folder records source, tests, wiring documentation and progress. The
-dashboard and archive outside this folder provide access to earlier project history.
+103 Python tests passed locally and on the actual Pi; updated actual-sketch
+C++ and browser checks passed. The final ESP32 application upload passed
+esptool data-hash verification. Justin confirmed new phone controls and that
+a blocked/unavailable scene refuses assisted drive with STOPPED/warning,
+motor power OFF. Paper covering the watched region produced a clear preview.
 
-## Confirmed physical results
+The held-joystick sock/shoe-entry test was requested but no result received.
+Real object-triggered stopping, camera-loss stopping on hardware and loaded
+braking remain unverified. No stopping distance has been measured. See
+[ASSISTED-MANUAL.md](ASSISTED-MANUAL.md).
 
-Orange Pi 5 and power bank are mounted on Argus. The camera is mounted and
-aimed at black tape on a light floor. Pi UART physical 8 TX connects to ESP32
-GPIO25 RX; physical 10 RX connects to ESP32 GPIO26 TX; physical 6 is common GND.
-ESP32 relays commands to the Mega. ESP USB power was moved from the Pi to the
-shared power bank; control travels over the three GPIO wires.
+The detector compares calibrated floor appearance. Tape, seams and shadows
+can warn; similar-looking objects can be missed. It is not an object classifier
+or distance sensor. Assisted mode is forward-only, capped at 35%, and latches
+a stop on hazard or lost guard health. Clear reports never resume motion.
+Unassisted manual and tape following have no camera obstacle stop.
 
-Raised wheels moved forward and stopped; the left-only test moved the correct
-wheel. A two-second floor run at 25% followed tape and stopped. A later requested
-four-second run ended early when the tape became uncertain. Justin reported
-about 12 cm of tape remained. Curved-course and untethered operation are unverified.
+The last explicit motor-OFF confirmation is dated November9. ESP32 USB was
+temporarily connected to the Pi for this update; returning it to bank power
+afterward is unconfirmed. Earlier bank-powered GPIO operation passed.
+These are dated observations, not today's live power/connection state.
 
-## Phone Start deployment
+## Physical results preserved
 
-Source includes phone Start, one-use request tokens, a 30-second session limit,
-a phone heartbeat watchdog, operator Stop and manual takeover. Local validation:
-88 Python tests, actual-sketch C++ route/control tests, and browser race tests
-passed. Target ESP32 firmware compiled successfully (938244 bytes).
+Pi and power bank are mounted. Current GPIO UART: Pi physical8 TX→ESP25 RX,
+physical10 RX←ESP26 TX, physical6 GND. Phone uses the ESP32 hotspot; ESP32
+relays percentage commands to the Mega. The recovered Mega baseline is in
+the handbook, but its exact installed firmware identity remains unknown.
 
-On November 9, the ESP32 application upload passes esptool's data-hash check.
-The actual service uses /usr/bin/python3 and /dev/ttyS0; its 88 tests pass.
-After reboot with ESP USB powered from the bank, the camera/bridge autostart
-and GPIO state remains stopped/zero until an explicit phone Start. USB data
-and laptop Ethernet are not part of the driving-command path. Phone controls
-pass motors-off and raised-wheel tests; the untethered floor check remains.
+Both raised wheels moved forward and stopped; left-only matched the left
+wheel. Phone Start/Stop and phone-lock stop passed. A two-second tethered 25%
+floor trial followed tape and stopped. Joined 45° turns improved but still
+stopped early on excess dark coverage. Tape tuning ended to prioritize manual
+warning/stop. No completed corner or untethered floor trial is verified;
+Justin confirmed Ethernet remained connected in reported floor tests. See
+[CORNER-CHECK.md](argus_avoidance/reports/CORNER-CHECK.md).
 
-## Main goal: assisted manual driving
+The camera assembly supports the caster and cannot tilt independently.
+Reported ~12cm remaining tape is not a measured camera blind distance.
+RPLIDAR C1 is unavailable after a reported failure; adapter ordered, failed
+component unconfirmed. ROS2 Humble's LiDAR preview is separate from the
+Python/GPIO camera route. No ROS motor integration is commissioned.
 
-Justin clarifies that the original goal is manual driving: the camera warns
-the driver and stops the robot when it detects an obstacle. Line following is
-a separate demo. Automatic detours are not the immediate priority. Camera
-obstacle protection is not currently installed in manual mode.
+## Reproduction and learning records
 
-[Next implementation plan](MANUAL-ASSIST-PLAN.md): stationary detection preview,
-then phone warning and a latched stop gate, then motors-off/raised-wheel checks.
+The [handbook](https://github.com/minesoil/Argus.vac-manual/tree/main/handbook)
+contains recovered Pi commands, an ordered reconstruction recipe, reviewed
+code snapshots, Mega provenance, hashes and beginner Linux/ROS explanations.
+Initial OS/ROS setup was already present; its full history is unavailable.
+Historical reports retain their dates.
 
-First build a stationary detection preview with timestamped frames, bounding boxes, inference
-latency and recorded examples from the actual camera. Evaluate cables, shoes,
-small dark objects and floor shadows; a class detector will miss unknown objects.
+Next robot task: motors-OFF object/held-joystick stop, then rearm/dropout,
+raised-wheel and supervised floor checks. No hardware work occurred during
+the November10 documentation session.
 
-Then add an explicit assisted-manual mode with a stop gate in the shared drive
-path. A detected hazard, stale frame or detector fault in that mode should stop,
-show a warning on the phone, and reject further drive commands until the view
-is clear and the driver deliberately re-enables control. Keep any unprotected
-standalone manual fallback clearly labeled. Validate with motors off, raised wheels, and slow
-supervised trials against soft obstacles. Record false detections and misses.
-A monocular camera alone does not establish reliable distance or a clear path.
+## GitHub records
 
-The RPLIDAR C1 is unavailable after a reported failure; an adapter was ordered,
-but the failed component is unconfirmed. Once ranging works, fuse camera labels
-with measured clearance before attempting detours. The current tape follower
-does not provide obstacle detection, mapping or autonomous room navigation.
-
-## GitHub recording policy
-
-Justin selected minesoil/Argus.vac-manual on November 9. Record source, tests,
-sanitized setup instructions, dated decisions and physical test outcomes there.
-Keep planned, locally tested, installed and physically verified states distinct.
-Future work should end with a reviewed commit and push plus a dated progress
-entry. This is a workflow, not an automatic background upload service.
-
-Exclude real Wi-Fi credentials, SSH credentials, config.h, compiled firmware
-(which embeds Wi-Fi credentials), private raw chat archives, caches and camera
-footage. Retain config examples and test stubs. Review diffs before each push.
+Use minesoil/Argus.vac-manual for reviewed source and dated build records.
+Commit meaningful changes; no background upload service exists. Exclude real
+configuration/passwords, private calibration, credential-bearing firmware
+and caches. Public historical chats/images are sanitized archive copies.
+Keep planned, tested, installed and physically verified states distinct.

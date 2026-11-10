@@ -4,6 +4,10 @@ Static GitHub Pages dashboard for `minesoil/Argus.vac-manual`. Replaces the old
 Onshape guide at the site root. No framework, build service, API key or robot
 connection is required. Git history retains the old website.
 
+`REPOSITORY-README.md` is a deployment template for the repository-root
+README. Its relative links assume that root; when reading a handbook snapshot,
+use the handbook's own README and inventory for local navigation.
+
 ## Updating it
 
 Publish `index.html`, `dashboard.css` and `dashboard.js` to the repository root.

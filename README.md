@@ -7,6 +7,7 @@ The dashboard replaces the earlier Onshape build-guide website; Git history
 preserves that version.
 
 - [Current progress and remaining work](robot_control/PROJECT-STATUS.md)
+- [Rebuild handbook: commands, all reviewed code, Linux and ROS 2](handbook/README.md)
 - [Orange Pi beginner guide](robot_control/argus_avoidance/START-HERE.md)
 - [Phone Start implementation and deployment](robot_control/argus_avoidance/PHONE-START-DESIGN.md)
 - [Pi ↔ ESP32 wiring](robot_control/argus_avoidance/PI-ESP32-WIRING.md)

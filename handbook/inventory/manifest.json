@@ -1,0 +1,531 @@
+{
+  "edition": "2026-11-10",
+  "scope": "reviewed source snapshot, not a Pi disk image",
+  "excluded": [
+    "real config.h",
+    "private .state",
+    "credentials",
+    "compiled firmware",
+    "caches"
+  ],
+  "files": [
+    {
+      "path": "code/dashboard/README.md",
+      "origin": "dashboard/README.md",
+      "bytes": 3232,
+      "sha256": "50684a1818019b7d308de8276bfa509c8063c3fe958255d31700a2473eb5b7e4",
+      "role": "Project explanation, instructions or dated design record."
+    },
+    {
+      "path": "code/dashboard/REPOSITORY-README.md",
+      "origin": "dashboard/REPOSITORY-README.md",
+      "bytes": 1506,
+      "sha256": "9414f165b2608b071a522e75baad5831f56f363192012aaeef5151a982e70097",
+      "role": "Project explanation, instructions or dated design record."
+    },
+    {
+      "path": "code/dashboard/REPOSITORY.gitignore",
+      "origin": "dashboard/REPOSITORY.gitignore",
+      "bytes": 229,
+      "sha256": "a395176e87980f8300c51fe5545de3f8a8dafcc698e49baed335a9467e779b54",
+      "role": "Supporting source, configuration, task or package resource."
+    },
+    {
+      "path": "code/dashboard/catalog.json",
+      "origin": "dashboard/catalog.json",
+      "bytes": 151243,
+      "sha256": "0acec57dd1795e72588cf16d658d5b9fa91a555d6a2e2cf6e65ba34333ff1252",
+      "role": "Supporting source, configuration, task or package resource."
+    },
+    {
+      "path": "code/dashboard/check.cjs",
+      "origin": "dashboard/check.cjs",
+      "bytes": 6517,
+      "sha256": "ac6ffc1dec567791e66feb08b9062817646b6e0770dc740bb297fed9014cf153",
+      "role": "Supporting source, configuration, task or package resource."
+    },
+    {
+      "path": "code/dashboard/dashboard.css",
+      "origin": "dashboard/dashboard.css",
+      "bytes": 7870,
+      "sha256": "75ffc0a1da18d1f01c30a68c0ae741c00aff1732ee9d5745f7d1249485fde091",
+      "role": "Dashboard layout and appearance."
+    },
+    {
+      "path": "code/dashboard/dashboard.js",
+      "origin": "dashboard/dashboard.js",
+      "bytes": 22561,
+      "sha256": "efb049886ff1ecbf6bc29d8703545ad02a0db5cae8ed41f1bb550a5faccf14ec",
+      "role": "Static repository file browser and formatted file explanations."
+    },
+    {
+      "path": "code/dashboard/index.html",
+      "origin": "dashboard/index.html",
+      "bytes": 3787,
+      "sha256": "41358d7572d5f14ab4b2f7f81c2d55b0088a1655830683fe019a34ec8a90a097",
+      "role": "Static dashboard page."
+    },
+    {
+      "path": "code/mega-reference/editable/Arduino_Mega_Manual_Control/Arduino_Mega_Manual_Control.ino",
+      "origin": "recovered editable Mega baseline",
+      "bytes": 5099,
+      "sha256": "965f5d7aa05dfdd30e1572036f926f463b5c0e83a4690641009f9177c6b3ec3e",
+      "role": "Recovered M-command Mega source; exact installed binary is unverified."
+    },
+    {
+      "path": "code/mega-reference/original/Arduino_Mega_Manual_Control/Arduino_Mega_Manual_Control.ino",
+      "origin": "recovered Arduino sketchbook original",
+      "bytes": 5702,
+      "sha256": "f4340354be985f3f0acaecb970f1db86ecf33fe20a84640354524bcb914881b3",
+      "role": "Recovered M-command Mega source; exact installed binary is unverified."
+    },
+    {
+      "path": "code/robot_control/ASSISTED-MANUAL.md",
+      "origin": "robot_control/ASSISTED-MANUAL.md",
+      "bytes": 4372,
+      "sha256": "08283bc9d45dd9ef4d3836c02fb3791aafeb3f2571ca28fec855c2a212bec32b",
+      "role": "Project explanation, instructions or dated design record."
+    },
+    {
+      "path": "code/robot_control/MANUAL-ASSIST-PLAN.md",
+      "origin": "robot_control/MANUAL-ASSIST-PLAN.md",
+      "bytes": 2423,
+      "sha256": "7edebd51c11718b917feb4fd4619c26a43a0a6250a3cdc990c9c89e72b2dcc4d",
+      "role": "Project explanation, instructions or dated design record."
+    },
+    {
+      "path": "code/robot_control/PROJECT-STATUS.md",
+      "origin": "robot_control/PROJECT-STATUS.md",
+      "bytes": 3768,
+      "sha256": "56d17b5e8f5c988a0f28a2029d1b819da6ddf07e098e37372579438236c0861d",
+      "role": "Project explanation, instructions or dated design record."
+    },
+    {
+      "path": "code/robot_control/README.md",
+      "origin": "robot_control/README.md",
+      "bytes": 780,
+      "sha256": "d3d56117e2672d7e28c6291f50a61836878019a45cb633bad0a4886df33d6b15",
+      "role": "Project explanation, instructions or dated design record."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/.vscode/tasks.json",
+      "origin": "robot_control/argus_avoidance/.vscode/tasks.json",
+      "bytes": 780,
+      "sha256": "e8f824caecb6b2dc3201bb313dff4000057aef715d51745ccaa3980bd0fe7c09",
+      "role": "Supporting source, configuration, task or package resource."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/PHONE-START-DESIGN.md",
+      "origin": "robot_control/argus_avoidance/PHONE-START-DESIGN.md",
+      "bytes": 2584,
+      "sha256": "3234e708ac3df1372fe74f8d0bef9a6e4f539d8e9e5f6eeae33f9b3ebfb6b5d8",
+      "role": "Project explanation, instructions or dated design record."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/PI-ESP32-WIRING.md",
+      "origin": "robot_control/argus_avoidance/PI-ESP32-WIRING.md",
+      "bytes": 2896,
+      "sha256": "2ff0cf965ee6789c582dc621ff87368eb48d90cf30036e16377841912bf09b0e",
+      "role": "Project explanation, instructions or dated design record."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/README.md",
+      "origin": "robot_control/argus_avoidance/README.md",
+      "bytes": 2650,
+      "sha256": "2a29d8045d493dd3c144096648cdad64b7f5b3190c9224c7f50ff5e0d9b00899",
+      "role": "Project explanation, instructions or dated design record."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/Run-Checks.ps1",
+      "origin": "robot_control/argus_avoidance/Run-Checks.ps1",
+      "bytes": 1051,
+      "sha256": "1fb29716ed20fe5890c9458027069dadb3e701d94bd6c9420d7986c090d4b43b",
+      "role": "Supporting source, configuration, task or package resource."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/START-HERE.md",
+      "origin": "robot_control/argus_avoidance/START-HERE.md",
+      "bytes": 3581,
+      "sha256": "6faa7677f98a4c9e00067e650b3594d48cd0dd62a5f5ec5b9685cfff167c1fb9",
+      "role": "Project explanation, instructions or dated design record."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/argus",
+      "origin": "robot_control/argus_avoidance/argus",
+      "bytes": 2068,
+      "sha256": "8c9c377ca5984f7105f35c21397dd9aaf42c4e20c7938f8fdeae3ab45580e488",
+      "role": "Human-facing Bash command shortcuts."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/argus_avoidance/__init__.py",
+      "origin": "robot_control/argus_avoidance/argus_avoidance/__init__.py",
+      "bytes": 83,
+      "sha256": "71d26b90aec877a4770f864c25f6d9d106d3f68602879bd1136576a362379863",
+      "role": "Supporting source, configuration, task or package resource."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/argus_avoidance/bench.py",
+      "origin": "robot_control/argus_avoidance/argus_avoidance/bench.py",
+      "bytes": 2823,
+      "sha256": "f5b16e20145f9548b677d53257be5f4d189d4d90762d5a69d1857e9f70d4f7e6",
+      "role": "Board/status, wall demo and scan-inspection commands."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/argus_avoidance/core.py",
+      "origin": "robot_control/argus_avoidance/argus_avoidance/core.py",
+      "bytes": 11804,
+      "sha256": "db93172ab2ecfafbe74ee598c7b8ac5b95f7dc5c5f1a45b8d20c610594c04251",
+      "role": "ROS-independent LiDAR avoidance algorithm."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/argus_avoidance/follow.py",
+      "origin": "robot_control/argus_avoidance/argus_avoidance/follow.py",
+      "bytes": 8004,
+      "sha256": "0013fc4848254d64677feb37b014b2bb0b5ea91feb6e9a938103b6bcd1971dc2",
+      "role": "Bounded camera tape-following session and wheel percentages."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/argus_avoidance/line_preview.py",
+      "origin": "robot_control/argus_avoidance/argus_avoidance/line_preview.py",
+      "bytes": 14039,
+      "sha256": "44ccd6e51424b25cece9ddfcd2703921bcf6433b85efbcec686f328d5fc86fb5",
+      "role": "Fresh camera snapshots and tape decisions without drive by default."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/argus_avoidance/manual_guard.py",
+      "origin": "robot_control/argus_avoidance/argus_avoidance/manual_guard.py",
+      "bytes": 1992,
+      "sha256": "c118926cfd7276eda1e613344688714145715e924aecfc18910650677eb144b7",
+      "role": "Freshness checks and sequenced guard reports to ESP32."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/argus_avoidance/node.py",
+      "origin": "robot_control/argus_avoidance/argus_avoidance/node.py",
+      "bytes": 15770,
+      "sha256": "cda211b6531d9cbaf5f8a6236be209aab8f157e915c868cf9c06bdc2d4461199",
+      "role": "Optional ROS 2 adapter around the LiDAR algorithm."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/argus_avoidance/obstacles.py",
+      "origin": "robot_control/argus_avoidance/argus_avoidance/obstacles.py",
+      "bytes": 10678,
+      "sha256": "dee4187e10d4a534cf084cb2f466962c6d3d5ece4fb3a614c5b2596bcf23b282",
+      "role": "Calibrated floor-appearance detector and localhost preview."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/argus_avoidance/serial_control.py",
+      "origin": "robot_control/argus_avoidance/argus_avoidance/serial_control.py",
+      "bytes": 4687,
+      "sha256": "16a3385f01a9c2b5f76e1e4d900f1c54b40812ce1c5f37d6cca00ae8cdf2a154",
+      "role": "Pi request/reply framing for ESP32 serial control."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/argus_avoidance/simulate.py",
+      "origin": "robot_control/argus_avoidance/argus_avoidance/simulate.py",
+      "bytes": 17320,
+      "sha256": "4ac84c291826a3a26f0f8fc10adbb0105aa5bc30c5e345d064e4848525d41bfb",
+      "role": "Lightweight modeled LiDAR/controller scenarios."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/argus_avoidance/usb_bridge.py",
+      "origin": "robot_control/argus_avoidance/argus_avoidance/usb_bridge.py",
+      "bytes": 5878,
+      "sha256": "114db68a64bcec4b5c7b559ebc39c61cbe7684878652d7dc59e14c18fd5c7aad",
+      "role": "Single serial owner and phone-start/guard supervisor; now GPIO UART."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/config/avoidance.yaml",
+      "origin": "robot_control/argus_avoidance/config/avoidance.yaml",
+      "bytes": 904,
+      "sha256": "33dfcd555cf1399ac65c136a1dd66c742112ce7a1560107f15efccd2296a1087",
+      "role": "ROS/simulation settings or output-disabled launch description."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/config/preview_guard.yaml",
+      "origin": "robot_control/argus_avoidance/config/preview_guard.yaml",
+      "bytes": 699,
+      "sha256": "54f51c6bb09d24a845099e36d517a741cf8378e38f4f52086b198a6d8990ed4a",
+      "role": "ROS/simulation settings or output-disabled launch description."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/config/preview_guard_humble.yaml",
+      "origin": "robot_control/argus_avoidance/config/preview_guard_humble.yaml",
+      "bytes": 615,
+      "sha256": "9e0a4d693e7598ac5fbd5ef63811719ed70017748e2cb6c4284af31147683a3e",
+      "role": "ROS/simulation settings or output-disabled launch description."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/config/simulation.yaml",
+      "origin": "robot_control/argus_avoidance/config/simulation.yaml",
+      "bytes": 643,
+      "sha256": "2f6532a800eac83614cb0fd535105af20f6a19f2a22e16b9b8014eb7b5dfdb2a",
+      "role": "ROS/simulation settings or output-disabled launch description."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/launch/avoidance.launch.py",
+      "origin": "robot_control/argus_avoidance/launch/avoidance.launch.py",
+      "bytes": 1795,
+      "sha256": "71c90ecea30d274c50553258c0578e1adbd827397745a28b2ca7b147012a5352",
+      "role": "ROS/simulation settings or output-disabled launch description."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/launch/guarded_preview.launch.py",
+      "origin": "robot_control/argus_avoidance/launch/guarded_preview.launch.py",
+      "bytes": 2207,
+      "sha256": "83e021d9d909e2c1bf2b7cfd31297bbe84ba07f77d0040f2736c4c25b4d2c9db",
+      "role": "ROS/simulation settings or output-disabled launch description."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/package.xml",
+      "origin": "robot_control/argus_avoidance/package.xml",
+      "bytes": 903,
+      "sha256": "3baac0f5bfc9291575f40e77f55d41df24a9cbb36521ad0e927a02dfeee04f27",
+      "role": "ROS package dependencies and metadata."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/reports/CORNER-CHECK.md",
+      "origin": "robot_control/argus_avoidance/reports/CORNER-CHECK.md",
+      "bytes": 5323,
+      "sha256": "f93f95bf77ff035118e6d4719910b2ec037757f907263c507476fe3daf124f81",
+      "role": "Dated verification evidence; consult current status for later results."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/reports/ORANGE-PI-CHECK.md",
+      "origin": "robot_control/argus_avoidance/reports/ORANGE-PI-CHECK.md",
+      "bytes": 2024,
+      "sha256": "e5d77ef102c1cf3936796ee9404c5d8bf8e90d044814dcf2906f7114278a0aaa",
+      "role": "Dated verification evidence; consult current status for later results."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/reports/TAPE-PREVIEW-CHECK.md",
+      "origin": "robot_control/argus_avoidance/reports/TAPE-PREVIEW-CHECK.md",
+      "bytes": 6471,
+      "sha256": "1a899ecb227ec3e39b4c29fb75fd6d55aad07ce7a816108f7a741c475e951d7d",
+      "role": "Dated verification evidence; consult current status for later results."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/reports/VERIFICATION.md",
+      "origin": "robot_control/argus_avoidance/reports/VERIFICATION.md",
+      "bytes": 2863,
+      "sha256": "d17d65081ae48682a676c455a996ca591dc785da05d66a5e23388eb1b673e6f1",
+      "role": "Dated verification evidence; consult current status for later results."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/reports/standalone-simulation.json",
+      "origin": "robot_control/argus_avoidance/reports/standalone-simulation.json",
+      "bytes": 235912,
+      "sha256": "a6bf9e6321aed4b904d929cd693e1bf82548219637fff89198a8c1ca8467c9ff",
+      "role": "Dated verification evidence; consult current status for later results."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/resource/argus_avoidance",
+      "origin": "robot_control/argus_avoidance/resource/argus_avoidance",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "role": "Supporting source, configuration, task or package resource."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/setup.cfg",
+      "origin": "robot_control/argus_avoidance/setup.cfg",
+      "bytes": 99,
+      "sha256": "44abd111d882e660c32ddb6d0670fe3fc44d54751ca20aecb78746eeffe6b973",
+      "role": "Supporting source, configuration, task or package resource."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/setup.py",
+      "origin": "robot_control/argus_avoidance/setup.py",
+      "bytes": 772,
+      "sha256": "7129ac439ffdda0ea63c8512e295772a24680f9587174ee1418f93392f0abdf6",
+      "role": "Python package and ROS executable/config installation metadata."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/systemd/argus-bridge-avoidance.conf",
+      "origin": "robot_control/argus_avoidance/systemd/argus-bridge-avoidance.conf",
+      "bytes": 496,
+      "sha256": "ad811128e5108400dd7c940230db359c9aa19e8021c47056c525b53dd75f6930",
+      "role": "Linux service or override for background program startup."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/systemd/argus-obstacle-preview.service",
+      "origin": "robot_control/argus_avoidance/systemd/argus-obstacle-preview.service",
+      "bytes": 378,
+      "sha256": "246dbd87392004f6b1ac7bdcddd096f9c6744c60581066107fca85dc5e8ee5c7",
+      "role": "Linux service or override for background program startup."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/tests/test_adapter.py",
+      "origin": "robot_control/argus_avoidance/tests/test_adapter.py",
+      "bytes": 9647,
+      "sha256": "554a3d346030e5c6bff3c7418b43a8aa70e2cc4aaea0c716b20dd4048b9053db",
+      "role": "Offline test or safe test stand-in for the neighboring implementation."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/tests/test_core.py",
+      "origin": "robot_control/argus_avoidance/tests/test_core.py",
+      "bytes": 8962,
+      "sha256": "d634fafbe819c0aa8f374136674038606c496c6bdd8e7db9337d3fe89e346f73",
+      "role": "Offline test or safe test stand-in for the neighboring implementation."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/tests/test_follow.py",
+      "origin": "robot_control/argus_avoidance/tests/test_follow.py",
+      "bytes": 9141,
+      "sha256": "4d16aa0af33d2c272dc4c69d0367c60b4142804403aa412793a349d1c3b8b80b",
+      "role": "Offline test or safe test stand-in for the neighboring implementation."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/tests/test_line_preview.py",
+      "origin": "robot_control/argus_avoidance/tests/test_line_preview.py",
+      "bytes": 9319,
+      "sha256": "a19fe349c3e8b32bfa87c78660c7dc184a1422fcc67d2e1596292119285b9d69",
+      "role": "Offline test or safe test stand-in for the neighboring implementation."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/tests/test_manual_guard.py",
+      "origin": "robot_control/argus_avoidance/tests/test_manual_guard.py",
+      "bytes": 2053,
+      "sha256": "14e84edb0fd2fdfa94a94c785b6ef004415bbe58a706dcde72b2c6ba3e1ce8ca",
+      "role": "Offline test or safe test stand-in for the neighboring implementation."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/tests/test_obstacles.py",
+      "origin": "robot_control/argus_avoidance/tests/test_obstacles.py",
+      "bytes": 2736,
+      "sha256": "e503d720c80564d491c7b3d9ee4a1bfdc2c1a36a14a6f34c54b36eacc613307e",
+      "role": "Offline test or safe test stand-in for the neighboring implementation."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/tests/test_serial_control.py",
+      "origin": "robot_control/argus_avoidance/tests/test_serial_control.py",
+      "bytes": 3473,
+      "sha256": "4740692db3b090d738dd6d00260f4cfce2871f46d6b2684d3248c94c7953221b",
+      "role": "Offline test or safe test stand-in for the neighboring implementation."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/tests/test_simulation.py",
+      "origin": "robot_control/argus_avoidance/tests/test_simulation.py",
+      "bytes": 3608,
+      "sha256": "ceab65d7b513d8d0346a6512284350a5b7fe2458255744585f6828be9053bc6d",
+      "role": "Offline test or safe test stand-in for the neighboring implementation."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/tests/test_usb_bridge.py",
+      "origin": "robot_control/argus_avoidance/tests/test_usb_bridge.py",
+      "bytes": 3919,
+      "sha256": "92e08b10989f46f6afba25d6ae44bb3bab8b1bcfead845736a61c913772bb625",
+      "role": "Offline test or safe test stand-in for the neighboring implementation."
+    },
+    {
+      "path": "code/robot_control/argus_avoidance/tools/build_replay.py",
+      "origin": "robot_control/argus_avoidance/tools/build_replay.py",
+      "bytes": 1275,
+      "sha256": "f795175bd614f0a914df8aec24ab7e42407baf4459e37d23939e2ec73a80de16",
+      "role": "Supporting source, configuration, task or package resource."
+    },
+    {
+      "path": "code/robot_control/firmware/esp32_wifi_controlcam_auto/ControlPacketParser.h",
+      "origin": "robot_control/firmware/esp32_wifi_controlcam_auto/ControlPacketParser.h",
+      "bytes": 1510,
+      "sha256": "f5ee30b43da09ce27c67f86ab1b6f67772ab08a12f2117ef06352d56e0bdd056",
+      "role": "Bounded parser for Pi serial messages."
+    },
+    {
+      "path": "code/robot_control/firmware/esp32_wifi_controlcam_auto/DriveControl.h",
+      "origin": "robot_control/firmware/esp32_wifi_controlcam_auto/DriveControl.h",
+      "bytes": 2608,
+      "sha256": "5ff277e23dbf5a1c8f22e64497865b6826dfbe6e20bdcbad09f011b31eba77da",
+      "role": "ESP32 control ownership and driving-command expiry."
+    },
+    {
+      "path": "code/robot_control/firmware/esp32_wifi_controlcam_auto/ManualGuard.h",
+      "origin": "robot_control/firmware/esp32_wifi_controlcam_auto/ManualGuard.h",
+      "bytes": 1758,
+      "sha256": "6d463925d3ea5b602baaf2d79ec0b7f3ffc497bbc122e7f30b393196a43630a5",
+      "role": "ESP32 assisted-mode bounds, guard expiry and stop latch."
+    },
+    {
+      "path": "code/robot_control/firmware/esp32_wifi_controlcam_auto/PhoneStart.h",
+      "origin": "robot_control/firmware/esp32_wifi_controlcam_auto/PhoneStart.h",
+      "bytes": 1228,
+      "sha256": "1dba7f6fa93213921feacc0ad30bcd696256f0ff3f7f525a49a83d19302e071e",
+      "role": "Phone line-start token and heartbeat handling."
+    },
+    {
+      "path": "code/robot_control/firmware/esp32_wifi_controlcam_auto/README.md",
+      "origin": "robot_control/firmware/esp32_wifi_controlcam_auto/README.md",
+      "bytes": 6906,
+      "sha256": "72a4e775b02aab298329532f66522c8b42dea26aa9a12df9656e596d81671ffa",
+      "role": "Project explanation, instructions or dated design record."
+    },
+    {
+      "path": "code/robot_control/firmware/esp32_wifi_controlcam_auto/VERIFICATION.md",
+      "origin": "robot_control/firmware/esp32_wifi_controlcam_auto/VERIFICATION.md",
+      "bytes": 2371,
+      "sha256": "c8e4ff5d217a12390355d4606c3d22e7783237c07f97dc691641ae13b93cf6b7",
+      "role": "Project explanation, instructions or dated design record."
+    },
+    {
+      "path": "code/robot_control/firmware/esp32_wifi_controlcam_auto/config.h.example",
+      "origin": "robot_control/firmware/esp32_wifi_controlcam_auto/config.h.example",
+      "bytes": 172,
+      "sha256": "61c28f1b8fbcbbc6a8c1669445978b2c35217e781a9c69ba4337b36169a9baad",
+      "role": "Placeholder hotspot configuration; choose private values locally."
+    },
+    {
+      "path": "code/robot_control/firmware/esp32_wifi_controlcam_auto/esp32_wifi_controlcam_auto.ino",
+      "origin": "robot_control/firmware/esp32_wifi_controlcam_auto/esp32_wifi_controlcam_auto.ino",
+      "bytes": 32315,
+      "sha256": "71c88323c9439787644eba524d361fff53ee2c02a45d421b18f5bd34cb285e81",
+      "role": "ESP32 Arduino setup/loop, UART, HTTP routes and phone UI."
+    },
+    {
+      "path": "code/robot_control/firmware/esp32_wifi_controlcam_auto/tests/browser_check.js",
+      "origin": "robot_control/firmware/esp32_wifi_controlcam_auto/tests/browser_check.js",
+      "bytes": 5606,
+      "sha256": "83dfdbdd73dbcd820e62f5df63a0e988714e0359afc962d824558f9fa9d787ab",
+      "role": "Offline test or safe test stand-in for the neighboring implementation."
+    },
+    {
+      "path": "code/robot_control/firmware/esp32_wifi_controlcam_auto/tests/host_check.cpp",
+      "origin": "robot_control/firmware/esp32_wifi_controlcam_auto/tests/host_check.cpp",
+      "bytes": 17505,
+      "sha256": "9157e8241bdbb32aba544bd222f8bacec83c87c4a1cd18321528f08eef38c073",
+      "role": "Offline test or safe test stand-in for the neighboring implementation."
+    },
+    {
+      "path": "code/robot_control/firmware/esp32_wifi_controlcam_auto/tests/phone_start_check.cpp",
+      "origin": "robot_control/firmware/esp32_wifi_controlcam_auto/tests/phone_start_check.cpp",
+      "bytes": 1062,
+      "sha256": "5150b83c623b6178492d2c81a25544bc205789b2febe878708bf439101cb20bd",
+      "role": "Offline test or safe test stand-in for the neighboring implementation."
+    },
+    {
+      "path": "code/robot_control/firmware/esp32_wifi_controlcam_auto/tests/stubs/Arduino.h",
+      "origin": "robot_control/firmware/esp32_wifi_controlcam_auto/tests/stubs/Arduino.h",
+      "bytes": 1374,
+      "sha256": "a0d71daf5900b35dc99d157695da74b969ae7228c35cf486d10d0b95c815b4fb",
+      "role": "Offline test or safe test stand-in for the neighboring implementation."
+    },
+    {
+      "path": "code/robot_control/firmware/esp32_wifi_controlcam_auto/tests/stubs/WebServer.h",
+      "origin": "robot_control/firmware/esp32_wifi_controlcam_auto/tests/stubs/WebServer.h",
+      "bytes": 1374,
+      "sha256": "cc3cc51b9cde88f181bdc06dabb3aaa3cb1f7b39c9347400119961ae5fcefb99",
+      "role": "Offline test or safe test stand-in for the neighboring implementation."
+    },
+    {
+      "path": "code/robot_control/firmware/esp32_wifi_controlcam_auto/tests/stubs/WiFi.h",
+      "origin": "robot_control/firmware/esp32_wifi_controlcam_auto/tests/stubs/WiFi.h",
+      "bytes": 252,
+      "sha256": "b879c8235ab6c4796920083423a0b0d461e1dc9fea7fe720c90f5cb1d098cc92",
+      "role": "Offline test or safe test stand-in for the neighboring implementation."
+    },
+    {
+      "path": "code/robot_control/firmware/esp32_wifi_controlcam_auto/tests/stubs/config.h",
+      "origin": "robot_control/firmware/esp32_wifi_controlcam_auto/tests/stubs/config.h",
+      "bytes": 150,
+      "sha256": "1ce095a401122f6353c3ca89be4d4d513f643fe1997d874c5b41b90af551118e",
+      "role": "Offline test or safe test stand-in for the neighboring implementation."
+    }
+  ]
+}

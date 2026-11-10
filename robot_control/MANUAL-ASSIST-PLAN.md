@@ -1,8 +1,13 @@
-# Next work: camera assistance for manual driving
+# Camera assistance plan and remaining checks
+
+Updated 10 November: the preview, phone warning and latched firmware gate below
+are now implemented and installed. See [ASSISTED-MANUAL.md](ASSISTED-MANUAL.md)
+for the recovered November9 checkpoint. The motors-OFF object-entry test and
+physical stopping stages remain pending. Earlier planning text follows.
 
 Justin wants to drive manually while the camera warns him and stops Argus on
-a detected obstacle. Tape following remains a demo. Obstacle protection is
-not installed in the current manual controls.
+a detected obstacle. Tape following remains a demo. The installed prototype
+compares floor appearance; it has not completed real object-stop commissioning.
 
 ## 1. Stationary detection preview
 

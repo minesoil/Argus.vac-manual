@@ -1,0 +1,1082 @@
+
+#include <WiFi.h>
+#include <WebServer.h>
+#include <errno.h>
+#include <stdlib.h>
+#include "DriveControl.h"
+#include "ControlPacketParser.h"
+#include "PhoneStart.h"
+#include "ManualGuard.h"
+
+// Argus Vac camera relay and joystick
+// Board: NodeMCU-32 / ESP32-WROOM-32
+
+#include "config.h"
+
+// ESP32 -> Arduino Mega Serial1
+const int MEGA_RX_PIN = 16;   // ESP32 RX2
+const int MEGA_TX_PIN = 17;   // ESP32 TX2 -> Mega D19
+
+const int MEGA_BAUD = 9600;
+
+// Orange Pi GPIO UART: Pi TX -> GPIO25 RX; Pi RX <- GPIO26 TX; shared GND.
+const int PI_RX_PIN = 25;
+const int PI_TX_PIN = 26;
+const int PI_BAUD = 115200;
+ControlPacketParser gpioControl;
+
+// Orange Pi -> ESP32 programming USB
+const int CAMERA_BAUD = 115200;
+const size_t MAX_JPEG = 24000;
+
+// Motor command timing
+const unsigned long SEND_INTERVAL = 100;
+
+WebServer server(80);
+
+// CAMERA FRAME BUFFERS
+
+// Two buffers: receiving + completed frame
+uint8_t jpegBuffers[2][MAX_JPEG];
+
+uint8_t activeFrame = 0;
+size_t activeLength = 0;
+bool frameReady = false;
+unsigned long frameTime = 0;
+
+// Camera packet:
+// "AVF1" + uint32 length (little endian) + JPEG
+
+enum CameraState {
+  WAIT_MAGIC,
+  READ_LENGTH,
+  READ_JPEG
+};
+
+CameraState cameraState = WAIT_MAGIC;
+
+const uint8_t MAGIC[4] = {'A','V','F','1'};
+bool controlPacket = false;
+const uint8_t CONTROL_MAGIC[4] = {0xA5, 0xDA, 0xC3, 0xBC};
+const size_t MAX_CONTROL = 160;
+char controlBuffer[MAX_CONTROL + 1];
+void processControlPacket(char* payload, bool viaGPIO = false);
+
+uint8_t magicPos = 0;
+uint8_t lengthPos = 0;
+uint32_t expectedLength = 0;
+size_t receivedLength = 0;
+
+unsigned long lastCameraByte = 0;
+
+// CONTROL OWNERSHIP AND MEGA OUTPUT
+
+DriveControl control;
+ManualGuard manualGuard;
+PhoneStart phoneStart;
+bool phoneSessionActive = false;
+uint32_t phoneLastHeartbeat = 0;
+unsigned long lastMotorSend = 0;
+
+void sendImmediateStop() {
+  // End any partial packet before the Mega's single-character stop command.
+  Serial2.print("\nS\n");
+}
+
+void sendToMega(int left, int right) {
+  Serial2.print("M:");
+  Serial2.print(left);
+  Serial2.print(",");
+  Serial2.println(right);
+}
+
+void updateMotors() {
+  unsigned long now = millis();
+  bool expired = manualGuard.tick(control, now);
+  expired = control.expire(now) || expired;
+  bool phoneOwnsState = phoneSessionActive &&
+      ((control.mode == DriveMode::Stopped && control.epoch == phoneStart.epoch) ||
+       (control.mode == DriveMode::Automatic && control.epoch == uint32_t(phoneStart.epoch + 1)));
+  if (phoneSessionActive && !phoneOwnsState) phoneSessionActive = false;
+  if (phoneOwnsState && uint32_t(now - phoneLastHeartbeat) >= 1000) {
+    phoneSessionActive = false;
+    phoneStart.pending = false;
+    control.stop("Phone connection lost; select control again");
+    expired = true;
+  }
+  if (expired) {
+    sendImmediateStop();
+    lastMotorSend = now;
+  }
+  if (now - lastMotorSend < SEND_INTERVAL) return;
+  lastMotorSend = now;
+  if (control.mode == DriveMode::Stopped) {
+    sendImmediateStop();
+  } else {
+    sendToMega(control.left, control.right);
+  }
+}
+
+// CAMERA SERIAL RECEIVER
+
+void resetCameraParser() {
+  cameraState = WAIT_MAGIC;
+  magicPos = 0;
+  lengthPos = 0;
+  expectedLength = 0;
+  receivedLength = 0;
+  controlPacket = false;
+}
+
+void processCameraByte(uint8_t b) {
+
+  lastCameraByte = millis();
+
+  if (cameraState == WAIT_MAGIC) {
+
+    if (magicPos == 0) controlPacket = b == CONTROL_MAGIC[0];
+    const uint8_t* expectedMagic = controlPacket ? CONTROL_MAGIC : MAGIC;
+    if (b == expectedMagic[magicPos]) {
+      magicPos++;
+    } else {
+      magicPos = (b == MAGIC[0] || b == CONTROL_MAGIC[0]) ? 1 : 0;
+      controlPacket = b == CONTROL_MAGIC[0];
+    }
+
+    if (magicPos == 4) {
+      cameraState = READ_LENGTH;
+      magicPos = 0;
+      lengthPos = 0;
+      expectedLength = 0;
+    }
+
+    return;
+  }
+
+  if (cameraState == READ_LENGTH) {
+    if (controlPacket && b < 0x80) {
+      resetCameraParser();
+      return;
+    }
+    expectedLength |= controlPacket
+        ? ((uint32_t)(b & 0x7f) << (7 * lengthPos))
+        : ((uint32_t)b << (8 * lengthPos));
+
+    lengthPos++;
+
+    if (lengthPos == (controlPacket ? 2 : 4)) {
+
+      if (expectedLength < (controlPacket ? 1u : 4u) ||
+          expectedLength > (controlPacket ? MAX_CONTROL : MAX_JPEG)) {
+        resetCameraParser();
+        return;
+      }
+
+      receivedLength = 0;
+      cameraState = READ_JPEG;
+    }
+
+    return;
+  }
+
+  if (cameraState == READ_JPEG) {
+
+    if (controlPacket) {
+      if (b < 0x80) {
+        resetCameraParser();
+        return;
+      }
+      controlBuffer[receivedLength++] = (char)(b & 0x7f);
+      if (receivedLength == expectedLength) {
+        controlBuffer[receivedLength] = '\0';
+        // Embedded NUL bytes cannot truncate a validated command.
+        if (strlen(controlBuffer) == expectedLength) processControlPacket(controlBuffer);
+        resetCameraParser();
+      }
+      return;
+    }
+
+    uint8_t receivingBuffer = 1 - activeFrame;
+
+    jpegBuffers[receivingBuffer][receivedLength++] = b;
+
+    if (receivedLength == expectedLength) {
+
+      uint8_t* image = jpegBuffers[receivingBuffer];
+
+      bool validJPEG =
+        image[0] == 0xFF &&
+        image[1] == 0xD8 &&
+        image[expectedLength - 2] == 0xFF &&
+        image[expectedLength - 1] == 0xD9;
+
+      if (validJPEG) {
+        activeFrame = receivingBuffer;
+        activeLength = expectedLength;
+        frameReady = true;
+        frameTime = millis();
+      }
+
+      resetCameraParser();
+    }
+  }
+}
+
+void receiveCamera() {
+
+  if (cameraState != WAIT_MAGIC &&
+      millis() - lastCameraByte > 1500) {
+    resetCameraParser();
+  }
+
+  // Limit serial processing each pass,
+  // so Wi-Fi and motor handling still run.
+  int budget = 4096;
+
+  while (Serial.available() > 0 && budget-- > 0) {
+    int value = Serial.read();
+
+    if (value >= 0) {
+      processCameraByte((uint8_t)value);
+    }
+  }
+}
+
+void receiveGpioControl() {
+  gpioControl.expire(millis());
+  int budget = 256;
+  while (Serial1.available() > 0 && budget-- > 0) {
+    int value = Serial1.read();
+    if (value >= 0 && gpioControl.feed((uint8_t)value, millis())) {
+      processControlPacket(gpioControl.payload, true);
+    }
+  }
+}
+
+// WEBPAGE
+
+const char PAGE_HTML[] PROGMEM = R"ARGUS(
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+ content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
+<title>Argus Vac</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #101820;
+  color: #f0f4f8;
+  font-family: system-ui, Arial, sans-serif;
+  text-align: center;
+}
+
+main {
+  max-width: 680px;
+  margin: auto;
+  padding: 14px;
+}
+
+h2 {
+  margin: 7px 0 14px;
+  letter-spacing: 2px;
+}
+
+.camera {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: #050505;
+  border: 1px solid #34444e;
+  border-radius: 12px;
+  object-fit: contain;
+}
+
+.status {
+  font-size: 13px;
+  color: #aab8c4;
+  margin: 8px;
+}
+.warning { color: #ff9b88; font-weight: bold; }
+
+#stick {
+  position: relative;
+  margin: 20px auto;
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+  background: #263743;
+  border: 2px solid #647887;
+  touch-action: none;
+  user-select: none;
+}
+
+#knob {
+  position: absolute;
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  background: #70b9d3;
+  border: 3px solid #b9e8f8;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  pointer-events: none;
+}
+
+.readout {
+  display: flex;
+  justify-content: space-around;
+  padding: 9px;
+  background: #1b2b35;
+  border-radius: 9px;
+}
+
+button {
+  padding: 13px 30px;
+  border: 0;
+  border-radius: 9px;
+  background: #d94b4b;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 14px;
+}
+</style>
+</head>
+
+<body>
+<main>
+<h2>ARGUS VAC</h2>
+
+<img id="camera" class="camera" alt="Live camera">
+
+<div id="cameraStatus" class="status">
+  Waiting for camera...
+</div>
+
+<div id="stick">
+  <div id="knob"></div>
+</div>
+
+<div class="readout">
+  <span>LEFT: <b id="left">0%</b></span>
+  <span>RIGHT: <b id="right">0%</b></span>
+</div>
+
+<div id="driveMode" class="status">Stopped</div>
+<div id="guardStatus" class="status">Camera assistance unavailable</div>
+<button id="assist">ENABLE CAMERA-ASSISTED DRIVE</button>
+<button id="manual">UNASSISTED MANUAL (NO CAMERA STOP)</button>
+<button id="follow">START LINE FOLLOWING</button>
+<button id="stop">STOP</button>
+<p class="status">Camera-assisted drive: forward only, 35% limit. Release joystick to stop. Tape following and unassisted manual have no obstacle stop.</p>
+</main>
+
+<script>
+// Joystick
+
+const stick = document.getElementById("stick");
+const knob = document.getElementById("knob");
+
+let leftSpeed = 0;
+let rightSpeed = 0;
+let dragging = false;
+
+function updateReadout() {
+  document.getElementById("left").textContent =
+    leftSpeed + "%";
+
+  document.getElementById("right").textContent =
+    rightSpeed + "%";
+}
+
+function moveStick(e) {
+  const rect = stick.getBoundingClientRect();
+
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
+
+  const radius = 70;
+
+  let dx = e.clientX - cx;
+  let dy = e.clientY - cy;
+
+  const distance = Math.hypot(dx, dy);
+
+  if (distance > radius) {
+    dx = dx * radius / distance;
+    dy = dy * radius / distance;
+  }
+
+  knob.style.left =
+    `calc(50% + ${dx}px)`;
+
+  knob.style.top =
+    `calc(50% + ${dy}px)`;
+
+  const steering = dx / radius;
+  const throttle = -dy / radius;
+
+  // Mix throttle and steering, keeping both outputs within 100%.
+  let l = throttle + steering;
+  let r = throttle - steering;
+
+  const scale = Math.max(1, Math.abs(l), Math.abs(r));
+
+  leftSpeed = Math.round(l / scale * 100);
+  rightSpeed = Math.round(r / scale * 100);
+  if (manualAssist) {
+    leftSpeed = Math.max(0, Math.round(leftSpeed * .35));
+    rightSpeed = Math.max(0, Math.round(rightSpeed * .35));
+  }
+
+  updateReadout();
+}
+
+let manualSession = "";
+let manualAssist = false;
+let followToken = "";
+let manualEpoch = "";
+let sequence = 0;
+let mode = "stopped";
+let intent = 0;
+let sending = false;
+let stateGeneration = 0;
+let stateRequest = 0;
+let latestStateApplied = 0;
+const modeLabel = document.getElementById("driveMode");
+
+function centerStick() {
+  dragging = false;
+  knob.style.left = "50%";
+  knob.style.top = "50%";
+  leftSpeed = 0;
+  rightSpeed = 0;
+  updateReadout();
+}
+
+async function post(path, fields = {}) {
+  return fetch(path, {
+    method: "POST",
+    body: new URLSearchParams(fields),
+    cache: "no-store"
+  });
+}
+
+async function refreshState() {
+  const observedGeneration = stateGeneration;
+  const request = ++stateRequest;
+  const reply = await fetch("/state", {cache: "no-store"});
+  const state = await reply.json();
+  if (observedGeneration !== stateGeneration || request < latestStateApplied) return state;
+  latestStateApplied = request;
+  mode = state.mode;
+  modeLabel.textContent = state.mode + " — " + state.reason;
+  document.getElementById("guardStatus").textContent = state.assist
+      ? (state.guard === "clear" ? (state.guard_latched ? "View clear — re-enable assisted drive to resume" : "Camera assistance active — watched front region only")
+         : (state.guard === "blocked" ? "OBSTACLE WARNING — assisted drive stopped" : "CAMERA UNAVAILABLE — assisted drive stopped"))
+      : "Camera: " + (state.guard || "unavailable") + " — unassisted mode has no obstacle stop";
+  document.getElementById("guardStatus").className = "status" + (state.assist && (state.guard !== "clear" || state.guard_latched) ? " warning" : "");
+  if (manualSession && String(state.epoch) !== manualEpoch) {
+    manualSession = "";
+    centerStick();
+  }
+  return state;
+}
+
+async function selectManual(expectedIntent, assisted = false) {
+  followToken = "";
+  const state = await refreshState();
+  if (expectedIntent !== intent) return false;
+  const reply = await post(assisted ? "/assist/arm" : "/manual/arm", {epoch: String(state.epoch)});
+  if (!reply.ok) {
+    await refreshState();
+    if (assisted) modeLabel.textContent = "Camera view not ready — assisted drive remains stopped";
+    return false;
+  }
+  const selected = await reply.json();
+  if (expectedIntent !== intent) return false;
+  ++stateGeneration;
+  manualSession = selected.session;
+  manualAssist = assisted;
+  manualEpoch = String(selected.epoch);
+  sequence = 0;
+  mode = "manual";
+  modeLabel.textContent = "manual — ready";
+  return true;
+}
+
+async function operatorStop() {
+  ++intent;
+  ++stateGeneration;
+  manualSession = "";
+  followToken = "";
+  centerStick();
+  mode = "stopped";
+  modeLabel.textContent = "stopped — stop requested";
+  // This has its own request and never waits for a drive request to finish.
+  try {
+    await post("/stop");
+    await refreshState();
+  } catch (error) {
+    modeLabel.textContent = "Connection lost — reconnect and select control again";
+  }
+}
+
+async function sendDrive() {
+  if (!manualSession || mode !== "manual" || sending || document.hidden) return;
+  const sentIntent = intent;
+  const sentSession = manualSession;
+  sending = true;
+  try {
+    const reply = await post("/drive", {
+      session: sentSession,
+      seq: String(++sequence),
+      l: String(leftSpeed),
+      r: String(rightSpeed)
+    });
+    if (!reply.ok && sentIntent === intent && sentSession === manualSession) {
+      manualSession = "";
+      centerStick();
+      await refreshState();
+    }
+  } catch (error) {
+    if (sentIntent === intent) {
+      manualSession = "";
+      centerStick();
+      modeLabel.textContent = "Connection lost — select control again";
+    }
+  } finally {
+    sending = false;
+  }
+}
+
+function releaseStick() {
+  ++intent;
+  centerStick();
+  sendDrive();
+}
+
+stick.addEventListener("pointerdown", async event => {
+  const thisIntent = ++intent;
+  stick.setPointerCapture(event.pointerId);
+  try {
+    const current = await refreshState();
+    if (thisIntent !== intent) return;
+    if (current.mode === "stopped") {
+      modeLabel.textContent = "Choose assisted or unassisted manual control first";
+      return;
+    }
+    dragging = true;
+    // A deliberate joystick gesture takes over automatic control.
+    if (!manualSession && !await selectManual(thisIntent, true)) return;
+    if (thisIntent !== intent || !dragging) return;
+    moveStick(event);
+    sendDrive();
+  } catch (error) {
+    manualSession = "";
+    centerStick();
+  }
+});
+
+stick.addEventListener("pointermove", event => {
+  if (dragging && manualSession) moveStick(event);
+});
+stick.addEventListener("pointerup", releaseStick);
+stick.addEventListener("pointercancel", releaseStick);
+
+document.getElementById("manual").onclick = async () => {
+  centerStick();
+  const thisIntent = ++intent;
+  try {
+    if (await selectManual(thisIntent)) sendDrive();
+  } catch (error) {
+    modeLabel.textContent = "Connection lost — select control again";
+  }
+};
+document.getElementById("stop").onclick = operatorStop;
+document.getElementById("assist").onclick = async () => {
+  centerStick();
+  const thisIntent = ++intent;
+  try { if (await selectManual(thisIntent, true)) sendDrive(); }
+  catch (error) { modeLabel.textContent = "Camera assistance unavailable — check the Pi"; }
+};
+document.getElementById("follow").onclick = async () => {
+  const thisIntent = ++intent;
+  centerStick();
+  try {
+    const state = await refreshState();
+    if (thisIntent !== intent) return;
+    const reply = await post("/follow/start", {epoch: String(state.epoch)});
+    if (!reply.ok) { modeLabel.textContent = "Press STOP, then try again"; return; }
+    const started = await reply.json();
+    if (thisIntent !== intent) return;
+    if (document.hidden) { await operatorStop(); return; }
+    followToken = started.follow_token;
+    modeLabel.textContent = "Line following requested";
+    setTimeout(async () => {
+      if (thisIntent !== intent) return;
+      try {
+        const current = await refreshState();
+        if (thisIntent === intent && current.mode === "stopped")
+          modeLabel.textContent = "No run started or it ended — check tape, then press STOP to retry";
+      } catch (error) { /* The heartbeat watchdog handles connection loss. */ }
+    }, 3000);
+  } catch (error) {
+    modeLabel.textContent = "Connection lost — reconnect and select control again";
+  }
+};
+window.addEventListener("blur", () => {if (manualSession || followToken) operatorStop();});
+window.addEventListener("pagehide", () => {if (manualSession || followToken) operatorStop();});
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden && (manualSession || followToken)) operatorStop();
+});
+
+setInterval(async () => {
+  if (!followToken || document.hidden) return;
+  const sentToken = followToken;
+  try {
+    const reply = await post("/follow/heartbeat", {session: sentToken});
+    if (!reply.ok && followToken === sentToken) followToken = "";
+  } catch (error) { if (followToken === sentToken) followToken = ""; }
+}, 400);
+
+// A manual page refreshes only its own valid manual session.
+setInterval(sendDrive, 100);
+setInterval(() => refreshState().catch(() => {}), 500);
+refreshState().catch(() => {});
+
+// Camera snapshot updates
+
+const camera = document.getElementById("camera");
+const cameraStatus =
+  document.getElementById("cameraStatus");
+
+let cameraTimer;
+
+function requestFrame() {
+  camera.src = "/frame?t=" + Date.now();
+}
+
+camera.onload = () => {
+  cameraStatus.textContent = "Camera connected";
+  cameraTimer = setTimeout(requestFrame, 450);
+};
+
+camera.onerror = () => {
+  cameraStatus.textContent = "Waiting for camera...";
+  cameraTimer = setTimeout(requestFrame, 1200);
+};
+
+requestFrame();
+
+</script>
+</body>
+</html>
+)ARGUS";
+
+// HTTP HANDLERS
+
+void handleHome() {
+  server.send_P(200, "text/html", PAGE_HTML);
+}
+
+const char* modeName() {
+  if (control.mode == DriveMode::Manual) return "manual";
+  if (control.mode == DriveMode::Automatic) return "auto";
+  return "stopped";
+}
+
+void formatState(char* response, size_t capacity, bool includeSession = false,
+                 uint32_t requestId = 0, int status = 200) {
+  phoneStart.expire(millis(), control.epoch, control.mode == DriveMode::Stopped);
+  char token[17];
+  char followToken[17];
+  snprintf(token, sizeof(token), "%08lx%08lx",
+           (unsigned long)(control.session >> 32), (unsigned long)(control.session & 0xffffffff));
+  snprintf(followToken, sizeof(followToken), "%08lx%08lx",
+           (unsigned long)(phoneStart.requestToken >> 32), (unsigned long)(phoneStart.requestToken & 0xffffffff));
+  snprintf(response, capacity,
+           "{\"mode\":\"%s\",\"epoch\":%lu,\"reason\":\"%s\","
+           "\"lease_ms\":%lu,\"max_auto_percent\":%d,\"left\":%d,\"right\":%d,"
+           "\"request_id\":%lu,\"status\":%d,\"follow_pending\":%s,\"follow_token\":\"%s\","
+           "\"assist\":%s,\"guard\":\"%s\",\"guard_latched\":%s%s%s%s}",
+           modeName(), (unsigned long)control.epoch, control.reason,
+           (unsigned long)DriveControl::TimeoutMs, DriveControl::AutoLimit,
+           control.left, control.right, (unsigned long)requestId, status,
+           phoneStart.pending ? "true" : "false", phoneStart.pending ? followToken : "",
+           manualGuard.selected ? "true" : "false", manualGuard.state(millis()), manualGuard.latched ? "true" : "false",
+           includeSession ? ",\"session\":\"" : "",
+           includeSession ? token : "", includeSession ? "\"" : "");
+}
+
+void sendState(bool includeSession = false) {
+  char response[768];
+  formatState(response, sizeof(response), includeSession);
+  server.sendHeader("Cache-Control", "no-store");
+  server.send(200, "application/json", response);
+}
+
+bool parseUnsigned(const String& value, uint32_t& result) {
+  if (!value.length() || value.length() > 10) return false;
+  for (size_t i = 0; i < value.length(); ++i) {
+    if (value[i] < '0' || value[i] > '9') return false;
+  }
+  errno = 0;
+  char* end = nullptr;
+  unsigned long long number = strtoull(value.c_str(), &end, 10);
+  if (errno || *end || number > UINT32_MAX) return false;
+  result = (uint32_t)number;
+  return true;
+}
+
+bool readUnsigned(const char* key, uint32_t& result) {
+  return server.hasArg(key) && parseUnsigned(server.arg(key), result);
+}
+
+bool parseToken(const String& value, uint64_t& result) {
+  if (value.length() != 16) return false;
+  for (size_t i = 0; i < value.length(); ++i) {
+    char c = value[i];
+    if (!((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F'))) return false;
+  }
+  errno = 0;
+  char* end = nullptr;
+  result = strtoull(value.c_str(), &end, 16);
+  return !errno && !*end && result != 0;
+}
+
+bool readToken(uint64_t& result) {
+  return server.hasArg("session") && parseToken(server.arg("session"), result);
+}
+
+bool parsePercent(const String& value, int limit, int& result) {
+  if (!value.length() || value.length() > 4) return false;
+  size_t digit = value[0] == '-' ? 1 : 0;
+  if (digit == value.length()) return false;
+  for (; digit < value.length(); ++digit) {
+    if (value[digit] < '0' || value[digit] > '9') return false;
+  }
+  char* end = nullptr;
+  long number = strtol(value.c_str(), &end, 10);
+  if (*end || number < -limit || number > limit) return false;
+  result = (int)number;
+  return true;
+}
+
+bool readPercent(const char* key, int limit, int& result) {
+  return server.hasArg(key) && parsePercent(server.arg(key), limit, result);
+}
+
+void writeControlBytes(const uint8_t* bytes, size_t count, bool viaGPIO) {
+  if (viaGPIO) Serial1.write(bytes, count);
+  else Serial.write(bytes, count);
+}
+
+void processControlPacket(char* payload, bool viaGPIO) {
+  char* parts[7];
+  size_t count = 0;
+  char* position = payload;
+  do {
+    if (count == 7) return;
+    parts[count++] = position;
+    char* comma = strchr(position, ',');
+    if (!comma) break;
+    *comma = '\0';
+    position = comma + 1;
+  } while (true);
+
+  uint32_t requestId = 0, epoch = 0, sequence = 0;
+  uint64_t token = 0;
+  int left = 0, right = 0, status = 400;
+  bool includeSession = false;
+  bool includeGuardToken = false;
+  updateMotors();
+  if (count >= 2 && parseUnsigned(String(parts[0]), requestId)) {
+    if (strcmp(parts[1], "state") == 0 && count == 2) {
+      status = 200;
+    } else if (viaGPIO && strcmp(parts[1], "garm") == 0 && count == 3 &&
+               parseUnsigned(String(parts[2]), epoch)) {
+      if (epoch != control.epoch) status = 409;
+      else {
+        token = ((uint64_t)esp_random() << 32) | esp_random();
+        manualGuard.connect(token ? token : 1);
+        if (manualGuard.tick(control, millis())) sendImmediateStop();
+        status = 200; includeGuardToken = true;
+      }
+    } else if (viaGPIO && strcmp(parts[1], "gupdate") == 0 && count == 5 &&
+               parseToken(String(parts[2]), token) && parseUnsigned(String(parts[3]), sequence) &&
+               parsePercent(String(parts[4]), 2, left) && left >= 0) {
+      status = manualGuard.report(token, sequence, left, millis()) ? 200 : 409;
+      if (manualGuard.tick(control, millis())) sendImmediateStop();
+    } else if (strcmp(parts[1], "claim") == 0 && count == 4 &&
+               parseUnsigned(String(parts[2]), epoch) && parseToken(String(parts[3]), token)) {
+      status = phoneStart.claim(epoch, token, control.epoch,
+                                control.mode == DriveMode::Stopped, millis()) ? 200 : 409;
+    } else if (strcmp(parts[1], "arm") == 0 && count == 3 &&
+               parseUnsigned(String(parts[2]), epoch)) {
+      token = ((uint64_t)esp_random() << 32) | esp_random();
+      if (!token) token = 1;
+      if (control.arm(DriveMode::Automatic, epoch, token, millis())) {
+        manualGuard.selected = false;
+        sendImmediateStop();
+        lastMotorSend = millis();
+        status = 200;
+        includeSession = true;
+      } else {
+        status = 409;
+      }
+    } else if (strcmp(parts[1], "drive") == 0 && count == 6 &&
+               parseToken(String(parts[2]), token) &&
+               parseUnsigned(String(parts[3]), sequence) &&
+               parsePercent(String(parts[4]), DriveControl::AutoLimit, left) &&
+               parsePercent(String(parts[5]), DriveControl::AutoLimit, right)) {
+      status = control.command(DriveMode::Automatic, token, sequence, left, right, millis())
+                   ? 204 : 409;
+    } else if (strcmp(parts[1], "stop") == 0 && count == 3 &&
+               parseToken(String(parts[2]), token)) {
+      if (control.stopAutomatic(token, millis())) {
+        sendImmediateStop();
+        lastMotorSend = millis();
+        status = 200;
+      } else {
+        status = 409;
+      }
+    }
+  }
+  char response[768];
+  formatState(response, sizeof(response), includeSession, requestId, status);
+  if (includeGuardToken) {
+    size_t length = strlen(response);
+    snprintf(response + length - 1, sizeof(response) - length + 1,
+             ",\"guard_token\":\"%08lx%08lx\"}",
+             (unsigned long)(manualGuard.token >> 32), (unsigned long)(manualGuard.token & 0xffffffff));
+  }
+  const uint8_t marker[] = {'A', 'V', 'R', '1'};
+  uint32_t length = strlen(response);
+  uint8_t lengthBytes[4];
+  for (int i = 0; i < 4; ++i) lengthBytes[i] = (length >> (8 * i)) & 0xff;
+  writeControlBytes(marker, sizeof(marker), viaGPIO);
+  writeControlBytes(lengthBytes, sizeof(lengthBytes), viaGPIO);
+  writeControlBytes((const uint8_t*)response, length, viaGPIO);
+}
+
+void handleState() {
+  updateMotors();
+  sendState();
+}
+
+void handleFollowStart() {
+  updateMotors();
+  uint32_t expectedEpoch;
+  if (!readUnsigned("epoch", expectedEpoch)) {
+    server.send(400, "text/plain", "Current epoch required");
+    return;
+  }
+  uint64_t token = ((uint64_t)esp_random() << 32) | esp_random();
+  if (!token) token = 1;
+  if (!phoneStart.request(expectedEpoch, control.epoch, control.mode == DriveMode::Stopped,
+                          millis(), token)) {
+    server.send(409, "text/plain", "Press Stop and select control again");
+    return;
+  }
+  phoneSessionActive = true;
+  phoneLastHeartbeat = millis();
+  sendState();
+}
+
+void handleFollowHeartbeat() {
+  updateMotors();
+  uint64_t token;
+  if (!readToken(token) || !phoneSessionActive || token != phoneStart.requestToken) {
+    server.send(409, "text/plain", "Phone session ended");
+    return;
+  }
+  phoneLastHeartbeat = millis();
+  server.send(204, "text/plain", "");
+}
+
+void handleArm(DriveMode mode, bool assisted = false) {
+  updateMotors();
+  uint32_t expectedEpoch;
+  if (!readUnsigned("epoch", expectedEpoch)) {
+    server.send(400, "text/plain", "Current epoch required");
+    return;
+  }
+  if (assisted && !manualGuard.clear(millis())) {
+    if (expectedEpoch == control.epoch) {
+      manualGuard.selected = true;
+      manualGuard.latched = true;
+      control.stop(manualGuard.code == 1 ? "Camera obstacle; assisted drive stopped"
+                                        : "Camera unavailable; assisted drive stopped");
+      sendImmediateStop();
+    }
+    server.send(409, "text/plain", "Camera guard must report a fresh clear view");
+    return;
+  }
+  uint64_t token = ((uint64_t)esp_random() << 32) | esp_random();
+  if (!token) token = 1;
+  if (!control.arm(mode, expectedEpoch, token, millis())) {
+    server.send(409, "text/plain", "State changed; select control again");
+    return;
+  }
+  manualGuard.selected = assisted;
+  if (assisted) manualGuard.latched = false;
+  sendImmediateStop();
+  lastMotorSend = millis();
+  sendState(true);
+}
+
+void handleCommand(DriveMode mode) {
+  updateMotors();
+  uint32_t sequence;
+  uint64_t token;
+  int left, right;
+  int limit = mode == DriveMode::Automatic ? DriveControl::AutoLimit : 100;
+  if (!readToken(token) || !readUnsigned("seq", sequence) ||
+      !readPercent("l", limit, left) || !readPercent("r", limit, right)) {
+    server.send(400, "text/plain", "Valid session, sequence and wheel percentages required");
+    return;
+  }
+  if (mode == DriveMode::Manual && manualGuard.selected && !manualGuard.permits(left, right, millis())) {
+    if (control.mode == mode && control.session == token) {
+      manualGuard.latched = true;
+      control.stop("Assisted drive requires clear view and forward 0-35 commands");
+      sendImmediateStop();
+    }
+    server.send(409, "text/plain", "Assisted drive blocked");
+    return;
+  }
+  if (!control.command(mode, token, sequence, left, right, millis())) {
+    server.send(409, "text/plain", "Control session expired, superseded or sequence already used");
+    return;
+  }
+  server.send(204, "text/plain", "");
+}
+
+void handleStop() {
+  control.stop("Operator stop; select control again");
+  sendImmediateStop();
+  lastMotorSend = millis();
+  sendState();
+}
+
+void handleAutoStop() {
+  updateMotors();
+  uint64_t token;
+  if (!readToken(token)) {
+    server.send(400, "text/plain", "Valid automatic session required");
+    return;
+  }
+  if (!control.stopAutomatic(token, millis())) {
+    server.send(409, "text/plain", "Automatic session is no longer current");
+    return;
+  }
+  sendImmediateStop();
+  lastMotorSend = millis();
+  sendState();
+}
+
+void handleFrame() {
+
+  if (!frameReady ||
+      millis() - frameTime > 3000) {
+    server.send(503, "text/plain", "No fresh frame");
+    return;
+  }
+
+  server.sendHeader("Cache-Control", "no-store");
+  server.setContentLength(activeLength);
+  server.send(200, "image/jpeg", "");
+
+  WiFiClient client = server.client();
+
+  size_t sent = 0;
+  unsigned long start = millis();
+
+  // Send image in chunks to avoid large writes
+  while (sent < activeLength &&
+         millis() - start < 80) {
+
+    size_t chunk = activeLength - sent;
+    if (chunk > 1024) chunk = 1024;
+
+    updateMotors();
+    size_t n = client.write(
+      jpegBuffers[activeFrame] + sent,
+      chunk
+    );
+
+    if (n == 0) break;
+    sent += n;
+  }
+}
+
+// SETUP
+
+void setup() {
+
+  // USB serial: Orange Pi JPEG data
+  // Must enlarge buffer BEFORE begin()
+  Serial.setRxBufferSize(32768);
+  Serial.begin(CAMERA_BAUD);
+  Serial1.setRxBufferSize(512);
+  Serial1.begin(PI_BAUD, SERIAL_8N1, PI_RX_PIN, PI_TX_PIN);
+
+  // Motor commands use UART2.
+  Serial2.begin(
+    MEGA_BAUD,
+    SERIAL_8N1,
+    MEGA_RX_PIN,
+    MEGA_TX_PIN
+  );
+
+  WiFi.mode(WIFI_AP);
+  WiFi.softAP(AP_SSID, AP_PASS);
+
+  server.on("/", HTTP_GET, handleHome);
+  server.on("/drive", HTTP_GET, []() { handleCommand(DriveMode::Manual); });
+  server.on("/drive", HTTP_POST, []() { handleCommand(DriveMode::Manual); });
+  server.on("/state", HTTP_GET, handleState);
+  server.on("/follow/start", HTTP_POST, handleFollowStart);
+  server.on("/follow/heartbeat", HTTP_POST, handleFollowHeartbeat);
+  server.on("/manual/arm", HTTP_POST, []() { handleArm(DriveMode::Manual); });
+  server.on("/assist/arm", HTTP_POST, []() { handleArm(DriveMode::Manual, true); });
+  server.on("/auto/arm", HTTP_POST, []() { handleArm(DriveMode::Automatic); });
+  server.on("/auto/drive", HTTP_POST, []() { handleCommand(DriveMode::Automatic); });
+  server.on("/auto/stop", HTTP_POST, handleAutoStop);
+  server.on("/stop", HTTP_POST, handleStop);
+  server.on("/frame", HTTP_GET, handleFrame);
+
+  server.begin();
+
+  control.reset(esp_random());
+  lastMotorSend = millis();
+
+  // Start stopped
+  sendImmediateStop();
+}
+
+// MAIN LOOP
+
+void loop() {
+
+  // Send motor commands before and after camera/HTTP work.
+  updateMotors();
+
+  // Read incoming JPEG bytes
+  receiveCamera();
+  receiveGpioControl();
+
+  // Handle browser requests
+  server.handleClient();
+
+  updateMotors();
+
+  delay(1);
+}

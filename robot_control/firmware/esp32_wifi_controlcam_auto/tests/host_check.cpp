@@ -45,6 +45,7 @@ void reset() {
   Serial1.output.clear();
   gpioControl.reset();
   phoneStart = PhoneStart();
+  manualGuard = ManualGuard();
   phoneSessionActive = false;
 }
 
@@ -131,7 +132,7 @@ int main() {
   reset();
   assert(server.dispatch("/", HTTP_GET) == 200);
   assert(server.responseBody.find("/stop") != std::string::npos);
-  assert(server.responseBody.find("ENABLE MANUAL") != std::string::npos);
+  assert(server.responseBody.find("ENABLE CAMERA-ASSISTED DRIVE") != std::string::npos);
   assert(server.dispatch("/frame", HTTP_GET) == 503);
   const uint8_t frame[] = {'A','V','F','1',4,0,0,0,0xff,0xd8,0xff,0xd9};
   for (uint8_t value : frame) processCameraByte(value);
@@ -292,4 +293,72 @@ int main() {
   assert(jsonValue(gpio("50,drive," + automatic + ",13,25,25"), "status") == "409");
   assert(server.dispatch("/follow/heartbeat", HTTP_POST, {{"session", startToken}}) == 409);
   std::cout << "PASS phone start: one-shot, stop-before-arm, heartbeat watchdog, and operator Stop\n";
+
+  reset();
+  assert(server.dispatch("/assist/arm", HTTP_POST, {{"epoch", epoch()}}) == 409);
+  std::string guardToken = jsonValue(gpio("100,garm," + epoch()), "guard_token");
+  assert(jsonValue(gpio("101,gupdate," + guardToken + ",1,0"), "status") == "200");
+  manual = arm("/assist/arm");
+  assert(drive("/drive", manual, "1", "20", "20") == 204);
+  assert(jsonValue(gpio("102,gupdate," + guardToken + ",2,1"), "status") == "200");
+  assert(control.mode == DriveMode::Stopped && control.left == 0 && control.right == 0);
+  assert(manualGuard.latched);
+  assert(Serial2.output.substr(Serial2.output.size()-3) == "\nS\n");
+  assert(drive("/drive", manual, "2", "20", "20") == 409);
+  assert(jsonValue(gpio("103,gupdate," + guardToken + ",1,0"), "status") == "409");
+  assert(jsonValue(gpio("104,gupdate," + guardToken + ",3,0"), "status") == "200");
+  assert(control.mode == DriveMode::Stopped && manualGuard.latched);
+  assert(drive("/drive", manual, "3", "20", "20") == 409);
+  manual = arm("/assist/arm");
+  assert(!manualGuard.latched);
+  for (int i=1; i<=8; ++i) {
+    testNow += 100;
+    assert(drive("/drive", manual, std::to_string(i).c_str(), "20", "20") == (i<8 ? 204 : 409));
+  }
+  assert(control.mode == DriveMode::Stopped);
+  assert(std::string(control.reason).find("Camera unavailable") != std::string::npos);
+  assert(jsonValue(gpio("105,gupdate," + guardToken + ",4,0"), "status") == "200");
+  manual = arm("/assist/arm");
+  assert(drive("/drive", manual, "1", "-5", "10") == 409);
+  assert(control.mode == DriveMode::Stopped && control.left == 0 && control.right == 0);
+  manual = arm("/manual/arm");
+  assert(!manualGuard.selected);
+  assert(drive("/drive", manual, "1", "100", "-100") == 204);
+  assert(jsonValue(gpio("106,gupdate," + guardToken + ",5,2"), "status") == "200");
+  assert(control.mode == DriveMode::Manual); // explicitly unassisted fallback
+  std::cout << "PASS assisted manual: stale guard, hazard latch, joystick rejection, deliberate re-arm, forward limits and fallback\n";
+
+  reset();
+  guardToken = jsonValue(gpio("200,garm," + epoch()), "guard_token");
+  assert(jsonValue(gpio("201,gupdate," + guardToken + ",1,0"), "status") == "200");
+  manual = arm("/assist/arm");
+  int guardSequence=1;
+  for(int i=1;i<=20;++i) {
+    testNow+=100;
+    if(i%3==0) assert(jsonValue(gpio("202,gupdate,"+guardToken+","+std::to_string(++guardSequence)+",0"),"status")=="200");
+    assert(drive("/drive",manual,std::to_string(i).c_str(),"25","20")==204);
+  }
+  assert(control.mode==DriveMode::Manual);
+  std::string replacement=jsonValue(gpio("203,garm,"+epoch()),"guard_token");
+  assert(replacement!=guardToken && control.mode==DriveMode::Stopped);
+  assert(jsonValue(gpio("204,gupdate,"+guardToken+",1000,0"),"status")=="409");
+  assert(!manualGuard.clear(testNow));
+  manualGuard.connect(1);
+  assert(manualGuard.report(1,1,0,0xffffff00u));
+  assert(manualGuard.clear(0x10u));
+  assert(!manualGuard.clear(0x300u));
+  std::cout << "PASS guard heartbeat: sustained control, replacement invalidation and clock rollover\n";
+
+  reset();
+  manual=arm("/manual/arm");
+  assert(drive("/drive",manual,"1","20","20")==204);
+  assert(server.dispatch("/assist/arm",HTTP_POST,{{"epoch",epoch()}})==409);
+  assert(control.mode==DriveMode::Stopped && control.left==0 && control.right==0);
+  assert(manualGuard.selected && manualGuard.latched);
+  std::string preAssistEpoch=epoch();
+  manual=arm("/manual/arm");
+  assert(drive("/drive",manual,"1","20","20")==204);
+  assert(server.dispatch("/assist/arm",HTTP_POST,{{"epoch",preAssistEpoch}})==409);
+  assert(control.mode==DriveMode::Manual && !manualGuard.selected);
+  std::cout << "PASS assisted selection: unavailable camera stops old unassisted drive; stale selection preserves newer owner\n";
 }

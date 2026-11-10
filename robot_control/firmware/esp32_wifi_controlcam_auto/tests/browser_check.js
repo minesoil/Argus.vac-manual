@@ -100,11 +100,13 @@ async function main() {
   await settle();
   states.at(-1).resolve(response({mode: 'auto', epoch: 105, reason: 'Automatic selected'}));
   await settle();
-  assert.equal(posts.at(-1).url, '/manual/arm');
+  assert.equal(posts.at(-1).url, '/assist/arm');
   posts.at(-1).resolve(response({mode: 'manual', epoch: 106, session: '3333333333333333'}));
   await gesture;
   assert.equal(evaluate('mode'), 'manual');
   assert.equal(posts.at(-1).url, '/drive');
+  assert.ok(Number(posts.at(-1).body.get('l')) >= 0 && Number(posts.at(-1).body.get('l')) <= 35);
+  assert.ok(Number(posts.at(-1).body.get('r')) >= 0 && Number(posts.at(-1).body.get('r')) <= 35);
   posts.at(-1).resolve(response(null, 204));
   await settle();
 

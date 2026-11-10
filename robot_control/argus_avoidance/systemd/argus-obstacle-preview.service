@@ -1,0 +1,14 @@
+[Unit]
+Description=Argus calibrated camera obstacle preview
+Requires=argus-camera.service
+After=argus-camera.service
+
+[Service]
+User=orangepi
+WorkingDirectory=/home/orangepi/argus/avoidance
+ExecStart=/usr/bin/python3 -u -m argus_avoidance.obstacles --profile /home/orangepi/argus/avoidance/.state/floor.json
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

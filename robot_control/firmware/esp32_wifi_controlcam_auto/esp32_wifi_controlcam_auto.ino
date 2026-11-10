@@ -6,6 +6,7 @@
 #include "DriveControl.h"
 #include "ControlPacketParser.h"
 #include "PhoneStart.h"
+#include "ManualGuard.h"
 
 // Argus Vac camera relay and joystick
 // Board: NodeMCU-32 / ESP32-WROOM-32
@@ -71,6 +72,7 @@ unsigned long lastCameraByte = 0;
 // CONTROL OWNERSHIP AND MEGA OUTPUT
 
 DriveControl control;
+ManualGuard manualGuard;
 PhoneStart phoneStart;
 bool phoneSessionActive = false;
 uint32_t phoneLastHeartbeat = 0;
@@ -90,7 +92,8 @@ void sendToMega(int left, int right) {
 
 void updateMotors() {
   unsigned long now = millis();
-  bool expired = control.expire(now);
+  bool expired = manualGuard.tick(control, now);
+  expired = control.expire(now) || expired;
   bool phoneOwnsState = phoneSessionActive &&
       ((control.mode == DriveMode::Stopped && control.epoch == phoneStart.epoch) ||
        (control.mode == DriveMode::Automatic && control.epoch == uint32_t(phoneStart.epoch + 1)));
@@ -298,6 +301,7 @@ h2 {
   color: #aab8c4;
   margin: 8px;
 }
+.warning { color: #ff9b88; font-weight: bold; }
 
 #stick {
   position: relative;
@@ -365,10 +369,12 @@ button {
 </div>
 
 <div id="driveMode" class="status">Stopped</div>
-<button id="manual">ENABLE MANUAL</button>
+<div id="guardStatus" class="status">Camera assistance unavailable</div>
+<button id="assist">ENABLE CAMERA-ASSISTED DRIVE</button>
+<button id="manual">UNASSISTED MANUAL (NO CAMERA STOP)</button>
 <button id="follow">START LINE FOLLOWING</button>
 <button id="stop">STOP</button>
-<p class="status">Release joystick to stop. Line following runs for up to 30 seconds.</p>
+<p class="status">Camera-assisted drive: forward only, 35% limit. Release joystick to stop. Tape following and unassisted manual have no obstacle stop.</p>
 </main>
 
 <script>
@@ -424,11 +430,16 @@ function moveStick(e) {
 
   leftSpeed = Math.round(l / scale * 100);
   rightSpeed = Math.round(r / scale * 100);
+  if (manualAssist) {
+    leftSpeed = Math.max(0, Math.round(leftSpeed * .35));
+    rightSpeed = Math.max(0, Math.round(rightSpeed * .35));
+  }
 
   updateReadout();
 }
 
 let manualSession = "";
+let manualAssist = false;
 let followToken = "";
 let manualEpoch = "";
 let sequence = 0;
@@ -466,6 +477,11 @@ async function refreshState() {
   latestStateApplied = request;
   mode = state.mode;
   modeLabel.textContent = state.mode + " — " + state.reason;
+  document.getElementById("guardStatus").textContent = state.assist
+      ? (state.guard === "clear" ? (state.guard_latched ? "View clear — re-enable assisted drive to resume" : "Camera assistance active — watched front region only")
+         : (state.guard === "blocked" ? "OBSTACLE WARNING — assisted drive stopped" : "CAMERA UNAVAILABLE — assisted drive stopped"))
+      : "Camera: " + (state.guard || "unavailable") + " — unassisted mode has no obstacle stop";
+  document.getElementById("guardStatus").className = "status" + (state.assist && (state.guard !== "clear" || state.guard_latched) ? " warning" : "");
   if (manualSession && String(state.epoch) !== manualEpoch) {
     manualSession = "";
     centerStick();
@@ -473,19 +489,21 @@ async function refreshState() {
   return state;
 }
 
-async function selectManual(expectedIntent) {
+async function selectManual(expectedIntent, assisted = false) {
   followToken = "";
   const state = await refreshState();
   if (expectedIntent !== intent) return false;
-  const reply = await post("/manual/arm", {epoch: String(state.epoch)});
+  const reply = await post(assisted ? "/assist/arm" : "/manual/arm", {epoch: String(state.epoch)});
   if (!reply.ok) {
     await refreshState();
+    if (assisted) modeLabel.textContent = "Camera view not ready — assisted drive remains stopped";
     return false;
   }
   const selected = await reply.json();
   if (expectedIntent !== intent) return false;
   ++stateGeneration;
   manualSession = selected.session;
+  manualAssist = assisted;
   manualEpoch = String(selected.epoch);
   sequence = 0;
   mode = "manual";
@@ -551,12 +569,12 @@ stick.addEventListener("pointerdown", async event => {
     const current = await refreshState();
     if (thisIntent !== intent) return;
     if (current.mode === "stopped") {
-      modeLabel.textContent = "Press ENABLE MANUAL first";
+      modeLabel.textContent = "Choose assisted or unassisted manual control first";
       return;
     }
     dragging = true;
     // A deliberate joystick gesture takes over automatic control.
-    if (!manualSession && !await selectManual(thisIntent)) return;
+    if (!manualSession && !await selectManual(thisIntent, true)) return;
     if (thisIntent !== intent || !dragging) return;
     moveStick(event);
     sendDrive();
@@ -582,6 +600,12 @@ document.getElementById("manual").onclick = async () => {
   }
 };
 document.getElementById("stop").onclick = operatorStop;
+document.getElementById("assist").onclick = async () => {
+  centerStick();
+  const thisIntent = ++intent;
+  try { if (await selectManual(thisIntent, true)) sendDrive(); }
+  catch (error) { modeLabel.textContent = "Camera assistance unavailable — check the Pi"; }
+};
 document.getElementById("follow").onclick = async () => {
   const thisIntent = ++intent;
   centerStick();
@@ -680,17 +704,19 @@ void formatState(char* response, size_t capacity, bool includeSession = false,
   snprintf(response, capacity,
            "{\"mode\":\"%s\",\"epoch\":%lu,\"reason\":\"%s\","
            "\"lease_ms\":%lu,\"max_auto_percent\":%d,\"left\":%d,\"right\":%d,"
-           "\"request_id\":%lu,\"status\":%d,\"follow_pending\":%s,\"follow_token\":\"%s\"%s%s%s}",
+           "\"request_id\":%lu,\"status\":%d,\"follow_pending\":%s,\"follow_token\":\"%s\","
+           "\"assist\":%s,\"guard\":\"%s\",\"guard_latched\":%s%s%s%s}",
            modeName(), (unsigned long)control.epoch, control.reason,
            (unsigned long)DriveControl::TimeoutMs, DriveControl::AutoLimit,
            control.left, control.right, (unsigned long)requestId, status,
            phoneStart.pending ? "true" : "false", phoneStart.pending ? followToken : "",
+           manualGuard.selected ? "true" : "false", manualGuard.state(millis()), manualGuard.latched ? "true" : "false",
            includeSession ? ",\"session\":\"" : "",
            includeSession ? token : "", includeSession ? "\"" : "");
 }
 
 void sendState(bool includeSession = false) {
-  char response[460];
+  char response[768];
   formatState(response, sizeof(response), includeSession);
   server.sendHeader("Cache-Control", "no-store");
   server.send(200, "application/json", response);
@@ -769,10 +795,25 @@ void processControlPacket(char* payload, bool viaGPIO) {
   uint64_t token = 0;
   int left = 0, right = 0, status = 400;
   bool includeSession = false;
+  bool includeGuardToken = false;
   updateMotors();
   if (count >= 2 && parseUnsigned(String(parts[0]), requestId)) {
     if (strcmp(parts[1], "state") == 0 && count == 2) {
       status = 200;
+    } else if (viaGPIO && strcmp(parts[1], "garm") == 0 && count == 3 &&
+               parseUnsigned(String(parts[2]), epoch)) {
+      if (epoch != control.epoch) status = 409;
+      else {
+        token = ((uint64_t)esp_random() << 32) | esp_random();
+        manualGuard.connect(token ? token : 1);
+        if (manualGuard.tick(control, millis())) sendImmediateStop();
+        status = 200; includeGuardToken = true;
+      }
+    } else if (viaGPIO && strcmp(parts[1], "gupdate") == 0 && count == 5 &&
+               parseToken(String(parts[2]), token) && parseUnsigned(String(parts[3]), sequence) &&
+               parsePercent(String(parts[4]), 2, left) && left >= 0) {
+      status = manualGuard.report(token, sequence, left, millis()) ? 200 : 409;
+      if (manualGuard.tick(control, millis())) sendImmediateStop();
     } else if (strcmp(parts[1], "claim") == 0 && count == 4 &&
                parseUnsigned(String(parts[2]), epoch) && parseToken(String(parts[3]), token)) {
       status = phoneStart.claim(epoch, token, control.epoch,
@@ -782,6 +823,7 @@ void processControlPacket(char* payload, bool viaGPIO) {
       token = ((uint64_t)esp_random() << 32) | esp_random();
       if (!token) token = 1;
       if (control.arm(DriveMode::Automatic, epoch, token, millis())) {
+        manualGuard.selected = false;
         sendImmediateStop();
         lastMotorSend = millis();
         status = 200;
@@ -807,8 +849,14 @@ void processControlPacket(char* payload, bool viaGPIO) {
       }
     }
   }
-  char response[460];
+  char response[768];
   formatState(response, sizeof(response), includeSession, requestId, status);
+  if (includeGuardToken) {
+    size_t length = strlen(response);
+    snprintf(response + length - 1, sizeof(response) - length + 1,
+             ",\"guard_token\":\"%08lx%08lx\"}",
+             (unsigned long)(manualGuard.token >> 32), (unsigned long)(manualGuard.token & 0xffffffff));
+  }
   const uint8_t marker[] = {'A', 'V', 'R', '1'};
   uint32_t length = strlen(response);
   uint8_t lengthBytes[4];
@@ -853,11 +901,22 @@ void handleFollowHeartbeat() {
   server.send(204, "text/plain", "");
 }
 
-void handleArm(DriveMode mode) {
+void handleArm(DriveMode mode, bool assisted = false) {
   updateMotors();
   uint32_t expectedEpoch;
   if (!readUnsigned("epoch", expectedEpoch)) {
     server.send(400, "text/plain", "Current epoch required");
+    return;
+  }
+  if (assisted && !manualGuard.clear(millis())) {
+    if (expectedEpoch == control.epoch) {
+      manualGuard.selected = true;
+      manualGuard.latched = true;
+      control.stop(manualGuard.code == 1 ? "Camera obstacle; assisted drive stopped"
+                                        : "Camera unavailable; assisted drive stopped");
+      sendImmediateStop();
+    }
+    server.send(409, "text/plain", "Camera guard must report a fresh clear view");
     return;
   }
   uint64_t token = ((uint64_t)esp_random() << 32) | esp_random();
@@ -866,6 +925,8 @@ void handleArm(DriveMode mode) {
     server.send(409, "text/plain", "State changed; select control again");
     return;
   }
+  manualGuard.selected = assisted;
+  if (assisted) manualGuard.latched = false;
   sendImmediateStop();
   lastMotorSend = millis();
   sendState(true);
@@ -880,6 +941,15 @@ void handleCommand(DriveMode mode) {
   if (!readToken(token) || !readUnsigned("seq", sequence) ||
       !readPercent("l", limit, left) || !readPercent("r", limit, right)) {
     server.send(400, "text/plain", "Valid session, sequence and wheel percentages required");
+    return;
+  }
+  if (mode == DriveMode::Manual && manualGuard.selected && !manualGuard.permits(left, right, millis())) {
+    if (control.mode == mode && control.session == token) {
+      manualGuard.latched = true;
+      control.stop("Assisted drive requires clear view and forward 0-35 commands");
+      sendImmediateStop();
+    }
+    server.send(409, "text/plain", "Assisted drive blocked");
     return;
   }
   if (!control.command(mode, token, sequence, left, right, millis())) {
@@ -976,6 +1046,7 @@ void setup() {
   server.on("/follow/start", HTTP_POST, handleFollowStart);
   server.on("/follow/heartbeat", HTTP_POST, handleFollowHeartbeat);
   server.on("/manual/arm", HTTP_POST, []() { handleArm(DriveMode::Manual); });
+  server.on("/assist/arm", HTTP_POST, []() { handleArm(DriveMode::Manual, true); });
   server.on("/auto/arm", HTTP_POST, []() { handleArm(DriveMode::Automatic); });
   server.on("/auto/drive", HTTP_POST, []() { handleCommand(DriveMode::Automatic); });
   server.on("/auto/stop", HTTP_POST, handleAutoStop);

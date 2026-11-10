@@ -1,160 +1,81 @@
 # Argus on your Orange Pi
 
-## Phone line following (firmware installed 9 November)
+The [handbook](https://github.com/minesoil/Argus.vac-manual/tree/main/handbook)
+has the full walkthrough. Latest robot evidence is dated November9;
+[current status](../PROJECT-STATUS.md) was assembled November10 offline.
 
-Connect your phone to the ESP32 hotspot and open http://192.168.4.1. Refresh the
-page after a firmware update. START LINE FOLLOWING asks the Pi to run the camera
-follower for up to 30 seconds. Keep the phone page visible and unlocked: switching
-away or losing its connection stops the phone-started session. STOP ends the run;
-ENABLE MANUAL selects the joystick. A stopped run never restarts itself.
+## Open the right folder
 
-The Pi sends commands over GPIO UART, so Ethernet is for setup/monitoring and is
-not needed by the follower. The camera, Pi, ESP32 and power supply stay on Argus.
-The bridge starts at boot but waits for an explicit Start request. If the camera
-cannot see a continuous strip of tape, it refuses to drive. Press STOP before
-retrying a failed start. No camera obstacle detection is installed in this demo.
-
-Commissioning status: the ESP32 upload is hash verified and all 93 software tests
-pass on the Pi. The real phone Start, operator Stop and phone-lock stop checks
-have passed with motor power OFF. Raised-wheel and untethered floor checks
-remain pending.
-
-The current bridge uses `/dev/ttyS0`, not USB data. ESP USB is temporarily plugged
-into the Pi for the upload; the planned bank-powered arrangement needs restoring
-and checking before the untethered trial.
-
-In your connected VS Code window, choose **File → Open Folder** and enter
-`/home/orangepi/argus/avoidance`. Choose **Terminal → New Terminal**. Commands
-typed there run on the Pi over Ethernet. Use the everyday `orangepi` account.
-
-Run these first, one line at a time:
+In VS Code Remote SSH open `/home/orangepi/argus/avoidance`, then Terminal →
+New Terminal. Use the everyday orangepi account. Run:
 
 ```bash
-cd ~/argus/avoidance
+cd /home/orangepi/argus/avoidance
 ./argus status
-./argus demo
+./argus check
 ```
 
-`~` means your home folder. `./argus` runs the command file in this folder.
-The wall demo prints the controller's decisions with simulated timestamps.
-Look for the transition from SLOW to STOP to TURN, then forward motion again.
-The demo finishes by reporting the modeled distance between the wall and the
-edge of the robot. You can also choose **Terminal → Run Task → Argus: Wall demo**.
+Services use `/usr/bin/python3`. `~` means the current user's home; it is
+`/root` in a root terminal. Use the absolute project path when uncertain.
 
-| Command | What you'll see |
+## Phone controls
+
+Join the ESP32 hotspot and open http://192.168.4.1. Refresh after updates.
+
+- ENABLE CAMERA-ASSISTED DRIVE: forward only, at most35%; requires a fresh
+  clear guard. Hazard/unavailable camera stops and latches. Enable again
+  deliberately after clear status; it never resumes by itself.
+- UNASSISTED MANUAL (NO CAMERA STOP): standalone joystick including reverse.
+- START LINE FOLLOWING: requests up to30seconds of tape following. Keep the
+  page visible/unlocked. Tape loss, stale camera, phone loss or STOP ends it.
+  This mode has no obstacle stop.
+- STOP revokes the current drive session.
+
+Assisted mode is installed, but real object/held-joystick and loaded stops
+remain pending. Motors-OFF blocked-view refusal passed; paper produced a
+clear preview. Read [ASSISTED-MANUAL.md](../ASSISTED-MANUAL.md).
+
+## Commands without driving
+
+| Command | Purpose |
 |---|---|
-| `./argus` | List the available commands. |
-| `./argus status` | Board name, Linux version, Python, ROS and available serial ports. |
-| `./argus demo` | Run the controller against a simulated wall. No robot connection needed. |
-| `./argus check` | Run the software tests. Allow a little time for the simulated scenarios. |
-| `./argus scan` | Listen for up to ten seconds on the lidar channel. If a driver publishes scans, show the sensor frame, valid range count and closest measured return. |
-| `./argus preview` | Start the ROS controller and its collision monitor with output disabled. Press **Ctrl+C** to stop them. |
+| `./argus` | Help. |
+| `./argus status` | Board, Python, ROS and device information. |
+| `./argus check` | Software tests; opens no motor port. |
+| `./argus demo` | Modeled wall approach. |
+| `./argus line-preview --seconds 20` | Tape decisions without driving. |
+| `./argus follow` | Tape preview; requires explicit `--drive` for motion. |
+| `./argus obstacle-status` | Floor-appearance preview status. |
+| `./argus scan` | Up to10seconds listening for scans; starts no driver. |
+| `./argus preview` | Optional ROS LiDAR/guard preview, output disabled. |
 
-## Camera line following
+With motors OFF and controller stopped/zero, `./argus obstacle-calibrate`
+samples ten fresh frames from a genuinely clear floor patch. Calibration
+expires after15minutes. On first setup inspect raw camera before calibration;
+the annotated localhost:8767 preview needs a readable profile. This compares
+appearance; it does not identify every object or measure distance.
 
-The Pi reads the USB camera, finds the tape and chooses wheel speeds. The
-current setup uses [three GPIO serial wires](PI-ESP32-WIRING.md) to the ESP32,
-which passes the commands to the Mega. Your phone stays connected to the
-ESP32 hotspot. Open **http://192.168.4.1** for the joystick
-and **STOP**. **ENABLE MANUAL** selects joystick control. The phone video relay
-is currently paused while resolving USB disconnects; the Pi continues using
-the full 640 × 480 camera image for tape detection.
+Current data link is [GPIO UART](PI-ESP32-WIRING.md), `/dev/ttyS0`:
+Pi8→ESP25, Pi10←ESP26, Pi6→GND. `argus-bridge.service` is the single serial
+owner; `usb_bridge.py` retains its old name. Phone video relay is paused;
+Pi processing reads timestamped camera snapshots. Ethernet is for setup/SSH.
+Fully untethered floor operation remains unconfirmed.
 
-The ESP32 starts stopped. Automatic driving starts only when you run a command
-with `--drive`; starting the Pi or opening the phone page does not start it.
-The `argus-bridge` background service handles the shared USB connection.
-You do not need a ROS command for this tape follower.
-
-For the first camera course, place black tape on a light floor so it extends
-away from the stationary camera through the lower part of the image. Run:
-
-```bash
-./argus line-preview --tape black --seconds 20
-```
-
-The preview prints LEFT, RIGHT, FORWARD or STOP. A negative offset places the
-tape to the left of image center. STOP also appears when the image is unclear,
-the line is missing, or several paths compete. The program ends after twenty
-seconds. You can select **Terminal → Run Task → Argus: Black tape preview**.
-Move the tape while keeping the robot still to check each decision. The next
-stage is to test manual override and steering with the wheels raised.
-
-After the raised-wheel steering and phone Stop checks, a short driving run is:
+## Inspect background programs
 
 ```bash
-./argus follow --drive --seconds 3
+systemctl is-active argus-camera.service argus-obstacle-preview.service argus-bridge.service
+curl --max-time 5 -sS http://127.0.0.1:8766/state
+journalctl -u argus-bridge.service -n 40 --no-pager
 ```
 
-For a supervised demo on a longer, clear strip, use the same command with
-`--seconds 8`. Keep the phone's **STOP** ready and leave the Ethernet and power
-cables slack. The live lidar is awaiting repair, so the tape follower needs a
-clear course. This is an initial demonstration of line following; mapping and
-floor-obstacle recognition are later stages.
+Services start at boot; the robot starts stopped. Do not run another serial
+bridge alongside the service. Press STOP and switch motor power OFF before
+maintenance. Closing SSH is not an operator stop.
 
-It uses a base of 25 percent wheel speed and small left/right corrections,
-capped at 35 percent. The initial 6 percent floor trial barely moved, so this
-profile replaces it. Percentages refer to the Mega's step-rate setting; they
-are not measured ground speed. It stops when time runs out, tape is lost,
-the camera becomes stale, or you press **STOP** on the phone. **Ctrl+C** also
-ends the run. After an uncertain reading or operator Stop, rerun the command
-to start another session. Moving the phone joystick takes manual control.
-Use a short, clear course: tape following does not detect obstacles or stairs.
+## ROS is a separate learning path
 
-The preview requires fresh capture timestamps from the Pi's camera server.
-A frozen or old frame produces STOP. `./argus follow` runs the same preview.
-Its explicit `--drive` option is for the separately prepared ESP32 automatic
-firmware after a stationary tape check and raised-wheel control checks.
-The [camera check report](reports/TAPE-PREVIEW-CHECK.md) records the current
-results. The prepared ESP32 page starts in stopped mode and adds an
-**ENABLE MANUAL** button before joystick use. Its **STOP** button stays latched
-until control is explicitly enabled again.
-
-## From a lidar reading to a wheel command
-
-In an Arduino sketch, your loop might read a sensor, decide whether to turn,
-and send the motors a speed. On the Pi, ROS lets separate programs handle those
-jobs. Each running program is called a **node**. A **topic** is a named channel
-on which one node sends readings or commands and other nodes listen.
-
-The lidar driver publishes a ring of distance readings on `/scan`. The
-controller checks those readings against the space the whole robot needs.
-Its candidate speed has two parts: forward speed in metres per second and
-turn rate in radians per second. The preview reports the decision on
-`/avoidance/status`. With preview running, open another terminal and run:
-
-```bash
-source /opt/ros/humble/setup.bash
-ros2 topic echo /avoidance/status --once
-```
-
-`source` loads the ROS commands into that terminal. With no scan or measured
-sensor position available, expect a waiting or disarmed status. Preview commands
-stay on the isolated `/avoidance/` topics. The commands in the table do not
-start either a motor bridge or a serial connection to the Mega.
-
-The camera follower uses the USB/manual ownership described above. The optional
-ROS lidar preview is a separate controller and does not command the wheels.
-
-## Live lidar check
-
-The CH340 USB adapter is now identified as the ESP32 and has the stable name
-`/dev/argus_esp32` on its current Pi USB socket. Justin reports that the C1 is
-faulty and is awaiting a replacement adapter. When it arrives, identify its
-own port and use `./argus scan` for a stationary reading. Check sensor direction
-and mounting position before using its distances as chassis clearance.
-
-## Files to start with
-
-- `argus_avoidance/core.py` contains the stop-and-turn decisions and demo defaults.
-- `config/avoidance.yaml` contains the ROS preview settings. The radius and
-  stopping distances are estimates until measured on Argus.
-- `README.md` covers the software and interfaces in more detail.
-
-The Pi uses Ubuntu 22.04 and ROS 2 Humble. This workspace has its own build
-files in `.ros/`. If you edit the optional ROS adapter, rebuild from this
-folder:
-
-```bash
-source /opt/ros/humble/setup.bash
-colcon --log-base .ros/log build --base-paths . --packages-select argus_avoidance --build-base .ros/build --install-base .ros/install
-```
+Pi runs Ubuntu22.04 with ROS2 Humble. Camera/manual drive is ordinary Python
+and UART, outside ROS. Run optional colcon builds as orangepi, not root.
+C1 is unavailable. Synthetic ROS tests do not prove real scans, transforms
+or motor integration; read the handbook before changing launch output.

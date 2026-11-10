@@ -1,0 +1,5237 @@
+{
+  "ref": "d230ad62add6f2432dd276a3d44c27950b3e555f",
+  "files": [
+    {
+      "path": ".gitignore",
+      "size": 226
+    },
+    {
+      "path": "README.md",
+      "size": 1419
+    },
+    {
+      "path": "archive/README.md",
+      "size": 23767
+    },
+    {
+      "path": "archive/indexes/a4988-bench.md",
+      "size": 709
+    },
+    {
+      "path": "archive/indexes/cad-aivac.md",
+      "size": 2452
+    },
+    {
+      "path": "archive/indexes/cad-protos.md",
+      "size": 2079
+    },
+    {
+      "path": "archive/indexes/connector-intake.md",
+      "size": 11511
+    },
+    {
+      "path": "archive/indexes/current-build-photos.md",
+      "size": 1145
+    },
+    {
+      "path": "archive/indexes/dashboard-repository.md",
+      "size": 371
+    },
+    {
+      "path": "archive/indexes/direct-user.md",
+      "size": 736
+    },
+    {
+      "path": "archive/indexes/downloads-cad-aivac.md",
+      "size": 2280
+    },
+    {
+      "path": "archive/indexes/live-bench.md",
+      "size": 1094
+    },
+    {
+      "path": "archive/indexes/local-extra-000.md",
+      "size": 300
+    },
+    {
+      "path": "archive/indexes/local-extra-001.md",
+      "size": 306
+    },
+    {
+      "path": "archive/indexes/local-extra-002.md",
+      "size": 300
+    },
+    {
+      "path": "archive/indexes/local-extra-003.md",
+      "size": 296
+    },
+    {
+      "path": "archive/indexes/local-extra-004.md",
+      "size": 471
+    },
+    {
+      "path": "archive/indexes/local-extra-005.md",
+      "size": 474
+    },
+    {
+      "path": "archive/indexes/local-extra-006.md",
+      "size": 471
+    },
+    {
+      "path": "archive/indexes/local-extra-007.md",
+      "size": 447
+    },
+    {
+      "path": "archive/indexes/local-extra-008.md",
+      "size": 450
+    },
+    {
+      "path": "archive/indexes/local-extra-009.md",
+      "size": 426
+    },
+    {
+      "path": "archive/indexes/local-extra-010.md",
+      "size": 363
+    },
+    {
+      "path": "archive/indexes/local-extra-011.md",
+      "size": 280
+    },
+    {
+      "path": "archive/indexes/local-extra-012.md",
+      "size": 272
+    },
+    {
+      "path": "archive/indexes/local-extra-013.md",
+      "size": 260
+    },
+    {
+      "path": "archive/indexes/local-extra-014.md",
+      "size": 270
+    },
+    {
+      "path": "archive/indexes/local-extra-015.md",
+      "size": 268
+    },
+    {
+      "path": "archive/indexes/local-extra-016.md",
+      "size": 264
+    },
+    {
+      "path": "archive/indexes/local-extra-017.md",
+      "size": 284
+    },
+    {
+      "path": "archive/indexes/local-extra-018.md",
+      "size": 280
+    },
+    {
+      "path": "archive/indexes/local-extra-019.md",
+      "size": 290
+    },
+    {
+      "path": "archive/indexes/local-extra-020.md",
+      "size": 286
+    },
+    {
+      "path": "archive/indexes/local-extra-021.md",
+      "size": 260
+    },
+    {
+      "path": "archive/indexes/local-extra-022.md",
+      "size": 260
+    },
+    {
+      "path": "archive/indexes/local-extra-023.md",
+      "size": 268
+    },
+    {
+      "path": "archive/indexes/local-extra-024.md",
+      "size": 264
+    },
+    {
+      "path": "archive/indexes/local-extra-025.md",
+      "size": 276
+    },
+    {
+      "path": "archive/indexes/local-extra-026.md",
+      "size": 272
+    },
+    {
+      "path": "archive/indexes/local-extra-027.md",
+      "size": 274
+    },
+    {
+      "path": "archive/indexes/local-extra-028.md",
+      "size": 272
+    },
+    {
+      "path": "archive/indexes/local-extra-029.md",
+      "size": 268
+    },
+    {
+      "path": "archive/indexes/local-extra-030.md",
+      "size": 274
+    },
+    {
+      "path": "archive/indexes/local-extra-031.md",
+      "size": 270
+    },
+    {
+      "path": "archive/indexes/local-extra-032.md",
+      "size": 266
+    },
+    {
+      "path": "archive/indexes/local-extra-033.md",
+      "size": 262
+    },
+    {
+      "path": "archive/indexes/local-extra-034.md",
+      "size": 270
+    },
+    {
+      "path": "archive/indexes/local-extra-035.md",
+      "size": 270
+    },
+    {
+      "path": "archive/indexes/local-extra-036.md",
+      "size": 270
+    },
+    {
+      "path": "archive/indexes/local-extra-037.md",
+      "size": 270
+    },
+    {
+      "path": "archive/indexes/local-extra-038.md",
+      "size": 271
+    },
+    {
+      "path": "archive/indexes/local-extra-039.md",
+      "size": 271
+    },
+    {
+      "path": "archive/indexes/local-extra-040.md",
+      "size": 260
+    },
+    {
+      "path": "archive/indexes/local-extra-041.md",
+      "size": 264
+    },
+    {
+      "path": "archive/indexes/local-extra-042.md",
+      "size": 264
+    },
+    {
+      "path": "archive/indexes/local-extra-043.md",
+      "size": 264
+    },
+    {
+      "path": "archive/indexes/local-extra-044.md",
+      "size": 264
+    },
+    {
+      "path": "archive/indexes/local-extra-045.md",
+      "size": 260
+    },
+    {
+      "path": "archive/indexes/local-extra-046.md",
+      "size": 262
+    },
+    {
+      "path": "archive/indexes/local-extra-047.md",
+      "size": 260
+    },
+    {
+      "path": "archive/indexes/local-extra-048.md",
+      "size": 262
+    },
+    {
+      "path": "archive/indexes/local-extra-049.md",
+      "size": 264
+    },
+    {
+      "path": "archive/indexes/local-extra-050.md",
+      "size": 260
+    },
+    {
+      "path": "archive/indexes/local-extra-051.md",
+      "size": 262
+    },
+    {
+      "path": "archive/indexes/local-extra-052.md",
+      "size": 264
+    },
+    {
+      "path": "archive/indexes/local-extra-053.md",
+      "size": 260
+    },
+    {
+      "path": "archive/indexes/local-extra-054.md",
+      "size": 264
+    },
+    {
+      "path": "archive/indexes/local-extra-055.md",
+      "size": 266
+    },
+    {
+      "path": "archive/indexes/local-extra-056.md",
+      "size": 262
+    },
+    {
+      "path": "archive/indexes/local-extra-057.md",
+      "size": 264
+    },
+    {
+      "path": "archive/indexes/local-extra-058.md",
+      "size": 264
+    },
+    {
+      "path": "archive/indexes/local-extra-059.md",
+      "size": 262
+    },
+    {
+      "path": "archive/indexes/local-extra-060.md",
+      "size": 264
+    },
+    {
+      "path": "archive/indexes/local-extra-061.md",
+      "size": 262
+    },
+    {
+      "path": "archive/indexes/local-extra-062.md",
+      "size": 266
+    },
+    {
+      "path": "archive/indexes/local-extra-063.md",
+      "size": 266
+    },
+    {
+      "path": "archive/indexes/local-extra-064.md",
+      "size": 264
+    },
+    {
+      "path": "archive/indexes/local-extra-065.md",
+      "size": 268
+    },
+    {
+      "path": "archive/indexes/local-extra-066.md",
+      "size": 264
+    },
+    {
+      "path": "archive/indexes/local-extra-067.md",
+      "size": 264
+    },
+    {
+      "path": "archive/indexes/local-extra-068.md",
+      "size": 260
+    },
+    {
+      "path": "archive/indexes/local-extra-069.md",
+      "size": 270
+    },
+    {
+      "path": "archive/indexes/local-extra-070.md",
+      "size": 260
+    },
+    {
+      "path": "archive/indexes/local-extra-071.md",
+      "size": 270
+    },
+    {
+      "path": "archive/indexes/local-extra-072.md",
+      "size": 260
+    },
+    {
+      "path": "archive/indexes/local-extra-073.md",
+      "size": 270
+    },
+    {
+      "path": "archive/indexes/local-extra-074.md",
+      "size": 284
+    },
+    {
+      "path": "archive/indexes/local-extra-075.md",
+      "size": 276
+    },
+    {
+      "path": "archive/indexes/local-extra-076.md",
+      "size": 269
+    },
+    {
+      "path": "archive/indexes/local-extra-077.md",
+      "size": 288
+    },
+    {
+      "path": "archive/indexes/local-extra-078.md",
+      "size": 288
+    },
+    {
+      "path": "archive/indexes/local-extra-079.md",
+      "size": 288
+    },
+    {
+      "path": "archive/indexes/local-extra-080.md",
+      "size": 286
+    },
+    {
+      "path": "archive/indexes/local-extra-081.md",
+      "size": 286
+    },
+    {
+      "path": "archive/indexes/local-extra-082.md",
+      "size": 286
+    },
+    {
+      "path": "archive/indexes/local-extra-083.md",
+      "size": 286
+    },
+    {
+      "path": "archive/indexes/local-extra-084.md",
+      "size": 286
+    },
+    {
+      "path": "archive/indexes/local-extra-085.md",
+      "size": 286
+    },
+    {
+      "path": "archive/indexes/local-extra-086.md",
+      "size": 269
+    },
+    {
+      "path": "archive/indexes/local-extra-087.md",
+      "size": 272
+    },
+    {
+      "path": "archive/indexes/local-extra-088.md",
+      "size": 266
+    },
+    {
+      "path": "archive/indexes/local-extra-089.md",
+      "size": 270
+    },
+    {
+      "path": "archive/indexes/local-extra-090.md",
+      "size": 262
+    },
+    {
+      "path": "archive/indexes/local-extra-091.md",
+      "size": 309
+    },
+    {
+      "path": "archive/indexes/local-extra-092.md",
+      "size": 317
+    },
+    {
+      "path": "archive/indexes/local-extra-093.md",
+      "size": 323
+    },
+    {
+      "path": "archive/indexes/local-extra-094.md",
+      "size": 327
+    },
+    {
+      "path": "archive/indexes/local-extra-095.md",
+      "size": 309
+    },
+    {
+      "path": "archive/indexes/local-extra-096.md",
+      "size": 307
+    },
+    {
+      "path": "archive/indexes/local-extra-097.md",
+      "size": 311
+    },
+    {
+      "path": "archive/indexes/local-extra-098.md",
+      "size": 319
+    },
+    {
+      "path": "archive/indexes/local-extra-099.md",
+      "size": 325
+    },
+    {
+      "path": "archive/indexes/local-extra-100.md",
+      "size": 335
+    },
+    {
+      "path": "archive/indexes/local-extra-101.md",
+      "size": 329
+    },
+    {
+      "path": "archive/indexes/local-extra-102.md",
+      "size": 311
+    },
+    {
+      "path": "archive/indexes/local-extra-103.md",
+      "size": 270
+    },
+    {
+      "path": "archive/indexes/local-extra-104.md",
+      "size": 322
+    },
+    {
+      "path": "archive/indexes/local-extra-105.md",
+      "size": 326
+    },
+    {
+      "path": "archive/indexes/local-extra-106.md",
+      "size": 322
+    },
+    {
+      "path": "archive/indexes/local-extra-107.md",
+      "size": 326
+    },
+    {
+      "path": "archive/indexes/local-extra-108.md",
+      "size": 318
+    },
+    {
+      "path": "archive/indexes/local-extra-109.md",
+      "size": 316
+    },
+    {
+      "path": "archive/indexes/local-extra-110.md",
+      "size": 312
+    },
+    {
+      "path": "archive/indexes/local-extra-111.md",
+      "size": 322
+    },
+    {
+      "path": "archive/indexes/local-extra-112.md",
+      "size": 326
+    },
+    {
+      "path": "archive/indexes/local-extra-113.md",
+      "size": 322
+    },
+    {
+      "path": "archive/indexes/local-extra-114.md",
+      "size": 326
+    },
+    {
+      "path": "archive/indexes/local-extra-115.md",
+      "size": 318
+    },
+    {
+      "path": "archive/indexes/local-extra-116.md",
+      "size": 316
+    },
+    {
+      "path": "archive/indexes/local-extra-117.md",
+      "size": 312
+    },
+    {
+      "path": "archive/indexes/local-extra-118.md",
+      "size": 322
+    },
+    {
+      "path": "archive/indexes/local-extra-119.md",
+      "size": 326
+    },
+    {
+      "path": "archive/indexes/local-extra-120.md",
+      "size": 322
+    },
+    {
+      "path": "archive/indexes/local-extra-121.md",
+      "size": 326
+    },
+    {
+      "path": "archive/indexes/local-extra-122.md",
+      "size": 316
+    },
+    {
+      "path": "archive/indexes/local-extra-123.md",
+      "size": 312
+    },
+    {
+      "path": "archive/indexes/local-extra-124.md",
+      "size": 324
+    },
+    {
+      "path": "archive/indexes/local-extra-125.md",
+      "size": 350
+    },
+    {
+      "path": "archive/indexes/local-extra-126.md",
+      "size": 348
+    },
+    {
+      "path": "archive/indexes/local-extra-127.md",
+      "size": 332
+    },
+    {
+      "path": "archive/indexes/local-extra-128.md",
+      "size": 328
+    },
+    {
+      "path": "archive/indexes/local-extra-129.md",
+      "size": 346
+    },
+    {
+      "path": "archive/indexes/local-extra-130.md",
+      "size": 349
+    },
+    {
+      "path": "archive/indexes/local-extra-131.md",
+      "size": 345
+    },
+    {
+      "path": "archive/indexes/local-extra-132.md",
+      "size": 345
+    },
+    {
+      "path": "archive/indexes/local-extra-133.md",
+      "size": 341
+    },
+    {
+      "path": "archive/indexes/local-extra-134.md",
+      "size": 353
+    },
+    {
+      "path": "archive/indexes/local-extra-135.md",
+      "size": 349
+    },
+    {
+      "path": "archive/indexes/local-extra-136.md",
+      "size": 311
+    },
+    {
+      "path": "archive/indexes/local-extra-137.md",
+      "size": 307
+    },
+    {
+      "path": "archive/indexes/local-extra-138.md",
+      "size": 309
+    },
+    {
+      "path": "archive/indexes/local-extra-139.md",
+      "size": 313
+    },
+    {
+      "path": "archive/indexes/local-extra-140.md",
+      "size": 305
+    },
+    {
+      "path": "archive/indexes/local-extra-141.md",
+      "size": 307
+    },
+    {
+      "path": "archive/indexes/local-extra-142.md",
+      "size": 307
+    },
+    {
+      "path": "archive/indexes/local-extra-143.md",
+      "size": 311
+    },
+    {
+      "path": "archive/indexes/local-extra-144.md",
+      "size": 307
+    },
+    {
+      "path": "archive/indexes/local-extra-145.md",
+      "size": 305
+    },
+    {
+      "path": "archive/indexes/local-extra-146.md",
+      "size": 303
+    },
+    {
+      "path": "archive/indexes/local-extra-147.md",
+      "size": 307
+    },
+    {
+      "path": "archive/indexes/local-extra-148.md",
+      "size": 323
+    },
+    {
+      "path": "archive/indexes/local-extra-149.md",
+      "size": 309
+    },
+    {
+      "path": "archive/indexes/local-extra-150.md",
+      "size": 335
+    },
+    {
+      "path": "archive/indexes/local-extra-151.md",
+      "size": 331
+    },
+    {
+      "path": "archive/indexes/local-extra-152.md",
+      "size": 307
+    },
+    {
+      "path": "archive/indexes/local-extra-153.md",
+      "size": 325
+    },
+    {
+      "path": "archive/indexes/local-extra-154.md",
+      "size": 339
+    },
+    {
+      "path": "archive/indexes/local-extra-155.md",
+      "size": 335
+    },
+    {
+      "path": "archive/indexes/local-extra-156.md",
+      "size": 329
+    },
+    {
+      "path": "archive/indexes/local-extra-157.md",
+      "size": 323
+    },
+    {
+      "path": "archive/indexes/local-extra-158.md",
+      "size": 323
+    },
+    {
+      "path": "archive/indexes/local-extra-159.md",
+      "size": 314
+    },
+    {
+      "path": "archive/indexes/local-extra-160.md",
+      "size": 286
+    },
+    {
+      "path": "archive/indexes/local-extra-161.md",
+      "size": 302
+    },
+    {
+      "path": "archive/indexes/local-extra-162.md",
+      "size": 288
+    },
+    {
+      "path": "archive/indexes/local-extra-163.md",
+      "size": 304
+    },
+    {
+      "path": "archive/indexes/local-extra-164.md",
+      "size": 276
+    },
+    {
+      "path": "archive/indexes/local-extra-165.md",
+      "size": 288
+    },
+    {
+      "path": "archive/indexes/local-extra-166.md",
+      "size": 304
+    },
+    {
+      "path": "archive/indexes/local-extra-167.md",
+      "size": 284
+    },
+    {
+      "path": "archive/indexes/local-extra-168.md",
+      "size": 300
+    },
+    {
+      "path": "archive/indexes/local-extra-169.md",
+      "size": 290
+    },
+    {
+      "path": "archive/indexes/local-extra-170.md",
+      "size": 306
+    },
+    {
+      "path": "archive/indexes/local-extra-171.md",
+      "size": 286
+    },
+    {
+      "path": "archive/indexes/local-extra-172.md",
+      "size": 302
+    },
+    {
+      "path": "archive/indexes/local-extra-173.md",
+      "size": 288
+    },
+    {
+      "path": "archive/indexes/local-extra-174.md",
+      "size": 304
+    },
+    {
+      "path": "archive/indexes/local-extra-175.md",
+      "size": 276
+    },
+    {
+      "path": "archive/indexes/local-extra-176.md",
+      "size": 288
+    },
+    {
+      "path": "archive/indexes/local-extra-177.md",
+      "size": 304
+    },
+    {
+      "path": "archive/indexes/local-extra-178.md",
+      "size": 284
+    },
+    {
+      "path": "archive/indexes/local-extra-179.md",
+      "size": 300
+    },
+    {
+      "path": "archive/indexes/local-extra-180.md",
+      "size": 306
+    },
+    {
+      "path": "archive/indexes/local-extra-181.md",
+      "size": 296
+    },
+    {
+      "path": "archive/indexes/local-extra-182.md",
+      "size": 296
+    },
+    {
+      "path": "archive/indexes/local-extra-183.md",
+      "size": 278
+    },
+    {
+      "path": "archive/indexes/local-extra-184.md",
+      "size": 268
+    },
+    {
+      "path": "archive/indexes/local-extra-185.md",
+      "size": 272
+    },
+    {
+      "path": "archive/indexes/local-extra-186.md",
+      "size": 316
+    },
+    {
+      "path": "archive/indexes/local-extra-187.md",
+      "size": 278
+    },
+    {
+      "path": "archive/indexes/local-extra-188.md",
+      "size": 278
+    },
+    {
+      "path": "archive/indexes/local-extra-189.md",
+      "size": 282
+    },
+    {
+      "path": "archive/indexes/local-extra-190.md",
+      "size": 288
+    },
+    {
+      "path": "archive/indexes/local-extra-191.md",
+      "size": 355
+    },
+    {
+      "path": "archive/indexes/local-extra-192.md",
+      "size": 356
+    },
+    {
+      "path": "archive/indexes/local-extra-193.md",
+      "size": 292
+    },
+    {
+      "path": "archive/indexes/local-extra-194.md",
+      "size": 320
+    },
+    {
+      "path": "archive/indexes/local-extra-195.md",
+      "size": 288
+    },
+    {
+      "path": "archive/indexes/local-extra-196.md",
+      "size": 288
+    },
+    {
+      "path": "archive/indexes/local-extra-197.md",
+      "size": 302
+    },
+    {
+      "path": "archive/indexes/local-extra-198.md",
+      "size": 288
+    },
+    {
+      "path": "archive/indexes/local-extra-199.md",
+      "size": 300
+    },
+    {
+      "path": "archive/indexes/local-extra-200.md",
+      "size": 280
+    },
+    {
+      "path": "archive/indexes/local-extra-201.md",
+      "size": 278
+    },
+    {
+      "path": "archive/indexes/local-extra-202.md",
+      "size": 445
+    },
+    {
+      "path": "archive/indexes/local-extra-203.md",
+      "size": 374
+    },
+    {
+      "path": "archive/indexes/local-extra-204.md",
+      "size": 310
+    },
+    {
+      "path": "archive/indexes/local-extra-205.md",
+      "size": 339
+    },
+    {
+      "path": "archive/indexes/local-extra-206.md",
+      "size": 314
+    },
+    {
+      "path": "archive/indexes/local-extra-207.md",
+      "size": 268
+    },
+    {
+      "path": "archive/indexes/local-extra-208.md",
+      "size": 278
+    },
+    {
+      "path": "archive/indexes/local-extra-209.md",
+      "size": 324
+    },
+    {
+      "path": "archive/indexes/local-extra-210.md",
+      "size": 310
+    },
+    {
+      "path": "archive/indexes/local-extra-211.md",
+      "size": 310
+    },
+    {
+      "path": "archive/indexes/local-extra-212.md",
+      "size": 310
+    },
+    {
+      "path": "archive/indexes/local-extra-213.md",
+      "size": 310
+    },
+    {
+      "path": "archive/indexes/local-extra-214.md",
+      "size": 304
+    },
+    {
+      "path": "archive/indexes/local-extra-215.md",
+      "size": 290
+    },
+    {
+      "path": "archive/indexes/local-extra-216.md",
+      "size": 290
+    },
+    {
+      "path": "archive/indexes/local-extra-217.md",
+      "size": 290
+    },
+    {
+      "path": "archive/indexes/local-extra-218.md",
+      "size": 290
+    },
+    {
+      "path": "archive/indexes/local-extra-219.md",
+      "size": 290
+    },
+    {
+      "path": "archive/indexes/local-extra-220.md",
+      "size": 304
+    },
+    {
+      "path": "archive/indexes/local-extra-221.md",
+      "size": 302
+    },
+    {
+      "path": "archive/indexes/local-extra-222.md",
+      "size": 320
+    },
+    {
+      "path": "archive/indexes/local-extra-223.md",
+      "size": 318
+    },
+    {
+      "path": "archive/indexes/local-extra-224.md",
+      "size": 272
+    },
+    {
+      "path": "archive/indexes/local-extra-225.md",
+      "size": 274
+    },
+    {
+      "path": "archive/indexes/obsidian-argus.md",
+      "size": 13437
+    },
+    {
+      "path": "archive/indexes/project-notes.md",
+      "size": 5046
+    },
+    {
+      "path": "archive/indexes/recent-chatgpt.md",
+      "size": 346
+    },
+    {
+      "path": "archive/indexes/ros-original.md",
+      "size": 15308
+    },
+    {
+      "path": "archive/indexes/ros-resumed.md",
+      "size": 52615
+    },
+    {
+      "path": "archive/indexes/wheel-shaft.md",
+      "size": 10303
+    },
+    {
+      "path": "archive/indexes/wsl-live.md",
+      "size": 41532
+    },
+    {
+      "path": "archive/indexes/zoo-aivac.md",
+      "size": 622
+    },
+    {
+      "path": "archive/indexes/zoo-untitled-vacuum.md",
+      "size": 276
+    },
+    {
+      "path": "archive/manifest.json",
+      "size": 761132
+    },
+    {
+      "path": "archive/notes/knowledge/CAD_RECONSTRUCTION.md",
+      "size": 2267
+    },
+    {
+      "path": "archive/notes/knowledge/COVERAGE.md",
+      "size": 5045
+    },
+    {
+      "path": "archive/notes/knowledge/CURRENT_BUILD_STATE.md",
+      "size": 12876
+    },
+    {
+      "path": "archive/notes/knowledge/DECISIONS.md",
+      "size": 14154
+    },
+    {
+      "path": "archive/notes/knowledge/INDEX.md",
+      "size": 433558
+    },
+    {
+      "path": "archive/notes/knowledge/OPEN_QUESTIONS.md",
+      "size": 9341
+    },
+    {
+      "path": "archive/notes/knowledge/PROJECT_MEMORY.md",
+      "size": 21398
+    },
+    {
+      "path": "archive/notes/knowledge/TOPICS.md",
+      "size": 40402
+    },
+    {
+      "path": "archive/notes/knowledge/plans/2026-11-07-basic-obstacle-avoidance.md",
+      "size": 7377
+    },
+    {
+      "path": "archive/notes/knowledge/updates/2026-10-13-current-build-user.md",
+      "size": 1865
+    },
+    {
+      "path": "archive/notes/knowledge/updates/2026-10-13-plate-thickness-confirmed.md",
+      "size": 531
+    },
+    {
+      "path": "archive/notes/knowledge/updates/2026-10-13-plate-thickness-correction.md",
+      "size": 415
+    },
+    {
+      "path": "archive/notes/knowledge/updates/2026-11-07-c1-replacement-and-manual-sketches.md",
+      "size": 1188
+    },
+    {
+      "path": "archive/notes/knowledge/updates/2026-11-07-current-manual-code-and-tape-preview.md",
+      "size": 3455
+    },
+    {
+      "path": "archive/notes/knowledge/updates/2026-11-07-esp32-unplug-camera.md",
+      "size": 840
+    },
+    {
+      "path": "archive/notes/knowledge/updates/2026-11-07-lid-fits-and-control-path.md",
+      "size": 1805
+    },
+    {
+      "path": "archive/notes/knowledge/updates/2026-11-07-lidar-lid-wiring-clearance.md",
+      "size": 1089
+    },
+    {
+      "path": "archive/notes/knowledge/updates/2026-11-07-obstacle-avoidance-request.md",
+      "size": 846
+    },
+    {
+      "path": "archive/notes/knowledge/updates/2026-11-07-orange-pi-setup-intake.md",
+      "size": 1133
+    },
+    {
+      "path": "archive/notes/knowledge/updates/2026-11-07-verified-orange-pi.md",
+      "size": 1637
+    },
+    {
+      "path": "archive/notes/knowledge/updates/2026-11-08-usb-tape-following.md",
+      "size": 17683
+    },
+    {
+      "path": "archive/notes/knowledge/updates/2026-11-09-file-dashboard.md",
+      "size": 1891
+    },
+    {
+      "path": "archive/notes/knowledge/updates/2026-11-09-github-phone-start-handoff.md",
+      "size": 1647
+    },
+    {
+      "path": "archive/notes/workspace/codex/01a12b5e-e226-7622-84a5-7a5572795600.md",
+      "size": 3203
+    },
+    {
+      "path": "archive/notes/workspace/exports/cad-reconstruction-v1/README.md",
+      "size": 1988
+    },
+    {
+      "path": "archive/notes/workspace/exports/cad-reference/wiring-evidence.md",
+      "size": 8220
+    },
+    {
+      "path": "archive/notes/workspace/history/notes/note_f91a410c8fcc/612241568e8d39e1917b1f2334cf5eebab523bb0860b4561b6b829222393a3e0.md",
+      "size": 805
+    },
+    {
+      "path": "archive/notes/workspace/notes/INDEX.md",
+      "size": 259
+    },
+    {
+      "path": "archive/notes/workspace/notes/note_f91a410c8fcc.md",
+      "size": 805
+    },
+    {
+      "path": "archive/notes/workspace/robot_control/PROJECT-STATUS.md",
+      "size": 3397
+    },
+    {
+      "path": "archive/notes/workspace/robot_control/argus_avoidance/PHONE-START-DESIGN.md",
+      "size": 2622
+    },
+    {
+      "path": "archive/notes/workspace/robot_control/argus_avoidance/PI-ESP32-WIRING.md",
+      "size": 2849
+    },
+    {
+      "path": "archive/notes/workspace/robot_control/argus_avoidance/README.md",
+      "size": 7669
+    },
+    {
+      "path": "archive/notes/workspace/robot_control/argus_avoidance/START-HERE.md",
+      "size": 6882
+    },
+    {
+      "path": "archive/notes/workspace/robot_control/argus_avoidance/reports/ORANGE-PI-CHECK.md",
+      "size": 2024
+    },
+    {
+      "path": "archive/notes/workspace/robot_control/argus_avoidance/reports/TAPE-PREVIEW-CHECK.md",
+      "size": 6471
+    },
+    {
+      "path": "archive/notes/workspace/robot_control/argus_avoidance/reports/VERIFICATION.md",
+      "size": 2863
+    },
+    {
+      "path": "archive/notes/workspace/robot_control/firmware/esp32_wifi_controlcam_auto/README.md",
+      "size": 5498
+    },
+    {
+      "path": "archive/notes/workspace/robot_control/firmware/esp32_wifi_controlcam_auto/VERIFICATION.md",
+      "size": 1865
+    },
+    {
+      "path": "archive/readable/02de04d4270ffef775e1-before.tar.gz.md",
+      "size": 206425
+    },
+    {
+      "path": "archive/readable/06eae1cb21dfcba8d63f-Argus Vac Final.fzz.md",
+      "size": 1040630
+    },
+    {
+      "path": "archive/readable/06fcfbaa2d5e45d542df-FRC _ Science Fair _ Vacuum Robot.pdf.md",
+      "size": 5457
+    },
+    {
+      "path": "archive/readable/18c61b4d0a3afc2b0f50-a4988-stepper-driver-with-pins-socketed-1.snapshot.2.zip.md",
+      "size": 171
+    },
+    {
+      "path": "archive/readable/18dd6e6fcff7e35c7252-before.tar.gz.md",
+      "size": 180974
+    },
+    {
+      "path": "archive/readable/2c6f3f8f6ce8f3abf076-Argus Vactextfile.pdf.md",
+      "size": 960961
+    },
+    {
+      "path": "archive/readable/34ab0fb64be38bc84e00-vacuum-workspace-source-20261007.tar.gz.md",
+      "size": 228276
+    },
+    {
+      "path": "archive/readable/4b14cc1606a41cf44530-FRC___Science_Fair___Vacuum_Robot.md",
+      "size": 14944
+    },
+    {
+      "path": "archive/readable/5ae3ff536e70db678760-Vacuum Robot.md",
+      "size": 28843
+    },
+    {
+      "path": "archive/readable/5b6e242015394129e1b1-AIVac.md",
+      "size": 3989
+    },
+    {
+      "path": "archive/readable/614ace17f37c6b03b295-機器人材料費.md",
+      "size": 731
+    },
+    {
+      "path": "archive/readable/62daf16c542e53d47980-rplidar_sdk_master.zip.md",
+      "size": 2215330
+    },
+    {
+      "path": "archive/readable/677c4151db70fdc0a414-san-ace-40-1.snapshot.5.zip.md",
+      "size": 174
+    },
+    {
+      "path": "archive/readable/6be05a3ff60d379c1829-ROBOT_MASTER.md",
+      "size": 1524
+    },
+    {
+      "path": "archive/readable/75a789cbb49b770f633a-bonjour.zip.md",
+      "size": 84
+    },
+    {
+      "path": "archive/readable/76f81cd2f706be538034-FRC _ Science Fair _ Vacuum Robot (1).pdf.md",
+      "size": 5616
+    },
+    {
+      "path": "archive/readable/7cd6ee941d4e4c49c2ff-Untitled document.md",
+      "size": 2357
+    },
+    {
+      "path": "archive/readable/7d190171a1c19fd7173e-A4988.fzz.md",
+      "size": 143102
+    },
+    {
+      "path": "archive/readable/95855215860e00691ab4-FRC _ Science Fair _ Vacuum Robot.md",
+      "size": 17617
+    },
+    {
+      "path": "archive/readable/99c11c4cb8d8bd55338b-Untitled document.md",
+      "size": 44772
+    },
+    {
+      "path": "archive/readable/a959b1fdaf2251edf97b-FRC _ Science Fair _ Vacuum Robot (1).pptx.md",
+      "size": 15069
+    },
+    {
+      "path": "archive/readable/b2979acc3613c2896281-FRC _ Science Fair _ Vacuum Robot.pptx.md",
+      "size": 19037
+    },
+    {
+      "path": "archive/readable/b3ee76abcaa114fa508f-Argus Vac1.zip.md",
+      "size": 72
+    },
+    {
+      "path": "archive/readable/b5ec74c3d42c748e4514-A4988 Stepper Motor Driver Carrier.fzpz.md",
+      "size": 330377
+    },
+    {
+      "path": "archive/readable/be3c08456cc7c7eb82cd-FRC___Science_Fair___Vacuum_Robot.pptx.md",
+      "size": 14793
+    },
+    {
+      "path": "archive/readable/c4b839a8eaf0484f8ab8-vacuum-workspace-source.tar.gz.md",
+      "size": 382684
+    },
+    {
+      "path": "archive/readable/cad8ec6481825ae7b036-Argus Vac.fzz.md",
+      "size": 1000351
+    },
+    {
+      "path": "archive/readable/cf1d0d29fd27ab768ca8-payload.zip.md",
+      "size": 188285
+    },
+    {
+      "path": "archive/readable/d8f9ef4fd818dd6f0aab-FRC _ Science Fair _ Vacuum Robot (2).pdf.md",
+      "size": 8465
+    },
+    {
+      "path": "archive/readable/d98f427ade435ff8102d-vacuum-workspace-source.tar.gz.md",
+      "size": 73418
+    },
+    {
+      "path": "archive/readable/df74112c46c3afa2f046-FRC _ Science Fair _ Vacuum Robot.pptx.md",
+      "size": 9657
+    },
+    {
+      "path": "archive/readable/eb56792ba9abb48d9699-Untitled presentation.md",
+      "size": 15079
+    },
+    {
+      "path": "archive/readable/f122826596d2345727e2-RPlidar-A1M8.fzpz.md",
+      "size": 198959
+    },
+    {
+      "path": "archive/readable/f4d088b886096cd7aab4-Argus Vac.fz.md",
+      "size": 997632
+    },
+    {
+      "path": "archive/readable/f581ec4045c37cbae5b2-CP210x_Windows_Drivers.zip.md",
+      "size": 20283
+    },
+    {
+      "path": "archive/readable/f64638aac74c5700efce-Arduino Vacuum Cleaner.md",
+      "size": 388
+    },
+    {
+      "path": "archive/sources/a4988-bench/outputs/WIRING_STATUS.md",
+      "size": 11849
+    },
+    {
+      "path": "archive/sources/a4988-bench/work/serial-test/Arduino.h",
+      "size": 1059
+    },
+    {
+      "path": "archive/sources/a4988-bench/work/serial-test/test.cpp",
+      "size": 5178
+    },
+    {
+      "path": "archive/sources/cad-aivac/a4988Driver.kcl",
+      "size": 2648
+    },
+    {
+      "path": "archive/sources/cad-aivac/a4988DriverRight.kcl",
+      "size": 2631
+    },
+    {
+      "path": "archive/sources/cad-aivac/arduinoMega.kcl",
+      "size": 3061
+    },
+    {
+      "path": "archive/sources/cad-aivac/batteryPack.kcl",
+      "size": 2264
+    },
+    {
+      "path": "archive/sources/cad-aivac/blank.kcl",
+      "size": 28
+    },
+    {
+      "path": "archive/sources/cad-aivac/buckConverter.kcl",
+      "size": 1776
+    },
+    {
+      "path": "archive/sources/cad-aivac/bumper.kcl",
+      "size": 1934
+    },
+    {
+      "path": "archive/sources/cad-aivac/casterWheel.kcl",
+      "size": 1667
+    },
+    {
+      "path": "archive/sources/cad-aivac/chassisBase.kcl",
+      "size": 3447
+    },
+    {
+      "path": "archive/sources/cad-aivac/driveWheel.kcl",
+      "size": 1598
+    },
+    {
+      "path": "archive/sources/cad-aivac/driveWheelRight.kcl",
+      "size": 1602
+    },
+    {
+      "path": "archive/sources/cad-aivac/lidarA1.kcl",
+      "size": 2236
+    },
+    {
+      "path": "archive/sources/cad-aivac/main.kcl",
+      "size": 3650
+    },
+    {
+      "path": "archive/sources/cad-aivac/nema17Stepper.kcl",
+      "size": 3317
+    },
+    {
+      "path": "archive/sources/cad-aivac/nema17StepperRight.kcl",
+      "size": 3319
+    },
+    {
+      "path": "archive/sources/cad-aivac/outerShell.kcl",
+      "size": 3121
+    },
+    {
+      "path": "archive/sources/cad-aivac/piCameraV2.kcl",
+      "size": 2143
+    },
+    {
+      "path": "archive/sources/cad-aivac/primitives.kcl",
+      "size": 1982
+    },
+    {
+      "path": "archive/sources/cad-aivac/project.toml",
+      "size": 168
+    },
+    {
+      "path": "archive/sources/cad-aivac/raspberryPi4.kcl",
+      "size": 3935
+    },
+    {
+      "path": "archive/sources/cad-aivac/thumbnail.png",
+      "size": 246851
+    },
+    {
+      "path": "archive/sources/cad-aivac/vacuumModule.kcl",
+      "size": 3922
+    },
+    {
+      "path": "archive/sources/cad-aivac/wiringHarness.kcl",
+      "size": 2696
+    },
+    {
+      "path": "archive/sources/connector-intake/chats/01a0f23d-427b-7882-b4e2-567c8015c061/conversation.md",
+      "size": 34018
+    },
+    {
+      "path": "archive/sources/connector-intake/chats/01a0f23d-427b-7882-b4e2-567c8015c061/page-001.json",
+      "size": 1184289
+    },
+    {
+      "path": "archive/sources/connector-intake/chats/01a0f23d-427b-7882-b4e2-567c8015c061/page-002.json",
+      "size": 209971
+    },
+    {
+      "path": "archive/sources/connector-intake/chats/01a100ed-8242-7cb2-84fa-d15b49a1ce9b/conversation.md",
+      "size": 53660
+    },
+    {
+      "path": "archive/sources/connector-intake/chats/01a100ed-8242-7cb2-84fa-d15b49a1ce9b/page-001.json",
+      "size": 204537
+    },
+    {
+      "path": "archive/sources/connector-intake/chats/01a100ed-8242-7cb2-84fa-d15b49a1ce9b/page-002.json",
+      "size": 52828
+    },
+    {
+      "path": "archive/sources/connector-intake/chats/01a100ed-8242-7cb2-84fa-d15b49a1ce9b/page-003.json",
+      "size": 26560
+    },
+    {
+      "path": "archive/sources/connector-intake/chats/01a100ed-8242-7cb2-84fa-d15b49a1ce9b/page-004.json",
+      "size": 43951
+    },
+    {
+      "path": "archive/sources/connector-intake/chats/01a100ed-8242-7cb2-84fa-d15b49a1ce9b/page-005.json",
+      "size": 14056
+    },
+    {
+      "path": "archive/sources/connector-intake/chats/01a10c3d-0091-7df2-8a3b-01c24d3edb83/conversation.md",
+      "size": 17856
+    },
+    {
+      "path": "archive/sources/connector-intake/chats/01a10c3d-0091-7df2-8a3b-01c24d3edb83/page-001.json",
+      "size": 230075
+    },
+    {
+      "path": "archive/sources/connector-intake/chats/01a10c3d-0091-7df2-8a3b-01c24d3edb83/page-002.json",
+      "size": 179405
+    },
+    {
+      "path": "archive/sources/connector-intake/chats/01a116f2-d5d7-7190-860d-2f8b7d7c7d0f/conversation.md",
+      "size": 11300
+    },
+    {
+      "path": "archive/sources/connector-intake/chats/01a116f2-d5d7-7190-860d-2f8b7d7c7d0f/page-001.json",
+      "size": 849504
+    },
+    {
+      "path": "archive/sources/connector-intake/chats/6ab52933-9c18-83ee-9b6a-9de48ba6eaa9/attachments/IMG_5050.jpeg",
+      "size": 318318
+    },
+    {
+      "path": "archive/sources/connector-intake/chats/6ab52933-9c18-83ee-9b6a-9de48ba6eaa9/attachments/IMG_5051.png",
+      "size": 873898
+    },
+    {
+      "path": "archive/sources/connector-intake/chats/6ab52933-9c18-83ee-9b6a-9de48ba6eaa9/attachments/IMG_5052.png",
+      "size": 931059
+    },
+    {
+      "path": "archive/sources/connector-intake/chats/6ab52933-9c18-83ee-9b6a-9de48ba6eaa9/attachments/IMG_5053.png",
+      "size": 655671
+    },
+    {
+      "path": "archive/sources/connector-intake/chats/6ab52933-9c18-83ee-9b6a-9de48ba6eaa9/conversation.md",
+      "size": 5348
+    },
+    {
+      "path": "archive/sources/connector-intake/chats/6ab52933-9c18-83ee-9b6a-9de48ba6eaa9/page-001.json",
+      "size": 9746
+    },
+    {
+      "path": "archive/sources/connector-intake/chats/6ab5e2f1-a8ec-83e8-a9e6-a57dac34bb00/attachments/IMG_5067.png",
+      "size": 220643
+    },
+    {
+      "path": "archive/sources/connector-intake/chats/6ab5e2f1-a8ec-83e8-a9e6-a57dac34bb00/attachments/IMG_5068.png",
+      "size": 320453
+    },
+    {
+      "path": "archive/sources/connector-intake/chats/6ab5e2f1-a8ec-83e8-a9e6-a57dac34bb00/conversation.md",
+      "size": 6584
+    },
+    {
+      "path": "archive/sources/connector-intake/chats/6ab5e2f1-a8ec-83e8-a9e6-a57dac34bb00/page-001.json",
+      "size": 10499
+    },
+    {
+      "path": "archive/sources/connector-intake/chats/6aca197c-2f7c-83ee-aa5a-e7b606718202/attachments/IMG_5272.jpeg",
+      "size": 567345
+    },
+    {
+      "path": "archive/sources/connector-intake/chats/6aca197c-2f7c-83ee-aa5a-e7b606718202/conversation.md",
+      "size": 1160
+    },
+    {
+      "path": "archive/sources/connector-intake/chats/6aca197c-2f7c-83ee-aa5a-e7b606718202/page-001.json",
+      "size": 3787
+    },
+    {
+      "path": "archive/sources/connector-intake/connectors/drive-107cm-NCR6GXcBC1v2Y3wA39ivgYLvj_kUkwiZdRptIA.json",
+      "size": 98959
+    },
+    {
+      "path": "archive/sources/connector-intake/connectors/drive-13v_HYE6L2R0zEDRqpuCBmyyn8OS5ZTVk02m-GaUP_mM.json",
+      "size": 5685
+    },
+    {
+      "path": "archive/sources/connector-intake/connectors/drive-1S5fF-rvpSBpLXt7XVuH2MHRfNx6jJ0Bhx0i_FLRIzjw.json",
+      "size": 27241
+    },
+    {
+      "path": "archive/sources/connector-intake/connectors/drive-1rZHA9eNgB6gzOe7b9h3RR7mDTY7pNa9fcBohMHnBQQw.json",
+      "size": 2502
+    },
+    {
+      "path": "archive/sources/connector-intake/connectors/drive-1xU4sxWypIqkrSlQkCySSFq8H5Ol_tE61-rM6YDt2LPE.json",
+      "size": 7827
+    },
+    {
+      "path": "archive/sources/connector-intake/connectors/drive-all-file-inventory.json",
+      "size": 9851
+    },
+    {
+      "path": "archive/sources/connector-intake/connectors/drive-file-inventory.json",
+      "size": 6050
+    },
+    {
+      "path": "archive/sources/connector-intake/connectors/drive-native-master.json",
+      "size": 60398
+    },
+    {
+      "path": "archive/sources/connector-intake/connectors/drive-robot-master.json",
+      "size": 4406
+    },
+    {
+      "path": "archive/sources/connector-intake/connectors/email-19e69b57fdfdc2d1.md",
+      "size": 193
+    },
+    {
+      "path": "archive/sources/connector-intake/connectors/email-19e6c086d56fbc3e.md",
+      "size": 187
+    },
+    {
+      "path": "archive/sources/connector-intake/connectors/email-19e799d456189f4e.md",
+      "size": 194
+    },
+    {
+      "path": "archive/sources/connector-intake/connectors/email-19e82db2335b2ba2.md",
+      "size": 207
+    },
+    {
+      "path": "archive/sources/connector-intake/connectors/email-19e8b6ff298aea83.md",
+      "size": 207
+    },
+    {
+      "path": "archive/sources/connector-intake/connectors/email-19e8d13b4298a034.md",
+      "size": 187
+    },
+    {
+      "path": "archive/sources/connector-intake/connectors/email-19ea0258a3bcf6c1.md",
+      "size": 207
+    },
+    {
+      "path": "archive/sources/connector-intake/connectors/email-19f173f236e6c4ad.md",
+      "size": 3221
+    },
+    {
+      "path": "archive/sources/connector-intake/connectors/gmail-argus-training.json",
+      "size": 200313
+    },
+    {
+      "path": "archive/sources/connector-intake/drive/107cm-NCR6GXcBC1v2Y3wA39ivgYLvj_kUkwiZdRptIA/Untitled document.docx",
+      "size": 29634
+    },
+    {
+      "path": "archive/sources/connector-intake/drive/11gFVu3NUXWlLeujJw3Lo2D_NingjTksxNNYVgfeGbDc/FRC _ Science Fair _ Vacuum Robot.pptx",
+      "size": 23563202
+    },
+    {
+      "path": "archive/sources/connector-intake/drive/12e5Cr_i9rSyV2Dwg_Oh0AmR2wzgz3bAfdJHN4pqh374/Vacuum Robot.pptx",
+      "size": 10834335
+    },
+    {
+      "path": "archive/sources/connector-intake/drive/13v_HYE6L2R0zEDRqpuCBmyyn8OS5ZTVk02m-GaUP_mM/Untitled document.docx",
+      "size": 7625
+    },
+    {
+      "path": "archive/sources/connector-intake/drive/1B27dPO_25KPaSOf8R9jGCIFTrnLUjVvR/FRC _ Science Fair _ Vacuum Robot.pptx",
+      "size": 23617834
+    },
+    {
+      "path": "archive/sources/connector-intake/drive/1Crse7eJOVYjAR4d68VfOYXwwTpFna_y87TUyLmbOUBY/FRC___Science_Fair___Vacuum_Robot.pptx",
+      "size": 13167288
+    },
+    {
+      "path": "archive/sources/connector-intake/drive/1S5fF-rvpSBpLXt7XVuH2MHRfNx6jJ0Bhx0i_FLRIzjw/Untitled presentation.pptx",
+      "size": 14275272
+    },
+    {
+      "path": "archive/sources/connector-intake/drive/1dDn1Gf3b0V9Acp3yp9YzrNIvoOCimND7Tfu1W19irzE/Arduino Vacuum Cleaner.pptx",
+      "size": 39665
+    },
+    {
+      "path": "archive/sources/connector-intake/drive/1q6D5DyZkiy5OSMA9Va4YALiVRFb-_k7qrIXbBWVtTgs/ROBOT_MASTER.docx",
+      "size": 7274
+    },
+    {
+      "path": "archive/sources/connector-intake/drive/1rZHA9eNgB6gzOe7b9h3RR7mDTY7pNa9fcBohMHnBQQw/機器人材料費.docx",
+      "size": 8964
+    },
+    {
+      "path": "archive/sources/connector-intake/drive/1xU4sxWypIqkrSlQkCySSFq8H5Ol_tE61-rM6YDt2LPE/AIVac.pptx",
+      "size": 3487662
+    },
+    {
+      "path": "archive/sources/connector-intake/local-codex/01a038d4-e7c4-7730-be8d-d45ea5e75e99/conversation.md",
+      "size": 2320
+    },
+    {
+      "path": "archive/sources/connector-intake/local-codex/01a038d4-e7c4-7730-be8d-d45ea5e75e99/messages.json",
+      "size": 2826
+    },
+    {
+      "path": "archive/sources/connector-intake/local-codex/01a038dc-064e-7681-bb85-6e15aaa8bdfe/conversation.md",
+      "size": 220
+    },
+    {
+      "path": "archive/sources/connector-intake/local-codex/01a038dc-064e-7681-bb85-6e15aaa8bdfe/messages.json",
+      "size": 778
+    },
+    {
+      "path": "archive/sources/connector-intake/local-codex/01a0f23d-427b-7882-b4e2-567c8015c061/conversation.md",
+      "size": 36118
+    },
+    {
+      "path": "archive/sources/connector-intake/local-codex/01a0f23d-427b-7882-b4e2-567c8015c061/messages.json",
+      "size": 45651
+    },
+    {
+      "path": "archive/sources/connector-intake/local-codex/01a100ed-8242-7cb2-84fa-d15b49a1ce9b/conversation.md",
+      "size": 10183
+    },
+    {
+      "path": "archive/sources/connector-intake/local-codex/01a100ed-8242-7cb2-84fa-d15b49a1ce9b/messages.json",
+      "size": 13791
+    },
+    {
+      "path": "archive/sources/connector-intake/local-codex/01a10c3d-0091-7df2-8a3b-01c24d3edb83/conversation.md",
+      "size": 18336
+    },
+    {
+      "path": "archive/sources/connector-intake/local-codex/01a10c3d-0091-7df2-8a3b-01c24d3edb83/messages.json",
+      "size": 24491
+    },
+    {
+      "path": "archive/sources/connector-intake/local-codex/01a116f2-d5d7-7190-860d-2f8b7d7c7d0f/conversation.md",
+      "size": 11700
+    },
+    {
+      "path": "archive/sources/connector-intake/local-codex/01a116f2-d5d7-7190-860d-2f8b7d7c7d0f/messages.json",
+      "size": 15224
+    },
+    {
+      "path": "archive/sources/current-build-photos/IMG_5456.jpeg",
+      "size": 482708
+    },
+    {
+      "path": "archive/sources/current-build-photos/IMG_5457.jpeg",
+      "size": 455230
+    },
+    {
+      "path": "archive/sources/current-build-photos/IMG_5458.jpeg",
+      "size": 421658
+    },
+    {
+      "path": "archive/sources/current-build-photos/IMG_5459.jpeg",
+      "size": 372492
+    },
+    {
+      "path": "archive/sources/current-build-photos/IMG_5460.jpeg",
+      "size": 345026
+    },
+    {
+      "path": "archive/sources/current-build-photos/IMG_5461.jpeg",
+      "size": 378659
+    },
+    {
+      "path": "archive/sources/current-build-photos/IMG_5462.jpeg",
+      "size": 292496
+    },
+    {
+      "path": "archive/sources/dashboard-repository/README.md",
+      "size": 23
+    },
+    {
+      "path": "archive/sources/direct-user/2026-10-13-current-build-user.md",
+      "size": 1865
+    },
+    {
+      "path": "archive/sources/direct-user/2026-10-13-plate-thickness-confirmed.md",
+      "size": 531
+    },
+    {
+      "path": "archive/sources/direct-user/2026-10-13-plate-thickness-correction.md",
+      "size": 415
+    },
+    {
+      "path": "archive/sources/direct-user/CAD_RECONSTRUCTION.md",
+      "size": 2267
+    },
+    {
+      "path": "archive/sources/downloads-cad-aivac/thumbnail.png",
+      "size": 128732
+    },
+    {
+      "path": "archive/sources/live-bench/2026-11-08-usb-tape-following.md",
+      "size": 14169
+    },
+    {
+      "path": "archive/sources/local-extra-000/Argus Vac_netlist_Final.txt",
+      "size": 37923
+    },
+    {
+      "path": "archive/sources/local-extra-002/Argus_Vac_BOM_and_Netlist.md",
+      "size": 13692
+    },
+    {
+      "path": "archive/sources/local-extra-003/Argus_Vac_MotorControl.ino",
+      "size": 4326
+    },
+    {
+      "path": "archive/sources/local-extra-004/FRC _ Science Fair _ Vacuum Robot (1).pdf",
+      "size": 13531513
+    },
+    {
+      "path": "archive/sources/local-extra-005/FRC _ Science Fair _ Vacuum Robot (1).pptx",
+      "size": 19511808
+    },
+    {
+      "path": "archive/sources/local-extra-006/FRC _ Science Fair _ Vacuum Robot (2).pdf",
+      "size": 14521708
+    },
+    {
+      "path": "archive/sources/local-extra-007/FRC _ Science Fair _ Vacuum Robot.pdf",
+      "size": 11121434
+    },
+    {
+      "path": "archive/sources/local-extra-008/FRC _ Science Fair _ Vacuum Robot.pptx",
+      "size": 13140589
+    },
+    {
+      "path": "archive/sources/local-extra-009/FRC___Science_Fair___Vacuum_Robot.pptx",
+      "size": 13152945
+    },
+    {
+      "path": "archive/sources/local-extra-010/RPlidar-A1M8.fzpz",
+      "size": 111838
+    },
+    {
+      "path": "archive/sources/local-extra-013/main.cpp",
+      "size": 5279
+    },
+    {
+      "path": "archive/sources/local-extra-015/AboutDlg.cpp",
+      "size": 1359
+    },
+    {
+      "path": "archive/sources/local-extra-016/AboutDlg.h",
+      "size": 1466
+    },
+    {
+      "path": "archive/sources/local-extra-017/AutoDiscoveryDlg.cpp",
+      "size": 8923
+    },
+    {
+      "path": "archive/sources/local-extra-018/AutoDiscoveryDlg.h",
+      "size": 3720
+    },
+    {
+      "path": "archive/sources/local-extra-019/ChooseConnectionDlg.cpp",
+      "size": 5641
+    },
+    {
+      "path": "archive/sources/local-extra-020/ChooseConnectionDlg.h",
+      "size": 3803
+    },
+    {
+      "path": "archive/sources/local-extra-021/dns_sd.h",
+      "size": 130272
+    },
+    {
+      "path": "archive/sources/local-extra-022/common.h",
+      "size": 932
+    },
+    {
+      "path": "archive/sources/local-extra-023/lidarmgr.cpp",
+      "size": 4098
+    },
+    {
+      "path": "archive/sources/local-extra-024/lidarmgr.h",
+      "size": 1596
+    },
+    {
+      "path": "archive/sources/local-extra-025/framegrabber.cpp",
+      "size": 3689
+    },
+    {
+      "path": "archive/sources/local-extra-026/framegrabber.h",
+      "size": 18
+    },
+    {
+      "path": "archive/sources/local-extra-027/framegrabber.rc",
+      "size": 14377
+    },
+    {
+      "path": "archive/sources/local-extra-028/FreqSetDlg.cpp",
+      "size": 3264
+    },
+    {
+      "path": "archive/sources/local-extra-029/FreqSetDlg.h",
+      "size": 2422
+    },
+    {
+      "path": "archive/sources/local-extra-030/IpConfigDlg.cpp",
+      "size": 4172
+    },
+    {
+      "path": "archive/sources/local-extra-031/IpConfigDlg.h",
+      "size": 2665
+    },
+    {
+      "path": "archive/sources/local-extra-032/MainFrm.cpp",
+      "size": 14369
+    },
+    {
+      "path": "archive/sources/local-extra-033/MainFrm.h",
+      "size": 5825
+    },
+    {
+      "path": "archive/sources/local-extra-040/atlapp.h",
+      "size": 53720
+    },
+    {
+      "path": "archive/sources/local-extra-041/atlcrack.h",
+      "size": 59760
+    },
+    {
+      "path": "archive/sources/local-extra-042/atlctrls.h",
+      "size": 260949
+    },
+    {
+      "path": "archive/sources/local-extra-043/atlctrlw.h",
+      "size": 117591
+    },
+    {
+      "path": "archive/sources/local-extra-044/atlctrlx.h",
+      "size": 127591
+    },
+    {
+      "path": "archive/sources/local-extra-045/atlddx.h",
+      "size": 16551
+    },
+    {
+      "path": "archive/sources/local-extra-046/atldlgs.h",
+      "size": 172555
+    },
+    {
+      "path": "archive/sources/local-extra-047/atldwm.h",
+      "size": 11555
+    },
+    {
+      "path": "archive/sources/local-extra-048/atlfind.h",
+      "size": 26950
+    },
+    {
+      "path": "archive/sources/local-extra-049/atlframe.h",
+      "size": 105168
+    },
+    {
+      "path": "archive/sources/local-extra-050/atlgdi.h",
+      "size": 97652
+    },
+    {
+      "path": "archive/sources/local-extra-051/atlmisc.h",
+      "size": 83943
+    },
+    {
+      "path": "archive/sources/local-extra-052/atlprint.h",
+      "size": 28889
+    },
+    {
+      "path": "archive/sources/local-extra-053/atlres.h",
+      "size": 9625
+    },
+    {
+      "path": "archive/sources/local-extra-054/atlresce.h",
+      "size": 2514
+    },
+    {
+      "path": "archive/sources/local-extra-055/atlribbon.h",
+      "size": 88277
+    },
+    {
+      "path": "archive/sources/local-extra-056/atlscrl.h",
+      "size": 55891
+    },
+    {
+      "path": "archive/sources/local-extra-057/atlsplit.h",
+      "size": 24445
+    },
+    {
+      "path": "archive/sources/local-extra-058/atltheme.h",
+      "size": 33717
+    },
+    {
+      "path": "archive/sources/local-extra-059/atluser.h",
+      "size": 38326
+    },
+    {
+      "path": "archive/sources/local-extra-060/atlwince.h",
+      "size": 80918
+    },
+    {
+      "path": "archive/sources/local-extra-061/atlwinx.h",
+      "size": 13872
+    },
+    {
+      "path": "archive/sources/local-extra-062/rplidar.ico",
+      "size": 15086
+    },
+    {
+      "path": "archive/sources/local-extra-063/Toolbar.bmp",
+      "size": 838
+    },
+    {
+      "path": "archive/sources/local-extra-064/resource.h",
+      "size": 2702
+    },
+    {
+      "path": "archive/sources/local-extra-065/scanView.cpp",
+      "size": 8229
+    },
+    {
+      "path": "archive/sources/local-extra-066/scanView.h",
+      "size": 2358
+    },
+    {
+      "path": "archive/sources/local-extra-067/stdafx.cpp",
+      "size": 968
+    },
+    {
+      "path": "archive/sources/local-extra-068/stdafx.h",
+      "size": 2507
+    },
+    {
+      "path": "archive/sources/local-extra-070/main.cpp",
+      "size": 9506
+    },
+    {
+      "path": "archive/sources/local-extra-072/main.cpp",
+      "size": 8648
+    },
+    {
+      "path": "archive/sources/local-extra-075/cross_compile.sh",
+      "size": 330
+    },
+    {
+      "path": "archive/sources/local-extra-077/ReleaseNote.v1.10.0.md",
+      "size": 115
+    },
+    {
+      "path": "archive/sources/local-extra-078/ReleaseNote.v1.11.0.md",
+      "size": 276
+    },
+    {
+      "path": "archive/sources/local-extra-079/ReleaseNote.v1.12.0.md",
+      "size": 238
+    },
+    {
+      "path": "archive/sources/local-extra-080/ReleaseNote.v1.8.0.md",
+      "size": 225
+    },
+    {
+      "path": "archive/sources/local-extra-081/ReleaseNote.v1.8.1.md",
+      "size": 192
+    },
+    {
+      "path": "archive/sources/local-extra-082/ReleaseNote.v1.9.0.md",
+      "size": 120
+    },
+    {
+      "path": "archive/sources/local-extra-083/ReleaseNote.v1.9.1.md",
+      "size": 146
+    },
+    {
+      "path": "archive/sources/local-extra-084/ReleaseNote.v2.0.0.md",
+      "size": 180
+    },
+    {
+      "path": "archive/sources/local-extra-085/ReleaseNote.v2.1.0.md",
+      "size": 256
+    },
+    {
+      "path": "archive/sources/local-extra-087/mak_common.inc",
+      "size": 3066
+    },
+    {
+      "path": "archive/sources/local-extra-088/mak_def.inc",
+      "size": 3971
+    },
+    {
+      "path": "archive/sources/local-extra-090/README.md",
+      "size": 9068
+    },
+    {
+      "path": "archive/sources/local-extra-160/frame_grabber.vcxproj",
+      "size": 9505
+    },
+    {
+      "path": "archive/sources/local-extra-161/frame_grabber.vcxproj.filters",
+      "size": 4055
+    },
+    {
+      "path": "archive/sources/local-extra-162/rplidar_driver.vcxproj",
+      "size": 6585
+    },
+    {
+      "path": "archive/sources/local-extra-163/rplidar_driver.vcxproj.filters",
+      "size": 4972
+    },
+    {
+      "path": "archive/sources/local-extra-164/sdk_and_demo.sln",
+      "size": 2609
+    },
+    {
+      "path": "archive/sources/local-extra-165/simple_grabber.vcxproj",
+      "size": 4888
+    },
+    {
+      "path": "archive/sources/local-extra-166/simple_grabber.vcxproj.filters",
+      "size": 960
+    },
+    {
+      "path": "archive/sources/local-extra-167/ultra_simple.vcxproj",
+      "size": 5255
+    },
+    {
+      "path": "archive/sources/local-extra-168/ultra_simple.vcxproj.filters",
+      "size": 958
+    },
+    {
+      "path": "archive/sources/local-extra-169/custom_baudrate.vcxproj",
+      "size": 8845
+    },
+    {
+      "path": "archive/sources/local-extra-170/custom_baudrate.vcxproj.filters",
+      "size": 985
+    },
+    {
+      "path": "archive/sources/local-extra-171/frame_grabber.vcxproj",
+      "size": 15854
+    },
+    {
+      "path": "archive/sources/local-extra-172/frame_grabber.vcxproj.filters",
+      "size": 4032
+    },
+    {
+      "path": "archive/sources/local-extra-173/rplidar_driver.vcxproj",
+      "size": 11529
+    },
+    {
+      "path": "archive/sources/local-extra-174/rplidar_driver.vcxproj.filters",
+      "size": 7314
+    },
+    {
+      "path": "archive/sources/local-extra-175/sdk_and_demo.sln",
+      "size": 4830
+    },
+    {
+      "path": "archive/sources/local-extra-176/simple_grabber.vcxproj",
+      "size": 8986
+    },
+    {
+      "path": "archive/sources/local-extra-178/ultra_simple.vcxproj",
+      "size": 9724
+    },
+    {
+      "path": "archive/sources/local-extra-181/LAP RAP SAN ACE 40.iam",
+      "size": 223744
+    },
+    {
+      "path": "archive/sources/local-extra-182/LAP RAP SAN ACE 40.png",
+      "size": 129949
+    },
+    {
+      "path": "archive/sources/local-extra-183/QUAT 5 CANH.ipt",
+      "size": 310272
+    },
+    {
+      "path": "archive/sources/local-extra-184/QUAT TO.ipt",
+      "size": 241664
+    },
+    {
+      "path": "archive/sources/local-extra-185/THAN QUAT.ipt",
+      "size": 504832
+    },
+    {
+      "path": "archive/sources/local-extra-187/Vacuum Robot.csv",
+      "size": 672
+    },
+    {
+      "path": "archive/sources/local-extra-188/Argus Vac_bb.png",
+      "size": 2276252
+    },
+    {
+      "path": "archive/sources/local-extra-189/Argus Cad Pic.png",
+      "size": 244009
+    },
+    {
+      "path": "archive/sources/local-extra-191/Argus Vac.fzz",
+      "size": 187441
+    },
+    {
+      "path": "archive/sources/local-extra-194/Argus Vac_Bill Of Materials_csv.csv",
+      "size": 1468
+    },
+    {
+      "path": "archive/sources/local-extra-195/Argus Vac_bom_csv.csv",
+      "size": 1100
+    },
+    {
+      "path": "archive/sources/local-extra-196/Argus Vactextfile.txt",
+      "size": 951849
+    },
+    {
+      "path": "archive/sources/local-extra-197/RPlidar-A1M8_1_breadboard.svg",
+      "size": 182283
+    },
+    {
+      "path": "archive/sources/local-extra-198/RPlidar-A1M8_1_pcb.svg",
+      "size": 3596
+    },
+    {
+      "path": "archive/sources/local-extra-199/RPlidar-A1M8_1_schematic.svg",
+      "size": 6717
+    },
+    {
+      "path": "archive/sources/local-extra-200/RPlidar-A1M8_1.fzp",
+      "size": 6140
+    },
+    {
+      "path": "archive/sources/local-extra-202/A4988 Stepper Motor Driver Carrier.fzpz",
+      "size": 104189
+    },
+    {
+      "path": "archive/sources/local-extra-204/A4988-Stepper-Driver-WithPins.stp",
+      "size": 1811178
+    },
+    {
+      "path": "archive/sources/local-extra-205/A4988.fzz",
+      "size": 6345
+    },
+    {
+      "path": "archive/sources/local-extra-206/ai_obstacle_avoidance_flowchart.png",
+      "size": 256056
+    },
+    {
+      "path": "archive/sources/local-extra-209/obstacle-detector-mediapipe-v2 (1).py",
+      "size": 9428
+    },
+    {
+      "path": "archive/sources/local-extra-210/obstacle-detector-mediapipe-v2.py",
+      "size": 8774
+    },
+    {
+      "path": "archive/sources/local-extra-211/obstacle-detector-mediapipe-v3.py",
+      "size": 10661
+    },
+    {
+      "path": "archive/sources/local-extra-212/obstacle-detector-mediapipe-v4.py",
+      "size": 10372
+    },
+    {
+      "path": "archive/sources/local-extra-213/obstacle-detector-mediapipe-v6.py",
+      "size": 12473
+    },
+    {
+      "path": "archive/sources/local-extra-214/obstacle-detector-mediapipe.py",
+      "size": 8679
+    },
+    {
+      "path": "archive/sources/local-extra-215/obstacle-detector-v2.py",
+      "size": 9677
+    },
+    {
+      "path": "archive/sources/local-extra-216/obstacle-detector-v3.py",
+      "size": 10063
+    },
+    {
+      "path": "archive/sources/local-extra-217/obstacle-detector-v4.py",
+      "size": 11419
+    },
+    {
+      "path": "archive/sources/local-extra-218/obstacle-detector-v5.py",
+      "size": 11405
+    },
+    {
+      "path": "archive/sources/local-extra-219/obstacle-detector-v6.py",
+      "size": 8225
+    },
+    {
+      "path": "archive/sources/local-extra-220/planetary-gearbox-+slim.shapr",
+      "size": 17640198
+    },
+    {
+      "path": "archive/sources/local-extra-221/planetary-gearbox-+slim.step",
+      "size": 6963556
+    },
+    {
+      "path": "archive/sources/local-extra-222/vacuum_system_architecture_diagram.png",
+      "size": 211279
+    },
+    {
+      "path": "archive/sources/local-extra-225/a4988Driver.kcl",
+      "size": 2648
+    },
+    {
+      "path": "archive/sources/obsidian-argus/1-Manuals/Argus Vac - Calibration & Preventive Troubleshooting Guide.md",
+      "size": 5895
+    },
+    {
+      "path": "archive/sources/obsidian-argus/1-Manuals/Argus Vac - Electrical Wiring & Power Reference.md",
+      "size": 6046
+    },
+    {
+      "path": "archive/sources/obsidian-argus/1-Manuals/Argus Vac - Hardware & Mechanical Architecture Manual.md",
+      "size": 4164
+    },
+    {
+      "path": "archive/sources/obsidian-argus/1-Manuals/Argus Vac - Project Progress & Action Plan.md",
+      "size": 5559
+    },
+    {
+      "path": "archive/sources/obsidian-argus/1-Manuals/Argus Vac - Wiring Day Build Checklist.md",
+      "size": 11875
+    },
+    {
+      "path": "archive/sources/obsidian-argus/2-Reference/ROBOT_MASTER.md",
+      "size": 2680
+    },
+    {
+      "path": "archive/sources/obsidian-argus/3-Logs/argus-vac-developer-preferences-v4.md",
+      "size": 8099
+    },
+    {
+      "path": "archive/sources/obsidian-argus/3-Logs/argus-vac-historical-troubleshooting-log-v4.6.md",
+      "size": 10009
+    },
+    {
+      "path": "archive/sources/obsidian-argus/3-Logs/argus-vac-housekeeping-and-cleanup-v3.14.md",
+      "size": 9078
+    },
+    {
+      "path": "archive/sources/obsidian-argus/3-Logs/argus-vac-next-steps.md",
+      "size": 8255
+    },
+    {
+      "path": "archive/sources/obsidian-argus/3-Logs/argus-vac-version-control-and-change-log-v25.md",
+      "size": 60134
+    },
+    {
+      "path": "archive/sources/obsidian-argus/3-Logs/argus-vac-vscode-setup-v3.md",
+      "size": 11188
+    },
+    {
+      "path": "archive/sources/obsidian-argus/4-Software/cv-environment-diagnostic.py",
+      "size": 7968
+    },
+    {
+      "path": "archive/sources/obsidian-argus/4-Software/dashboard/app.js",
+      "size": 2377
+    },
+    {
+      "path": "archive/sources/obsidian-argus/4-Software/dashboard/app1.js.ts",
+      "size": 0
+    },
+    {
+      "path": "archive/sources/obsidian-argus/4-Software/dashboard/index.html",
+      "size": 1560
+    },
+    {
+      "path": "archive/sources/obsidian-argus/4-Software/dashboard/style.css",
+      "size": 3144
+    },
+    {
+      "path": "archive/sources/obsidian-argus/4-Software/lidar-watch.py",
+      "size": 8309
+    },
+    {
+      "path": "archive/sources/obsidian-argus/4-Software/mega-controller.ino",
+      "size": 6257
+    },
+    {
+      "path": "archive/sources/obsidian-argus/4-Software/obstacle-detector-mediapipe-v10.6.py",
+      "size": 43590
+    },
+    {
+      "path": "archive/sources/obsidian-argus/4-Software/pi-hardware-validator.py",
+      "size": 6132
+    },
+    {
+      "path": "archive/sources/obsidian-argus/5-Hardware/Argus Vac Final.fzz",
+      "size": 189919
+    },
+    {
+      "path": "archive/sources/obsidian-argus/5-Hardware/Argus Vac_netlist_Final.xml",
+      "size": 37976
+    },
+    {
+      "path": "archive/sources/obsidian-argus/AGENTS.md",
+      "size": 3853
+    },
+    {
+      "path": "archive/sources/obsidian-argus/Agent - GLM Worker.md.md",
+      "size": 268
+    },
+    {
+      "path": "archive/sources/obsidian-argus/Agent - Ox Alpha Orchestrator.md.md",
+      "size": 419
+    },
+    {
+      "path": "archive/sources/obsidian-argus/Agent-Pipeline.canvas.canvas-llm",
+      "size": 6304
+    },
+    {
+      "path": "archive/sources/obsidian-argus/CLAUDE.md",
+      "size": 11
+    },
+    {
+      "path": "archive/sources/obsidian-argus/Canvas LLM 10.canvas-llm",
+      "size": 688
+    },
+    {
+      "path": "archive/sources/obsidian-argus/Canvas LLM 11.canvas-llm",
+      "size": 555
+    },
+    {
+      "path": "archive/sources/obsidian-argus/Canvas LLM 2.canvas-llm",
+      "size": 688
+    },
+    {
+      "path": "archive/sources/obsidian-argus/Canvas LLM 3.canvas-llm",
+      "size": 688
+    },
+    {
+      "path": "archive/sources/obsidian-argus/Canvas LLM 4.canvas-llm",
+      "size": 688
+    },
+    {
+      "path": "archive/sources/obsidian-argus/Canvas LLM 5.canvas-llm",
+      "size": 688
+    },
+    {
+      "path": "archive/sources/obsidian-argus/Canvas LLM 6.canvas-llm",
+      "size": 688
+    },
+    {
+      "path": "archive/sources/obsidian-argus/Canvas LLM 7.canvas-llm",
+      "size": 688
+    },
+    {
+      "path": "archive/sources/obsidian-argus/Canvas LLM 8.canvas-llm",
+      "size": 688
+    },
+    {
+      "path": "archive/sources/obsidian-argus/Canvas LLM 9.canvas-llm",
+      "size": 688
+    },
+    {
+      "path": "archive/sources/obsidian-argus/Canvas LLM.canvas-llm",
+      "size": 688
+    },
+    {
+      "path": "archive/sources/obsidian-argus/Chats/File Review Bot.md",
+      "size": 227
+    },
+    {
+      "path": "archive/sources/obsidian-argus/HANDOFF.md",
+      "size": 14838
+    },
+    {
+      "path": "archive/sources/obsidian-argus/Prompt.md",
+      "size": 54
+    },
+    {
+      "path": "archive/sources/obsidian-argus/Voice Scribe/voice-2026-08-25-1210-2.m4a",
+      "size": 75033
+    },
+    {
+      "path": "archive/sources/obsidian-argus/Voice Scribe/voice-2026-08-25-1210-2.md",
+      "size": 82
+    },
+    {
+      "path": "archive/sources/obsidian-argus/Voice Scribe/voice-2026-08-25-1210-3.m4a",
+      "size": 146424
+    },
+    {
+      "path": "archive/sources/obsidian-argus/Voice Scribe/voice-2026-08-25-1210-3.md",
+      "size": 88
+    },
+    {
+      "path": "archive/sources/obsidian-argus/Voice Scribe/voice-2026-08-25-1210.m4a",
+      "size": 153293
+    },
+    {
+      "path": "archive/sources/obsidian-argus/Voice Scribe/voice-2026-08-25-1210.md",
+      "size": 64
+    },
+    {
+      "path": "archive/sources/obsidian-argus/Welcome.md",
+      "size": 203
+    },
+    {
+      "path": "archive/sources/obsidian-argus/_Archive/obstacle-detector-mediapipe-v8.py",
+      "size": 19023
+    },
+    {
+      "path": "archive/sources/obsidian-argus/_Archive/obstacle-detector-mediapipe-v9.py",
+      "size": 25499
+    },
+    {
+      "path": "archive/sources/obsidian-argus/agent-pipeline.js.md",
+      "size": 1578
+    },
+    {
+      "path": "archive/sources/obsidian-argus/chatobby.md",
+      "size": 753
+    },
+    {
+      "path": "archive/sources/obsidian-argus/copilot/copilot-conversations/Argus_Vac_Obstacle_Detector_Explained@20260826_004340.md",
+      "size": 51314
+    },
+    {
+      "path": "archive/sources/obsidian-argus/copilot/copilot-conversations/Argus_Vac_Obstacle_Risk_Detector@20260826_004340.md",
+      "size": 45037
+    },
+    {
+      "path": "archive/sources/obsidian-argus/copilot/copilot-conversations/Multi-Model_Task_Delegation_Plan@20260826_204340.md",
+      "size": 2292
+    },
+    {
+      "path": "archive/sources/obsidian-argus/copilot/copilot-conversations/agent__Its_been_a_hwile_since_I_update_everything._As_of@20260927_122746.md",
+      "size": 15072
+    },
+    {
+      "path": "archive/sources/obsidian-argus/copilot/copilot-conversations/agent__based_off_the_pinouts,_write_me_a_test_code_for@20260827_231221.md",
+      "size": 576
+    },
+    {
+      "path": "archive/sources/obsidian-argus/copilot/copilot-conversations/agent__based_off_the_pinouts,_write_me_a_test_code_for@20260827_231307.md",
+      "size": 583
+    },
+    {
+      "path": "archive/sources/obsidian-argus/copilot/copilot-conversations/agent__based_off_the_pinouts,_write_me_a_test_code_for@20260827_231330.md",
+      "size": 69094
+    },
+    {
+      "path": "archive/sources/obsidian-argus/copilot/copilot-conversations/agent__hi,_are_you_able_to_recruit_other_AIs@20260826_225938.md",
+      "size": 443
+    },
+    {
+      "path": "archive/sources/obsidian-argus/copilot/copilot-conversations/agent__hi,_give_me_a_breif_summary_on_my_vault_after@20260826_230300.md",
+      "size": 2944
+    },
+    {
+      "path": "archive/sources/obsidian-argus/copilot/copilot-conversations/agent__today,_i_was_doing_research_on_wire_sizes,_and_it@20260826_193027.md",
+      "size": 6657
+    },
+    {
+      "path": "archive/sources/obsidian-argus/copilot/copilot-conversations/agent__yo,_my_last_convo_with_another_AI_Agent_got_cut@20260826_005256.md",
+      "size": 41467
+    },
+    {
+      "path": "archive/sources/obsidian-argus/copilot/memory/Recent Conversations.md",
+      "size": 91
+    },
+    {
+      "path": "archive/sources/obsidian-argus/outputs/detector-refine/README.md",
+      "size": 2449
+    },
+    {
+      "path": "archive/sources/obsidian-argus/outputs/detector-refine/api_person.json",
+      "size": 10892
+    },
+    {
+      "path": "archive/sources/obsidian-argus/outputs/detector-refine/bench_accuracy.py",
+      "size": 4519
+    },
+    {
+      "path": "archive/sources/obsidian-argus/outputs/detector-refine/bench_synth.py",
+      "size": 9699
+    },
+    {
+      "path": "archive/sources/obsidian-argus/outputs/detector-refine/cat_laptop.jpg",
+      "size": 387654
+    },
+    {
+      "path": "archive/sources/obsidian-argus/outputs/detector-refine/chair_room.jpg",
+      "size": 3224628
+    },
+    {
+      "path": "archive/sources/obsidian-argus/outputs/detector-refine/dog.jpg",
+      "size": 350358
+    },
+    {
+      "path": "archive/sources/obsidian-argus/outputs/detector-refine/efficientdet_lite2.tflite",
+      "size": 12138859
+    },
+    {
+      "path": "archive/sources/obsidian-argus/outputs/detector-refine/person_street.jpg",
+      "size": 213859
+    },
+    {
+      "path": "archive/sources/obsidian-argus/outputs/detector-refine/test_dashboard.py",
+      "size": 3527
+    },
+    {
+      "path": "archive/sources/obsidian-argus/outputs/detector-refine/test_lidar.py",
+      "size": 4115
+    },
+    {
+      "path": "archive/sources/obsidian-argus/outputs/detector-refine/test_protocol.py",
+      "size": 7130
+    },
+    {
+      "path": "archive/sources/obsidian-argus/outputs/detector-refine/test_robustness.py",
+      "size": 4577
+    },
+    {
+      "path": "archive/sources/obsidian-argus/outputs/detector-refine/test_v10.py",
+      "size": 11160
+    },
+    {
+      "path": "archive/sources/obsidian-argus/outputs/detector-refine/test_v9.py",
+      "size": 6958
+    },
+    {
+      "path": "archive/sources/obsidian-argus/outputs/detector-refine/virtual_mega.py",
+      "size": 3603
+    },
+    {
+      "path": "archive/sources/obsidian-argus/outputs/left_wheel_diagnostic/left_wheel_diagnostic.ino",
+      "size": 8495
+    },
+    {
+      "path": "archive/sources/obsidian-argus/tools/parse-fritzing-v1.1.py",
+      "size": 10545
+    },
+    {
+      "path": "archive/sources/obsidian-argus/tools/vaultsync.py",
+      "size": 10605
+    },
+    {
+      "path": "archive/sources/recent-chatgpt/recent-microstepping-chat-2026-10-13.json",
+      "size": 5827
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/Check-Lab.ps1",
+      "size": 1092
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/Controller-Panel.ps1",
+      "size": 21263
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/Drive robot.cmd",
+      "size": 101
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/Furnished-room-preview.png",
+      "size": 555856
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/Open-Robot-Code.ps1",
+      "size": 131
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/Robot Code.cmd",
+      "size": 112
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/Robot-Guide.md",
+      "size": 8035
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/Robot-camera-preview.png",
+      "size": 30621
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/Setup-status.md",
+      "size": 3066
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/Start-Ubuntu.ps1",
+      "size": 122
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/Start-Vacuum-Simulation.ps1",
+      "size": 154
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/Ubuntu Terminal.cmd",
+      "size": 98
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/Vacuum Lab.cmd",
+      "size": 91
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/Vacuum Simulator - RViz only.cmd",
+      "size": 147
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/Vacuum Simulator.cmd",
+      "size": 136
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/Vacuum-Lab-Quickstart.md",
+      "size": 7121
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/Vacuum-Lab.ps1",
+      "size": 8041
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/activate_guard.py",
+      "size": 1689
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/backup-verification.json",
+      "size": 328
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/build_furnished_room.py",
+      "size": 23325
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/capture_room_preview.py",
+      "size": 2879
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/check_lab.py",
+      "size": 5295
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/command_gate.py",
+      "size": 2139
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/controller-bridge-last.log",
+      "size": 216
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/controller_bridge.py",
+      "size": 7298
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/direct-drive-validation.json",
+      "size": 543
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/directional-guard-validation.json",
+      "size": 392
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/lab-validation.json",
+      "size": 386
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/lab_controller.py",
+      "size": 13423
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/navigation-check.json",
+      "size": 159
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/navigation.launch.py",
+      "size": 1922
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/performance-check.json",
+      "size": 102
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/prepare_lab.py",
+      "size": 9061
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/simulation-check.json",
+      "size": 419
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/tuned-simulation-check.json",
+      "size": 436
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/validate_directional_guard.py",
+      "size": 4397
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/validate_drive.py",
+      "size": 5014
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/validate_lab.py",
+      "size": 4818
+    },
+    {
+      "path": "archive/sources/ros-original/outputs/wait_ready.py",
+      "size": 3171
+    },
+    {
+      "path": "archive/sources/ros-original/work/active-backup-path.txt",
+      "size": 69
+    },
+    {
+      "path": "archive/sources/ros-original/work/approved-wslconfig.txt",
+      "size": 156
+    },
+    {
+      "path": "archive/sources/ros-original/work/backup.log",
+      "size": 505
+    },
+    {
+      "path": "archive/sources/ros-original/work/build-and-check.sh",
+      "size": 530
+    },
+    {
+      "path": "archive/sources/ros-original/work/build-check.log",
+      "size": 34599
+    },
+    {
+      "path": "archive/sources/ros-original/work/check-navigation.py",
+      "size": 2373
+    },
+    {
+      "path": "archive/sources/ros-original/work/check-sim.py",
+      "size": 2881
+    },
+    {
+      "path": "archive/sources/ros-original/work/clean-validation-groups.py",
+      "size": 1089
+    },
+    {
+      "path": "archive/sources/ros-original/work/download-wsl-parts.ps1",
+      "size": 2829
+    },
+    {
+      "path": "archive/sources/ros-original/work/enable-vdrvroot.ps1",
+      "size": 980
+    },
+    {
+      "path": "archive/sources/ros-original/work/enable-vid.ps1",
+      "size": 798
+    },
+    {
+      "path": "archive/sources/ros-original/work/enable-wsl.ps1",
+      "size": 1357
+    },
+    {
+      "path": "archive/sources/ros-original/work/export-verified-ubuntu.ps1",
+      "size": 2052
+    },
+    {
+      "path": "archive/sources/ros-original/work/final-linux-check.log",
+      "size": 2948
+    },
+    {
+      "path": "archive/sources/ros-original/work/finalize-workspace.sh",
+      "size": 1741
+    },
+    {
+      "path": "archive/sources/ros-original/work/fix-sim-launch.py",
+      "size": 1109
+    },
+    {
+      "path": "archive/sources/ros-original/work/furnished-room-20261007-before/Controller-Panel.ps1",
+      "size": 20379
+    },
+    {
+      "path": "archive/sources/ros-original/work/furnished-room-20261007-before/Vacuum-Lab-Quickstart.md",
+      "size": 4424
+    },
+    {
+      "path": "archive/sources/ros-original/work/furnished-room-20261007-before/check_lab.py",
+      "size": 4990
+    },
+    {
+      "path": "archive/sources/ros-original/work/furnished-room-20261007-before/controller_bridge.py",
+      "size": 6102
+    },
+    {
+      "path": "archive/sources/ros-original/work/furnished-room-20261007-before/direct-drive-validation.json",
+      "size": 450
+    },
+    {
+      "path": "archive/sources/ros-original/work/furnished-room-20261007-before/lab-validation.json",
+      "size": 385
+    },
+    {
+      "path": "archive/sources/ros-original/work/furnished-room-20261007-before/lab_controller.py",
+      "size": 12379
+    },
+    {
+      "path": "archive/sources/ros-original/work/furnished-room-20261007-before/prepare_lab.py",
+      "size": 9073
+    },
+    {
+      "path": "archive/sources/ros-original/work/furnished-room-20261007-before/validate_drive.py",
+      "size": 3627
+    },
+    {
+      "path": "archive/sources/ros-original/work/furnished-room-20261007-before/wait_ready.py",
+      "size": 2689
+    },
+    {
+      "path": "archive/sources/ros-original/work/install-ros-jazzy.sh",
+      "size": 1792
+    },
+    {
+      "path": "archive/sources/ros-original/work/install-ubuntu-elevated.ps1",
+      "size": 1332
+    },
+    {
+      "path": "archive/sources/ros-original/work/install-wsl-standalone.ps1",
+      "size": 2125
+    },
+    {
+      "path": "archive/sources/ros-original/work/linux-preflight.sh",
+      "size": 348
+    },
+    {
+      "path": "archive/sources/ros-original/work/navigation-check.log",
+      "size": 5326
+    },
+    {
+      "path": "archive/sources/ros-original/work/performance-check.log",
+      "size": 838
+    },
+    {
+      "path": "archive/sources/ros-original/work/performance-measure.py",
+      "size": 1168
+    },
+    {
+      "path": "archive/sources/ros-original/work/prepare-linux-user.sh",
+      "size": 1091
+    },
+    {
+      "path": "archive/sources/ros-original/work/resume-checklist.md",
+      "size": 10693
+    },
+    {
+      "path": "archive/sources/ros-original/work/ros-install-result.json",
+      "size": 178
+    },
+    {
+      "path": "archive/sources/ros-original/work/ros-install.log",
+      "size": 762366
+    },
+    {
+      "path": "archive/sources/ros-original/work/run_sim.py",
+      "size": 1295
+    },
+    {
+      "path": "archive/sources/ros-original/work/simulation-check.log",
+      "size": 419
+    },
+    {
+      "path": "archive/sources/ros-original/work/start-validation.py",
+      "size": 611
+    },
+    {
+      "path": "archive/sources/ros-original/work/start-vmcompute.ps1",
+      "size": 577
+    },
+    {
+      "path": "archive/sources/ros-original/work/stop-validation.py",
+      "size": 790
+    },
+    {
+      "path": "archive/sources/ros-original/work/test-controller-status.ps1",
+      "size": 2064
+    },
+    {
+      "path": "archive/sources/ros-original/work/test-launcher-job.ps1",
+      "size": 1382
+    },
+    {
+      "path": "archive/sources/ros-original/work/tune-performance.py",
+      "size": 2624
+    },
+    {
+      "path": "archive/sources/ros-original/work/ubuntu-image-verification.json",
+      "size": 245
+    },
+    {
+      "path": "archive/sources/ros-original/work/ubuntu-install-result.json",
+      "size": 159
+    },
+    {
+      "path": "archive/sources/ros-original/work/ubuntu-install.log",
+      "size": 158
+    },
+    {
+      "path": "archive/sources/ros-original/work/vacuum_ws/PREPARATION_STATUS.md",
+      "size": 2316
+    },
+    {
+      "path": "archive/sources/ros-original/work/vacuum_ws/env.sh",
+      "size": 620
+    },
+    {
+      "path": "archive/sources/ros-original/work/vacuum_ws/src/vacuum_sim/CMakeLists.txt",
+      "size": 261
+    },
+    {
+      "path": "archive/sources/ros-original/work/vacuum_ws/src/vacuum_sim/config/bridge.yaml",
+      "size": 711
+    },
+    {
+      "path": "archive/sources/ros-original/work/vacuum_ws/src/vacuum_sim/config/controllers.yaml",
+      "size": 1215
+    },
+    {
+      "path": "archive/sources/ros-original/work/vacuum_ws/src/vacuum_sim/config/slam.yaml",
+      "size": 733
+    },
+    {
+      "path": "archive/sources/ros-original/work/vacuum_ws/src/vacuum_sim/config/view.rviz",
+      "size": 1503
+    },
+    {
+      "path": "archive/sources/ros-original/work/vacuum_ws/src/vacuum_sim/launch/mapping.launch.py",
+      "size": 674
+    },
+    {
+      "path": "archive/sources/ros-original/work/vacuum_ws/src/vacuum_sim/launch/navigation.launch.py",
+      "size": 973
+    },
+    {
+      "path": "archive/sources/ros-original/work/vacuum_ws/src/vacuum_sim/launch/sim.launch.py",
+      "size": 2878
+    },
+    {
+      "path": "archive/sources/ros-original/work/vacuum_ws/src/vacuum_sim/package.xml",
+      "size": 1118
+    },
+    {
+      "path": "archive/sources/ros-original/work/vacuum_ws/src/vacuum_sim/scripts/twist_adapter.py",
+      "size": 1384
+    },
+    {
+      "path": "archive/sources/ros-original/work/vacuum_ws/src/vacuum_sim/urdf/vacuum.urdf.xacro",
+      "size": 6882
+    },
+    {
+      "path": "archive/sources/ros-original/work/vacuum_ws/src/vacuum_sim/worlds/room.sdf",
+      "size": 3220
+    },
+    {
+      "path": "archive/sources/ros-original/work/vacuum_ws/tools/prepare_nav2.py",
+      "size": 4197
+    },
+    {
+      "path": "archive/sources/ros-original/work/vdrvroot-result.json",
+      "size": 202
+    },
+    {
+      "path": "archive/sources/ros-original/work/vid-result.json",
+      "size": 197
+    },
+    {
+      "path": "archive/sources/ros-original/work/vmcompute-start-result.json",
+      "size": 143
+    },
+    {
+      "path": "archive/sources/ros-original/work/wsl-bootstrap-result.json",
+      "size": 289
+    },
+    {
+      "path": "archive/sources/ros-original/work/wsl-bootstrap.log",
+      "size": 907
+    },
+    {
+      "path": "archive/sources/ros-original/work/wsl-distributions.json",
+      "size": 14539
+    },
+    {
+      "path": "archive/sources/ros-original/work/wsl-installer-verification.json",
+      "size": 305
+    },
+    {
+      "path": "archive/sources/ros-original/work/wsl-msi-install.log",
+      "size": 1639438
+    },
+    {
+      "path": "archive/sources/ros-original/work/wsl-standalone-result.json",
+      "size": 308
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/Check-Lab.ps1",
+      "size": 1178
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/Controller-Panel.ps1",
+      "size": 23132
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/Executable-Guide.md",
+      "size": 2096
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/Executable-source/Build-Executable.ps1",
+      "size": 1793
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/Executable-source/Launcher.cs",
+      "size": 5459
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/Executable-source/Make-Icon.py",
+      "size": 1112
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/Files-Panel.ps1",
+      "size": 12064
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/Furnished-room-preview.png",
+      "size": 280935
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/Hardware-Profile.md",
+      "size": 3390
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/Modern-Theme.ps1",
+      "size": 4747
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/Resume-status.md",
+      "size": 1196
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/Robot-Guide.md",
+      "size": 1172
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/Robot-camera-preview.png",
+      "size": 30323
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/Robot-model-preview.png",
+      "size": 290145
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/README.md",
+      "size": 2592
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/archive/legacy-tools/apply_robot_profile.py",
+      "size": 11224
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/archive/legacy-tools/navigation.launch.py",
+      "size": 1922
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/archive/legacy-tools/reference.urdf",
+      "size": 19953
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/archive/legacy-tools/robot-profile.json",
+      "size": 1047
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/assets/Vacuum-Lab.ico",
+      "size": 2623
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/config/dependencies.json",
+      "size": 346
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/designer/model.py",
+      "size": 19034
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/designer/server.py",
+      "size": 17025
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/designer/web/app.js",
+      "size": 21358
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/designer/web/index.html",
+      "size": 7653
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/designer/web/style.css",
+      "size": 7236
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/designer/web/vendor/OrbitControls.js",
+      "size": 38703
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/designer/web/vendor/STLLoader.js",
+      "size": 10715
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/designer/web/vendor/TransformControls.js",
+      "size": 49397
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/designer/web/vendor/three.core.js",
+      "size": 1403455
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/designer/web/vendor/three.module.js",
+      "size": 603113
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/designs/default.json",
+      "size": 30090
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/desktop/Check-Lab.ps1",
+      "size": 1191
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/desktop/Controller-Panel.ps1",
+      "size": 23289
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/desktop/Files-Panel.ps1",
+      "size": 12806
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/desktop/Modern-Theme.ps1",
+      "size": 4770
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/desktop/Start-Designer.ps1",
+      "size": 2216
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/desktop/Vacuum-Lab.ps1",
+      "size": 9940
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/docs/architecture.md",
+      "size": 4188
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/docs/designer.md",
+      "size": 3562
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/docs/development.md",
+      "size": 3315
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/docs/hardware.md",
+      "size": 3998
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/docs/orange-pi.md",
+      "size": 4180
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/firmware/mega_drive/drive_config.h",
+      "size": 997
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/firmware/mega_drive/mega_drive.ino",
+      "size": 6344
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/firmware/mega_drive/protocol.h",
+      "size": 2063
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/reports/README.md",
+      "size": 1267
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/reports/history/shutdown-verification.json",
+      "size": 311
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/CMakeLists.txt",
+      "size": 2506
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/README.md",
+      "size": 4193
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/launch/sllidar_a1_launch.py",
+      "size": 2579
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/launch/sllidar_a2m12_launch .py",
+      "size": 2579
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/launch/sllidar_a3_launch.py",
+      "size": 2635
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/launch/sllidar_c1_launch.py",
+      "size": 2613
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/launch/sllidar_s1_launch.py",
+      "size": 2351
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/launch/sllidar_s1_tcp_launch.py",
+      "size": 2265
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/launch/sllidar_s2_launch.py",
+      "size": 2635
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/launch/sllidar_s2e_launch.py",
+      "size": 2602
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/launch/sllidar_s3_launch.py",
+      "size": 2616
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/launch/sllidar_t1_launch.py",
+      "size": 2529
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/launch/view_sllidar_a1_launch.py",
+      "size": 2942
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/launch/view_sllidar_a2m12_launch.py",
+      "size": 2942
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/launch/view_sllidar_a3_launch.py",
+      "size": 2960
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/launch/view_sllidar_c1_launch.py",
+      "size": 2967
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/launch/view_sllidar_s1_launch.py",
+      "size": 2695
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/launch/view_sllidar_s1_tcp_launch.py",
+      "size": 2591
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/launch/view_sllidar_s2_launch.py",
+      "size": 2989
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/launch/view_sllidar_s2e_launch.py",
+      "size": 2932
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/launch/view_sllidar_s3_launch.py",
+      "size": 2970
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/launch/view_sllidar_t1_launch.py",
+      "size": 2855
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/package.xml",
+      "size": 624
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/rplidar_A1.png",
+      "size": 33994
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/rplidar_A2.png",
+      "size": 47081
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/rviz/sllidar_ros2.rviz",
+      "size": 5432
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/scripts/create_udev_rules.sh",
+      "size": 403
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/scripts/delete_udev_rules.sh",
+      "size": 281
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/scripts/rplidar.rules",
+      "size": 169
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/include/rplidar.h",
+      "size": 1747
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/include/rplidar_cmd.h",
+      "size": 12025
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/include/rplidar_driver.h",
+      "size": 11526
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/include/rplidar_protocol.h",
+      "size": 2246
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/include/rptypes.h",
+      "size": 3455
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/include/sl_crc.h",
+      "size": 1679
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/include/sl_lidar.h",
+      "size": 2053
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/include/sl_lidar_cmd.h",
+      "size": 13848
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/include/sl_lidar_driver.h",
+      "size": 23507
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/include/sl_lidar_driver_impl.h",
+      "size": 8983
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/include/sl_lidar_protocol.h",
+      "size": 2512
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/include/sl_types.h",
+      "size": 3106
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/arch/linux/arch_linux.h",
+      "size": 1986
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/arch/linux/net_serial.cpp",
+      "size": 10942
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/arch/linux/net_serial.h",
+      "size": 2836
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/arch/linux/net_socket.cpp",
+      "size": 24994
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/arch/linux/thread.hpp",
+      "size": 5188
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/arch/linux/timer.cpp",
+      "size": 1892
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/arch/linux/timer.h",
+      "size": 1925
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/arch/macOS/arch_macOS.h",
+      "size": 1989
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/arch/macOS/net_serial.cpp",
+      "size": 8033
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/arch/macOS/net_serial.h",
+      "size": 2741
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/arch/macOS/net_socket.cpp",
+      "size": 25426
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/arch/macOS/thread.hpp",
+      "size": 2490
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/arch/macOS/timer.cpp",
+      "size": 1894
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/arch/macOS/timer.h",
+      "size": 1922
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/arch/win32/arch_win32.h",
+      "size": 1959
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/arch/win32/net_serial.cpp",
+      "size": 8992
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/arch/win32/net_serial.h",
+      "size": 2802
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/arch/win32/net_socket.cpp",
+      "size": 27074
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/arch/win32/timer.cpp",
+      "size": 2189
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/arch/win32/timer.h",
+      "size": 1765
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/arch/win32/winthread.hpp",
+      "size": 4127
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/dataunpacker/dataunnpacker_commondef.h",
+      "size": 1940
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/dataunpacker/dataunnpacker_internal.h",
+      "size": 2532
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.cpp",
+      "size": 6050
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h",
+      "size": 2867
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/dataunpacker/dataupacker_namespace.h",
+      "size": 115
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/handler_capsules.cpp",
+      "size": 39592
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/handler_capsules.h",
+      "size": 5266
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/handler_hqnode.cpp",
+      "size": 6550
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/handler_hqnode.h",
+      "size": 2162
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/handler_normalnode.cpp",
+      "size": 5620
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/handler_normalnode.h",
+      "size": 2161
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/hal/abs_rxtx.h",
+      "size": 2741
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/hal/assert.h",
+      "size": 313
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/hal/byteops.h",
+      "size": 2130
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/hal/byteorder.h",
+      "size": 3599
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/hal/event.h",
+      "size": 5911
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/hal/locker.h",
+      "size": 4785
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/hal/socket.h",
+      "size": 4023
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/hal/thread.cpp",
+      "size": 1804
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/hal/thread.h",
+      "size": 3046
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/hal/types.h",
+      "size": 2746
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/hal/util.h",
+      "size": 2268
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/hal/waiter.h",
+      "size": 541
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/rplidar_driver.cpp",
+      "size": 6404
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/sdkcommon.h",
+      "size": 1820
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/sl_async_transceiver.cpp",
+      "size": 8866
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/sl_async_transceiver.h",
+      "size": 3856
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/sl_crc.cpp",
+      "size": 3011
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp",
+      "size": 59737
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/sl_lidarprotocol_codec.cpp",
+      "size": 7218
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/sl_lidarprotocol_codec.h",
+      "size": 2604
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/sl_serial_channel.cpp",
+      "size": 4423
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/sl_tcp_channel.cpp",
+      "size": 3644
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/sdk/src/sl_udp_channel.cpp",
+      "size": 3769
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/src/sllidar_client.cpp",
+      "size": 1185
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/sllidar_ros2/src/sllidar_node.cpp",
+      "size": 20362
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_hardware/config/hardware.yaml",
+      "size": 1072
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_hardware/launch/hardware.launch.py",
+      "size": 2709
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_hardware/package.xml",
+      "size": 896
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_hardware/setup.cfg",
+      "size": 99
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_hardware/setup.py",
+      "size": 824
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_hardware/urdf/robot.urdf",
+      "size": 21064
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_hardware/vacuum_hardware/__init__.py",
+      "size": 76
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_hardware/vacuum_hardware/motor_bridge.py",
+      "size": 11218
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_hardware/vacuum_hardware/protocol.py",
+      "size": 2394
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_hardware/vacuum_hardware/serial_link.py",
+      "size": 3847
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/CMakeLists.txt",
+      "size": 268
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/config/controllers.yaml",
+      "size": 1391
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/config/drive.rviz",
+      "size": 5038
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/config/nav2.yaml",
+      "size": 13186
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/config/vacuum_nav2.yaml",
+      "size": 16300
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/config/vacuum_navigate.xml",
+      "size": 605
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/config/view.rviz",
+      "size": 5613
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/launch/mapping.launch.py",
+      "size": 837
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/launch/navigation.launch.py",
+      "size": 2328
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/launch/sim.launch.py",
+      "size": 4851
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/scripts/twist_adapter.py",
+      "size": 1425
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/urdf/vacuum.urdf.xacro",
+      "size": 19808
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/worlds/furnished/architecture.dae",
+      "size": 692836
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/worlds/furnished/bookcase.dae",
+      "size": 204111
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/worlds/furnished/dining_chair_north.dae",
+      "size": 266834
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/worlds/furnished/dining_table.dae",
+      "size": 270448
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/worlds/furnished/entry_plant.dae",
+      "size": 125915
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/worlds/furnished/floor_lamp.dae",
+      "size": 77101
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/worlds/furnished/framed_wall_art.dae",
+      "size": 11826
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/worlds/furnished/garden.png",
+      "size": 17658
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/worlds/furnished/home_office_desk.dae",
+      "size": 329164
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/worlds/furnished/landscape.png",
+      "size": 2188
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/worlds/furnished/linen.png",
+      "size": 3606
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/worlds/furnished/living_room.dae",
+      "size": 6356577
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/worlds/furnished/oak.png",
+      "size": 476256
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/worlds/furnished/oak_media_console.dae",
+      "size": 209179
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/worlds/furnished/rounded_coffee_table.dae",
+      "size": 229620
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/worlds/furnished/three_seat_sofa.dae",
+      "size": 1113502
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/worlds/furnished/window_plant.dae",
+      "size": 125903
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/worlds/furnished/woven-rug.png",
+      "size": 8924
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/worlds/furnished/woven_living_room_rug.dae",
+      "size": 3134
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/ros2/src/vacuum_sim/worlds/room.sdf",
+      "size": 31938
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/simulation/tools/activate_guard.py",
+      "size": 1713
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/simulation/tools/build_furnished_room.py",
+      "size": 32065
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/simulation/tools/capture_robot_preview.py",
+      "size": 4457
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/simulation/tools/capture_room_preview.py",
+      "size": 3858
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/simulation/tools/check_lab.py",
+      "size": 5883
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/simulation/tools/command_gate.py",
+      "size": 2421
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/simulation/tools/controller_bridge.py",
+      "size": 8188
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/simulation/tools/file_catalog.py",
+      "size": 1917
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/simulation/tools/lab_controller.py",
+      "size": 15214
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/simulation/tools/prepare_lab.py",
+      "size": 805
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/simulation/tools/run_sim.py",
+      "size": 3198
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/simulation/tools/validate_directional_guard.py",
+      "size": 5134
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/simulation/tools/validate_drive.py",
+      "size": 8652
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/simulation/tools/validate_lab.py",
+      "size": 5073
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/simulation/tools/wait_ready.py",
+      "size": 3480
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/simulation/tools/workspace_paths.py",
+      "size": 717
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/tests/firmware/stubs/Arduino.h",
+      "size": 746
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/tests/firmware/stubs/avr/wdt.h",
+      "size": 115
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/tests/firmware/stubs/util/atomic.h",
+      "size": 125
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/tests/firmware/test_runtime.cpp",
+      "size": 1868
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/tests/run.sh",
+      "size": 373
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/tests/test_hardware_ros.py",
+      "size": 2816
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/tests/test_model.py",
+      "size": 4254
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/tests/test_protocol.py",
+      "size": 1783
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/tests/test_serial_link.py",
+      "size": 1858
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/tools/deploy/99-robot-lab.rules.example",
+      "size": 360
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/tools/deploy/build-hardware.sh",
+      "size": 667
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/tools/deploy/export-hardware.py",
+      "size": 1844
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/tools/deploy/fetch-lidar.sh",
+      "size": 927
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/tools/deploy/install-deps.sh",
+      "size": 1712
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/tools/deploy/preflight.py",
+      "size": 919
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/tools/deploy/run-hardware.sh",
+      "size": 385
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/RobotLab/tools/install-simulation.py",
+      "size": 3954
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/Vacuum-Lab-Quickstart.md",
+      "size": 3940
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/Vacuum-Lab.ps1",
+      "size": 9504
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/apply_robot_profile.py",
+      "size": 11207
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/build_furnished_room.py",
+      "size": 25848
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/capture_robot_preview.py",
+      "size": 3335
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/capture_room_preview.py",
+      "size": 2879
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/check_lab.py",
+      "size": 5624
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/command_gate.py",
+      "size": 2337
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/controller-bridge-last.log",
+      "size": 8193
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/controller_bridge.py",
+      "size": 7512
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/direct-drive-validation.json",
+      "size": 1022
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/directional-guard-validation.json",
+      "size": 407
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/executable-verification.json",
+      "size": 630
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/file_catalog.py",
+      "size": 1749
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/lab-validation.json",
+      "size": 386
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/lab_controller.py",
+      "size": 13493
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/prepare_lab.py",
+      "size": 9129
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/robot-profile.json",
+      "size": 989
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/run_sim.py",
+      "size": 2790
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/validate_directional_guard.py",
+      "size": 4451
+    },
+    {
+      "path": "archive/sources/ros-resumed/outputs/validate_drive.py",
+      "size": 7536
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/build_design_seed.py",
+      "size": 4077
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/check-executable.ps1",
+      "size": 2883
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/clean-known-orphan.py",
+      "size": 1024
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/enlarge-room.py",
+      "size": 4204
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/exe-check.txt",
+      "size": 105
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/files-preview.png",
+      "size": 64179
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/final_source_cleanup.py",
+      "size": 2853
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/finish_integration.py",
+      "size": 1307
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/integrate_structure.py",
+      "size": 7993
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/make-robot-preview.py",
+      "size": 1118
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/modern-backup/Check-Lab.ps1",
+      "size": 1111
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/modern-backup/Files-Panel.ps1",
+      "size": 11866
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/modern-backup/Resume-status.md",
+      "size": 1294
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/modern-backup/Vacuum-Lab-Quickstart.md",
+      "size": 7384
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/modern-backup/Vacuum-Lab.ps1",
+      "size": 8349
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/modern-backup/direct-drive-validation.json",
+      "size": 541
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/modern-backup/executable-verification.json",
+      "size": 630
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/modern-controller.png",
+      "size": 30974
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/modern-launcher.png",
+      "size": 84542
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/modernize-launcher.py",
+      "size": 11235
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/README.md",
+      "size": 3396
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/THIRD-PARTY-NOTICES.md",
+      "size": 267363
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/bin/prettier.cjs",
+      "size": 2568
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/doc.d.ts",
+      "size": 7419
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/doc.js",
+      "size": 54023
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/doc.mjs",
+      "size": 50429
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/index.cjs",
+      "size": 36971
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/index.d.ts",
+      "size": 27436
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/index.mjs",
+      "size": 645784
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/internal/experimental-cli-worker.mjs",
+      "size": 84145
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/internal/experimental-cli.mjs",
+      "size": 484874
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/internal/legacy-cli.mjs",
+      "size": 140286
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/package.json",
+      "size": 6304
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/acorn.d.ts",
+      "size": 109
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/acorn.js",
+      "size": 155719
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/acorn.mjs",
+      "size": 155328
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/angular.d.ts",
+      "size": 177
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/angular.js",
+      "size": 89837
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/angular.mjs",
+      "size": 89154
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/babel.d.ts",
+      "size": 419
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/babel.js",
+      "size": 326760
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/babel.mjs",
+      "size": 326369
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/estree.d.ts",
+      "size": 11
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/estree.js",
+      "size": 201207
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/estree.mjs",
+      "size": 200556
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/flow.d.ts",
+      "size": 90
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/flow.js",
+      "size": 686585
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/flow.mjs",
+      "size": 686193
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/glimmer.d.ts",
+      "size": 93
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/glimmer.js",
+      "size": 137258
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/glimmer.mjs",
+      "size": 136606
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/graphql.d.ts",
+      "size": 93
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/graphql.js",
+      "size": 44190
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/graphql.mjs",
+      "size": 43552
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/html.d.ts",
+      "size": 155
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/html.js",
+      "size": 153665
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/html.mjs",
+      "size": 153030
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/markdown.d.ts",
+      "size": 127
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/markdown.js",
+      "size": 150391
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/markdown.mjs",
+      "size": 150042
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/meriyah.d.ts",
+      "size": 93
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/meriyah.js",
+      "size": 129477
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/meriyah.mjs",
+      "size": 128794
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/postcss.d.ts",
+      "size": 121
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/postcss.js",
+      "size": 154594
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/postcss.mjs",
+      "size": 154246
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/typescript.d.ts",
+      "size": 96
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/typescript.js",
+      "size": 894119
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/typescript.mjs",
+      "size": 893433
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/yaml.d.ts",
+      "size": 90
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/yaml.js",
+      "size": 122558
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/plugins/yaml.mjs",
+      "size": 122316
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/standalone.d.ts",
+      "size": 1358
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/standalone.js",
+      "size": 78205
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/prettier/package/standalone.mjs",
+      "size": 77971
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/preview-controller.ps1",
+      "size": 427
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/preview-files.ps1",
+      "size": 420
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/restart-designer.py",
+      "size": 263
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/resume-checkpoint.md",
+      "size": 3535
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/test-controller-status.ps1",
+      "size": 2135
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/update-drive-backend.py",
+      "size": 2157
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/update-modern-docs.py",
+      "size": 5382
+    },
+    {
+      "path": "archive/sources/ros-resumed/work/update-validation.py",
+      "size": 3766
+    },
+    {
+      "path": "archive/sources/wheel-shaft/outputs/direct_hex_40mm_13mm_base_assembly_notes.txt",
+      "size": 2977
+    },
+    {
+      "path": "archive/sources/wheel-shaft/outputs/direct_hex_40mm_assembly_notes.txt",
+      "size": 2517
+    },
+    {
+      "path": "archive/sources/wheel-shaft/outputs/direct_hex_40mm_reinforced_assembly_notes.txt",
+      "size": 2782
+    },
+    {
+      "path": "archive/sources/wheel-shaft/outputs/direct_hex_40mm_uniform13_assembly_notes.txt",
+      "size": 2890
+    },
+    {
+      "path": "archive/sources/wheel-shaft/outputs/direct_hex_assembly_notes.txt",
+      "size": 2311
+    },
+    {
+      "path": "archive/sources/wheel-shaft/outputs/shaft_pair_5mm_D.step",
+      "size": 216625
+    },
+    {
+      "path": "archive/sources/wheel-shaft/outputs/shaft_pair_5mm_D.stl",
+      "size": 6354084
+    },
+    {
+      "path": "archive/sources/wheel-shaft/outputs/shaft_pair_direct_hex_M3.png",
+      "size": 70433
+    },
+    {
+      "path": "archive/sources/wheel-shaft/outputs/shaft_pair_direct_hex_M3.step",
+      "size": 329180
+    },
+    {
+      "path": "archive/sources/wheel-shaft/outputs/shaft_pair_direct_hex_M3.stl",
+      "size": 4513284
+    },
+    {
+      "path": "archive/sources/wheel-shaft/outputs/shaft_pair_direct_hex_M3_40mm.png",
+      "size": 61545
+    },
+    {
+      "path": "archive/sources/wheel-shaft/outputs/shaft_pair_direct_hex_M3_40mm.step",
+      "size": 331513
+    },
+    {
+      "path": "archive/sources/wheel-shaft/outputs/shaft_pair_direct_hex_M3_40mm.stl",
+      "size": 4526084
+    },
+    {
+      "path": "archive/sources/wheel-shaft/outputs/shaft_pair_direct_hex_M3_40mm_13mm_base.png",
+      "size": 77063
+    },
+    {
+      "path": "archive/sources/wheel-shaft/outputs/shaft_pair_direct_hex_M3_40mm_13mm_base.step",
+      "size": 332196
+    },
+    {
+      "path": "archive/sources/wheel-shaft/outputs/shaft_pair_direct_hex_M3_40mm_13mm_base.stl",
+      "size": 5299084
+    },
+    {
+      "path": "archive/sources/wheel-shaft/outputs/shaft_pair_direct_hex_M3_40mm_reinforced.png",
+      "size": 76467
+    },
+    {
+      "path": "archive/sources/wheel-shaft/outputs/shaft_pair_direct_hex_M3_40mm_reinforced.step",
+      "size": 335764
+    },
+    {
+      "path": "archive/sources/wheel-shaft/outputs/shaft_pair_direct_hex_M3_40mm_reinforced.stl",
+      "size": 6164084
+    },
+    {
+      "path": "archive/sources/wheel-shaft/outputs/shaft_pair_direct_hex_M3_40mm_uniform13.png",
+      "size": 68734
+    },
+    {
+      "path": "archive/sources/wheel-shaft/outputs/shaft_pair_direct_hex_M3_40mm_uniform13.step",
+      "size": 321312
+    },
+    {
+      "path": "archive/sources/wheel-shaft/outputs/shaft_pair_direct_hex_M3_40mm_uniform13.stl",
+      "size": 4234084
+    },
+    {
+      "path": "archive/sources/wheel-shaft/outputs/shaft_pair_preview.png",
+      "size": 60071
+    },
+    {
+      "path": "archive/sources/wheel-shaft/outputs/shaft_pair_shorter_reinforced.png",
+      "size": 69465
+    },
+    {
+      "path": "archive/sources/wheel-shaft/outputs/shaft_pair_shorter_reinforced.step",
+      "size": 221778
+    },
+    {
+      "path": "archive/sources/wheel-shaft/outputs/shaft_pair_shorter_reinforced.stl",
+      "size": 11331084
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/analyze_cad.py",
+      "size": 799
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/build_shafts.py",
+      "size": 4390
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/cadnode/build.mjs",
+      "size": 2842
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/cadnode/build_hex.mjs",
+      "size": 7507
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/cadnode/build_v2.mjs",
+      "size": 4541
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/cadnode/check_widebase_fit.mjs",
+      "size": 1359
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/cadnode/hex_external.mjs",
+      "size": 1991
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/cadnode/hex_widebase.mjs",
+      "size": 1661
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/cadnode/inspect.mjs",
+      "size": 920
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/cadnode/inspect_hex.mjs",
+      "size": 1315
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/cadnode/package.json",
+      "size": 93
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/check_stl.py",
+      "size": 1610
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/detail_mesh_hex.json",
+      "size": 2701341
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/detail_mesh_hex_35mm.json",
+      "size": 2715314
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/detail_mesh_hex_40mm.json",
+      "size": 2715379
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/detail_mesh_hex_40mm_13mm_base.json",
+      "size": 3142220
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/detail_mesh_hex_40mm_reinforced.json",
+      "size": 3675543
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/detail_mesh_hex_40mm_uniform13.json",
+      "size": 2545221
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/hex_detail.png",
+      "size": 57129
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/hex_external.step",
+      "size": 136382
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/hex_external_mesh.json",
+      "size": 2580629
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/inspect_faces.py",
+      "size": 704
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/inspect_step.py",
+      "size": 904
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/original_mesh.json",
+      "size": 2464795
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/original_output.step",
+      "size": 1113658
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/original_preview.png",
+      "size": 64687
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/pair_mesh.json",
+      "size": 5056797
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/pair_mesh_hex.json",
+      "size": 5440902
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/pair_mesh_hex_35mm.json",
+      "size": 5468347
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/pair_mesh_hex_40mm.json",
+      "size": 5468425
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/pair_mesh_hex_40mm_13mm_base.json",
+      "size": 6314398
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/pair_mesh_hex_40mm_reinforced.json",
+      "size": 7374518
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/pair_mesh_hex_40mm_uniform13.json",
+      "size": 5124988
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/pair_mesh_v2.json",
+      "size": 8465851
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/render_mesh.py",
+      "size": 5328
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/stl_validation.json",
+      "size": 180
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/stl_validation_shaft_pair_direct_hex_M3.json",
+      "size": 178
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/stl_validation_shaft_pair_direct_hex_M3_40mm.json",
+      "size": 178
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/stl_validation_shaft_pair_direct_hex_M3_40mm_13mm_base.json",
+      "size": 178
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/stl_validation_shaft_pair_direct_hex_M3_40mm_reinforced.json",
+      "size": 178
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/stl_validation_shaft_pair_direct_hex_M3_40mm_uniform13.json",
+      "size": 177
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/stl_validation_v2.json",
+      "size": 180
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/underside_mesh_v2.json",
+      "size": 4529029
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/underside_preview_v2.png",
+      "size": 30471
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/validation.json",
+      "size": 639
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/validation_hex.json",
+      "size": 1344
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/validation_hex_35mm.json",
+      "size": 1543
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/validation_hex_40mm.json",
+      "size": 1525
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/validation_hex_40mm_13mm_base.json",
+      "size": 1872
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/validation_hex_40mm_reinforced.json",
+      "size": 1804
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/validation_hex_40mm_uniform13.json",
+      "size": 1987
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/validation_v2.json",
+      "size": 1060
+    },
+    {
+      "path": "archive/sources/wheel-shaft/work/widebase_housing_check.json",
+      "size": 139
+    },
+    {
+      "path": "archive/sources/wsl-live/.lab/bridge-validation.log",
+      "size": 6826
+    },
+    {
+      "path": "archive/sources/wsl-live/.lab/camera view.log",
+      "size": 321
+    },
+    {
+      "path": "archive/sources/wsl-live/.lab/collision guard.log",
+      "size": 3267
+    },
+    {
+      "path": "archive/sources/wsl-live/.lab/command gate.log",
+      "size": 2354
+    },
+    {
+      "path": "archive/sources/wsl-live/.lab/custom-design.json",
+      "size": 33224
+    },
+    {
+      "path": "archive/sources/wsl-live/.lab/drive-guard.yaml",
+      "size": 4840
+    },
+    {
+      "path": "archive/sources/wsl-live/.lab/drive-validation-bridge.log",
+      "size": 10862
+    },
+    {
+      "path": "archive/sources/wsl-live/.lab/mapping.log",
+      "size": 796
+    },
+    {
+      "path": "archive/sources/wsl-live/.lab/navigation.log",
+      "size": 16010
+    },
+    {
+      "path": "archive/sources/wsl-live/.lab/processes.json",
+      "size": 212
+    },
+    {
+      "path": "archive/sources/wsl-live/.lab/session.json",
+      "size": 36
+    },
+    {
+      "path": "archive/sources/wsl-live/.lab/simulation.log",
+      "size": 174989
+    },
+    {
+      "path": "archive/sources/wsl-live/PREPARATION_STATUS.md",
+      "size": 861
+    },
+    {
+      "path": "archive/sources/wsl-live/docs/AUTONOMOUS_NAVIGATION.md",
+      "size": 18211
+    },
+    {
+      "path": "archive/sources/wsl-live/docs/VACUUM_LAB.md",
+      "size": 6788
+    },
+    {
+      "path": "archive/sources/wsl-live/launchers/windows/Controller-Panel.ps1",
+      "size": 20843
+    },
+    {
+      "path": "archive/sources/wsl-live/launchers/windows/build_furnished_room.py",
+      "size": 23242
+    },
+    {
+      "path": "archive/sources/wsl-live/launchers/windows/controller_bridge.py",
+      "size": 6326
+    },
+    {
+      "path": "archive/sources/wsl-live/launchers/windows/validate_drive.py",
+      "size": 4933
+    },
+    {
+      "path": "archive/sources/wsl-live/maps/room-20261007-204953-160957.pgm",
+      "size": 14176
+    },
+    {
+      "path": "archive/sources/wsl-live/maps/room-20261007-204953-160957.yaml",
+      "size": 149
+    },
+    {
+      "path": "archive/sources/wsl-live/maps/room-20261007-205305-599814.yaml",
+      "size": 149
+    },
+    {
+      "path": "archive/sources/wsl-live/maps/room-20261007-205732-316107.pgm",
+      "size": 14176
+    },
+    {
+      "path": "archive/sources/wsl-live/maps/room-20261007-205732-316107.yaml",
+      "size": 149
+    },
+    {
+      "path": "archive/sources/wsl-live/maps/room-20261007-205925-376184.yaml",
+      "size": 149
+    },
+    {
+      "path": "archive/sources/wsl-live/maps/room-20261007-210137-532422.yaml",
+      "size": 149
+    },
+    {
+      "path": "archive/sources/wsl-live/maps/room-20261007-210454-328329.pgm",
+      "size": 14176
+    },
+    {
+      "path": "archive/sources/wsl-live/maps/room-20261007-210454-328329.yaml",
+      "size": 149
+    },
+    {
+      "path": "archive/sources/wsl-live/maps/room-20261007-224435-484972.pgm",
+      "size": 22116
+    },
+    {
+      "path": "archive/sources/wsl-live/maps/room-20261007-224435-484972.yaml",
+      "size": 149
+    },
+    {
+      "path": "archive/sources/wsl-live/maps/room-20261007-235926-520113.pgm",
+      "size": 75461
+    },
+    {
+      "path": "archive/sources/wsl-live/maps/room-20261007-235926-520113.yaml",
+      "size": 149
+    },
+    {
+      "path": "archive/sources/wsl-live/maps/room.pgm",
+      "size": 14176
+    },
+    {
+      "path": "archive/sources/wsl-live/maps/room.yaml",
+      "size": 126
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/20261007-204353-975021/config/nav2.yaml",
+      "size": 11598
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/20261007-204353-975021/config/vacuum_nav2.yaml",
+      "size": 12251
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/20261007-204353-975021/config/view.rviz",
+      "size": 5943
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/20261007-204353-975021/urdf/vacuum.urdf.xacro",
+      "size": 7076
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/camera60-20261007-212147-897495/config/view.rviz",
+      "size": 5613
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/camera60-20261007-212147-897495/launch/sim.launch.py",
+      "size": 3295
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/camera60-20261007-212147-897495/urdf/vacuum.urdf.xacro",
+      "size": 6595
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/camera60-20261007-212441-048154/worlds/room.sdf",
+      "size": 3222
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/camera60-20261007-220558-522624/worlds/room.sdf",
+      "size": 25091
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/camera60-20261007-221214-318542/worlds/room.sdf",
+      "size": 25093
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/camera60-20261007-221855-911783/worlds/room.sdf",
+      "size": 25338
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/camera60-20261007-222240-714300/worlds/room.sdf",
+      "size": 21011
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/camera60-20261007-223735-607982/worlds/room.sdf",
+      "size": 21229
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/camera60-20261007-225646-002761/worlds/room.sdf",
+      "size": 21169
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/camera60-20261007-234703-588871/worlds/room.sdf",
+      "size": 31976
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/design-20261008-005400-352692/src/vacuum_sim/urdf/designed.urdf",
+      "size": 23831
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/hardware-v2-20261007-234656-882622/config/controllers.yaml",
+      "size": 1278
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/hardware-v2-20261007-234656-882622/config/nav2.yaml",
+      "size": 13184
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/hardware-v2-20261007-234656-882622/config/vacuum_nav2.yaml",
+      "size": 16309
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/hardware-v2-20261007-234656-882622/urdf/vacuum.urdf.xacro",
+      "size": 6596
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/hardware-v2-20261007-235220-820956/config/controllers.yaml",
+      "size": 1391
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/hardware-v2-20261007-235220-820956/config/robot-profile.json",
+      "size": 1013
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/hardware-v2-20261007-235220-820956/scripts/twist_adapter.py",
+      "size": 1384
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/hardware-v2-20261007-235220-820956/urdf/vacuum.urdf.xacro",
+      "size": 19597
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/hardware-v2-20261008-000758-989089/scripts/twist_adapter.py",
+      "size": 1381
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/source-update-20261008-005235-922126/src/vacuum_sim/launch/sim.launch.py",
+      "size": 3392
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/source-update-20261008-005235-922126/tools/diagnose_manual.py",
+      "size": 1020
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/source-update-20261008-005235-922126/tools/validate_autonomy.py",
+      "size": 8895
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/source-update-20261008-005309-923014/tools/prepare_lab.py",
+      "size": 4606
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/source-update-20261008-005309-923014/tools/validate_directional_guard.py",
+      "size": 5077
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/source-update-20261008-005309-923014/tools/validate_drive.py",
+      "size": 8575
+    },
+    {
+      "path": "archive/sources/wsl-live/model-backups/source-update-20261008-005309-923014/tools/validate_lab.py",
+      "size": 4987
+    },
+    {
+      "path": "archive/sources/wsl-live/performance-originals/config/view.rviz",
+      "size": 5943
+    },
+    {
+      "path": "archive/sources/wsl-live/src/vacuum_sim/config/nav2.yaml",
+      "size": 11961
+    },
+    {
+      "path": "archive/sources/wsl-live/src/vacuum_sim/config/vacuum_nav2.yaml",
+      "size": 15067
+    },
+    {
+      "path": "archive/sources/wsl-live/validation/autonomy-20261006/isolated_guard.log",
+      "size": 6053
+    },
+    {
+      "path": "archive/sources/wsl-live/validation/autonomy-20261006/isolated_guard.yaml",
+      "size": 1450
+    },
+    {
+      "path": "archive/sources/wsl-live/validation/autonomy-20261006/mapping.log",
+      "size": 1197
+    },
+    {
+      "path": "archive/sources/wsl-live/validation/autonomy-20261006/navigation.log",
+      "size": 37637
+    },
+    {
+      "path": "archive/sources/wsl-live/validation/autonomy-20261006/results.json",
+      "size": 418
+    },
+    {
+      "path": "archive/sources/wsl-live/validation/autonomy-20261006/sim.log",
+      "size": 13042
+    },
+    {
+      "path": "archive/sources/wsl-live/validation/furnished-20261007/isolated-guard.log",
+      "size": 6703
+    },
+    {
+      "path": "archive/sources/wsl-live/validation/furnished-20261007/isolated-guard.yaml",
+      "size": 4950
+    },
+    {
+      "path": "archive/sources/wsl-live/validation/furnished-20261007/preview-bridge.log",
+      "size": 227
+    },
+    {
+      "path": "archive/sources/wsl-live/validation/furnished-20261007/preview-camera.sdf",
+      "size": 453
+    },
+    {
+      "path": "archive/sources/wsl-live/validation/mapping.log",
+      "size": 1434
+    },
+    {
+      "path": "archive/sources/wsl-live/validation/navigation.log",
+      "size": 37851
+    },
+    {
+      "path": "archive/sources/wsl-live/validation/review-20261008/results.json",
+      "size": 297
+    },
+    {
+      "path": "archive/sources/wsl-live/validation/sim.log",
+      "size": 29955
+    },
+    {
+      "path": "archive/sources/zoo-aivac/main.kcl",
+      "size": 28
+    },
+    {
+      "path": "archive/sources/zoo-aivac/project.toml",
+      "size": 97
+    },
+    {
+      "path": "archive/sources/zoo-aivac/thumbnail.png",
+      "size": 150985
+    },
+    {
+      "path": "archive/sources/zoo-untitled-vacuum/project.toml",
+      "size": 97
+    },
+    {
+      "path": "archive/summary.json",
+      "size": 703
+    },
+    {
+      "path": "archive/tools/export_public_archive.py",
+      "size": 18643
+    },
+    {
+      "path": "catalog.json",
+      "size": 6037
+    },
+    {
+      "path": "dashboard.css",
+      "size": 7870
+    },
+    {
+      "path": "dashboard.js",
+      "size": 20593
+    },
+    {
+      "path": "dashboard/README.md",
+      "size": 2524
+    },
+    {
+      "path": "dashboard/check.cjs",
+      "size": 6517
+    },
+    {
+      "path": "index.html",
+      "size": 3800
+    },
+    {
+      "path": "robot_control/PROJECT-STATUS.md",
+      "size": 3397
+    },
+    {
+      "path": "robot_control/argus_avoidance/.vscode/tasks.json",
+      "size": 780
+    },
+    {
+      "path": "robot_control/argus_avoidance/PHONE-START-DESIGN.md",
+      "size": 2622
+    },
+    {
+      "path": "robot_control/argus_avoidance/PI-ESP32-WIRING.md",
+      "size": 2896
+    },
+    {
+      "path": "robot_control/argus_avoidance/README.md",
+      "size": 7669
+    },
+    {
+      "path": "robot_control/argus_avoidance/Run-Checks.ps1",
+      "size": 1051
+    },
+    {
+      "path": "robot_control/argus_avoidance/START-HERE.md",
+      "size": 6882
+    },
+    {
+      "path": "robot_control/argus_avoidance/argus",
+      "size": 1597
+    },
+    {
+      "path": "robot_control/argus_avoidance/argus_avoidance/__init__.py",
+      "size": 83
+    },
+    {
+      "path": "robot_control/argus_avoidance/argus_avoidance/bench.py",
+      "size": 2823
+    },
+    {
+      "path": "robot_control/argus_avoidance/argus_avoidance/core.py",
+      "size": 11804
+    },
+    {
+      "path": "robot_control/argus_avoidance/argus_avoidance/follow.py",
+      "size": 7621
+    },
+    {
+      "path": "robot_control/argus_avoidance/argus_avoidance/line_preview.py",
+      "size": 13013
+    },
+    {
+      "path": "robot_control/argus_avoidance/argus_avoidance/node.py",
+      "size": 15770
+    },
+    {
+      "path": "robot_control/argus_avoidance/argus_avoidance/serial_control.py",
+      "size": 4568
+    },
+    {
+      "path": "robot_control/argus_avoidance/argus_avoidance/simulate.py",
+      "size": 17320
+    },
+    {
+      "path": "robot_control/argus_avoidance/argus_avoidance/usb_bridge.py",
+      "size": 5325
+    },
+    {
+      "path": "robot_control/argus_avoidance/config/avoidance.yaml",
+      "size": 904
+    },
+    {
+      "path": "robot_control/argus_avoidance/config/preview_guard.yaml",
+      "size": 699
+    },
+    {
+      "path": "robot_control/argus_avoidance/config/preview_guard_humble.yaml",
+      "size": 615
+    },
+    {
+      "path": "robot_control/argus_avoidance/config/simulation.yaml",
+      "size": 643
+    },
+    {
+      "path": "robot_control/argus_avoidance/launch/avoidance.launch.py",
+      "size": 1795
+    },
+    {
+      "path": "robot_control/argus_avoidance/launch/guarded_preview.launch.py",
+      "size": 2207
+    },
+    {
+      "path": "robot_control/argus_avoidance/package.xml",
+      "size": 903
+    },
+    {
+      "path": "robot_control/argus_avoidance/reports/ORANGE-PI-CHECK.md",
+      "size": 2024
+    },
+    {
+      "path": "robot_control/argus_avoidance/reports/TAPE-PREVIEW-CHECK.md",
+      "size": 6471
+    },
+    {
+      "path": "robot_control/argus_avoidance/reports/VERIFICATION.md",
+      "size": 2863
+    },
+    {
+      "path": "robot_control/argus_avoidance/reports/standalone-simulation.json",
+      "size": 235912
+    },
+    {
+      "path": "robot_control/argus_avoidance/resource/argus_avoidance",
+      "size": 1
+    },
+    {
+      "path": "robot_control/argus_avoidance/setup.cfg",
+      "size": 99
+    },
+    {
+      "path": "robot_control/argus_avoidance/setup.py",
+      "size": 772
+    },
+    {
+      "path": "robot_control/argus_avoidance/systemd/argus-bridge-avoidance.conf",
+      "size": 407
+    },
+    {
+      "path": "robot_control/argus_avoidance/tests/test_adapter.py",
+      "size": 9647
+    },
+    {
+      "path": "robot_control/argus_avoidance/tests/test_core.py",
+      "size": 8962
+    },
+    {
+      "path": "robot_control/argus_avoidance/tests/test_follow.py",
+      "size": 8483
+    },
+    {
+      "path": "robot_control/argus_avoidance/tests/test_line_preview.py",
+      "size": 8220
+    },
+    {
+      "path": "robot_control/argus_avoidance/tests/test_serial_control.py",
+      "size": 3473
+    },
+    {
+      "path": "robot_control/argus_avoidance/tests/test_simulation.py",
+      "size": 3608
+    },
+    {
+      "path": "robot_control/argus_avoidance/tests/test_usb_bridge.py",
+      "size": 3919
+    },
+    {
+      "path": "robot_control/argus_avoidance/tools/build_replay.py",
+      "size": 1275
+    },
+    {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/.gitignore",
+      "size": 38
+    },
+    {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/ControlPacketParser.h",
+      "size": 1510
+    },
+    {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/DriveControl.h",
+      "size": 2608
+    },
+    {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/PhoneStart.h",
+      "size": 1228
+    },
+    {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/README.md",
+      "size": 5498
+    },
+    {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/VERIFICATION.md",
+      "size": 1865
+    },
+    {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/config.h.example",
+      "size": 172
+    },
+    {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/esp32_wifi_controlcam_auto.ino",
+      "size": 28184
+    },
+    {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/tests/browser_check.js",
+      "size": 5410
+    },
+    {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/tests/host_check.cpp",
+      "size": 13632
+    },
+    {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/tests/phone_start_check.cpp",
+      "size": 1062
+    },
+    {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/tests/stubs/Arduino.h",
+      "size": 1374
+    },
+    {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/tests/stubs/WebServer.h",
+      "size": 1374
+    },
+    {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/tests/stubs/WiFi.h",
+      "size": 252
+    },
+    {
+      "path": "robot_control/firmware/esp32_wifi_controlcam_auto/tests/stubs/config.h",
+      "size": 150
+    }
+  ]
+}

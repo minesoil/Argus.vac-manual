@@ -1,0 +1,2 @@
+# Preserve the teaching snapshot byte-for-byte so its SHA-256 manifest remains valid.
+handbook/code/** -text

@@ -13,6 +13,7 @@ import urllib.parse
 from .follow import ControlError
 from .line_preview import SnapshotReader
 from .serial_control import SerialAutoClient
+from .manual_guard import GuardPublisher
 
 
 class BridgeHandler(BaseHTTPRequestHandler):
@@ -85,6 +86,8 @@ def main(argv=None):
                         help="ESP32 USB port; COM ports also support a laptop bench relay")
     parser.add_argument("--no-phone-preview", action="store_true",
                         help="Keep USB available for control without relaying phone JPEGs")
+    parser.add_argument("--manual-guard", action="store_true",
+                        help="Publish local obstacle-preview health to assisted-manual firmware")
     args = parser.parse_args(argv)
     controller = SerialAutoClient(args.serial)
     camera = SnapshotReader()
@@ -95,18 +98,25 @@ def main(argv=None):
     ended = threading.Event()
     thread = None
     follower = None
+    guard = GuardPublisher(controller, "http://127.0.0.1:8767/status") if args.manual_guard else None
     signal.signal(signal.SIGTERM, lambda *_: ended.set())
     try:
         initial = controller.request("/state")
         print(f"ESP32 serial ready on {args.serial}, mode {initial['mode']}", flush=True)
         thread = threading.Thread(target=server.serve_forever, daemon=True)
         thread.start()
-        while not ended.wait(0.5):
+        state = initial
+        next_health = 0.0
+        while not ended.wait(0.1 if guard else 0.5):
             # A USB reconnect invalidates the old descriptor even if this
             # process is still running. Probe without renewing any drive lease.
             with server.usb_lock:
-                state = controller.request("/state")
-                follower = claim_phone_start(controller, state, follower)
+                if time.monotonic() >= next_health:
+                    state = controller.request("/state")
+                    follower = claim_phone_start(controller, state, follower)
+                    next_health = time.monotonic() + 0.5
+                if guard:
+                    guard.tick(state)
             if args.no_phone_preview:
                 continue
             try:

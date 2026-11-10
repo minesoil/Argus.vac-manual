@@ -1,0 +1,19 @@
+# New complete base for a fresh rebuild; not the historical camera_sender unit.
+# Current reviewed drop-in may be applied on top of this base.
+[Unit]
+Description=Argus serial drive supervisor (reconstructed recovery unit)
+Requires=argus-camera.service
+Wants=argus-obstacle-preview.service
+After=argus-camera.service argus-obstacle-preview.service
+
+[Service]
+Type=simple
+User=orangepi
+SupplementaryGroups=dialout
+WorkingDirectory=/home/orangepi/argus/avoidance
+ExecStart=/usr/bin/python3 -u -m argus_avoidance.usb_bridge --serial /dev/ttyS0 --no-phone-preview --manual-guard
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target

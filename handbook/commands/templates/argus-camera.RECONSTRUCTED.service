@@ -1,0 +1,17 @@
+# New recovery template, NOT an exact copy of the original camera unit.
+# Command arguments match the observed uStreamer 4.9 startup.
+# Verify camera device, user/group access and existing units before installing.
+[Unit]
+Description=Argus local USB camera (reconstructed recovery unit)
+After=network.target
+
+[Service]
+Type=simple
+User=orangepi
+SupplementaryGroups=video
+ExecStart=/usr/bin/ustreamer --device=/dev/video0 --format=MJPEG --resolution=640x480 --host=127.0.0.1 --port=8080
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

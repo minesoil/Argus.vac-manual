@@ -1,4 +1,11 @@
-# Draft verification on November 7, 2026
+# Draft verification on November 7, 2026 (historical)
+
+This report identifies the November7 draft, not the current sketch bytes.
+The November9 assisted update was built and upload-hash verified; 103 Pi/Python
+tests plus updated actual-sketch C++ and browser checks passed. Actual object
+entry/held-joystick stopping remains pending. Current status is in
+[ASSISTED-MANUAL.md](../../ASSISTED-MANUAL.md); source hashes are in the
+[handbook provenance](https://github.com/minesoil/Argus.vac-manual/blob/main/handbook/evidence/FIRMWARE_PROVENANCE.md).
 
 The final sketch compiled for `esp32:esp32:nodemcu-32s` using ESP32 Arduino
 core 3.3.11. Compile-time hotspot values came from the example configuration.

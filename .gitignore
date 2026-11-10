@@ -3,6 +3,7 @@
 *.pyc
 .tmp/
 node_modules/
+.state/
 .env
 .env.*
 !.env.example
@@ -10,4 +11,5 @@ node_modules/
 *.key
 *.bin
 *.elf
-robot_control/firmware/esp32_wifi_controlcam_auto/config.h
+**/firmware/esp32_wifi_controlcam_auto/config.h
+*.map
