@@ -24,6 +24,10 @@ class Config:
     steer_front_clearance_m: float = 0.50
     steer_balance_m: float = 0.07
     steer_rad_s: float = 0.10
+    curve_start_clearance_m: float = 0.68
+    curve_release_clearance_m: float = 0.85
+    curve_lookahead_m: float = 0.24
+    curve_rad_s: float = 0.20
     scan_timeout_s: float = 0.5
     clear_scans: int = 3
     stop_hold_s: float = 0.25
@@ -47,6 +51,11 @@ class Config:
         if not self.side_stop_clearance_m < self.side_steer_clearance_m or (
                 self.steer_front_clearance_m <= self.stop_clearance_m):
             raise ValueError("Steering thresholds must exceed stop thresholds")
+        if not (self.stop_clearance_m < self.curve_start_clearance_m <
+                self.curve_release_clearance_m):
+            raise ValueError("Curve thresholds must exceed stop clearance")
+        if self.curve_rad_s > self.turn_rad_s:
+            raise ValueError("Moving curve cannot turn faster than an in-place pivot")
         if self.slow_m_s > self.forward_m_s:
             raise ValueError("Slow speed cannot exceed forward speed")
         if self.min_coverage_ratio > 1 or self.max_unknown_gap_rad > math.pi:
@@ -84,6 +93,7 @@ class _Observation:
     left: float
     right: float
     nearest: float
+    points: tuple[tuple[float, float], ...]
 
 
 class AvoidanceController:
@@ -101,6 +111,7 @@ class AvoidanceController:
         self._stopped_at = 0.0
         self._turn_started = 0.0
         self._turn_direction = 0
+        self._curve_direction = 0
         self._last_step = None
 
     def observe(self, scan: Scan):
@@ -176,7 +187,8 @@ class AvoidanceController:
 
         return _Observation(scan.received_at, corridor(0), corridor(math.pi / 2),
                             corridor(-math.pi / 2),
-                            min((math.hypot(x, y) for x, y in points), default=math.inf))
+                            min((math.hypot(x, y) for x, y in points), default=math.inf),
+                            tuple(points))
 
     def health(self, now):
         if not math.isfinite(now):
@@ -200,6 +212,7 @@ class AvoidanceController:
         self.state, self.reason = "STOP", "Armed; checking clear scans"
         self._stopped_at = now
         self._turn_direction = 0
+        self._curve_direction = 0
         self._clear_count = 0
         self._counted_sequence = -1
         self._last_step = now
@@ -210,6 +223,7 @@ class AvoidanceController:
         self.state, self.reason = "DISARMED", reason
         self._clear_count = 0
         self._turn_direction = 0
+        self._curve_direction = 0
 
     def _halt(self, state, reason):
         self.armed = False
@@ -222,19 +236,58 @@ class AvoidanceController:
                         obs.front if obs else None, obs.left if obs else None,
                         obs.right if obs else None)
 
+    def _curve_path_clear(self, direction):
+        """Require clearance along a short family of plausible forward arcs.
+
+        Wheelbase and wheel speed have not been calibrated on the floor. Checking
+        straight travel as well as several curved paths avoids assuming that a
+        requested wheel ratio produces one exact radius. This is a local guard;
+        the front stop threshold and fresh-scan requirement still apply.
+        """
+        cfg, obs = self.config, self._observation
+        clearance = cfg.robot_radius_m + cfg.margin_m + 0.03
+        limit_sq = clearance * clearance
+        for step in range(1, 13):
+            distance = cfg.curve_lookahead_m * step / 12
+            for curvature in (0.0, 1.5, 3.0, 4.5, 6.0):
+                if curvature == 0:
+                    x, y = distance, 0.0
+                else:
+                    angle = curvature * distance
+                    x = math.sin(angle) / curvature
+                    y = direction * (1 - math.cos(angle)) / curvature
+                if any((px-x)**2 + (py-y)**2 <= limit_sq for px, py in obs.points):
+                    return False
+        return True
+
     def _drive(self):
         cfg, obs = self.config, self._observation
         slow = obs.front <= cfg.slow_clearance_m
         self.state = "SLOW" if slow else "FORWARD"
         speed = cfg.slow_m_s if slow else cfg.forward_m_s
         self.reason = "Obstacle approaching" if slow else "Forward corridor clear"
+        if obs.front > cfg.curve_release_clearance_m:
+            self._curve_direction = 0
+        if obs.front <= cfg.curve_start_clearance_m or self._curve_direction:
+            if self._curve_direction:
+                directions = (self._curve_direction,)
+            else:
+                directions = (1, -1) if obs.left >= obs.right else (-1, 1)
+            for direction in directions:
+                if self._curve_path_clear(direction):
+                    self._curve_direction = direction
+                    self.state = "SLOW"
+                    self.reason = "Curving left around obstacle" if direction > 0 else "Curving right around obstacle"
+                    return self._decision(cfg.slow_m_s, cfg.curve_rad_s * direction)
         if obs.front > cfg.steer_front_clearance_m and min(obs.left, obs.right) < cfg.side_steer_clearance_m:
             if obs.left + cfg.steer_balance_m < obs.right:
-                self.reason = "Steering right away from left obstacle"
-                return self._decision(speed, -cfg.steer_rad_s)
+                if self._curve_path_clear(-1):
+                    self.reason = "Steering right away from left obstacle"
+                    return self._decision(speed, -cfg.steer_rad_s)
             if obs.right + cfg.steer_balance_m < obs.left:
-                self.reason = "Steering left away from right obstacle"
-                return self._decision(speed, cfg.steer_rad_s)
+                if self._curve_path_clear(1):
+                    self.reason = "Steering left away from right obstacle"
+                    return self._decision(speed, cfg.steer_rad_s)
         return self._decision(speed)
 
     def step(self, now):
@@ -270,6 +323,7 @@ class AvoidanceController:
             self.state, self.reason = "STOP", "Obstacle near travel path; stopping before turn"
             self._stopped_at = now
             self._clear_count = 0
+            self._curve_direction = 0
             return self._decision()
         if self.state == "STOP":
             if now - self._stopped_at < cfg.stop_hold_s:

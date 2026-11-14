@@ -130,3 +130,73 @@ The Pi private profile was updated to `sensor_x=0.08 m`, `sensor_y=0`,
 `radius=0.15 m` while the controller was stopped/zero; `commissioned` remains
 false and no motor command or stationary scan was run after the update.
 Continuous mode remains disabled through dinner.
+
+Later source-only update, 14 November: the new source assigns one Pi bridge
+process ownership of the C1 USB port. The roaming runner reads the latest
+sweep from its loopback `/lidar/sweep` endpoint. The same raw 72-bin sweep can
+be relayed over a separate
+Pi-to-ESP32 USB serial link to a new phone LiDAR canvas. The phone page selects
+LiDAR by default and retains an optional camera view. This is a live relative
+range display, not a saved room map or localization. A missing map USB link
+does not interrupt the GPIO control link; invalid or stale C1 data still stops
+roaming. This paragraph describes the new source, not a verified phone view or
+firmware installation.
+
+The controller source now attempts a slow forward-moving arc when front
+clearance narrows, checking the inflated chassis circle along a short family
+of straight and curved paths against current scan returns. If a moving arc
+cannot be supported, the existing stop/pivot behavior remains. The wheel mix
+keeps both wheels forward for a curve; Stop, blocked scans and faults command
+zero immediately. CLI `--wall-gap` and optional private-profile `wall_gap` set
+front stop and side-steering thresholds, default 300 mm and bounded to
+200–400 mm until loaded stopping is measured. The side-steer threshold is the
+requested gap minus the unchanged 60 mm footprint margin, while the hard side
+stop remains 50 mm beyond the inflated footprint. With Justin's estimated
+150 mm radius and 60 mm margin, the inflated circle is 210 mm. The sensor origin is
+still an approximate +80 mm from the wheel midpoint. These values have not
+been physically calibrated after the geometry correction; a smaller requested
+gap does not guarantee that the body will reach it or clean a corner.
+
+At this source checkpoint, 135 Python tests passed locally. In independent
+geometry simulations using radius 150 mm, margin 60 mm and sensor x +80 mm,
+the wall, chair-leg and moving-obstacle scenarios had no contact. The simulated
+wide wall left about 300 mm of physical body clearance at the default gap and
+about 200 mm with `--wall-gap 0.20`, with no extra Stop/pivot or contact in that
+simulation. These are simulator outcomes, not loaded robot measurements. No
+new motion was commanded during this source work.
+The new map firmware, USB relay on the Pi, corrected-geometry floor behavior,
+loaded stopping distance, sustained room run and outdoor performance remain
+unverified at this checkpoint. Continuous mode stays disabled.
+
+Later 14 November installation and physical check: the Pi single-owner C1
+bridge and ESP32 LiDAR page were installed. The first ESP32 app flash was
+interrupted by the Pi bridge reopening its programming USB port; the app was
+restored from a private, locally built image and its flash hash verified. The
+Pi bridge was then launched as an unprivileged process because its systemd
+service had exited cleanly and requires local sudo to restart. The service
+remains inactive, although the manual process serves GPIO control and C1 map
+data. Justin refreshed his phone and confirmed live dots/arcs; the first
+display felt laggy. Motor power was OFF during both flashes.
+
+Two corrected-geometry, eight-second, 12% floor trials were then supervised.
+The first logged a left pivot followed by a moving left curve; Justin saw both
+and confirmed no contact. Its initial front-corridor clearance was 0.31 m
+beyond the inflated footprint, despite no obvious object straight ahead.
+That corridor spans the robot's full width and nearby returns can trigger it.
+The second trial used `--wall-gap 0.20` and coupled side-steer clearance to
+0.14 m; its log stayed in a moving left curve throughout and ended stopped,
+left/right zero. Justin confirmed the smooth curve and no contact, estimating
+about 35 cm from the body to a bag of markers at scanner height. That is a
+visual estimate, not a measured close-wall stop or a cleaning validation.
+135 Python tests passed on the Pi before this second run. Continuous mode and
+phone autonomous Start remain uncommissioned.
+
+After Justin switched motor power OFF again, the map relay interval and browser
+poll were reduced from 500 to 250 ms and the phone scan styling changed to a
+technical instrument layout. The ESP32 target compiled at 950580 program bytes;
+the 950736-byte application flash was hash-verified. Actual-sketch host and
+embedded-browser checks passed. The Pi manual bridge was relaunched, reporting
+ESP32 stopped/zero and a 72-bin C1 sweep. Justin refreshed the final phone
+page and said its technical display looks better and updates more smoothly.
+Outdoor performance, sustained room operation, loaded braking and
+close-wall/corner cleaning remain unverified.

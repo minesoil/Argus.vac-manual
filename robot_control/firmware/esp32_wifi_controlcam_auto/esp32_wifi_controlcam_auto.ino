@@ -7,6 +7,7 @@
 #include "ControlPacketParser.h"
 #include "PhoneStart.h"
 #include "ManualGuard.h"
+#include "LidarMap.h"
 
 // Argus Vac camera relay and joystick
 // Board: NodeMCU-32 / ESP32-WROOM-32
@@ -44,8 +45,8 @@ size_t activeLength = 0;
 bool frameReady = false;
 unsigned long frameTime = 0;
 
-// Camera packet:
-// "AVF1" + uint32 length (little endian) + JPEG
+// USB preview packet: "AVF1" + uint32 length (little endian) + JPEG.
+// USB map packet: "AVL1" + uint32 length (little endian, 72) + 72 range bins.
 
 enum CameraState {
   WAIT_MAGIC,
@@ -56,10 +57,13 @@ enum CameraState {
 CameraState cameraState = WAIT_MAGIC;
 
 const uint8_t MAGIC[4] = {'A','V','F','1'};
+const uint8_t MAP_MAGIC[4] = {'A','V','L','1'};
 bool controlPacket = false;
+bool mapPacket = false;
 const uint8_t CONTROL_MAGIC[4] = {0xA5, 0xDA, 0xC3, 0xBC};
 const size_t MAX_CONTROL = 160;
 char controlBuffer[MAX_CONTROL + 1];
+uint8_t mapBuffer[LidarMap::BinCount];
 void processControlPacket(char* payload, bool viaGPIO = false);
 
 uint8_t magicPos = 0;
@@ -74,6 +78,7 @@ unsigned long lastCameraByte = 0;
 DriveControl control;
 ManualGuard manualGuard;
 PhoneStart phoneStart;
+LidarMap lidarMap;
 bool phoneSessionActive = false;
 uint32_t phoneLastHeartbeat = 0;
 unsigned long lastMotorSend = 0;
@@ -126,6 +131,7 @@ void resetCameraParser() {
   expectedLength = 0;
   receivedLength = 0;
   controlPacket = false;
+  mapPacket = false;
 }
 
 void processCameraByte(uint8_t b) {
@@ -134,13 +140,18 @@ void processCameraByte(uint8_t b) {
 
   if (cameraState == WAIT_MAGIC) {
 
-    if (magicPos == 0) controlPacket = b == CONTROL_MAGIC[0];
-    const uint8_t* expectedMagic = controlPacket ? CONTROL_MAGIC : MAGIC;
+    if (magicPos == 0) {
+      controlPacket = b == CONTROL_MAGIC[0];
+      mapPacket = false;
+    }
+    if (!controlPacket && magicPos == 2 && b == MAP_MAGIC[2]) mapPacket = true;
+    const uint8_t* expectedMagic = controlPacket ? CONTROL_MAGIC : (mapPacket ? MAP_MAGIC : MAGIC);
     if (b == expectedMagic[magicPos]) {
       magicPos++;
     } else {
       magicPos = (b == MAGIC[0] || b == CONTROL_MAGIC[0]) ? 1 : 0;
       controlPacket = b == CONTROL_MAGIC[0];
+      mapPacket = false;
     }
 
     if (magicPos == 4) {
@@ -166,8 +177,9 @@ void processCameraByte(uint8_t b) {
 
     if (lengthPos == (controlPacket ? 2 : 4)) {
 
-      if (expectedLength < (controlPacket ? 1u : 4u) ||
-          expectedLength > (controlPacket ? MAX_CONTROL : MAX_JPEG)) {
+      if ((mapPacket && expectedLength != LidarMap::BinCount) ||
+          (!mapPacket && (expectedLength < (controlPacket ? 1u : 4u) ||
+                          expectedLength > (controlPacket ? MAX_CONTROL : MAX_JPEG)))) {
         resetCameraParser();
         return;
       }
@@ -180,6 +192,15 @@ void processCameraByte(uint8_t b) {
   }
 
   if (cameraState == READ_JPEG) {
+
+    if (mapPacket) {
+      mapBuffer[receivedLength++] = b;
+      if (receivedLength == expectedLength) {
+        lidarMap.updateBins(mapBuffer, receivedLength, millis());
+        resetCameraParser();
+      }
+      return;
+    }
 
     if (controlPacket) {
       if (b < 0x80) {
@@ -270,9 +291,9 @@ const char PAGE_HTML[] PROGMEM = R"ARGUS(
 
 body {
   margin: 0;
-  background: #101820;
-  color: #f0f4f8;
-  font-family: system-ui, Arial, sans-serif;
+  background: #0b1118;
+  color: #dce7ec;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
   text-align: center;
 }
 
@@ -284,7 +305,70 @@ main {
 
 h2 {
   margin: 7px 0 14px;
-  letter-spacing: 2px;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: 3px;
+}
+
+.view-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.view-tabs button {
+  margin: 0;
+  padding: 10px;
+  background: #16212b;
+  color: #a4b7bf;
+  font: 12px ui-monospace, SFMono-Regular, Consolas, monospace;
+  letter-spacing: .5px;
+}
+.view-tabs button.selected {
+  background: #17323a;
+  color: #bce9e5;
+  box-shadow: inset 0 -2px #4ca8a4;
+}
+.sensor-panel[hidden] { display: none; }
+.map-card {
+  padding: 9px;
+  border: 1px solid #34505a;
+  border-radius: 4px;
+  background: #111d26;
+}
+.map-heading {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 3px 9px;
+  color: #a9c8ce;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+#lidarCanvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  border: 1px solid #29424b;
+  background: #0b171e;
+}
+.map-card.stale #lidarCanvas { opacity: .6; }
+.map-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 8px;
+  text-align: left;
+}
+.map-details .status { margin: 0; }
+.map-details select {
+  flex: none;
+  border: 1px solid #45606a;
+  border-radius: 3px;
+  padding: 6px;
+  background: #13232c;
+  color: #dce7ec;
+  font: 11px ui-monospace, SFMono-Regular, Consolas, monospace;
 }
 
 .camera {
@@ -297,7 +381,7 @@ h2 {
 }
 
 .status {
-  font-size: 13px;
+  font-size: 12px;
   color: #aab8c4;
   margin: 8px;
 }
@@ -346,6 +430,13 @@ button {
   font-size: 16px;
   margin-top: 14px;
 }
+#stop {
+  position: sticky;
+  bottom: 10px;
+  z-index: 2;
+  width: 100%;
+  box-shadow: 0 4px 18px #0009;
+}
 </style>
 </head>
 
@@ -353,11 +444,30 @@ button {
 <main>
 <h2>ARGUS VAC</h2>
 
-<img id="camera" class="camera" alt="Live camera">
-
-<div id="cameraStatus" class="status">
-  Waiting for camera...
+<div class="view-tabs">
+  <button id="viewLidar" class="selected" type="button">LiDAR map</button>
+  <button id="viewCamera" type="button">Camera · later</button>
 </div>
+<section id="lidarPanel" class="sensor-panel" aria-label="Live LiDAR map">
+  <div id="mapCard" class="map-card stale">
+    <div class="map-heading"><span>C1 / POLAR SCAN</span><span>72 × 5° · ROBOT FRAME</span></div>
+    <canvas id="lidarCanvas" aria-label="Robot centered range map; forward is up"></canvas>
+    <div class="map-details">
+      <div id="mapStatus" class="status">Waiting for LiDAR scan...</div>
+      <select id="mapRange" aria-label="Map distance">
+        <option value="100">1 m view</option>
+        <option value="200" selected>2 m view</option>
+        <option value="400">4 m view</option>
+        <option value="800">8 m view</option>
+      </select>
+    </div>
+  </div>
+  <p class="status">FORWARD ↑ · RETURNS AT SCANNER HEIGHT · BLANK SECTORS = UNKNOWN</p>
+</section>
+<section id="cameraPanel" class="sensor-panel" hidden>
+  <img id="camera" class="camera" alt="Optional camera preview">
+  <div id="cameraStatus" class="status">Camera preview is available when enabled on the Pi.</div>
+</section>
 
 <div id="stick">
   <div id="knob"></div>
@@ -374,7 +484,7 @@ button {
 <button id="manual">UNASSISTED MANUAL (NO CAMERA STOP)</button>
 <button id="follow">START LINE FOLLOWING</button>
 <button id="roam">START LIDAR ROAMING</button>
-<p class="status">Lidar roaming: stop, turn and continue. Keep this page open and STOP within reach. Scan or connection loss ends the run.</p>
+<p class="status">LiDAR roaming requires a clear route. Keep STOP within reach. Scan or connection loss ends the run.</p>
 <button id="stop">STOP</button>
 <p class="status">Camera-assisted drive: forward only, 35% limit. Release joystick to stop. Tape following and unassisted manual have no obstacle stop.</p>
 </main>
@@ -655,29 +765,153 @@ setInterval(sendDrive, 100);
 setInterval(() => refreshState().catch(() => {}), 500);
 refreshState().catch(() => {});
 
-// Camera snapshot updates
-
+// Read-only sensor views. Range data never drives the robot from this page.
+const mapCanvas = document.getElementById("lidarCanvas");
+const mapStatus = document.getElementById("mapStatus");
+const mapCard = document.getElementById("mapCard");
+const mapRange = document.getElementById("mapRange");
 const camera = document.getElementById("camera");
-const cameraStatus =
-  document.getElementById("cameraStatus");
-
+const cameraStatus = document.getElementById("cameraStatus");
+let selectedView = "lidar";
+let latestScan = null;
+let lidarPending = false;
 let cameraTimer;
 
-function requestFrame() {
-  camera.src = "/frame?t=" + Date.now();
+function drawLidar(scan) {
+  const context = mapCanvas.getContext("2d");
+  if (!context) return;
+  const size = Math.max(240, Math.round(mapCanvas.getBoundingClientRect().width || 300));
+  const ratio = Math.min(2, window.devicePixelRatio || 1);
+  mapCanvas.width = Math.round(size * ratio);
+  mapCanvas.height = Math.round(size * ratio);
+  context.setTransform(ratio, 0, 0, ratio, 0, 0);
+  const middle = size / 2;
+  const rangeCm = Number(mapRange.value) || 200;
+  const scale = size * .44 / rangeCm;
+  const sensorY = middle - (scan.sensor_forward_cm || 8) * scale;
+
+  context.fillStyle = "#0b171e";
+  context.fillRect(0, 0, size, size);
+  context.strokeStyle = "#25414a";
+  context.lineWidth = 1;
+  context.font = "10px monospace";
+  context.fillStyle = "#8aa9b0";
+  for (let ring = 1; ring <= 4; ring++) {
+    const radius = size * .44 * ring / 4;
+    context.beginPath();
+    context.arc(middle, middle, radius, 0, Math.PI * 2);
+    context.stroke();
+    context.fillText((rangeCm * ring / 400).toFixed(1) + " m", middle + 5, middle - radius - 4);
+  }
+  context.beginPath();
+  context.moveTo(middle, 8);
+  context.lineTo(middle, size - 8);
+  context.moveTo(8, middle);
+  context.lineTo(size - 8, middle);
+  context.stroke();
+
+  const points = [];
+  for (let i = 0; i < 72; i++) {
+    const steps = parseInt(scan.bins.slice(i * 2, i * 2 + 2), 16);
+    if (!steps) { points.push(null); continue; }
+    const cm = steps * 5;
+    const angle = i * Math.PI / 36;
+    const x = middle + Math.sin(angle) * cm * scale;
+    const y = sensorY - Math.cos(angle) * cm * scale;
+    points.push(x >= 2 && x <= size - 2 && y >= 2 && y <= size - 2 ? {x, y, cm} : null);
+  }
+  if (scan.fresh) {
+    context.lineWidth = 1.3;
+    context.strokeStyle = "#478d91";
+    for (let i = 0; i < 72; i++) {
+      const a = points[i], b = points[(i + 1) % 72];
+      if (!a || !b || Math.abs(a.cm - b.cm) > 25 + Math.min(a.cm, b.cm) * .15) continue;
+      context.beginPath();
+      context.moveTo(a.x, a.y);
+      context.lineTo(b.x, b.y);
+      context.stroke();
+    }
+  }
+  for (const point of points) {
+    if (!point) continue;
+    context.beginPath();
+    context.arc(point.x, point.y, point.cm < 40 ? 2.7 : 1.8, 0, Math.PI * 2);
+    context.fillStyle = point.cm < 40 ? "#f0a46c" : "#8bd4d0";
+    context.fill();
+  }
+
+  // Chassis and scanner share one robot-centered coordinate frame.
+  context.beginPath();
+  context.arc(middle, middle, 15 * scale, 0, Math.PI * 2);
+  context.strokeStyle = "#d7e1df";
+  context.lineWidth = 1.5;
+  context.stroke();
+  context.beginPath();
+  context.moveTo(middle, middle - 16 * scale);
+  context.lineTo(middle - 6 * scale, middle + 3 * scale);
+  context.lineTo(middle + 6 * scale, middle + 3 * scale);
+  context.stroke();
+  context.beginPath();
+  context.arc(middle, sensorY, 3, 0, Math.PI * 2);
+  context.fillStyle = "#d7e1df";
+  context.fill();
+  context.fillStyle = "#a9c8ce";
+  context.fillText("FWD 000°", middle - 24, 17);
 }
 
+async function refreshLidar() {
+  if (lidarPending || selectedView !== "lidar" || document.hidden) return;
+  lidarPending = true;
+  try {
+    const reply = await fetch("/lidar", {cache: "no-store"});
+    if (!reply.ok) throw new Error("LiDAR unavailable");
+    const scan = await reply.json();
+    if (typeof scan.bins !== "string" || !/^[0-9A-F]{144}$/.test(scan.bins))
+      throw new Error("Invalid LiDAR data");
+    latestScan = scan;
+    drawLidar(scan);
+    mapCard.className = "map-card" + (scan.fresh ? "" : " stale");
+    const hasReturns = /[1-9A-F]/.test(scan.bins);
+    const returns = (scan.bins.match(/.{2}/g) || []).filter(value => value !== "00").length;
+    mapStatus.textContent = scan.fresh
+      ? (hasReturns ? "LIVE / " + scan.age_ms + " ms / " + returns + " returns"
+                    : "SCAN ACTIVE / NO RETURNS")
+      : (hasReturns ? "STALE / CHECK PI + C1" : "WAITING FOR C1 SCAN");
+  } catch (error) {
+    mapCard.className = "map-card stale";
+    mapStatus.textContent = "DISCONNECTED / CHECK PI LINK";
+  } finally {
+    lidarPending = false;
+  }
+}
+
+function requestFrame() {
+  if (selectedView === "camera" && !document.hidden)
+    camera.src = "/frame?t=" + Date.now();
+}
 camera.onload = () => {
   cameraStatus.textContent = "Camera connected";
   cameraTimer = setTimeout(requestFrame, 450);
 };
-
 camera.onerror = () => {
-  cameraStatus.textContent = "Waiting for camera...";
+  cameraStatus.textContent = "Camera preview is not enabled on the Pi";
   cameraTimer = setTimeout(requestFrame, 1200);
 };
-
-requestFrame();
+function selectView(view) {
+  selectedView = view;
+  document.getElementById("lidarPanel").hidden = view !== "lidar";
+  document.getElementById("cameraPanel").hidden = view !== "camera";
+  document.getElementById("viewLidar").className = view === "lidar" ? "selected" : "";
+  document.getElementById("viewCamera").className = view === "camera" ? "selected" : "";
+  clearTimeout(cameraTimer);
+  if (view === "camera") requestFrame();
+  else refreshLidar().catch(() => {});
+}
+document.getElementById("viewLidar").onclick = () => selectView("lidar");
+document.getElementById("viewCamera").onclick = () => selectView("camera");
+mapRange.onchange = () => { if (latestScan) drawLidar(latestScan); };
+setInterval(() => refreshLidar().catch(() => {}), 250);
+setTimeout(() => refreshLidar().catch(() => {}), 0);
 
 </script>
 </body>
@@ -876,6 +1110,19 @@ void handleState() {
   sendState();
 }
 
+void handleLidar() {
+  char encoded[LidarMap::BinCount * 2 + 1];
+  lidarMap.encodeHex(encoded);
+  uint32_t now = millis();
+  char response[256];
+  snprintf(response, sizeof(response),
+           "{\"fresh\":%s,\"age_ms\":%lu,\"step_deg\":5,\"unit_cm\":5,\"sensor_forward_cm\":8,\"bins\":\"%s\"}",
+           lidarMap.fresh(now) ? "true" : "false",
+           (unsigned long)lidarMap.age(now), encoded);
+  server.sendHeader("Cache-Control", "no-store");
+  server.send(200, "application/json", response);
+}
+
 void handleFollowStart(bool roaming = false) {
   updateMotors();
   uint32_t expectedEpoch;
@@ -1048,6 +1295,7 @@ void setup() {
   server.on("/drive", HTTP_GET, []() { handleCommand(DriveMode::Manual); });
   server.on("/drive", HTTP_POST, []() { handleCommand(DriveMode::Manual); });
   server.on("/state", HTTP_GET, handleState);
+  server.on("/lidar", HTTP_GET, handleLidar);
   server.on("/follow/start", HTTP_POST, []() { handleFollowStart(false); });
   server.on("/roam/start", HTTP_POST, []() { handleFollowStart(true); });
   server.on("/follow/heartbeat", HTTP_POST, handleFollowHeartbeat);

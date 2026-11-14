@@ -1,5 +1,36 @@
 # Unresolved project facts
 
+2026-11-14 evening: measure actual loaded stopping distance and body clearance
+to a broad upright wall after a longer supervised run, then decide whether
+to commission 30-second phone Start or continuous room roaming. Two short
+no-contact curves do not validate sustained room coverage. Justin confirmed
+the final phone LiDAR display looks better and updates more smoothly. Pi bridge runs
+manually; enabled systemd unit should be checked after a reboot. Outdoor floor
+tape is only an operator marker, not a sensed boundary.
+
+Latest 2026-11-14 recovery, about 21:11 Asia/Taipei: ESP32 app flash/hash
+verification and phone live map are restored, resolving the interruption below.
+Systemd bridge remains inactive after clean stop; only a manual unprivileged
+bridge process (PID 16802 at checkpoint) is confirmed. Durable service startup
+is not established by that process. Justin reports slight map lag and requests
+a more technical UI; those improvements remain pending. State stopped/zero,
+sweep 72 bins, and stationary geometry preview reports 1.115 m forward clearance
+and a forward decision without a motor command. No new floor/continuous/
+close-wall/outdoor validation. Profile stays uncommissioned; latest motor-power
+confirmation OFF. [Recovery evidence](updates/2026-11-14-arc-map-flash-interruption.md).
+
+Historical 2026-11-14 recovery priority, resolved by the checkpoint above: recover and verify the ESP32 application after
+flash failed at 2.7% following app-sector erase. Phone controller/service is
+unavailable at this checkpoint; recovery is in progress. Resolve CH340 access
+against the bridge service, complete and verify the flash, then establish
+restored phone/controller operation before relying on Stop. Justin confirmed
+motor power OFF for this update, resolving the earlier dinner-confirmation
+gap. Pi map-hub is installed; 133 Pi tests twice, host/browser checks and target
+compile pass. Those do not establish deployment or physical behavior. Working
+geometry is radius 0.15 m/C1 x=+0.08 m/y=0, still uncommissioned; approximate
+offset, continuous drive, close-wall and outdoor checks remain pending.
+[Recovery checkpoint](updates/2026-11-14-arc-map-flash-interruption.md).
+
 2026-11-14 update: Justin supplied a 30 cm diameter and approximate +8 cm C1
 scan-center offset from the drive-wheel midpoint; profile is updated but
 uncommissioned. Next: stationary scan using these dimensions, bounded floor

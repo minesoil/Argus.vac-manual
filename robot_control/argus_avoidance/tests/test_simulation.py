@@ -2,6 +2,9 @@
 
 import math
 import unittest
+from dataclasses import replace
+
+from argus_avoidance.roam import navigation_config
 
 from argus_avoidance.simulate import (
     Circle, Segment, World, point_segment_distance, ray_circle, ray_segment,
@@ -51,6 +54,20 @@ class GeometryTests(unittest.TestCase):
 
 
 class ControllerSimulationTests(unittest.TestCase):
+    def test_bounded_wall_gap_curves_closer_without_pivot_or_contact(self):
+        wall = replace(next(s for s in scenarios() if s.name == "wall"),
+                       sensor_x=0.08)
+        normal = run_scenario(wall, navigation_config(0.15, 0.30))
+        closer = run_scenario(wall, navigation_config(0.15, 0.20))
+        self.assertTrue(normal["passed"], normal["failures"])
+        self.assertTrue(closer["passed"], closer["failures"])
+        self.assertEqual(closer["contact_substeps"], 0)
+        self.assertGreaterEqual(closer["minimum_physical_clearance_m"], 0.06)
+        self.assertLess(closer["minimum_physical_clearance_m"],
+                        normal["minimum_physical_clearance_m"] - 0.07)
+        self.assertFalse(any(item["state"] in ("STOP", "TURN")
+                             for item in closer["transitions"][1:]))
+
     def test_deterministic_scenarios(self):
         for scenario in scenarios():
             with self.subTest(scenario=scenario.name):

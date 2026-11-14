@@ -7,7 +7,9 @@ const vm = require('vm');
 const sketch = fs.readFileSync(path.join(__dirname, '../esp32_wifi_controlcam_auto.ino'), 'utf8');
 const source = sketch.match(/<script>([\s\S]*?)<\/script>/)[1];
 const states = [];
+const lidars = [];
 const posts = [];
+const drawnArcs = [];
 const elements = new Map();
 const response = (value, status = 200) => ({ok: status < 400, json: async () => value});
 function deferred() {
@@ -17,10 +19,17 @@ function deferred() {
 }
 function element(id) {
   if (!elements.has(id)) elements.set(id, {
-    style: {}, textContent: '', events: {},
+    style: {}, textContent: '', className: '', hidden: false,
+    value: id === 'mapRange' ? '200' : '', events: {},
     addEventListener(name, fn) {this.events[name] = fn;},
     setPointerCapture() {},
-    getBoundingClientRect() {return {left: 0, top: 0, width: 160, height: 160};}
+    getBoundingClientRect() {return {left: 0, top: 0, width: 160, height: 160};},
+    getContext() {
+      const draw = () => {};
+      return {setTransform: draw, fillRect: draw, beginPath: draw,
+        arc(x, y, radius) {drawnArcs.push({x, y, radius});},
+        stroke: draw, fillText: draw, moveTo: draw, lineTo: draw, fill: draw};
+    }
   });
   return elements.get(id);
 }
@@ -28,10 +37,12 @@ const context = vm.createContext({
   document: {getElementById: element, addEventListener() {}, hidden: false},
   window: {addEventListener() {}},
   URLSearchParams, Math, Date, console,
-  setInterval() {}, setTimeout() {},
+  setInterval() {}, setTimeout() {}, clearTimeout() {},
   fetch(url, options) {
     const pending = deferred();
-    if (!options || options.method !== 'POST') {
+    if (url === '/lidar') {
+      lidars.push(pending);
+    } else if (!options || options.method !== 'POST') {
       states.push(pending);
     } else {
       posts.push({url, body: new URLSearchParams(options.body), ...pending});
@@ -137,6 +148,27 @@ async function main() {
   await roamStart;
   assert.equal(evaluate('followToken'), '5555555555555555');
   assert.equal(evaluate('modeLabel.textContent'), 'Lidar roaming requested');
+  const showMap = evaluate('refreshLidar()');
+  assert.equal(lidars.length, 1);
+  const bins = '14' + '00'.repeat(17) + '0A' + '00'.repeat(53);
+  lidars[0].resolve(response({fresh: true, age_ms: 120, bins, sensor_forward_cm: 8}));
+  await showMap;
+  assert.ok(elements.get('mapStatus').textContent.startsWith('LIVE'));
+  assert.equal(elements.get('mapCard').className, 'map-card');
+  // At a 2 m view and 240 px canvas, a 1 m forward return starts at
+  // the C1 marker 8 cm ahead of the robot midpoint.
+  assert.ok(drawnArcs.some(a => Math.abs(a.x - 120) < .1 &&
+    Math.abs(a.y - (120 - 108 * .528)) < .1 && a.radius === 1.8));
+  elements.get('viewCamera').onclick();
+  assert.equal(elements.get('lidarPanel').hidden, true);
+  assert.equal(elements.get('cameraPanel').hidden, false);
+  elements.get('viewLidar').onclick();
+  assert.equal(elements.get('lidarPanel').hidden, false);
+  const staleMap = lidars.at(-1);
+  staleMap.resolve(response({fresh: false, age_ms: 1700, bins, sensor_forward_cm: 8}));
+  await settle();
+  assert.ok(elements.get('mapStatus').textContent.toLowerCase().includes('stale'));
+  assert.ok(elements.get('mapCard').className.includes('stale'));
   console.log('PASS embedded UI: stale poll, manual takeover, Stop races and separate lidar roaming Start');
 }
 main().catch(error => {console.error(error); process.exitCode = 1;});

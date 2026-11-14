@@ -22,6 +22,28 @@ Releasing the joystick requests zero wheel speed. Press **STOP** to latch the
 stopped mode. Select control again before driving after a stop or command timeout.
 The camera relay and its `/frame` endpoint retain the existing JPEG protocol.
 
+## LiDAR phone map (source update, not yet flashed)
+
+The phone page opens on a live LiDAR map. Its Camera tab retains the optional
+`/frame` preview for later use. The map is display-only; it does not change
+motor control or replace the Pi's avoidance decisions. It marks itself stale
+when no complete scan arrives for more than 1 second.
+
+The Pi can send map frames over the ESP32 programming USB connection while
+drive commands continue over the separate GPIO UART. One map frame is `AVL1`,
+a four-byte little-endian payload length of 72, then 72 raw unsigned range
+bytes. Bin 0 points robot-forward; bins increase clockwise in 5° steps (bin
+18 right, 36 back, 54 left). Each byte is distance **from the C1 scanner** in
+5 cm units: 0 means no valid return, 1–240 mean 5 cm–12 m. The Pi rotates the
+scanner readings into robot heading, preserving their scanner origin. The
+browser plots those returns from a marker 8 cm forward of the drive-wheel
+midpoint, matching the measured build estimate.
+
+`GET /lidar` returns `fresh`, `age_ms`, `step_deg`, `unit_cm`,
+`sensor_forward_cm`, and `bins` (144 uppercase hex characters). Bad frame
+lengths and range bytes above 240 are discarded. `/lidar` is read-only and
+the USB map link has no access to the GPIO drive session.
+
 The Pi requests automatic mode only on an explicit start action. Moving the
 joystick requests assisted manual control from automatic mode; it refuses
 when camera health is unavailable. Automatic commands are capped

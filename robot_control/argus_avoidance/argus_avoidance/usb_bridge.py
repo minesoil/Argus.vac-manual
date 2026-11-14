@@ -3,6 +3,7 @@
 import argparse
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
+import math
 from pathlib import Path
 import subprocess
 import signal
@@ -15,6 +16,7 @@ from .follow import ControlError
 from .line_preview import SnapshotReader
 from .serial_control import SerialAutoClient
 from .manual_guard import GuardPublisher
+from .lidar_hub import LidarHub, ESP_PORT
 
 
 class BridgeHandler(BaseHTTPRequestHandler):
@@ -45,6 +47,18 @@ class BridgeHandler(BaseHTTPRequestHandler):
             self.reply(400, {"error": "Missing or invalid control fields"})
 
     def do_GET(self):
+        if self.path == "/lidar/sweep":
+            hub = getattr(self.server, "lidar_hub", None)
+            if hub is None or hub.error:
+                self.reply(503, {"error": hub.error if hub is not None else "C1 unavailable"})
+                return
+            sweep = hub.latest
+            self.reply(200, {"sweep": None if sweep is None else {
+                "sequence": sweep.sequence, "started": sweep.started,
+                "finished": sweep.finished, "nodes": sweep.nodes,
+                "ranges": [value if math.isfinite(value) else None
+                           for value in sweep.ranges]}})
+            return
         self.forward()
 
     def do_POST(self):
@@ -84,7 +98,7 @@ def claim_phone_start(controller, state, follower, launch=subprocess.Popen, roam
     return launch(command + ["--expected-epoch", str(epoch)])
 
 
-def load_roam_args(path):
+def load_roam_args(path, lidar_bridge=False):
     """Explicit measured deployment profile; absent/uncommissioned disables Start."""
     if path is None:
         return None
@@ -97,7 +111,10 @@ def load_roam_args(path):
     result = ["--commissioned"]
     for key in required + ("cruise", "slow", "turn"):
         if key in profile:
-            result.extend(["--" + key.replace("_", "-"), str(profile[key])])
+            value = "bridge" if key == "lidar" and lidar_bridge else profile[key]
+            result.extend(["--" + key.replace("_", "-"), str(value)])
+    if "wall_gap" in profile:
+        result.extend(["--wall-gap", str(profile["wall_gap"])])
     if profile.get("continuous") is True:
         result.append("--continuous")
     else:
@@ -115,26 +132,52 @@ def main(argv=None):
                         help="Publish local obstacle-preview health to assisted-manual firmware")
     parser.add_argument("--roam-config", help="Measured C1 roaming profile; missing/uncommissioned disables roaming")
     args = parser.parse_args(argv)
-    roam_args = load_roam_args(args.roam_config)
-    controller = SerialAutoClient(args.serial)
+    profile = json.loads(Path(args.roam_config).read_text()) if args.roam_config else {}
+    hub = None
+    if profile.get("lidar"):
+        try:
+            hub = LidarHub(profile["lidar"], profile.get("map_port", ESP_PORT),
+                           front_deg=float(profile.get("front_deg", 90))).start()
+            hub.open_map_port()
+            print("C1 scanner ready; ESP32 map relay optional", flush=True)
+        except (OSError, ValueError) as error:
+            if hub is not None:
+                hub.close()
+            hub = None
+            print(f"C1 map unavailable: {error}; drive bridge remains available", flush=True)
+    roam_args = load_roam_args(args.roam_config, lidar_bridge=hub is not None)
+    try:
+        controller = SerialAutoClient(args.serial)
+    except BaseException:
+        if hub:
+            hub.close()
+        raise
     camera = SnapshotReader()
     server = ThreadingHTTPServer(("127.0.0.1", 8766), BridgeHandler)
     server.daemon_threads = True
     server.controller = controller
     server.usb_lock = threading.Lock()
+    server.lidar_hub = hub
     ended = threading.Event()
     thread = None
     follower = None
     guard = GuardPublisher(controller, "http://127.0.0.1:8767/status") if args.manual_guard else None
     signal.signal(signal.SIGTERM, lambda *_: ended.set())
     try:
-        initial = controller.request("/state")
+        for attempt in range(3):
+            try:
+                initial = controller.request("/state")
+                break
+            except ControlError:
+                if attempt == 2:
+                    raise
+                time.sleep(0.5)
         print(f"ESP32 serial ready on {args.serial}, mode {initial['mode']}", flush=True)
         thread = threading.Thread(target=server.serve_forever, daemon=True)
         thread.start()
         state = initial
         next_health = 0.0
-        while not ended.wait(0.1 if guard else 0.5):
+        while not ended.wait(0.1 if guard or hub else 0.5):
             # A USB reconnect invalidates the old descriptor even if this
             # process is still running. Probe without renewing any drive lease.
             with server.usb_lock:
@@ -144,6 +187,8 @@ def main(argv=None):
                     next_health = time.monotonic() + 0.5
                 if guard:
                     guard.tick(state)
+            if hub:
+                hub.relay_once()
             if args.no_phone_preview:
                 continue
             try:
@@ -166,6 +211,8 @@ def main(argv=None):
             thread.join(timeout=1)
         server.server_close()
         controller.close()
+        if hub:
+            hub.close()
 
 
 if __name__ == "__main__":

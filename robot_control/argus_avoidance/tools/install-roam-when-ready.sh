@@ -14,7 +14,7 @@ if ! python3 -c 'import json,urllib.request;s=json.load(urllib.request.urlopen("
 fi
 mkdir -m 700 "$backup"
 for name in core.py usb_bridge.py; do cp -a "$root/argus_avoidance/$name" "$backup/"; done
-for name in c1.py c1_preview.py core.py roam.py usb_bridge.py; do
+for name in c1.py c1_bridge.py c1_preview.py lidar_hub.py core.py roam.py usb_bridge.py; do
   install -m 644 "$stage/argus_avoidance/$name" "$root/argus_avoidance/$name"
 done
 if [[ ! -f "$root/.state/roam.json" ]]; then

@@ -1,4 +1,4 @@
-"""C1 stop-turn-continue demo; preview by default, faults require a new Start."""
+"""C1 reactive roaming demo; preview by default, faults require a new Start."""
 
 import argparse
 from dataclasses import asdict
@@ -8,6 +8,7 @@ import signal
 import time
 
 from .c1 import C1Reader
+from .c1_bridge import BridgeC1Reader
 from .core import AvoidanceController, Config
 from .follow import ESP32AutoClient, ControlError
 
@@ -24,17 +25,43 @@ class RoamClient(ESP32AutoClient):
 
 
 def wheels(decision, cruise=18, slow=12, turn=15):
+    if not math.isfinite(decision.angular):
+        return 0, 0
     if decision.state == "TURN":
         # Positive core angular velocity means CCW/left.
-        return (-turn, turn) if decision.angular > 0 else (turn, -turn)
+        if decision.angular > 0:
+            return -turn, turn
+        if decision.angular < 0:
+            return turn, -turn
+        return 0, 0
     if decision.state in ("FORWARD", "SLOW"):
         power = cruise if decision.state == "FORWARD" else slow
+        # Curves keep both wheels forward; the inner wheel slows as the
+        # requested turn increases, with a 50% differential cap.
+        differential = min(power - 1, max(1, round(power * min(0.5, abs(decision.angular) * 1.8))))
         if decision.angular > 0:
-            return max(1, power - 2), power
+            return power - differential, power
         if decision.angular < 0:
-            return power, max(1, power - 2)
+            return power, power - differential
         return power, power
     return 0, 0
+
+
+def navigation_config(radius, wall_gap):
+    """Use one wall spacing target for front stopping and side correction.
+
+    Both readings are measured beyond the inflated circle. Side correction
+    starts at wall_gap minus the fixed margin, aiming for roughly wall_gap
+    measured from the actual circular body. Front stopping remains more
+    conservative: its actual-body gap also includes the margin. The side hard
+    stop remains independent and unchanged.
+    """
+    margin = 0.06
+    return Config(robot_radius_m=radius, margin_m=margin,
+                  stop_clearance_m=wall_gap,
+                  resume_clearance_m=wall_gap + 0.10,
+                  side_steer_clearance_m=wall_gap - margin,
+                  scan_timeout_s=0.6)
 
 
 def run(reader, controller, client=None, seconds=30.0, expected_epoch=None,
@@ -121,6 +148,8 @@ def main(argv=None):
     parser.add_argument("--sensor-y", type=float, default=0.0)
     parser.add_argument("--radius", type=float, default=0.23,
                         help="Circle about drive rotation centre containing the whole robot, metres")
+    parser.add_argument("--wall-gap", type=float, default=0.30,
+                        help="Front clearance beyond inflated radius; adjusts side steering (0.20 to 0.40 m)")
     parser.add_argument("--commissioned", action="store_true",
                         help="Confirm sensor pose, footprint, low-speed wheel direction and braking checks")
     parser.add_argument("--cruise", type=int, default=18)
@@ -128,24 +157,25 @@ def main(argv=None):
     parser.add_argument("--turn", type=int, default=15)
     parser.add_argument("--expected-epoch", type=int, help=argparse.SUPPRESS)
     args = parser.parse_args(argv)
-    values = (args.seconds, args.sensor_x, args.sensor_y, args.radius,
+    values = (args.seconds, args.sensor_x, args.sensor_y, args.radius, args.wall_gap,
               args.front_deg if args.front_deg is not None else 0)
     if not all(math.isfinite(v) for v in values) or args.seconds <= 0 or args.radius <= 0:
         parser.error("Geometry and duration must be finite; duration and radius positive")
     if not 1 <= args.slow <= args.cruise <= 25 or not 1 <= args.turn <= 20:
         parser.error("Require 1 <= slow <= cruise <= 25 and 1 <= turn <= 20")
+    if not 0.20 <= args.wall_gap <= 0.40:
+        parser.error("Require 0.20 <= wall-gap <= 0.40 m pending loaded stopping validation")
     if args.trial:
         if args.continuous or args.seconds > 20 or args.cruise > 12 or args.turn > 12:
             parser.error("Trial requires <=20 seconds, <=12% cruise and turn, no continuous run")
         args.drive = True
     if args.drive and (args.front_deg is None or not (args.commissioned or args.trial)):
         parser.error("Driving needs measured --front-deg and completed --commissioned checks")
-    controller = AvoidanceController(Config(robot_radius_m=args.radius, margin_m=0.06,
-                                             scan_timeout_s=0.6))
+    controller = AvoidanceController(navigation_config(args.radius, args.wall_gap))
     stopped = [False]
     for sig in (signal.SIGINT, signal.SIGTERM):
         signal.signal(sig, lambda *_: stopped.__setitem__(0, True))
-    reader = C1Reader(args.lidar)
+    reader = BridgeC1Reader() if args.lidar == "bridge" else C1Reader(args.lidar)
     try:
         reader.start()
         client = RoamClient(args.esp32, timeout=0.15) if args.drive else None

@@ -1,7 +1,25 @@
 {
   "schema_version": 1,
-  "as_of": "2026-11-14 Asia/Taipei; C1 Pi floor commissioning checkpoint; individual older evidence retained",
+  "as_of": "2026-11-14 evening Asia/Taipei; corrected-geometry curves physically checked, final map app flashed, motor power OFF; older evidence retained",
   "facts": [
+    {
+      "key": "arc_map_loaded_curves_final_flash_20261114",
+      "value": "Two corrected-geometry 8-second 12% floor trials ended stopped/zero. Justin confirmed left pivot then moving curve without contact, then a continuous smooth left curve without contact using wall_gap 0.20 and coupled side-steer threshold 0.14. He visually estimated about 35 cm from body to a marker bag at scanner height; close-wall stop remains unmeasured. 135 Python tests passed on actual Pi. Final technical LiDAR ESP32 app 950736 bytes was flash-hash verified; Pi manual bridge PID24510 at checkpoint reported stopped/zero and 72-bin C1 sweep. Enabled systemd unit inactive after clean stop. Justin confirmed motor power OFF after trial. Private profile commissioned=false and continuous=false; sustained indoor and outdoor use unverified.",
+      "status": "Direct user visual/power and final phone-display statements plus verified Pi tests, trial logs, flash hash and HTTP state",
+      "evidence": ["knowledge/updates/2026-11-14-arc-map-flash-interruption.md"]
+    },
+    {
+      "key": "esp32_arc_map_flash_recovered_20261114",
+      "value": "About21:11 Asia/Taipei esptool wrote950160-byte ESP32 app at0x10000, verified flash hash and hard reset. Original private Pi profile restored. Systemd bridge inactive after clean stop; manual unprivileged PID16802 runs exact service command at checkpoint. Localhost state stopped left/right0; /lidar/sweep has72 bins. Justin refreshed phone and confirmed live map, reports slight lag and requests a more technical UI. Stationary revised-geometry preview returned fresh72 bins, forward clearance1.115m and forward decision without motor command. Latest motor-power confirmation OFF; profile uncommissioned. No new floor, continuous, close-wall or outdoor physical validation.",
+      "status": "2026-11-14 parent-reported esptool/process/HTTP evidence plus direct user phone confirmation; supersedes interrupted app/phone outage, does not establish systemd running or physical arc/map performance",
+      "evidence": ["knowledge/updates/2026-11-14-arc-map-flash-interruption.md"]
+    },
+    {
+      "key": "esp32_arc_map_flash_interruption_20261114",
+      "value": "Justin explicitly confirmed motor power OFF tonight for ESP32 update. Smooth arcs and --wall-gap implemented; 133 Python tests passed on actual Pi twice, actual-sketch host/browser checks passed, and ESP32 target compiled a 950160-byte application. Pi map-hub installed. Application flash failed at 2.7% after app-sector erase when CH340 clashed with bridge service: current ESP32 app incomplete and phone controller/service unavailable until recovered. Private pre-write flash backup exists; recovery in progress, not complete. No continuous drive, outdoor or close-wall physical validation.",
+      "status": "2026-11-14 direct user motor-power confirmation and parent-reported tool checks/flash interruption; supersedes earlier phone availability and motor-OFF-pending statements at this checkpoint",
+      "evidence": ["knowledge/updates/2026-11-14-arc-map-flash-interruption.md"]
+    },
     {
       "key": "lidar_pose_user_dimensions_20261114",
       "value": "Justin states a 30 cm diameter robot, hence a 15 cm farthest-body radius from the drive-wheel midpoint, and estimates the C1 scan center 8 cm forward and laterally centered. The Pi private profile was updated while controller stopped/zero to sensor_x=0.08 m, sensor_y=0, radius=0.15 m, commissioned=false. This supersedes zero-offset/0.23 m placeholders and hypothetical +0.16 m preview. No new motion or stationary scan followed; continuous mode remains disabled through dinner.",

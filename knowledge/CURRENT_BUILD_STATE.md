@@ -1,5 +1,40 @@
 # Argus Vac — current physical build
 
+Latest 2026-11-14 evening: C1, Pi bridge and ESP32 phone LiDAR map are live;
+Justin said the final map looks better and updates more smoothly.
+The ESP32's final 950736-byte app image passed flash-hash verification and the
+Pi reports stopped/zero with a 72-bin C1 sweep. Two loaded eight-second runs
+confirmed a left pivot then forward curve, and then a continuous left curve,
+both without contact per Justin. He estimated ~35 cm to a marker bag, not a
+measured close-wall stop. Motor power is now confirmed OFF. The Pi bridge is a
+manual process; the enabled systemd unit is currently inactive. Private
+roaming profile remains `commissioned: false`, `continuous: false`; no
+unbounded room or outdoor operation is established.
+
+Latest recovery, about 21:11 Asia/Taipei on 2026-11-14: 950160-byte ESP32 app
+written at `0x10000`, flash hash verified and hard reset completed. Justin
+confirmed restored phone live map, with slight lag and a request for a more
+technical UI. Original private Pi profile restored. Systemd bridge inactive
+after clean stop; manual unprivileged bridge PID 16802 runs the exact service
+command at checkpoint. Local state stopped/zero; sweep endpoint has 72 bins.
+Stationary revised-geometry C1 preview: fresh 72 bins, 1.115 m forward clearance,
+forward software decision, no motor command. Latest motor-power confirmation
+OFF; profile stays uncommissioned. No new floor, continuous, close-wall or
+outdoor physical check. This supersedes the interrupted-app/phone-outage status.
+[Recovery evidence](updates/2026-11-14-arc-map-flash-interruption.md).
+
+Earlier 2026-11-14 interruption, superseded by recovery above: Justin explicitly confirms motor power OFF
+for the ESP32 update. Flash failed at 2.7% after application-sector erase
+because CH340 clashed with the bridge service. ESP32 app is now incomplete;
+phone controller/service is unavailable until successful recovery. A private
+pre-write backup exists and recovery is in progress. Do not treat earlier
+phone Stop availability as current. Pi map-hub is installed; smooth arcs and
+`--wall-gap` pass 133 Python tests twice on Pi, host/browser checks and a
+950160-byte target compile, without completed ESP32 deployment or new physical
+validation. Current working geometry: radius 0.15 m, C1 x=+0.08 m/y=0,
+`commissioned=false`. Continuous, outdoor and close-wall checks are pending.
+[Evidence](updates/2026-11-14-arc-map-flash-interruption.md).
+
 Latest 2026-11-14 geometry from Justin: 30 cm diameter robot gives 15 cm
 maximum extent from the drive-wheel midpoint; C1 scan center is roughly 8 cm
 forward and laterally centered. Pi private profile updated to x=+0.08 m,

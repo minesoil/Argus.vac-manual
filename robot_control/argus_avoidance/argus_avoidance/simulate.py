@@ -235,14 +235,17 @@ def run_scenario(scenario: Scenario, config: Optional[Config] = None) -> dict:
                 "front_clearance_m": _number(decision.front_clearance),
             })
             previous_turn_sign = 0
-        if state == "TURN":
+        if state == "TURN" or (decision.linear > 0.0 and abs(decision.angular) > 1e-9):
+            # A forward arc is also a successful obstacle turn. The geometry
+            # checks below still require clearance and meaningful progress.
             saw_turn = True
+        if state == "TURN":
             sign = 1 if decision.angular > 0.0 else -1 if decision.angular < 0.0 else 0
             if previous_turn_sign and sign and sign != previous_turn_sign:
                 turn_direction_flips += 1
             if sign:
                 previous_turn_sign = sign
-        elif saw_turn and decision.linear > 0.0:
+        elif saw_turn and decision.linear > 0.0 and abs(decision.angular) < 1e-9:
             resumed_after_turn = True
         if state == "FAULT":
             saw_fault = True

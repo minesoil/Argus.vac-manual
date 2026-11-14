@@ -46,6 +46,7 @@ void reset() {
   gpioControl.reset();
   phoneStart = PhoneStart();
   manualGuard = ManualGuard();
+  lidarMap = LidarMap();
   phoneSessionActive = false;
 }
 
@@ -139,6 +140,42 @@ int main() {
   assert(frameReady && activeLength == 4);
   assert(server.dispatch("/frame", HTTP_GET) == 200);
   assert(server.responseType == "image/jpeg");
+
+  // USB LiDAR frames are display-only, length checked, and expire independently.
+  reset();
+  assert(server.dispatch("/lidar", HTTP_GET) == 200);
+  assert(server.responseBody.find("\"fresh\":false") != std::string::npos);
+  auto mapFrame = [](const std::string& bins, uint32_t length = 72) {
+    std::string packet = "AVL1";
+    for (int i = 0; i < 4; ++i) packet += char((length >> (8 * i)) & 0xff);
+    packet += bins;
+    for (uint8_t value : packet) processCameraByte(value);
+  };
+  std::string bins(72, '\0');
+  bins[0] = 20;    // 1 m forward from C1
+  bins[18] = 10;   // 0.5 m right
+  bins[54] = 4;    // 0.2 m left
+  const std::string beforeMapMotors = Serial2.output;
+  mapFrame(bins);
+  assert(Serial2.output == beforeMapMotors);
+  assert(control.mode == DriveMode::Stopped);
+  assert(server.dispatch("/lidar", HTTP_GET) == 200);
+  assert(server.responseBody.find("\"fresh\":true") != std::string::npos);
+  std::string encoded = jsonValue(server.responseBody, "bins");
+  assert(encoded.size() == 144 && encoded.substr(0, 2) == "14");
+  assert(encoded.substr(36, 2) == "0A" && encoded.substr(108, 2) == "04");
+  std::string invalid = bins; invalid[0] = char(241);
+  mapFrame(invalid);
+  assert(server.dispatch("/lidar", HTTP_GET) == 200);
+  assert(jsonValue(server.responseBody, "bins") == encoded);
+  mapFrame(bins.substr(0, 71), 71); // invalid length must not replace the map
+  assert(server.dispatch("/lidar", HTTP_GET) == 200);
+  assert(jsonValue(server.responseBody, "bins") == encoded);
+  testNow += 1001;
+  assert(server.dispatch("/lidar", HTTP_GET) == 200);
+  assert(server.responseBody.find("\"fresh\":false") != std::string::npos);
+  assert(jsonValue(server.responseBody, "age_ms") == "1001");
+  std::cout << "PASS LiDAR USB packet: raw ranges, bounds, read-only route and stale display\n";
 
   std::cout << "PASS actual HTTP routes: ownership, stop races, expiry, bounds, malformed input, rollover, camera relay\n";
 

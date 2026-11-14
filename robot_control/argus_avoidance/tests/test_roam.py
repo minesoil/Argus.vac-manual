@@ -12,7 +12,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from argus_avoidance.c1 import C1Reader, Sweep
 from argus_avoidance.core import AvoidanceController, Config, Decision
 from argus_avoidance.follow import ControlError
-from argus_avoidance.roam import main, run, wheels
+from argus_avoidance.roam import main, navigation_config, run, wheels
 from argus_avoidance.usb_bridge import claim_phone_start
 
 
@@ -145,7 +145,8 @@ class RoamTests(unittest.TestCase):
 
     def test_uncommissioned_trial_rejects_long_or_fast_drive(self):
         for extras in (("--seconds", "21"), ("--seconds", "4", "--cruise", "13"),
-                       ("--continuous",)):
+                       ("--continuous",), ("--wall-gap", "0.19"),
+                       ("--wall-gap", "0.41")):
             with redirect_stderr(io.StringIO()), self.assertRaises(SystemExit) as caught:
                 main(["--lidar", "/dev/c1", "--front-deg", "90", "--trial", *extras])
             self.assertEqual(caught.exception.code, 2)
@@ -153,8 +154,20 @@ class RoamTests(unittest.TestCase):
     def test_moving_steer_keeps_both_wheels_forward(self):
         right = Decision("SLOW", "steer", 0.025, -0.1)
         left = Decision("FORWARD", "steer", 0.05, 0.1)
+        curve = Decision("SLOW", "curve", 0.025, -0.2)
         self.assertEqual(wheels(right, cruise=18, slow=12), (12, 10))
-        self.assertEqual(wheels(left, cruise=18, slow=12), (16, 18))
+        self.assertEqual(wheels(left, cruise=18, slow=12), (15, 18))
+        self.assertEqual(wheels(curve, cruise=18, slow=12), (12, 8))
+        self.assertEqual(wheels(Decision("STOP", "wall")), (0, 0))
+
+    def test_wall_gap_controls_side_approach_without_weakening_hard_stop(self):
+        normal = navigation_config(0.15, 0.30)
+        closer = navigation_config(0.15, 0.20)
+        self.assertAlmostEqual(normal.side_steer_clearance_m, 0.24)
+        self.assertAlmostEqual(closer.side_steer_clearance_m, 0.14)
+        self.assertAlmostEqual(closer.stop_clearance_m, 0.20)
+        self.assertEqual(closer.side_stop_clearance_m, normal.side_stop_clearance_m)
+        self.assertEqual(closer.margin_m, normal.margin_m)
 
     def test_decoder_rejects_bad_sync_and_decodes_fixed_point(self):
         self.assertIsNone(C1Reader.node(bytes((0, 0, 0, 0, 0))))

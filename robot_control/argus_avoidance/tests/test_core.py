@@ -92,6 +92,32 @@ class ControllerTests(unittest.TestCase):
         self.assertGreater(decision.linear, 0)
         self.assertLess(decision.angular, 0)
 
+    def test_front_obstacle_starts_moving_curve_before_stop_line(self):
+        _, decision = self.ready(((0, 0.78),))
+        self.assertEqual(decision.state, "SLOW")
+        self.assertGreater(decision.linear, 0)
+        self.assertGreater(decision.angular, 0)
+        self.assertGreater(decision.front_clearance, 0.30)
+
+    def test_curve_chooses_scanned_clear_side(self):
+        # This point misses the straight corridor but intersects the predicted
+        # left arc. The controller must choose a rightward moving arc instead.
+        left_arc_point = (math.pi / 4, math.hypot(0.28, 0.28))
+        _, decision = self.ready(((0, 0.78), left_arc_point))
+        self.assertEqual(decision.state, "SLOW")
+        self.assertLess(decision.angular, 0)
+
+    def test_rejects_both_unproved_arcs_then_stops_at_front_limit(self):
+        points = ((0, 0.78),
+                  (math.pi / 4, math.hypot(0.28, 0.28)),
+                  (-math.pi / 4, math.hypot(0.28, 0.28)))
+        controller, decision = self.ready(points)
+        self.assertEqual(decision.state, "SLOW")
+        self.assertEqual(decision.angular, 0)
+        controller.observe(scan(0.4, ((0, 0.5), *points[1:])))
+        decision = controller.step(0.4)
+        self.assertEqual((decision.state, decision.linear, decision.angular), ("STOP", 0, 0))
+
     def test_sweep_checks_rear_obstacle_too(self):
         _, decision = self.ready(((math.pi, 0.24),))
         self.assertEqual(decision.state, "BLOCKED")
@@ -226,7 +252,9 @@ class ControllerTests(unittest.TestCase):
     def test_invalid_configuration_is_rejected(self):
         for kwargs in ({"robot_radius_m": 0}, {"clear_scans": 2.5},
                        {"scan_timeout_s": math.inf}, {"no_return_is_clear": 1},
-                       {"stop_clearance_m": 0.7}, {"slow_m_s": 0.1}):
+                       {"stop_clearance_m": 0.7}, {"slow_m_s": 0.1},
+                       {"curve_start_clearance_m": 0.3},
+                       {"curve_rad_s": 0.4}):
             with self.assertRaises(ValueError, msg=repr(kwargs)):
                 Config(**kwargs)
 

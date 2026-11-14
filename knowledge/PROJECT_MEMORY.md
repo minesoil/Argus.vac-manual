@@ -1,5 +1,39 @@
 # Argus Vac — project memory
 
+Latest 2026-11-14 evening: two corrected-geometry eight-second floor runs at
+12% ended stopped/zero. Justin saw a left pivot then moving curve without
+contact, then a continuous smooth left curve without contact at `--wall-gap
+0.20`; he estimated about 35 cm from the body to a marker bag. The closer
+wall stop, braking, sustained room run and outdoor use remain unverified.
+The technical phone LiDAR display was flashed with a verified app hash; Justin
+said it looks better and updates more smoothly. Pi
+bridge runs manually with live 72-bin scans while its enabled systemd unit is
+inactive after a clean stop. Motor power is confirmed OFF again. The private
+profile remains uncommissioned. [Evidence](updates/2026-11-14-arc-map-flash-interruption.md).
+
+Latest recovery, about 21:11 Asia/Taipei on 2026-11-14: ESP32 950160-byte app
+flashed at `0x10000` with hash verification and hard reset. Phone live map is
+confirmed by Justin; he finds it slightly laggy and wants a more technical UI.
+The original Pi profile is restored. Systemd bridge is inactive after clean
+stop; a manual unprivileged bridge (PID 16802 at checkpoint) runs the exact
+service command. Local state stopped/zero and `/lidar/sweep` has 72 bins.
+Stationary geometry preview gave fresh 72 bins, 1.115 m forward clearance and
+a forward decision, with no motor command. Last motor-power confirmation OFF;
+profile remains uncommissioned and no new floor drive validation occurred.
+This supersedes the incomplete-flash/phone-outage checkpoint below.
+[Recovery evidence](updates/2026-11-14-arc-map-flash-interruption.md).
+
+Earlier 2026-11-14 interruption checkpoint, superseded by recovery above: Justin confirms motor power OFF for
+the ESP32 update. Smooth arcs/`--wall-gap` pass 133 Python tests on Pi twice,
+host/browser checks pass, and the 950160-byte ESP32 application compiles;
+Pi map-hub is installed. The ESP32 flash failed at 2.7% after app-sector erase
+when CH340 clashed with the bridge service. **ESP32 app is incomplete; phone
+controller is unavailable until recovered.** A private flash backup exists;
+recovery is in progress, not complete. Geometry is 30 cm diameter, radius
+0.15 m, approximate C1 x=+0.08 m/y=0; profile stays uncommissioned. Continuous,
+outdoor and close-wall physical checks remain pending.
+[Dated evidence](updates/2026-11-14-arc-map-flash-interruption.md).
+
 Latest 2026-11-14 geometry: Justin states the robot is 30 cm in diameter,
 giving a 15 cm farthest-body radius from the drive-wheel midpoint, and
 estimates the C1 scan center about 8 cm forward, centered laterally. The Pi

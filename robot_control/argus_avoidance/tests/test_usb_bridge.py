@@ -2,6 +2,7 @@
 
 from http.server import ThreadingHTTPServer
 import json
+import math
 from pathlib import Path
 import sys
 import threading
@@ -12,7 +13,8 @@ import urllib.request
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from argus_avoidance.follow import ControlError
-from argus_avoidance.usb_bridge import BridgeHandler, claim_phone_start
+from argus_avoidance.c1 import Sweep
+from argus_avoidance.usb_bridge import BridgeHandler, claim_phone_start, load_roam_args
 
 
 class Controller:
@@ -67,6 +69,39 @@ class USBBridgeTests(unittest.TestCase):
                     self.call(path, body)
                 self.assertEqual(error.exception.code, status)
         self.assertEqual(self.server.controller.calls, [])
+
+    def test_lidar_sweep_is_read_only_and_preserves_unknown_bins(self):
+        hub = mock.Mock()
+        hub.error = None
+        ranges = [2.0] * 72
+        ranges[4] = math.nan
+        hub.latest = Sweep(3, 12.0, 12.1, tuple(ranges), 500)
+        self.server.lidar_hub = hub
+        with self.call("/lidar/sweep") as response:
+            data = json.load(response)["sweep"]
+        self.assertEqual((data["sequence"], data["started"]), (3, 12.0))
+        self.assertIsNone(data["ranges"][4])
+        self.assertEqual(self.server.controller.calls, [])
+
+    def test_lidar_fault_cannot_return_old_clear_scan(self):
+        hub = mock.Mock()
+        hub.error = "C1 disconnected"
+        self.server.lidar_hub = hub
+        with self.assertRaises(urllib.error.HTTPError) as error:
+            self.call("/lidar/sweep")
+        self.assertEqual(error.exception.code, 503)
+
+    def test_phone_roaming_reads_single_owner_bridge_profile(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "roam.json"
+            path.write_text(json.dumps({"commissioned": True, "lidar": "/dev/c1",
+                                        "front_deg": 90, "sensor_x": 0.08,
+                                        "sensor_y": 0, "radius": 0.15,
+                                        "wall_gap": 0.30}))
+            args = load_roam_args(path, lidar_bridge=True)
+        self.assertEqual(args[args.index("--lidar") + 1], "bridge")
+        self.assertEqual(args[args.index("--wall-gap") + 1], "0.3")
 
     def test_start_claim_launches_once_with_captured_epoch(self):
         controller = self.server.controller

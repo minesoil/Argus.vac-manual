@@ -1,5 +1,36 @@
 # Argus Vac decisions and chronology
 
+2026-11-14 evening: keep the private roaming profile uncommissioned and
+continuous mode disabled after two eight-second loaded checks. Use
+`--wall-gap 0.20` only for a bounded supervised trial; its coupled side-steer
+threshold is 0.14 m beyond the inflated footprint. Justin observed a smooth
+curve without contact but estimated ~35 cm to a marker bag, so close-wall
+cleaning and stopping distance are not validated. Final phone map image was
+hash-verified; motor power switched OFF afterward. Systemd bridge unit is
+enabled but inactive; manual bridge currently provides control and scans.
+
+2026-11-14 about 21:11 Asia/Taipei — Recovery succeeds: ESP32 app 950160 bytes
+at `0x10000`, flash hash verified, hard reset. Justin confirms restored phone
+live map, reports slight lag and requests a more technical UI. Original Pi
+profile restored; systemd service inactive after clean stop, manual
+unprivileged bridge PID 16802 running the exact service command. State
+stopped/zero and sweep has 72 bins. Stationary preview at revised geometry
+reports fresh 72 bins/1.115 m forward clearance/forward decision without a motor
+command. Supersede incomplete-app/phone-outage condition; do not equate manual
+process recovery with systemd running, or preview decisions with a floor test.
+Latest motor-power confirmation OFF, profile uncommissioned.
+[Dated recovery](updates/2026-11-14-arc-map-flash-interruption.md).
+
+2026-11-14 later ESP32 recovery checkpoint — Justin confirms motor power OFF.
+Keep it OFF while recovering the application after the flash failed at 2.7%
+following sector erase amid a CH340/bridge-service clash. Phone controller is
+unavailable; private pre-write flash backup retained privately. Do not mark
+deployment complete. Smooth arcs/`--wall-gap` have 133 Pi tests passing twice,
+host/browser checks and a 950160-byte target compile; Pi map-hub is installed.
+Use radius 0.15 m and approximate lidar x=+0.08 m/y=0 with `commissioned=false`.
+Continuous/outdoor/close-wall physical validation remains pending.
+[Dated evidence](updates/2026-11-14-arc-map-flash-interruption.md).
+
 2026-11-14 geometry correction: use Justin's 30 cm diameter and approximate
 8 cm forward C1 scan-center offset as working dimensions. Update Pi private
 profile to radius 0.15 m and sensor_x +0.08 m, leaving `commissioned: false`
