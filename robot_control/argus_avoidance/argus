@@ -11,6 +11,9 @@ case "${1:-help}" in
   follow)
     shift
     exec /usr/bin/python3 -m argus_avoidance.follow "$@" ;;
+  roam)
+    shift
+    exec /usr/bin/python3 -m argus_avoidance.roam "$@" ;;
   obstacle-calibrate)
     shift
     exec /usr/bin/python3 -m argus_avoidance.obstacles --profile .state/floor.json --calibrate "$@" ;;
@@ -38,6 +41,7 @@ Argus on the Orange Pi
   ./argus scan     Listen for three real lidar scans (10 second limit)
   ./argus line-preview  Print tape steering decisions from the live camera
   ./argus follow   Preview the tape follower; --drive selects the prepared ESP32 session API
+  ./argus roam --lidar PORT  Preview C1 stop-turn-continue; explicit --drive requires commissioning
   ./argus obstacle-status  Show calibrated camera-preview status
   ./argus obstacle-calibrate  Calibrate a clear floor patch while STOPPED, motors OFF
   ./argus preview  Run the ROS controller with motor output disabled

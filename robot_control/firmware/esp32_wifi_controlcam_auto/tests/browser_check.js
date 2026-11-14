@@ -129,6 +129,14 @@ async function main() {
   assert.equal(evaluate('followToken'), '');
   assert.equal(posts.length, countAfterStop);
 
-  console.log('PASS embedded UI: stale poll, manual arm/takeover, idle auto, in-flight drive/independent stop');
+  const roamStart = elements.get('roam').onclick();
+  states.at(-1).resolve(response({mode: 'stopped', epoch: 111, reason: 'stopped'}));
+  await settle();
+  assert.equal(posts.at(-1).url, '/roam/start');
+  posts.at(-1).resolve(response({follow_token: '5555555555555555'}));
+  await roamStart;
+  assert.equal(evaluate('followToken'), '5555555555555555');
+  assert.equal(evaluate('modeLabel.textContent'), 'Lidar roaming requested');
+  console.log('PASS embedded UI: stale poll, manual takeover, Stop races and separate lidar roaming Start');
 }
 main().catch(error => {console.error(error); process.exitCode = 1;});

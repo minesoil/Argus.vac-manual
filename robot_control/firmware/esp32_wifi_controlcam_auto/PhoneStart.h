@@ -9,6 +9,7 @@ class PhoneStart {
   uint32_t requestedAt = 0;
   uint64_t requestToken = 0;
   bool consumed = false;
+  bool roaming = false;
   uint32_t consumedEpoch = 0;
 
   void expire(uint32_t now, uint32_t currentEpoch, bool stopped) {
@@ -17,13 +18,14 @@ class PhoneStart {
   }
 
   bool request(uint32_t expectedEpoch, uint32_t currentEpoch, bool stopped, uint32_t now,
-               uint64_t token) {
+               uint64_t token, bool requestRoaming = false) {
     expire(now, currentEpoch, stopped);
     if (!token || !stopped || expectedEpoch != currentEpoch || pending ||
         (consumed && consumedEpoch == currentEpoch)) return false;
     epoch = currentEpoch;
     requestedAt = now;
     requestToken = token;
+    roaming = requestRoaming;
     pending = true;
     return true;
   }

@@ -3,6 +3,7 @@
 import argparse
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
+from pathlib import Path
 import subprocess
 import signal
 import sys
@@ -61,9 +62,12 @@ class BridgeHandler(BaseHTTPRequestHandler):
         self.forward(values)
 
 
-def claim_phone_start(controller, state, follower, launch=subprocess.Popen):
+def claim_phone_start(controller, state, follower, launch=subprocess.Popen, roam_args=None):
     """Claim one request; a changed epoch means Stop or takeover won."""
     if not state.get("follow_pending"):
+        return follower
+    kind = state.get("follow_kind", "tape")
+    if kind not in ("tape", "roam") or (kind == "roam" and roam_args is None):
         return follower
     epoch, token = state.get("epoch"), state.get("follow_token")
     try:
@@ -74,10 +78,31 @@ def claim_phone_start(controller, state, follower, launch=subprocess.Popen):
         return follower
     if follower is not None and follower.poll() is None:
         return follower
-    return launch([
-        sys.executable, "-m", "argus_avoidance.follow", "--drive",
-        "--seconds", "30", "--expected-epoch", str(epoch),
-    ])
+    command = ([sys.executable, "-u", "-m", "argus_avoidance.roam", "--drive"] + roam_args
+               if kind == "roam" else
+               [sys.executable, "-m", "argus_avoidance.follow", "--drive", "--seconds", "30"])
+    return launch(command + ["--expected-epoch", str(epoch)])
+
+
+def load_roam_args(path):
+    """Explicit measured deployment profile; absent/uncommissioned disables Start."""
+    if path is None:
+        return None
+    profile = json.loads(Path(path).read_text())
+    if profile.get("commissioned") is not True:
+        return None
+    required = ("lidar", "front_deg", "sensor_x", "sensor_y", "radius")
+    if any(key not in profile for key in required):
+        raise ValueError("Roam profile requires lidar, front_deg, sensor_x, sensor_y, radius")
+    result = ["--commissioned"]
+    for key in required + ("cruise", "slow", "turn"):
+        if key in profile:
+            result.extend(["--" + key.replace("_", "-"), str(profile[key])])
+    if profile.get("continuous") is True:
+        result.append("--continuous")
+    else:
+        result.extend(["--seconds", str(profile.get("seconds", 30))])
+    return result
 
 
 def main(argv=None):
@@ -88,7 +113,9 @@ def main(argv=None):
                         help="Keep USB available for control without relaying phone JPEGs")
     parser.add_argument("--manual-guard", action="store_true",
                         help="Publish local obstacle-preview health to assisted-manual firmware")
+    parser.add_argument("--roam-config", help="Measured C1 roaming profile; missing/uncommissioned disables roaming")
     args = parser.parse_args(argv)
+    roam_args = load_roam_args(args.roam_config)
     controller = SerialAutoClient(args.serial)
     camera = SnapshotReader()
     server = ThreadingHTTPServer(("127.0.0.1", 8766), BridgeHandler)
@@ -113,7 +140,7 @@ def main(argv=None):
             with server.usb_lock:
                 if time.monotonic() >= next_health:
                     state = controller.request("/state")
-                    follower = claim_phone_start(controller, state, follower)
+                    follower = claim_phone_start(controller, state, follower, roam_args=roam_args)
                     next_health = time.monotonic() + 0.5
                 if guard:
                     guard.tick(state)

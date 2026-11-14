@@ -23,6 +23,15 @@ int main() {
   assert(!p.claim(4, 16, 4, true, 2112)); // delayed old claim
   assert(p.claim(4, 17, 4, true, 2113));
   PhoneStart rollover;
+  PhoneStart roaming;
+  assert(roaming.request(1, 1, true, 100, 12, true));
+  assert(roaming.roaming);
+  assert(!roaming.request(1, 1, true, 101, 13, false));
+  assert(roaming.roaming); // rejected tape request cannot change selected mode
+  assert(roaming.claim(1, 12, 1, true, 102));
+  assert(roaming.roaming);
+  assert(roaming.request(2, 2, true, 103, 14));
+  assert(!roaming.roaming);
   assert(rollover.request(9, 9, true, UINT32_MAX - 1000, 22));
   assert(!rollover.claim(9, 22, 9, true, 1100));
 }

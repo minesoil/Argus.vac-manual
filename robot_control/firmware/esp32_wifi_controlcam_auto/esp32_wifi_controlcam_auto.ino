@@ -373,6 +373,8 @@ button {
 <button id="assist">ENABLE CAMERA-ASSISTED DRIVE</button>
 <button id="manual">UNASSISTED MANUAL (NO CAMERA STOP)</button>
 <button id="follow">START LINE FOLLOWING</button>
+<button id="roam">START LIDAR ROAMING</button>
+<p class="status">Lidar roaming: stop, turn and continue. Keep this page open and STOP within reach. Scan or connection loss ends the run.</p>
 <button id="stop">STOP</button>
 <p class="status">Camera-assisted drive: forward only, 35% limit. Release joystick to stop. Tape following and unassisted manual have no obstacle stop.</p>
 </main>
@@ -606,31 +608,33 @@ document.getElementById("assist").onclick = async () => {
   try { if (await selectManual(thisIntent, true)) sendDrive(); }
   catch (error) { modeLabel.textContent = "Camera assistance unavailable — check the Pi"; }
 };
-document.getElementById("follow").onclick = async () => {
+async function startAutomatic(roaming) {
   const thisIntent = ++intent;
   centerStick();
   try {
     const state = await refreshState();
     if (thisIntent !== intent) return;
-    const reply = await post("/follow/start", {epoch: String(state.epoch)});
+    const reply = await post(roaming ? "/roam/start" : "/follow/start", {epoch: String(state.epoch)});
     if (!reply.ok) { modeLabel.textContent = "Press STOP, then try again"; return; }
     const started = await reply.json();
     if (thisIntent !== intent) return;
     if (document.hidden) { await operatorStop(); return; }
     followToken = started.follow_token;
-    modeLabel.textContent = "Line following requested";
+    modeLabel.textContent = roaming ? "Lidar roaming requested" : "Line following requested";
     setTimeout(async () => {
       if (thisIntent !== intent) return;
       try {
         const current = await refreshState();
         if (thisIntent === intent && current.mode === "stopped")
-          modeLabel.textContent = "No run started or it ended — check tape, then press STOP to retry";
+          modeLabel.textContent = "Run stopped or unavailable — check the Pi and sensor, then press STOP to retry";
       } catch (error) { /* The heartbeat watchdog handles connection loss. */ }
     }, 3000);
   } catch (error) {
     modeLabel.textContent = "Connection lost — reconnect and select control again";
   }
-};
+}
+document.getElementById("follow").onclick = () => startAutomatic(false);
+document.getElementById("roam").onclick = () => startAutomatic(true);
 window.addEventListener("blur", () => {if (manualSession || followToken) operatorStop();});
 window.addEventListener("pagehide", () => {if (manualSession || followToken) operatorStop();});
 document.addEventListener("visibilitychange", () => {
@@ -705,11 +709,12 @@ void formatState(char* response, size_t capacity, bool includeSession = false,
            "{\"mode\":\"%s\",\"epoch\":%lu,\"reason\":\"%s\","
            "\"lease_ms\":%lu,\"max_auto_percent\":%d,\"left\":%d,\"right\":%d,"
            "\"request_id\":%lu,\"status\":%d,\"follow_pending\":%s,\"follow_token\":\"%s\","
-           "\"assist\":%s,\"guard\":\"%s\",\"guard_latched\":%s%s%s%s}",
+           "\"follow_kind\":\"%s\",\"assist\":%s,\"guard\":\"%s\",\"guard_latched\":%s%s%s%s}",
            modeName(), (unsigned long)control.epoch, control.reason,
            (unsigned long)DriveControl::TimeoutMs, DriveControl::AutoLimit,
            control.left, control.right, (unsigned long)requestId, status,
            phoneStart.pending ? "true" : "false", phoneStart.pending ? followToken : "",
+           phoneStart.roaming ? "roam" : "tape",
            manualGuard.selected ? "true" : "false", manualGuard.state(millis()), manualGuard.latched ? "true" : "false",
            includeSession ? ",\"session\":\"" : "",
            includeSession ? token : "", includeSession ? "\"" : "");
@@ -871,7 +876,7 @@ void handleState() {
   sendState();
 }
 
-void handleFollowStart() {
+void handleFollowStart(bool roaming = false) {
   updateMotors();
   uint32_t expectedEpoch;
   if (!readUnsigned("epoch", expectedEpoch)) {
@@ -881,7 +886,7 @@ void handleFollowStart() {
   uint64_t token = ((uint64_t)esp_random() << 32) | esp_random();
   if (!token) token = 1;
   if (!phoneStart.request(expectedEpoch, control.epoch, control.mode == DriveMode::Stopped,
-                          millis(), token)) {
+                          millis(), token, roaming)) {
     server.send(409, "text/plain", "Press Stop and select control again");
     return;
   }
@@ -1043,7 +1048,8 @@ void setup() {
   server.on("/drive", HTTP_GET, []() { handleCommand(DriveMode::Manual); });
   server.on("/drive", HTTP_POST, []() { handleCommand(DriveMode::Manual); });
   server.on("/state", HTTP_GET, handleState);
-  server.on("/follow/start", HTTP_POST, handleFollowStart);
+  server.on("/follow/start", HTTP_POST, []() { handleFollowStart(false); });
+  server.on("/roam/start", HTTP_POST, []() { handleFollowStart(true); });
   server.on("/follow/heartbeat", HTTP_POST, handleFollowHeartbeat);
   server.on("/manual/arm", HTTP_POST, []() { handleArm(DriveMode::Manual); });
   server.on("/assist/arm", HTTP_POST, []() { handleArm(DriveMode::Manual, true); });

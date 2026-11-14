@@ -361,4 +361,17 @@ int main() {
   assert(server.dispatch("/assist/arm",HTTP_POST,{{"epoch",preAssistEpoch}})==409);
   assert(control.mode==DriveMode::Manual && !manualGuard.selected);
   std::cout << "PASS assisted selection: unavailable camera stops old unassisted drive; stale selection preserves newer owner\n";
+  reset();
+  assert(server.dispatch("/roam/start",HTTP_POST,{{"epoch",epoch()}})==200);
+  assert(phoneStart.pending && phoneStart.roaming);
+  assert(jsonValue(server.responseBody,"follow_kind")=="roam");
+  std::string roamPhoneToken=jsonValue(server.responseBody,"follow_token");
+  assert(control.left==0 && control.right==0);
+  assert(jsonValue(gpio("300,claim,"+epoch()+","+roamPhoneToken),"status")=="200");
+  automatic=arm("/auto/arm");
+  assert(drive("/auto/drive",automatic,"1","-15","15")==204);
+  assert(server.dispatch("/stop",HTTP_POST)==200);
+  assert(control.mode==DriveMode::Stopped && control.left==0 && control.right==0);
+  assert(drive("/auto/drive",automatic,"2","18","18")==409);
+  std::cout << "PASS lidar roaming: separate phone mode, zero-output start, pivot and Stop invalidation\n";
 }
