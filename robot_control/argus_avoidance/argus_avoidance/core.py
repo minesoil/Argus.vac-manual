@@ -19,6 +19,7 @@ class Config:
     slow_clearance_m: float = 0.60
     stop_clearance_m: float = 0.30
     resume_clearance_m: float = 0.40
+    side_stop_clearance_m: float = 0.15
     scan_timeout_s: float = 0.5
     clear_scans: int = 3
     stop_hold_s: float = 0.25
@@ -235,7 +236,9 @@ class AvoidanceController:
         if obs.nearest <= cfg.robot_radius_m + cfg.margin_m:
             return self._halt("BLOCKED", "Obstacle inside swept footprint clearance")
         if self._counted_sequence != self._sequence:
-            self._clear_count = self._clear_count + 1 if obs.front > cfg.resume_clearance_m else 0
+            path_clear = (obs.front > cfg.resume_clearance_m and
+                          min(obs.left, obs.right) > cfg.side_stop_clearance_m)
+            self._clear_count = self._clear_count + 1 if path_clear else 0
             self._counted_sequence = self._sequence
         if self.state == "TURN":
             if now - self._turn_started >= cfg.turn_timeout_s:
@@ -246,9 +249,10 @@ class AvoidanceController:
                 return self._decision()
             return self._decision(angular=cfg.turn_rad_s * self._turn_direction)
         if self.state in ("FORWARD", "SLOW"):
-            if obs.front > cfg.stop_clearance_m:
+            if (obs.front > cfg.stop_clearance_m and
+                    min(obs.left, obs.right) > cfg.side_stop_clearance_m):
                 return self._drive()
-            self.state, self.reason = "STOP", "Forward obstacle; stopping before turn"
+            self.state, self.reason = "STOP", "Obstacle near travel path; stopping before turn"
             self._stopped_at = now
             self._clear_count = 0
             return self._decision()
@@ -259,7 +263,8 @@ class AvoidanceController:
                 self._turn_direction = 0
                 return self._drive()
             # Wait for actual distinct clear observations, not repeated timer ticks.
-            if obs.front > cfg.resume_clearance_m:
+            if (obs.front > cfg.resume_clearance_m and
+                    min(obs.left, obs.right) > cfg.side_stop_clearance_m):
                 return self._decision()
             # Turning in place sweeps the circular footprint already checked
             # above. Side corridors need not fit a forward-moving chassis.

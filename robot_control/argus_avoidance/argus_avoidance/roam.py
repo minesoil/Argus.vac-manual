@@ -132,8 +132,8 @@ def main(argv=None):
     if not 1 <= args.slow <= args.cruise <= 25 or not 1 <= args.turn <= 20:
         parser.error("Require 1 <= slow <= cruise <= 25 and 1 <= turn <= 20")
     if args.trial:
-        if args.continuous or args.seconds > 5 or args.cruise > 12 or args.turn > 12:
-            parser.error("Trial requires <=5 seconds, <=12% cruise and turn, no continuous run")
+        if args.continuous or args.seconds > 20 or args.cruise > 12 or args.turn > 12:
+            parser.error("Trial requires <=20 seconds, <=12% cruise and turn, no continuous run")
         args.drive = True
     if args.drive and (args.front_deg is None or not (args.commissioned or args.trial)):
         parser.error("Driving needs measured --front-deg and completed --commissioned checks")

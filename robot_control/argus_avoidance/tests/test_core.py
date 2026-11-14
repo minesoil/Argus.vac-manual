@@ -73,6 +73,19 @@ class ControllerTests(unittest.TestCase):
         self.assertEqual(decision.linear, 0)
         self.assertGreater(decision.angular, 0)
 
+    def test_nearby_side_obstacle_stops_before_footprint_and_turns_away(self):
+        obstacle = ((math.pi / 2, 0.37),)
+        controller = AvoidanceController()
+        controller.observe(scan(0, obstacle))
+        self.assertTrue(controller.arm(0)[0])
+        controller.observe(scan(0.1, obstacle))
+        decision = controller.step(0.1)
+        self.assertEqual(decision.state, "STOP")
+        controller.observe(scan(0.3, obstacle))
+        decision = controller.step(0.3)
+        self.assertEqual(decision.state, "TURN")
+        self.assertLess(decision.angular, 0)
+
     def test_sweep_checks_rear_obstacle_too(self):
         _, decision = self.ready(((math.pi, 0.24),))
         self.assertEqual(decision.state, "BLOCKED")

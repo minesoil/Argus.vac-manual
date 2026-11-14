@@ -1,5 +1,7 @@
 """Serial decoding and failure-driven checks of the actual roaming runner."""
 
+from contextlib import redirect_stderr
+import io
 import math
 from pathlib import Path
 import sys
@@ -10,7 +12,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from argus_avoidance.c1 import C1Reader, Sweep
 from argus_avoidance.core import AvoidanceController, Config
 from argus_avoidance.follow import ControlError
-from argus_avoidance.roam import run
+from argus_avoidance.roam import main, run
 from argus_avoidance.usb_bridge import claim_phone_start
 
 
@@ -140,6 +142,13 @@ class RoamTests(unittest.TestCase):
         self.assertEqual(len(grouped.ranges), 36)
         self.assertEqual(grouped.ranges[1], 0.42)
         self.assertTrue(math.isnan(grouped.ranges[2]))
+
+    def test_uncommissioned_trial_rejects_long_or_fast_drive(self):
+        for extras in (("--seconds", "21"), ("--seconds", "4", "--cruise", "13"),
+                       ("--continuous",)):
+            with redirect_stderr(io.StringIO()), self.assertRaises(SystemExit) as caught:
+                main(["--lidar", "/dev/c1", "--front-deg", "90", "--trial", *extras])
+            self.assertEqual(caught.exception.code, 2)
 
     def test_decoder_rejects_bad_sync_and_decodes_fixed_point(self):
         self.assertIsNone(C1Reader.node(bytes((0, 0, 0, 0, 0))))

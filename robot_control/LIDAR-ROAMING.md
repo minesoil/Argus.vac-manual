@@ -26,6 +26,8 @@ translation and orientation applied. Default footprint radius is 230 mm plus
 60 mm margin; these are commissioning placeholders, not measured dimensions.
 Distance thresholds are measured beyond that inflated footprint: slow at
 600 mm, stop at 300 mm, resume above 400 mm after three distinct clear scans.
+Forward travel also stops when either side has less than 150 mm beyond the
+inflated footprint, to catch drift toward a wall before the turn clearance is lost.
 First stop, wait 250 ms, then pivot toward the clearer side. The side need not
 fit a forward path for an in-place pivot; the full swept footprint must still
 be clear. An obstacle inside the rotation footprint stops the run. A turn that
@@ -92,7 +94,7 @@ duration cap, not an assurance of indefinite or unattended operation.
    lidar/control link. Confirm no automatic restart. On the floor, use a short
    low-speed approach to a large upright box with Stop ready and ample space;
    measure the stopped gap. Stop and retune if the margin is inadequate.
-   The command-line `--trial` mode is limited to five seconds and 12% wheel
+   The command-line `--trial` mode is limited to 20 seconds and 12% wheel
    commands for that first supervised floor check. It does not mark the profile
    commissioned or enable the phone roaming Start.
 7. After those physical checks, set `commissioned: true`, restart the bridge,
