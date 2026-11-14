@@ -261,14 +261,10 @@ class AvoidanceController:
             # Wait for actual distinct clear observations, not repeated timer ticks.
             if obs.front > cfg.resume_clearance_m:
                 return self._decision()
-            left_ok = obs.left > cfg.resume_clearance_m
-            right_ok = obs.right > cfg.resume_clearance_m
-            if not left_ok and not right_ok:
-                return self._halt("BLOCKED", "Neither side has sufficient clearance")
+            # Turning in place sweeps the circular footprint already checked
+            # above. Side corridors need not fit a forward-moving chassis.
             if not self._turn_direction:
-                self._turn_direction = 1 if left_ok and (not right_ok or obs.left >= obs.right) else -1
-            elif self._turn_direction > 0 and not left_ok or self._turn_direction < 0 and not right_ok:
-                return self._halt("BLOCKED", "Chosen turn is blocked")
+                self._turn_direction = 1 if obs.left >= obs.right else -1
             self.state, self.reason = "TURN", "Turning left" if self._turn_direction > 0 else "Turning right"
             self._turn_started = now
             self._clear_count = 0

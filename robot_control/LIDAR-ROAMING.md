@@ -25,8 +25,10 @@ translation and orientation applied. Default footprint radius is 230 mm plus
 60 mm margin; these are commissioning placeholders, not measured dimensions.
 Distance thresholds are measured beyond that inflated footprint: slow at
 600 mm, stop at 300 mm, resume above 400 mm after three distinct clear scans.
-First stop, wait 250 ms, then pivot toward the clearer side. An obstacle inside
-the rotation footprint stops the run. A turn that cannot clear in 15 s latches
+First stop, wait 250 ms, then pivot toward the clearer side. The side need not
+fit a forward path for an in-place pivot; the full swept footprint must still
+be clear. An obstacle inside the rotation footprint stops the run. A turn that
+cannot clear in 15 s latches
 BLOCKED instead of repeatedly reversing or spinning.
 
 Default commands are 18% cruise, 12% slow, 15% pivot. Percent is not a calibrated
@@ -60,6 +62,8 @@ duration cap, not an assurance of indefinite or unattended operation.
    on the Pi. Build/flash the matched ESP32 only with motor power OFF and verify
    the upload; retain private `config.h` without publishing it. Restore its normal
    power arrangement afterward and check GPIO Stop/zero outputs.
+   For this Pi, staged Python files and a stopped, uncommissioned bridge installer
+   are under `/home/orangepi/argus/roam-stage-20261114/`.
 3. Stationary preview, with no drive client:
 
    ```sh

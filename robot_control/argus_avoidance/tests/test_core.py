@@ -61,11 +61,17 @@ class ControllerTests(unittest.TestCase):
         self.assertLess(decision.angular, 0)
 
     def test_trapped_remains_stopped_until_rearmed(self):
-        controller, decision = self.ready(((0, 0.5), (math.pi / 2, 0.45), (-math.pi / 2, 0.45)))
+        controller, decision = self.ready(((0, 0.5), (math.pi / 2, 0.24), (-math.pi / 2, 0.45)))
         self.assertEqual(decision.state, "BLOCKED")
         controller.observe(scan(0.4))
         self.assertEqual(controller.step(0.4).linear, 0)
         self.assertFalse(controller.armed)
+
+    def test_tight_room_allows_in_place_turn_when_footprint_is_clear(self):
+        _, decision = self.ready(((0, 0.5), (math.pi / 2, 0.45), (-math.pi / 2, 0.42)))
+        self.assertEqual(decision.state, "TURN")
+        self.assertEqual(decision.linear, 0)
+        self.assertGreater(decision.angular, 0)
 
     def test_sweep_checks_rear_obstacle_too(self):
         _, decision = self.ready(((math.pi, 0.24),))
