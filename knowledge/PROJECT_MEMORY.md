@@ -1,5 +1,12 @@
 # Argus Vac — project memory
 
+Dinner pause, 2026-11-14: Justin places the C1 about 3.5–4 cm behind the front,
+centered laterally, and estimates 6 cm from the C1's rear to the drive-wheel
+midpoint. The lidar measurement origin's offset is still unknown; a +0.16 m
+preview was only hypothetical and blocked. The controller is stopped/zero,
+continuous mode remains disabled, and motor power-off is awaiting Justin's
+confirmation. [Evidence](updates/2026-11-14-lidar-floor-commissioning.md).
+
 Latest 2026-11-14 floor checkpoint: C1 live on Pi; Python roaming source is
 installed, the private profile stays uncommissioned, and the new ESP32 phone
 firmware is unflashed. Justin confirmed a loaded right pivot then forward crawl

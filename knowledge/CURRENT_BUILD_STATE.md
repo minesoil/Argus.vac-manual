@@ -1,5 +1,12 @@
 # Argus Vac — current physical build
 
+Dinner pause, 2026-11-14: C1 is laterally centered, about 3.5–4 cm behind
+the front. Justin estimates 6 cm from the C1 rear to the drive-wheel midpoint.
+Exact measurement-origin offset and farthest chassis radius are unverified;
+do not use the hypothetical +0.16 m pose as commissioned geometry. Last drive
+session stopped/zero; continuous mode disabled; motor power-off was requested
+and not yet confirmed. [Evidence](updates/2026-11-14-lidar-floor-commissioning.md).
+
 Latest 2026-11-14: C1 connected to Pi through CP2102; live scans and bounded
 floor roaming trials succeeded. Justin confirmed raised-wheel forward and left
 pivot directions, a short loaded forward crawl, and a loaded right pivot then

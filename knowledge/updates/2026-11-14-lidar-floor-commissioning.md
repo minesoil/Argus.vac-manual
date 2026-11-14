@@ -34,3 +34,10 @@ room behavior, outdoor open-space coverage and drop-off detection remain
 unverified. Floor tape is not a lidar boundary. Last confirmed motor power
 was ON for the bounded floor test; switch-off was not confirmed. Source:
 GitHub commit `a5896f1abd1b072824ed8b5eda3ec14474d14c3d`.
+
+Dinner handoff: Justin says the C1 is laterally centered and 3.5–4 cm behind
+the robot front; he estimates 6 cm from the lidar housing rear to the drive
+wheel midpoint. The diagram's origin and scan-center offset are not known.
+A stationary preview assuming +0.16 m offset and 0.30 m chassis radius blocked;
+that assumption is not the commissioned pose. No more motor motion was sent.
+Justin was asked to switch motor power OFF before dinner; not yet confirmed.

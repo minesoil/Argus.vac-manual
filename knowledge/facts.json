@@ -3,6 +3,12 @@
   "as_of": "2026-11-14 Asia/Taipei; C1 Pi floor commissioning checkpoint; individual older evidence retained",
   "facts": [
     {
+      "key": "lidar_pose_dinner_pause_20261114",
+      "value": "Justin places the C1 laterally centered and about 3.5–4 cm behind the robot front, and estimates 6 cm from the lidar housing rear to the midpoint between drive wheels. The scan-center offset and farthest chassis radius remain unknown. A stationary preview with hypothetical +0.16 m offset and 0.30 m radius blocked; those are not commissioned measurements. Last ESP32 state was stopped/zero. Continuous mode disabled; motor power-off requested but not confirmed.",
+      "status": "Direct user geometry statement plus stationary software preview; supersedes treating the zero sensor offset as known",
+      "evidence": ["knowledge/updates/2026-11-14-lidar-floor-commissioning.md"]
+    },
+    {
       "key": "lidar_roaming_floor_checkpoint_20261114",
       "value": "C1 live on Pi; 120 Python tests passed there. Justin confirmed raised-wheel forward and left pivot directions, a loaded forward crawl, and a loaded right pivot followed by forward motion without contact. Later bounded trials showed repeated stop-turn-go; a gentle moving curve was added for clearer paths. Every trial ended with ESP32 stopped and zero wheel outputs. Python source is installed, private roaming profile remains uncommissioned, and new ESP32 phone firmware is unflashed. Continuous room and outdoor runs remain unverified. Last confirmed motor power was ON during a floor trial, with switch-off unconfirmed.",
       "status": "Live Pi and ESP32 readbacks plus direct Justin observations; supersedes earlier same-day not-installed and untested claims, while preserving those records as chronology",

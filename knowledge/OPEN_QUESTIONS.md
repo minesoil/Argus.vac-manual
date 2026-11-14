@@ -1,5 +1,11 @@
 # Unresolved project facts
 
+2026-11-14 dinner handoff: measure the forward offset from the C1 scan center
+(not housing rear) to the drive-wheel midpoint, and the farthest body point
+from that midpoint. Justin estimated 6 cm from housing rear to wheel midpoint,
+but this does not resolve scan-center offset. A hypothetical +0.16 m pose
+preview blocked. Confirm motor power is OFF before leaving.
+
 Latest 2026-11-14: confirm physical C1 offset from the drive rotation center,
 full robot turning radius, loaded stopping gap, phone Stop takeover during a
 roaming run, sustained continuous room behavior, and outdoor scan coverage.

@@ -103,3 +103,21 @@ has not been restarted for the last source sync. The private roaming profile
 remains `commissioned: false`, and new phone firmware is not flashed. No
 continuous floor run or outdoor validation has occurred. Last confirmed motor
 power state was ON during the floor trial; switch-off was not confirmed.
+
+Justin later corrected sensor placement: C1 is horizontally centered and about
+3.5–4 cm behind the robot front. His illustrative coordinates put front at
+`(0, 20 cm)` and lidar at `(0, 16 cm)`; whether `(0,0)` is the drive-wheel
+midpoint and the farthest chassis extent are still being checked. Earlier
+trials used placeholder `sensor_x=0`, so their clearance estimates are not
+fully calibrated. A stationary preview assuming the diagram's origin is the
+drive center (`sensor_x=+0.16 m`, radius `0.30 m`, margin `0.06 m`) latched
+BLOCKED for an obstacle within the swept footprint. No further motor motion
+was commanded after this geometry correction, and continuous mode remains
+disabled pending measured geometry.
+
+Dinner pause: Justin estimates about 6 cm from the back of the C1 to the
+midpoint between drive wheels. This does not establish the lidar measurement
+origin's forward offset, because the C1 housing size and diagram origin were
+not specified. The +0.16 m preview above was hypothetical, not final
+calibration. The last drive session was stopped/zero; Justin was asked to turn
+drive-motor power OFF before leaving. Power-off confirmation remains pending.

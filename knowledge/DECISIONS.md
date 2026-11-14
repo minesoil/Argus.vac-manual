@@ -1,5 +1,11 @@
 # Argus Vac decisions and chronology
 
+2026-11-14 dinner pause: stop physical trials and leave continuous mode
+disabled until C1 scan-center offset and robot turning radius are measured.
+The last ESP32 state was stopped with zero outputs. Justin was asked to turn
+motor power OFF; confirmation is pending. His 6 cm estimate is housing-rear to
+wheel-midpoint, not the scan-center offset.
+
 2026-11-14 later commissioning decision: retain Stop/pivot in tight clearance,
 add gentle moving steering only with an open forward path, and keep the private
 roaming profile uncommissioned until sustained floor behavior and geometry are
