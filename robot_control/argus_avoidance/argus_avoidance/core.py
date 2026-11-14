@@ -19,7 +19,11 @@ class Config:
     slow_clearance_m: float = 0.60
     stop_clearance_m: float = 0.30
     resume_clearance_m: float = 0.40
-    side_stop_clearance_m: float = 0.15
+    side_stop_clearance_m: float = 0.05
+    side_steer_clearance_m: float = 0.25
+    steer_front_clearance_m: float = 0.50
+    steer_balance_m: float = 0.07
+    steer_rad_s: float = 0.10
     scan_timeout_s: float = 0.5
     clear_scans: int = 3
     stop_hold_s: float = 0.25
@@ -40,6 +44,9 @@ class Config:
             raise ValueError("clear_scans must be an integer")
         if not self.stop_clearance_m < self.resume_clearance_m < self.slow_clearance_m:
             raise ValueError("Require stop < resume < slow clearances")
+        if not self.side_stop_clearance_m < self.side_steer_clearance_m or (
+                self.steer_front_clearance_m <= self.stop_clearance_m):
+            raise ValueError("Steering thresholds must exceed stop thresholds")
         if self.slow_m_s > self.forward_m_s:
             raise ValueError("Slow speed cannot exceed forward speed")
         if self.min_coverage_ratio > 1 or self.max_unknown_gap_rad > math.pi:
@@ -216,11 +223,19 @@ class AvoidanceController:
                         obs.right if obs else None)
 
     def _drive(self):
-        if self._observation.front <= self.config.slow_clearance_m:
-            self.state, self.reason = "SLOW", "Obstacle approaching"
-            return self._decision(self.config.slow_m_s)
-        self.state, self.reason = "FORWARD", "Forward corridor clear"
-        return self._decision(self.config.forward_m_s)
+        cfg, obs = self.config, self._observation
+        slow = obs.front <= cfg.slow_clearance_m
+        self.state = "SLOW" if slow else "FORWARD"
+        speed = cfg.slow_m_s if slow else cfg.forward_m_s
+        self.reason = "Obstacle approaching" if slow else "Forward corridor clear"
+        if obs.front > cfg.steer_front_clearance_m and min(obs.left, obs.right) < cfg.side_steer_clearance_m:
+            if obs.left + cfg.steer_balance_m < obs.right:
+                self.reason = "Steering right away from left obstacle"
+                return self._decision(speed, -cfg.steer_rad_s)
+            if obs.right + cfg.steer_balance_m < obs.left:
+                self.reason = "Steering left away from right obstacle"
+                return self._decision(speed, cfg.steer_rad_s)
+        return self._decision(speed)
 
     def step(self, now):
         if not self.armed:

@@ -74,7 +74,7 @@ class ControllerTests(unittest.TestCase):
         self.assertGreater(decision.angular, 0)
 
     def test_nearby_side_obstacle_stops_before_footprint_and_turns_away(self):
-        obstacle = ((math.pi / 2, 0.37),)
+        obstacle = ((math.pi / 2, 0.28),)
         controller = AvoidanceController()
         controller.observe(scan(0, obstacle))
         self.assertTrue(controller.arm(0)[0])
@@ -84,6 +84,12 @@ class ControllerTests(unittest.TestCase):
         controller.observe(scan(0.3, obstacle))
         decision = controller.step(0.3)
         self.assertEqual(decision.state, "TURN")
+        self.assertLess(decision.angular, 0)
+
+    def test_open_front_steers_while_moving_away_from_left_obstacle(self):
+        _, decision = self.ready(((math.pi / 2, 0.37),))
+        self.assertEqual(decision.state, "FORWARD")
+        self.assertGreater(decision.linear, 0)
         self.assertLess(decision.angular, 0)
 
     def test_sweep_checks_rear_obstacle_too(self):

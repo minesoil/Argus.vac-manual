@@ -27,10 +27,13 @@ def wheels(decision, cruise=18, slow=12, turn=15):
     if decision.state == "TURN":
         # Positive core angular velocity means CCW/left.
         return (-turn, turn) if decision.angular > 0 else (turn, -turn)
-    if decision.state == "FORWARD":
-        return cruise, cruise
-    if decision.state == "SLOW":
-        return slow, slow
+    if decision.state in ("FORWARD", "SLOW"):
+        power = cruise if decision.state == "FORWARD" else slow
+        if decision.angular > 0:
+            return max(1, power - 2), power
+        if decision.angular < 0:
+            return power, max(1, power - 2)
+        return power, power
     return 0, 0
 
 

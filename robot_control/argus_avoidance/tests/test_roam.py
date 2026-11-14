@@ -10,9 +10,9 @@ from unittest.mock import Mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from argus_avoidance.c1 import C1Reader, Sweep
-from argus_avoidance.core import AvoidanceController, Config
+from argus_avoidance.core import AvoidanceController, Config, Decision
 from argus_avoidance.follow import ControlError
-from argus_avoidance.roam import main, run
+from argus_avoidance.roam import main, run, wheels
 from argus_avoidance.usb_bridge import claim_phone_start
 
 
@@ -149,6 +149,12 @@ class RoamTests(unittest.TestCase):
             with redirect_stderr(io.StringIO()), self.assertRaises(SystemExit) as caught:
                 main(["--lidar", "/dev/c1", "--front-deg", "90", "--trial", *extras])
             self.assertEqual(caught.exception.code, 2)
+
+    def test_moving_steer_keeps_both_wheels_forward(self):
+        right = Decision("SLOW", "steer", 0.025, -0.1)
+        left = Decision("FORWARD", "steer", 0.05, 0.1)
+        self.assertEqual(wheels(right, cruise=18, slow=12), (12, 10))
+        self.assertEqual(wheels(left, cruise=18, slow=12), (16, 18))
 
     def test_decoder_rejects_bad_sync_and_decodes_fixed_point(self):
         self.assertIsNone(C1Reader.node(bytes((0, 0, 0, 0, 0))))

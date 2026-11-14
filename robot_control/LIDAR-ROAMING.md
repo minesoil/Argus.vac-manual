@@ -26,8 +26,11 @@ translation and orientation applied. Default footprint radius is 230 mm plus
 60 mm margin; these are commissioning placeholders, not measured dimensions.
 Distance thresholds are measured beyond that inflated footprint: slow at
 600 mm, stop at 300 mm, resume above 400 mm after three distinct clear scans.
-Forward travel also stops when either side has less than 150 mm beyond the
+Forward travel also stops when either side has less than 50 mm beyond the
 inflated footprint, to catch drift toward a wall before the turn clearance is lost.
+With at least 500 mm of forward clearance beyond that footprint, the robot
+can gently steer away from a nearer side object while both wheels continue
+forward. Closer obstacles still cause a full stop and in-place pivot.
 First stop, wait 250 ms, then pivot toward the clearer side. The side need not
 fit a forward path for an in-place pivot; the full swept footprint must still
 be clear. An obstacle inside the rotation footprint stops the run. A turn that
