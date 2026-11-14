@@ -3,6 +3,12 @@
   "as_of": "2026-11-14 Asia/Taipei; C1 Pi floor commissioning checkpoint; individual older evidence retained",
   "facts": [
     {
+      "key": "lidar_pose_user_dimensions_20261114",
+      "value": "Justin states a 30 cm diameter robot, hence a 15 cm farthest-body radius from the drive-wheel midpoint, and estimates the C1 scan center 8 cm forward and laterally centered. The Pi private profile was updated while controller stopped/zero to sensor_x=0.08 m, sensor_y=0, radius=0.15 m, commissioned=false. This supersedes zero-offset/0.23 m placeholders and hypothetical +0.16 m preview. No new motion or stationary scan followed; continuous mode remains disabled through dinner.",
+      "status": "Direct user dimensions plus verified private Pi profile update; offset approximate and physical operation with revised geometry not yet validated",
+      "evidence": ["knowledge/updates/2026-11-14-lidar-floor-commissioning.md"]
+    },
+    {
       "key": "lidar_pose_dinner_pause_20261114",
       "value": "Justin places the C1 laterally centered and about 3.5–4 cm behind the robot front, and estimates 6 cm from the lidar housing rear to the midpoint between drive wheels. The scan-center offset and farthest chassis radius remain unknown. A stationary preview with hypothetical +0.16 m offset and 0.30 m radius blocked; those are not commissioned measurements. Last ESP32 state was stopped/zero. Continuous mode disabled; motor power-off requested but not confirmed.",
       "status": "Direct user geometry statement plus stationary software preview; supersedes treating the zero sensor offset as known",

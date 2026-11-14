@@ -1,5 +1,12 @@
 # Argus Vac — current physical build
 
+Latest 2026-11-14 geometry from Justin: 30 cm diameter robot gives 15 cm
+maximum extent from the drive-wheel midpoint; C1 scan center is roughly 8 cm
+forward and laterally centered. Pi private profile updated to x=+0.08 m,
+y=0, radius=0.15 m while stopped/zero. `commissioned` remains false;
+continuous mode and motor power-off confirmation remain pending. The +0.16 m
+preview below was hypothetical and superseded.
+
 Dinner pause, 2026-11-14: C1 is laterally centered, about 3.5–4 cm behind
 the front. Justin estimates 6 cm from the C1 rear to the drive-wheel midpoint.
 Exact measurement-origin offset and farthest chassis radius are unverified;

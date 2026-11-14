@@ -1,5 +1,11 @@
 # Unresolved project facts
 
+2026-11-14 update: Justin supplied a 30 cm diameter and approximate +8 cm C1
+scan-center offset from the drive-wheel midpoint; profile is updated but
+uncommissioned. Next: stationary scan using these dimensions, bounded floor
+stopping/turning check, then decide on supervised continuous mode. Confirm
+motor power was switched OFF before dinner. Outdoor coverage remains untested.
+
 2026-11-14 dinner handoff: measure the forward offset from the C1 scan center
 (not housing rear) to the drive-wheel midpoint, and the farthest body point
 from that midpoint. Justin estimated 6 cm from housing rear to wheel midpoint,

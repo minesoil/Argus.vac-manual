@@ -1,5 +1,13 @@
 # Argus Vac — project memory
 
+Latest 2026-11-14 geometry: Justin states the robot is 30 cm in diameter,
+giving a 15 cm farthest-body radius from the drive-wheel midpoint, and
+estimates the C1 scan center about 8 cm forward, centered laterally. The Pi
+private profile now uses `sensor_x=0.08 m`, `sensor_y=0`, `radius=0.15 m`, with
+`commissioned: false`. This supersedes the older zero-offset/23 cm placeholder
+and the hypothetical +16 cm preview below. No new movement occurred; continuous
+mode stays disabled for dinner. [Evidence](updates/2026-11-14-lidar-floor-commissioning.md).
+
 Dinner pause, 2026-11-14: Justin places the C1 about 3.5–4 cm behind the front,
 centered laterally, and estimates 6 cm from the C1's rear to the drive-wheel
 midpoint. The lidar measurement origin's offset is still unknown; a +0.16 m

@@ -41,3 +41,11 @@ wheel midpoint. The diagram's origin and scan-center offset are not known.
 A stationary preview assuming +0.16 m offset and 0.30 m chassis radius blocked;
 that assumption is not the commissioned pose. No more motor motion was sent.
 Justin was asked to switch motor power OFF before dinner; not yet confirmed.
+
+Later same-day geometry correction: Justin states the robot is 30 cm in
+diameter, with the farthest body point 15 cm from the wheel midpoint. He
+estimates the C1 scan center roughly 8 cm forward of that midpoint, laterally
+centered. The Pi private profile was changed while ESP32 was stopped/zero to
+`sensor_x=0.08`, `sensor_y=0`, `radius=0.15`, `commissioned=false`. The
+earlier +0.16 m preview was hypothetical and is superseded. No motion or
+new stationary scan followed this profile update.

@@ -1,5 +1,11 @@
 # Argus Vac decisions and chronology
 
+2026-11-14 geometry correction: use Justin's 30 cm diameter and approximate
+8 cm forward C1 scan-center offset as working dimensions. Update Pi private
+profile to radius 0.15 m and sensor_x +0.08 m, leaving `commissioned: false`
+through dinner. Supersedes zero-offset/0.23 m placeholder and the hypothetical
++0.16 m blocked preview. No further motion commanded.
+
 2026-11-14 dinner pause: stop physical trials and leave continuous mode
 disabled until C1 scan-center offset and robot turning radius are measured.
 The last ESP32 state was stopped with zero outputs. Justin was asked to turn

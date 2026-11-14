@@ -121,3 +121,12 @@ origin's forward offset, because the C1 housing size and diagram origin were
 not specified. The +0.16 m preview above was hypothetical, not final
 calibration. The last drive session was stopped/zero; Justin was asked to turn
 drive-motor power OFF before leaving. Power-off confirmation remains pending.
+
+Justin then supplied working dimensions: the robot is 30 cm in diameter, so
+the farthest body point from the wheel midpoint is 15 cm, and the C1 scan
+center is roughly 8 cm forward of that midpoint. This supersedes the old
+`sensor_x=0`, `radius=0.23 m` placeholders and the hypothetical +0.16 m pose.
+The Pi private profile was updated to `sensor_x=0.08 m`, `sensor_y=0`,
+`radius=0.15 m` while the controller was stopped/zero; `commissioned` remains
+false and no motor command or stationary scan was run after the update.
+Continuous mode remains disabled through dinner.
