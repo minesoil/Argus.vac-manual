@@ -24,7 +24,7 @@ class Config:
     stop_hold_s: float = 0.25
     turn_timeout_s: float = 15.0
     min_coverage_ratio: float = 0.90
-    max_unknown_gap_rad: float = 0.15
+    max_unknown_gap_rad: float = 0.20
     no_return_is_clear: bool = False
 
     def __post_init__(self):

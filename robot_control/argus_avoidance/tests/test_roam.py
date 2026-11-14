@@ -93,7 +93,7 @@ class RoamTests(unittest.TestCase):
     def test_unknown_return_cannot_be_treated_as_clear(self):
         def scene(now, ranges):
             if now > 0.8:
-                ranges[15] = math.nan
+                ranges[14:16] = [math.nan, math.nan]
         result, client, output = self.execute(scene)
         self.assertEqual(result, 1)
         self.assertIn("unknown", output[-1].lower())
@@ -130,6 +130,16 @@ class RoamTests(unittest.TestCase):
         controller.observe(Sweep(1, 1, 1.1, tuple(ranges), 500).scan(front_deg=92.5))
         self.assertTrue(controller.arm(1.2)[0])
         self.assertAlmostEqual(controller.step(1.2).front_clearance, 0.25)
+
+    def test_grouped_control_scan_keeps_measured_nearest_and_unknown_pairs(self):
+        ranges = [2.0] * 72
+        ranges[2] = math.nan
+        ranges[3] = 0.42
+        ranges[4:6] = [math.nan, math.nan]
+        grouped = Sweep(1, 1, 1.1, tuple(ranges), 500).scan(coalesce=True)
+        self.assertEqual(len(grouped.ranges), 36)
+        self.assertEqual(grouped.ranges[1], 0.42)
+        self.assertTrue(math.isnan(grouped.ranges[2]))
 
     def test_decoder_rejects_bad_sync_and_decodes_fixed_point(self):
         self.assertIsNone(C1Reader.node(bytes((0, 0, 0, 0, 0))))

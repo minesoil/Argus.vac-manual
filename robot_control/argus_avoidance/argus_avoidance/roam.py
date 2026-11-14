@@ -61,7 +61,7 @@ def run(reader, controller, client=None, seconds=30.0, expected_epoch=None,
             sweep = reader.latest
             if sweep is not None and sweep.sequence != last_sequence:
                 last_sequence = sweep.sequence
-                controller.observe(sweep.scan(front_deg, x, y))
+                controller.observe(sweep.scan(front_deg, x, y, coalesce=True))
             healthy, reason = controller.health(now)
             if not armed:
                 if healthy:
@@ -106,6 +106,8 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--lidar", required=True)
     parser.add_argument("--drive", action="store_true")
+    parser.add_argument("--trial", action="store_true",
+                        help="Bounded low-power floor commissioning trial; requires explicit duration")
     parser.add_argument("--esp32", default="http://127.0.0.1:8766")
     duration = parser.add_mutually_exclusive_group()
     duration.add_argument("--seconds", type=float, default=30)
@@ -129,7 +131,11 @@ def main(argv=None):
         parser.error("Geometry and duration must be finite; duration and radius positive")
     if not 1 <= args.slow <= args.cruise <= 25 or not 1 <= args.turn <= 20:
         parser.error("Require 1 <= slow <= cruise <= 25 and 1 <= turn <= 20")
-    if args.drive and (args.front_deg is None or not args.commissioned):
+    if args.trial:
+        if args.continuous or args.seconds > 5 or args.cruise > 12 or args.turn > 12:
+            parser.error("Trial requires <=5 seconds, <=12% cruise and turn, no continuous run")
+        args.drive = True
+    if args.drive and (args.front_deg is None or not (args.commissioned or args.trial)):
         parser.error("Driving needs measured --front-deg and completed --commissioned checks")
     controller = AvoidanceController(Config(robot_radius_m=args.radius, margin_m=0.06,
                                              scan_timeout_s=0.6))

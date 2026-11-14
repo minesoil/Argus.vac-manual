@@ -17,9 +17,17 @@ class Sweep:
     ranges: tuple
     nodes: int
 
-    def scan(self, front_deg=0.0, x=0.0, y=0.0):
+    def scan(self, front_deg=0.0, x=0.0, y=0.0, coalesce=False):
         # C1 angles increase clockwise. Core uses CCW from robot forward.
-        return Scan(self.ranges, -math.pi / len(self.ranges), -math.tau / len(self.ranges),
+        ranges = self.ranges
+        if coalesce:
+            if len(ranges) != 72:
+                raise ValueError("Expected 72 raw C1 bins")
+            # Use a measured nearest return from each adjacent 5-degree pair.
+            # A pair with no return remains unknown.
+            ranges = tuple(min((v for v in ranges[i:i+2] if math.isfinite(v)),
+                               default=math.nan) for i in range(0, 72, 2))
+        return Scan(ranges, -math.pi / len(ranges), -math.tau / len(ranges),
                     0.05, 12.0, self.started, x, y, math.radians(front_deg))
 
 

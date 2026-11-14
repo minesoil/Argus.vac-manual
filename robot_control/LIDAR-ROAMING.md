@@ -13,8 +13,9 @@ This reuses the reviewed state machine and drive arbitration. ROS mapping,
 localization and navigation are not prerequisites for this reactive demo.
 It is not room coverage planning; loops and unvisited patches are possible.
 
-Each revolution is reduced to 72 five-degree bins using the nearest valid
-return in each bin. Invalid/zero returns stay unknown. All bins must have a
+Each revolution is reduced to 72 five-degree diagnostic bins, then adjacent
+pairs are grouped into 36 ten-degree control bins using the nearest measured
+return. A pair without a return stays unknown. All control bins must have a
 valid observation; receipt age uses the start of the revolution, with a 600 ms
 limit. Acquisition corruption invalidates that revolution; large UART backlogs
 and disconnects stop the run. The conservative policy may refuse to run in open
@@ -71,7 +72,9 @@ duration cap, not an assurance of indefinite or unattended operation.
    ./argus roam --lidar /dev/serial/by-id/ACTUAL_C1 --seconds 30
    ```
 
-   A healthy stream needs 72 known bins, fresh ages and no sensor fault. If it
+   A healthy control stream needs all 36 grouped bins, fresh ages and no sensor fault. Raw
+   diagnostics may show 71 of 72 bins because the 10–15° slice intermittently
+   lacks returns on this indoor setup. If control refuses on missing coverage, investigate power, scanner occlusion, targets and
    refuses on missing coverage, investigate power, scanner occlusion, targets and
    illumination. Do not convert missing returns into invented clear distances.
 4. Measure raw scanner direction by placing a broad upright target in front of
@@ -89,6 +92,9 @@ duration cap, not an assurance of indefinite or unattended operation.
    lidar/control link. Confirm no automatic restart. On the floor, use a short
    low-speed approach to a large upright box with Stop ready and ample space;
    measure the stopped gap. Stop and retune if the margin is inadequate.
+   The command-line `--trial` mode is limited to five seconds and 12% wheel
+   commands for that first supervised floor check. It does not mark the profile
+   commissioned or enable the phone roaming Start.
 7. After those physical checks, set `commissioned: true`, restart the bridge,
    press Stop, then **START LIDAR ROAMING** for the initial 30-second room test.
    Validate several different walls/corners and a placed object, then extend
