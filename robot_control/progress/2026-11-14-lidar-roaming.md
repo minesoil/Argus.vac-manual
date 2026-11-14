@@ -78,3 +78,28 @@ within 150 mm beyond its inflated footprint, then pivots toward more room;
 118 Python tests passed on Pi. This is staged, not yet installed in the active
 bridge. No loaded turn/continue validation, measured stopping distance,
 continuous room run, or outdoor trial has been completed.
+
+Subsequent 14 November verification: Justin rotated the robot 90° by hand;
+the near return shifted roughly 100° in raw scanner angle and grew from 282
+to 435 mm, identifying an external object rather than fixed robot structure.
+With the wheels on the floor, a seven-second trial logged right pivot → Stop →
+forward crawl → Stop; Justin confirmed all three happened without contact.
+The next bounded trial logged obstacle Stop, turn, forward travel and another
+Stop/turn. Justin confirmed the turns, but said the robot did not look close
+to walls. Side clearance was still about 118 mm beyond the 290 mm inflated
+footprint, so the 150 mm side rule was overly cautious in this room.
+
+The side travel threshold was tuned to 50 mm beyond the inflated footprint.
+The controller now steers gently away from a nearer side obstacle while both
+wheels drive forward, only when forward clearance exceeds 500 mm. A later
+ten-second loaded trial logged an initial moving right curve, then Stop/pivot,
+followed by forward travel. Justin still observed the conspicuous stop-turn-go
+sequence; the moving curve is subtle at a two-percentage-point wheel difference.
+In tight clearance the stop/pivot remains the intended safety behavior. The
+ESP32 ended stopped with zero outputs. 120 Python tests passed on the Pi;
+source is installed in the Pi package with backups and published as commit
+a5896f1abd1b072824ed8b5eda3ec14474d14c3d. The running bridge process
+has not been restarted for the last source sync. The private roaming profile
+remains `commissioned: false`, and new phone firmware is not flashed. No
+continuous floor run or outdoor validation has occurred. Last confirmed motor
+power state was ON during the floor trial; switch-off was not confirmed.

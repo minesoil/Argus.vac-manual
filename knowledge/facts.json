@@ -1,0 +1,523 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-11-14 Asia/Taipei; C1 Pi floor commissioning checkpoint; individual older evidence retained",
+  "facts": [
+    {
+      "key": "lidar_roaming_floor_checkpoint_20261114",
+      "value": "C1 live on Pi; 120 Python tests passed there. Justin confirmed raised-wheel forward and left pivot directions, a loaded forward crawl, and a loaded right pivot followed by forward motion without contact. Later bounded trials showed repeated stop-turn-go; a gentle moving curve was added for clearer paths. Every trial ended with ESP32 stopped and zero wheel outputs. Python source is installed, private roaming profile remains uncommissioned, and new ESP32 phone firmware is unflashed. Continuous room and outdoor runs remain unverified. Last confirmed motor power was ON during a floor trial, with switch-off unconfirmed.",
+      "status": "Live Pi and ESP32 readbacks plus direct Justin observations; supersedes earlier same-day not-installed and untested claims, while preserving those records as chronology",
+      "evidence": [
+        "knowledge/updates/2026-11-14-lidar-floor-commissioning.md",
+        "workspace/robot_control/progress/2026-11-14-lidar-roaming.md"
+      ]
+    },
+{
+  "key": "lidar_roaming_prototype_20261114",
+  "value": "2026-11-14: Justin requests C1 autonomous obstacle avoidance tonight and an outdoor showcase tomorrow. Outdoor area may be open, marked with floor tape only; lidar does not see floor tape, so plan supervised runs with Stop available. Justin confirms motor power OFF and Pi/lidar/Ethernet connected; laptop network sharing must be toggled off/on after laptop restart. Pi is reachable but SSH authentication remains unresolved. Lidar roaming prototype implemented and 114 Python, C++ host, browser and ESP32 dummy-config target checks pass; source published commit 6bd87628f51f2fd9345c1af18892e6f21554da92. It is not installed, scanner runner is not live-tested, and robot motion/braking and outdoor coverage remain unverified. See workspace/robot_control/progress/2026-11-14-lidar-roaming.md.",
+  "status": "User statements and locally verified software; physical deployment pending",
+  "evidence": [
+    "workspace/robot_control/progress/2026-11-14-lidar-roaming.md"
+  ]
+},
+{
+  "key": "c1_laptop_live_scan_pass_20261114",
+  "value": "2026-11-14 verified laptop bench test: CP2102 on COM3; C1 identity responds at 460800 8N1 (model 0x41, firmware 1.02). Health status/error both zero before and after a bounded three-second scan. Received 4584 valid nodes, including 4153 positive nonzero-quality ranges at 138.5–3376 mm. STOP sent, subsequent idle stream zero bytes, port closed. Short live ranging passes; sustained power, calibrated accuracy, scan-rate stability, physical standstill and Pi/ROS integration remain unverified. Supersedes earlier unknown communication/function; no robot drive commanded. Evidence: updates/2026-11-14-c1-laptop-bench-test.md.",
+  "status": "Actual Windows serial bench test; limited three-second live ranging, no calibrated or sustained validation",
+  "evidence": [
+    "knowledge/updates/2026-11-14-c1-laptop-bench-test.md"
+  ]
+},
+{
+  "key": "c1_wiring_reported_20261114",
+  "value": "2026-11-14 follow-up: Justin reports finishing the C1-to-USB-TTL wiring and wants to connect it to his laptop. Interpreted his wording in the context of the CP2102 discussion; exact terminations/soldering, pin mapping, supply capability and working lidar remain unverified. This supersedes wiring-not-yet-reported only. A read-only Windows baseline shows COM13/COM14 Bluetooth and USB Serial Device COM15; none identified as this CP2102. No serial command, scan or motor operation performed.",
+  "status": "Direct user report; physical wiring and lidar function unverified",
+  "evidence": [
+    "knowledge/updates/2026-11-14-cp2102-arrival.md"
+  ]
+},
+    {
+      "key": "cp2102_adapter_arrived_20261114",
+      "value": "Justin confirms USB-to-TTL module arrived, described CP2102 with five pins labelled 3v3, TXD, RXD, GND, 5v. His RPLIDAR C1 has red, yellow, green and black wires crimped into a user-described JST-XH connector. Four wires confirmed; connector cavity count and exact module/connector design unverified. Supersedes November7 replacement-adapter-order-pending only; no completed wiring, fault diagnosis, repaired scanner or live scan established.",
+      "status": "2026-11-14 direct user statement; no hardware operation, voltage/current measurement or physical validation",
+      "evidence": ["knowledge/updates/2026-11-14-cp2102-arrival.md"]
+    },
+    {
+      "key": "learning_baseline_20261110",
+      "value": "Justin reports the handbook has too much code/commands to understand, barely knows Linux and Python, understands some C++ and can understand Arduino code. Basic boolean/if/else examples are already familiar and too simple. He explicitly requests code alongside teaching. Use small actual Argus excerpts with filenames/language to explain command/program/file flow and Arduino comparisons; no broader proficiency inferred.",
+      "status": "2026-11-10 direct user statements; teaching approach is assistant response, not evidence of learning progress",
+      "evidence": ["knowledge/updates/2026-11-10-learning-baseline.md"]
+    },
+    {
+      "key": "reproduction_handbook_published_20261110",
+      "value": "Completed workspace/argus-handbook with93 packaged files including74 reviewed source files, exact recovered command ledger, labeled reconstruction recipe, firmware provenance, Linux and ROS2 learning guides, hash inventory and ZIP under workspace/exports. Published content f8af59b and dashboard fallback3f4c25f to minesoil/Argus.vac-manual main. Offline103 Python tests, host/browser checks, ESP32 dummy-config target compile and dashboard checks pass. No hardware accessed; spare-Pi rebuild untested.",
+      "status": "2026-11-10 actual local artifacts, passed checks and successful Git push; remote readback recorded separately",
+      "evidence": ["knowledge/updates/2026-11-10-assisted-checkpoint-and-handbook.md", "workspace/argus-handbook/evidence/OFFLINE_CHECKS_2026-11-10.md", "https://github.com/minesoil/Argus.vac-manual/tree/main/handbook"]
+    },
+    {
+      "key": "assisted_manual_installed_recovered_20261110",
+      "value": "Later November 9 tool evidence confirms the camera-assisted manual prototype installed on Pi and ESP32, with103 Python tests passing locally and on actual Pi. Final941568-byte application SHA256 fbc4e7bc6b32263d2866c546ff624dbcaebe4598dac0179ac8768f2fbec5ddba was flashed at0x10000 with hash verification. Bridge uses ttyS0 with --manual-guard; obstacle-preview service enabled.",
+      "status": "2026-11-10 recovery of 2026-11-09 tool evidence, not fresh hardware testing; supersedes earlier same-day not-installed and93-test summaries",
+      "evidence": ["knowledge/updates/2026-11-10-assisted-checkpoint-and-handbook.md", "workspace/robot_control/ASSISTED-MANUAL.md"]
+    },
+    {
+      "key": "assisted_manual_physical_limits_recovered_20261110",
+      "value": "Justin confirmed new assisted/manual phone buttons and blocked/unavailable-assisted selection remained STOPPED with warning. Paper-covered live preview later reported CLEAR. No recorded answer to requested motors-off held-joystick actual-object entry/stop check. Raised-wheel assisted stop and loaded obstacle braking remain unverified; completed45-degree tape corner and untethered floor run remain unverified.",
+      "status": "2026-11-09 user confirmation and live preview recovered 2026-11-10; refuse to equate software gate tests with physical braking",
+      "evidence": ["knowledge/updates/2026-11-10-assisted-checkpoint-and-handbook.md"]
+    },
+    {
+      "key": "latest_power_arrangement_recovered_20261110",
+      "value": "For later November9 assisted programming, user reconnected ESP32 USB to Pi. Restoration to bank power after this update is not confirmed; earlier bank-powered GPIO/raised-wheel checks predate the guard. Latest explicit motor-power OFF confirmation belongs to November9. GPIO UART remains control link; no live power state established on November10.",
+      "status": "dated user arrangement, not a fresh power-state check; supersedes assuming earlier bank connection remained current",
+      "evidence": ["knowledge/updates/2026-11-10-assisted-checkpoint-and-handbook.md"]
+    },
+    {
+      "key": "reproduction_handbook_request_20261110",
+      "value": "Justin is at school without Argus and requests an organized folder of exact recoverable Pi commands, every relevant ESP32/Mega/Pi source file, human reproduction steps and beginner Linux/ROS2 explanations. Work folder workspace/argus-handbook; publication pending at checkpoint. Separate recovered commands from reconstructed recipes and exact installed code from historical candidates.",
+      "status": "2026-11-10 direct request; documentation-only work, no robot connection or motor command",
+      "evidence": ["knowledge/updates/2026-11-10-assisted-checkpoint-and-handbook.md", "workspace/argus-handbook/README.md"]
+    },
+    {
+      "key": "line_tests_checkpoint_20261109",
+      "value": "Phone Start installed; bank-powered GPIO and raised-wheel controls pass. Framing correction and tighter large-error turns installed with93 tests passing on actual Pi. User observes sharper but incomplete45-degree turn, still stopping early; Ethernet remained attached. Final GPIO stopped/zero. User delegates stopping tape tests; assistant ends tape tuning and prioritizes assisted manual obstacle warning/braking, which is not installed.",
+      "status": "2026-11-09 live logs and user observations; no successful complete corner or untethered floor trial; requested final motor switch-off unconfirmed",
+      "evidence": ["workspace/robot_control/argus_avoidance/reports/CORNER-CHECK.md", "workspace/robot_control/MANUAL-ASSIST-PLAN.md"]
+    },
+    {
+      "key": "manual_obstacle_assist_and_fixed_camera_20261109",
+      "value": "Justin reiterates primary goal: manual driving with camera obstacle warning and automatic stop. Line following is a demo, detours not immediate priority. He says camera assembly acts as caster holder and cannot be tilted without structural changes; keeps sharp 45-degree tape course. Motor power confirmed OFF during software framing work.",
+      "status": "2026-11-09 direct user statements; manual obstacle protection not installed",
+      "evidence": ["workspace/robot_control/PROJECT-STATUS.md", "workspace/robot_control/argus_avoidance/reports/CORNER-CHECK.md"]
+    },
+    {
+      "key": "phone_start_raised_wheel_check_20261109",
+      "value": "User verifies phone Start/Stop and phone-lock stop with motor off. After restoring ESP USB power to bank, Pi camera/bridge autostart and GPIO control works with no USB serial device. User confirms both raised wheels forward then stopped via phone. Live state shows auto 23/27 then operator-stop zero. Ethernet-unplugged floor result pending.",
+      "status": "2026-11-09 direct user observation and live state; physical raised-wheel check passed, floor pending",
+      "evidence": ["knowledge/updates/2026-11-09-phone-start-installed.md"]
+    },
+    {
+      "key": "phone_start_installed_20261109",
+      "value": "User reconnects Pi/ESP and confirms motor power OFF. Verified ESP MAC, ran 88 tests successfully on actual Pi, flashed phone Start application with esptool hash verified, restarted GPIO bridge. Thirty state requests stay stopped/zero with one epoch. Camera fresh but too broadly dark for tape. Real phone and untethered checks pending.",
+      "status": "2026-11-09 direct user confirmation and live tool evidence; supersedes disconnected/upload-pending state; no new physical drive validation",
+      "evidence": ["knowledge/updates/2026-11-09-phone-start-installed.md"]
+    },
+    {
+      "key": "public_archive_20261109",
+      "value": "Justin explicitly requests all available project documentation/chats/images on GitHub. Published sanitized archive accounting for 1449 original records and 39 current notes; 1396 original records have a public file or readable extraction. Includes three saved Gemini-model chats, Obsidian records and 55 images/diagrams. Complete Gemini-app export unavailable; omissions and aliases are recorded.",
+      "status": "2026-11-09 explicit user authorization and actual Git push; local browser and export integrity checks pass; import d230ad62add6f2432dd276a3d44c27950b3e555f",
+      "evidence": ["knowledge/updates/2026-11-09-public-documentation-archive.md"]
+    },
+    {
+      "key": "dashboard_style_preference_20261109",
+      "value": "Justin requested a less AI-looking dashboard. Replaced slogans, cards and badges with a plain project notebook layout, system fonts and a dated progress note; preserved file browser behavior.",
+      "status": "2026-11-09 user request; implemented and published; browser checks passed",
+      "evidence": ["https://github.com/minesoil/Argus.vac-manual/commit/1a1a2a979606716be0a5a10cf918dcbb13a72e72"]
+    },
+    {
+      "key": "file_dashboard_20261109",
+      "value": "Justin requested replacing the Onshape website with a formatted file dashboard and explanations. Published dashboard to minesoil/Argus.vac-manual main at 19637658bc0318a98e04bc75c876d4a948e5cf5b, with dynamic file discovery, labeled fallback listings and dated milestones. Browser checks pass. Local source: workspace/dashboard.",
+      "status": "2026-11-09 implemented and committed; GitHub Pages propagation checked separately",
+      "evidence": ["knowledge/updates/2026-11-09-file-dashboard.md"]
+    },
+    {
+      "key": "github_and_phone_start_20261109",
+      "value": "Justin selects minesoil/Argus.vac-manual for code/documentation logging and wants camera obstacle warning/stop after tape following. Phone Start local validation passed 88 Python tests plus C++/browser checks. Pi modules copied and bridge stopped; ESP32 update and live checks pending. Ethernet disconnected and user cannot reconnect now.",
+      "status": "2026-11-09 direct user replies and local tool evidence; supersedes design-only status; hardware completion not claimed",
+      "evidence": ["workspace/robot_control/PROJECT-STATUS.md"]
+    },
+    {
+      "key": "untethered_phone_start_request",
+      "value": "Justin requests phone-started untethered line following and confirms the Orange Pi and power bank are both secured on Argus. A local epoch-preserving arm prerequisite passes13 targeted tests; phone Start and Pi supervisor are not installed.",
+      "status": "direct user confirmation 2026-11-08; supersedes October Pi-uninstalled state; phone start not yet implemented",
+      "evidence": ["workspace/robot_control/argus_avoidance/PHONE-START-DESIGN.md"]
+    },
+    {
+      "key": "floor_four_second_retry_latest",
+      "value": "After reported USB power move and60 stable read-only checks, user confirms motor ON and clear path. Four-second camera-following session starts, improves tape offset from -0.15 to about -0.09, then stops early because tape coverage becomes uncertain. Physical stop location awaits user observation.",
+      "status": "2026-11-08 live GPIO and camera output; early automatic stop, not a completed four-second run; power stability beyond short check unresolved",
+      "evidence": ["knowledge/updates/2026-11-08-usb-tape-following.md"]
+    },
+    {
+      "key": "esp_power_move_gpio_check_latest",
+      "value": "After requested move of ESP USB power to the shared power bank, user reports power restored. Pi GPIO bridge returns stopped state with zero outputs and 35% cap; 60 read-only checks pass with a single boot epoch. Four-second floor retry awaits physical readiness.",
+      "status": "2026-11-08 user report and short live check; longer-term power stability and cable placement not independently verified",
+      "evidence": ["knowledge/updates/2026-11-08-usb-tape-following.md"]
+    },
+    {
+      "key": "ground_success_and_reset_latest",
+      "value": "User observes two-second25% camera-guided floor movement along tape and stopping. Requested4s attempt fails503 during arming before drive calls. ESP boot epoch changes and state returns Start stopped/zero; Pi and bridge remain running, kernel logs USB CH340 disconnects. USB autosuspend is off. User confirms motor power OFF and ESP powered only by USB, no extra VIN/5V/3V3 wire. Separate5V USB supply being sought;4s run incomplete.",
+      "status": "2026-11-08 live state/log evidence and user physical observation; exact reset cause unconfirmed; sustained floor reliability unresolved",
+      "evidence": ["knowledge/updates/2026-11-08-usb-tape-following.md"]
+    },
+    {
+      "key": "floor_trial_and_speed_profile_latest",
+      "value": "Camera mounted on Argus confirmed. Left-channel physical check passes. First one-second6% tethered floor session completes with centered tape; user reports barely moving and100% manual speed slow. User confirms motor power OFF. Paired25% cruise/35% cap firmware uploaded and hash verified; all83 Pi checks and actual-sketch host checks pass. Live GPIO zero-speed handshake ends stopped, cap35 and zero outputs. New-profile ground run pending.",
+      "status": "2026-11-08 live physical and software evidence; supersedes6% profile and pending cap35 upload; ground speed unmeasured",
+      "evidence": ["knowledge/updates/2026-11-08-usb-tape-following.md"]
+    },
+    {
+      "key": "raised_wheel_physical_checks_latest",
+      "value": "Motor power ON, wheels raised, phone Stop ready confirmed. GPIO Stop passed after570 zero-speed heartbeats. One-second5% both-wheel pulse: user observes both forward then stopped. Two-second real camera tape session completes with LEFT offset -0.20; user sees both move and stop but cannot compare speeds. Three-second left-only5% pulse completed and stopped; wheel identity observation pending. No floor-course following validated.",
+      "status": "2026-11-08 live physical bench evidence; supersedes pending nonzero movement and prior motor-off stage; ground driving remains unverified",
+      "evidence": ["knowledge/updates/2026-11-08-usb-tape-following.md"]
+    },
+    {
+      "key": "gpio_communication_verified_latest",
+      "value": "After moving ESP ends to GPIO25/26, user restored USB power. Live bridge on ttyS0 returns stopped state; 50 of 50 read-only checks pass with zero wheel outputs. Zero-speed automatic GPIO session running for phone Stop check. Motor power off; physical movement untested.",
+      "status": "live verified 2026-11-08; supersedes silent GPIO link and pending endpoint correction",
+      "evidence": ["knowledge/updates/2026-11-08-usb-tape-following.md"]
+    },
+    {
+      "key": "gpio_wire_trace_latest",
+      "value": "User confirms Pi top-row columns3/4/5 in a horizontal 2-by-13 header. Pi8 reaches ESP plain RX label; Pi10 reaches ESP plain TX label. Firmware instead expects GPIO25 RX and GPIO26 TX. Pi shut down for moving only ESP ends to 25 and 26; correction and GPIO verification pending. Motor power off, no nonzero request sent.",
+      "status": "direct user wire trace and verified shutdown 2026-11-08; resolves endpoint-label mismatch, not physical correction",
+      "evidence": ["knowledge/updates/2026-11-08-usb-tape-following.md"]
+    },
+    {
+      "key": "gpio_uart_preparation_latest",
+      "value": "Persistent USB faults blocked both pulse attempts before arming. User chooses direct Pi control and has three jumpers; motor power off confirmed. ESP32 GPIO UART RX25/TX26 firmware uploaded and hash verified. Pi uart0-m2 enabled, ttyS0 and actual pin mux verified: physical8 TX to ESP25, physical10 RX from ESP26, physical6 GND. Bridge configured for ttyS0; jumpers and physical driving not yet verified.",
+      "status": "2026-11-08 verified software/board preparation; physical connection pending; supersedes USB as intended control transport",
+      "evidence": ["knowledge/updates/2026-11-08-usb-tape-following.md", "workspace/robot_control/argus_avoidance/PI-ESP32-WIRING.md"]
+    },
+    {
+      "key": "camera_usb_integration_latest",
+      "value": "New ESP32 manual/automatic firmware uploaded and flash-hash verified. Pi USB at 115200 baud; phone remains on ESP32 hotspot. All 83 Pi checks pass, real tape is detected slightly left. Longer runs expose USB disconnects across reseating and another socket. With phone video paused, 314 zero-speed heartbeats complete and actual phone Operator Stop revokes the old session with zero outputs. Pi camera remains full resolution. Wheels raised and motor power off confirmed; physical steering pending.",
+      "status": "verified bench integration 2026-11-08; supersedes pending-upload, unavailable-tape and unidentified-CH340 status; no physical automatic driving validation",
+      "evidence": ["knowledge/updates/2026-11-08-usb-tape-following.md"]
+    },
+    {
+      "key":"manual_drive_and_tape_demo_latest",
+      "value":"User confirms reliable ESP32/Mega forward/turn/stop and selects black tape on light floor. Recent chat selection identifies joystick/camera code family. Pi passed74 Python checks; new tape preview and future auto client installed; new ESP32 draft pending upload and physical tape test.",
+      "status":"2026-11-07 user-confirmed manual behavior and software checks; no physical automatic driving validated",
+      "evidence":["knowledge/updates/2026-11-07-current-manual-code-and-tape-preview.md"]
+    },
+    {
+      "key":"c1_replacement_and_manual_sketch_discovery",
+      "value":"Justin reports a C1 fault and is ordering an adapter; fault location unverified. October 25 ESP32 controlcam and Mega manual-control sketch candidates found in the Arduino sketchbook.",
+      "status":"2026-11-07 user report and local source inspection; supersedes firmware-source location uncertainty, not flashed-version uncertainty",
+      "evidence":["knowledge/updates/2026-11-07-c1-replacement-and-manual-sketches.md"]
+    },
+    {
+      "key":"esp32_unplug_sensor_check",
+      "value":"After user unplugged ESP32, CH340 disappeared. USB camera delivered distinct 640x480 JPEG frames. No USB serial device node and no /scan in ten seconds.",
+      "status":"verified 2026-11-07 on Pi; ESP32 association inferred from before/after observation; supersedes enumeration-only camera evidence",
+      "evidence":["knowledge/updates/2026-11-07-esp32-unplug-camera.md"]
+    },
+    {
+      "key": "orange_pi_verified_bench_setup",
+      "value": {"host":"orangepi5","os":"Ubuntu 22.04.5 Jammy ARM64","python":"3.10.12","ros":"Humble","ethernet_ssh":"verified","project":"/home/orangepi/argus/avoidance","checks":"44 passed; live ROS preview with synthetic scans, output zero","live_scan":"none observed; CH340 endpoint unknown, BRLTTY claimed interface"},
+      "status":"verified 2026-11-07; supersedes disconnected/OS-unknown/ROS-untested bench status; physical integration and robot installation unverified",
+      "evidence":["knowledge/updates/2026-11-07-verified-orange-pi.md","workspace/robot_control/argus_avoidance/reports/ORANGE-PI-CHECK.md"]
+    },
+    {
+      "key": "orange_pi_linux_installed",
+      "value": "Linux is already installed on Orange Pi; distribution/version, storage medium, login and SSH service unconfirmed",
+      "status": "user-confirmed 2026-11-07; supersedes OS-installation uncertainty at setup intake, not robot integration status",
+      "evidence": ["knowledge/updates/2026-11-07-orange-pi-setup-intake.md"]
+    },
+    {
+      "key": "orange_pi_setup_intake",
+      "value": "Justin requests assisted setup while connecting Orange Pi to laptop; not yet plugged in. Boot media, installed OS and SSH access unconfirmed",
+      "status": "direct user statement 2026-11-07; extends future setup idea, does not establish installation or connection",
+      "evidence": ["knowledge/updates/2026-11-07-orange-pi-setup-intake.md"]
+    },
+    {
+      "key": "current_manual_control_route",
+      "value": "Manual control over Wi-Fi through ESP32 to Mega; interconnect, firmware and protocol not identified",
+      "status": "user-confirmed 2026-11-07; supersedes uncertainty about current manual route, not motor wiring/protocol facts",
+      "evidence": ["knowledge/updates/2026-11-07-lid-fits-and-control-path.md"]
+    },
+    {
+      "key": "lidar_lid_fit_latest",
+      "value": "Lidar lid now fits; fastening, changed dimensions and final sensor pose unconfirmed",
+      "status": "user-confirmed 2026-11-07; supersedes earlier same-day wiring-height fit blocker",
+      "evidence": ["knowledge/updates/2026-11-07-lid-fits-and-control-path.md"]
+    },
+    {
+      "key": "orange_pi_future_setup_idea",
+      "value": "Use Orange Pi later, initially configuring remotely over SSH with Ethernet connected and VS Code",
+      "status": "user idea 2026-11-07; OS, networking, ROS and deployment not established",
+      "evidence": ["knowledge/updates/2026-11-07-lid-fits-and-control-path.md"]
+    },
+    {
+      "key": "avoidance_software_first_delivery",
+      "value": "Pure Python controller plus small standalone 2D simulation and optional disabled-output ROS adapter; 44 offline tests and nine modeled scenarios pass",
+      "status": "software-verified 2026-11-07; no live ROS, ESP32 integration, firmware deployment or physical validation",
+      "evidence": ["workspace/robot_control/argus_avoidance/reports/VERIFICATION.md", "workspace/robot_control/argus_avoidance/reports/standalone-simulation.json"]
+    },
+    {
+      "key": "simulator_current_availability",
+      "value": "Justin intentionally removed the historical robot simulator; permits no simulator or a small alternative. New tests use standard-library Python only",
+      "status": "user-confirmed preference 2026-11-07; supersedes assumption of an available historical WSL/Gazebo runtime",
+      "evidence": ["knowledge/updates/2026-11-07-lid-fits-and-control-path.md"]
+    },
+    {
+      "key": "lidar_lid_clearance_blocker",
+      "value": {
+        "confirmed_date": "2026-11-07",
+        "lid_status": "Lid carrying lidar still not fitted",
+        "primary_reason": "Excess wiring makes assembly too tall for current spacer clearance",
+        "new_dimensions": "None supplied",
+        "supersedes": "Any assumption of lid installation after the 2026-10-13 detached-lid evidence"
+      },
+      "status": "historical earlier 2026-11-07 statement; superseded for fit by latest same-day lid-now-fits message",
+      "evidence": [
+        "knowledge/updates/2026-11-07-lidar-lid-wiring-clearance.md"
+      ]
+    },
+    {
+      "key": "obstacle_avoidance_work_sequence",
+      "value": {
+        "request_date": "2026-11-07",
+        "requested_work": "Plan first; later same-day keep-going message authorizes implementation",
+        "target": "Physical robot; software tests use a small alternative after user confirms deleting old simulator",
+        "technical_plan_status": "Initial software implemented and offline-tested; hardware integration pending",
+        "supersedes": "No existing hardware facts"
+      },
+      "status": "user-stated request and target; no deployment or physical validation established",
+      "evidence": [
+        "knowledge/updates/2026-11-07-obstacle-avoidance-request.md",
+        "knowledge/updates/2026-11-07-lid-fits-and-control-path.md"
+      ],
+      "artifact_paths": [
+        "knowledge/plans/2026-11-07-basic-obstacle-avoidance.md"
+      ]
+    },
+    {
+      "key": "project_goal",
+      "value": "Autonomous vacuum robot with lidar mapping/navigation and camera avoidance of floor obstacles",
+      "status": "user-stated",
+      "evidence": [
+        "87b42cf22476245ab36c"
+      ]
+    },
+    {
+      "key": "current_drive_design",
+      "value": {
+        "computer": "Orange Pi 5",
+        "microcontroller": "Arduino Mega 2560",
+        "lidar": "RPLIDAR C1",
+        "camera": "USB camera",
+        "motors": "2 x NEMA 17 beneath chassis",
+        "drivers": "2 x TB6600",
+        "wheel_diameter_m": 0.07
+      },
+      "status": "October design inventory; Orange Pi 5 explicitly not installed on 2026-10-13",
+      "evidence": [
+        "2dda853c7eb12414d740",
+        "806bee89d69956754534"
+      ]
+    },
+    {
+      "key": "driver_detail",
+      "value": {
+        "driver_description": "barebones TB6600 with blue current potentiometer",
+        "motor_rated_current_a": 1.7
+      },
+      "status": "user-stated 2026-10-10; exact variant unverified",
+      "evidence": [
+        "5ff50638ee53f122f835"
+      ]
+    },
+    {
+      "key": "power_plan",
+      "value": "M12 3Ah battery and red adapter identified by Justin; adapter present. Protection/wiring/commissioning remain unverified.",
+      "status": "user-stated 2026-10-13; supersedes September adapter-pending state",
+      "evidence": [
+        "806bee89d69956754534",
+        "aac5f6b53ceaeaa0a2e7"
+      ]
+    },
+    {
+      "key": "simulation_settings",
+      "value": {
+        "room_m": [
+          16,
+          12
+        ],
+        "forward_limit_m_s": 1.5,
+        "control": "arm once, centre yoke to stop"
+      },
+      "status": "confirmed simulator preferences, not physical capability",
+      "evidence": [
+        "2dda853c7eb12414d740"
+      ]
+    },
+    {
+      "key": "physical_software_defaults",
+      "value": {
+        "motion_enabled": false,
+        "forward_m_s": 0.15,
+        "reverse_m_s": 0.08,
+        "wheel_radius_m": 0.035,
+        "wheel_separation_m": 0.22,
+        "steps_per_revolution": 1600
+      },
+      "status": "generated configuration; measured hardware fit unverified",
+      "evidence": [
+        "2d65f22d8a96c5384fe0"
+      ]
+    },
+    {
+      "key": "protocols",
+      "value": {
+        "legacy": "P/S/B/V/H/G and R threat packets",
+        "new": "V1 command / S1 telemetry with CRC-16/CCITT-FALSE"
+      },
+      "status": "separate incompatible branches; deployed branch unconfirmed",
+      "evidence": [
+        "f37f98b9fc923eeae76e",
+        "1c00e63e2dbdf342de4b"
+      ]
+    },
+    {
+      "key": "legacy_detector",
+      "value": {
+        "file": "obstacle-detector-mediapipe-v10.6.py",
+        "model": "EfficientDet-Lite2",
+        "native_resolution": [
+          640,
+          480
+        ],
+        "stream_port": 8000
+      },
+      "status": "historical validated desktop branch; mounted Orange Pi runtime unverified",
+      "evidence": [
+        "3ed6887665294227ae51"
+      ]
+    },
+    {
+      "key": "latest_shaft",
+      "value": {
+        "body_diameter_mm": 13,
+        "base_to_hex_tip_mm": 40,
+        "bottom_bore_mm": 5.6,
+        "hex_across_flats_mm": 11.8,
+        "hex_length_mm": 5.8,
+        "retainer": "captive M3 nut",
+        "copies": 2,
+        "material_available": "PLA"
+      },
+      "status": "saved CAD variant; actual fit, print and strength unconfirmed",
+      "evidence": [
+        "a67e6567414fd102db4a",
+        "7d5829052d72afa7a145"
+      ]
+    },
+    {
+      "key": "final_robotlab_audit",
+      "value": "reports/quality-review.json was referenced but absent; latest cleanup turn has no recovered final completion answer",
+      "status": "collection observation; prior historical reports retained",
+      "evidence": [
+        "bee8d33387d734fbda1e",
+        "2dda853c7eb12414d740"
+      ]
+    },
+    {
+      "key": "current_cad_objective",
+      "value": "Two separate models: present robot reconstructed from photos, and proposed completed wiring/layout with component retention, balanced placement and organized cables.",
+      "status": "editable CAD drafts saved 2026-10-13; current photo reconstruction and completed-layout proposal; exact geometry, physical fit, measured balance and terminal wiring unverified",
+      "artifact_paths": [
+        "workspace/designs/argus-as-built-v1.json",
+        "workspace/designs/argus-complete-layout-v1.json",
+        "workspace/exports/cad-reconstruction-v1/README.md",
+        "knowledge/CAD_RECONSTRUCTION.md"
+      ],
+      "evidence": [
+        "806bee89d69956754534",
+        "d349f5730e9d85c6675c"
+      ]
+    },
+    {
+      "key": "current_build_stage",
+      "value": {
+        "stage": "physical chassis and electrical assembly; cleaning and Orange Pi integration unfinished",
+        "not_installed": [
+          "Orange Pi 5",
+          "San Ace suction motors",
+          "N12 12V brush motors",
+          "their respective cleaning drivers"
+        ],
+        "lidar": "RPLIDAR C1 mounted on separate detached lid",
+        "battery_adapter": "red adapter for Justin's M12 3Ah battery",
+        "electrical_commissioning": "not established by this update"
+      },
+      "status": "explicit user update 2026-10-13 Asia/Taipei; supersedes older installation/adapter-pending assumptions",
+      "evidence": [
+        "806bee89d69956754534"
+      ]
+    },
+    {
+      "key": "current_chassis",
+      "value": {
+        "plate_bounds_mm": [
+          300,
+          300
+        ],
+        "plate_thickness_mm": 3,
+        "outline": "circular, observed in current photos",
+        "spacer_count": 3,
+        "spacer_layout": "triangle",
+        "spacer_length_range_mm": [
+          60,
+          70
+        ],
+        "exact_spacer_length_mm": null
+      },
+      "status": "latest explicit user correction 2026-10-13: 3mm supersedes earlier10mm; circular outline photo-observed",
+      "evidence": [
+        "806bee89d69956754534",
+        "d349f5730e9d85c6675c",
+        "56e9221eb80504ec9657",
+        "99d04ed15adfb12d0ab5"
+      ]
+    },
+    {
+      "key": "current_cleaning_installation",
+      "value": {
+        "suction": "San Ace motors uninstalled; exact model/count unresolved",
+        "brush": "N12 12V motors uninstalled; older N20 label superseded as current user terminology, exact model/count unresolved",
+        "drivers": "respective cleaning drivers uninstalled; historical L298N/IBT-2 selection not newly confirmed"
+      },
+      "status": "explicit user update 2026-10-13",
+      "evidence": [
+        "806bee89d69956754534"
+      ]
+    },
+    {
+      "key": "current_mechanical_problems",
+      "value": [
+        "components slide off",
+        "unbalanced weight",
+        "messy wiring consumes usable space"
+      ],
+      "status": "user-reported 2026-10-13",
+      "evidence": [
+        "806bee89d69956754534"
+      ]
+    },
+    {
+      "key": "recent_drive_bench_stage",
+      "value": {
+        "gearbox_ratio": "4:1, stated by Justin in recent bench chat",
+        "bench_wiring": "only one TB wired in that dated session; current two-driver commissioning not confirmed",
+        "old_right_driver": "Justin suspects short/broken; diagnosis not verified",
+        "manual_firmware": "user pasted successful Mega flash output; exact present sketch contents/deployment unknown"
+      },
+      "status": "recent user messages retrieved 2026-10-13; separate from current photos and CRC software proposal",
+      "evidence": [
+        "28ee0334dcf467ef2adc"
+      ]
+    }
+  ],
+  "workshop_notes": [
+    {
+      "id": "note_f91a410c8fcc",
+      "title": "Argus Workshop purpose and collection scope",
+      "status": "confirmed",
+      "updated": "2026-10-11T14:11:47.379686+00:00",
+      "evidence": [],
+      "path": "workspace/notes/note_f91a410c8fcc.md"
+    }
+  ]
+}
