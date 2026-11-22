@@ -109,6 +109,8 @@ class ControllerTests(unittest.TestCase):
                     decision = controller.step(now)
                 self.assertEqual(decision.reason, "Following right wall")
                 self.assertGreater(decision.linear, 0)
+                self.assertAlmostEqual(decision.wall_gap_estimate_m, gap, places=3)
+                self.assertAlmostEqual(decision.wall_heading_rad, 0.0, places=3)
                 sign = (decision.angular > 0) - (decision.angular < 0)
                 self.assertEqual(sign, expected_sign)
 

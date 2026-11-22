@@ -106,7 +106,9 @@ modeled body gap of about 10 cm. A marked front obstruction can still trigger
 a moving curve or a stop. Use a straight wall with an open route ahead for
 the first test, and verify the real gap, footprint and wheel response. The
 demo bounds remain 20 seconds and 12% wheel commands. The log records each
-state transition, requested wheel outputs and normal timer expiry.
+state transition, requested wheel outputs and normal timer expiry. With a
+valid fit, `wall_gap_estimate_m` and `wall_heading_rad` report the estimated
+gap from the configured body and the wall angle relative to robot forward.
 
 For stationary testing, use the existing preview command with
 `--follow-wall right` or `--follow-wall left`.

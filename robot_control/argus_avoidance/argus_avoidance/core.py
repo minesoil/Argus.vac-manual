@@ -85,6 +85,8 @@ class Decision:
     front_clearance: float | None = None
     left_clearance: float | None = None
     right_clearance: float | None = None
+    wall_gap_estimate_m: float | None = None
+    wall_heading_rad: float | None = None
 
 
 @dataclass(frozen=True)
@@ -252,9 +254,12 @@ class AvoidanceController:
 
     def _decision(self, linear=0.0, angular=0.0):
         obs = self._observation
+        wall = self._wall
         return Decision(self.state, self.reason, linear, angular,
                         obs.front if obs else None, obs.left if obs else None,
-                        obs.right if obs else None)
+                        obs.right if obs else None,
+                        wall.distance - self.config.robot_radius_m if wall else None,
+                        wall.heading if wall else None)
 
     def _fit_side_wall(self, points):
         """Fit a nearby side surface only if it extends fore and aft."""
