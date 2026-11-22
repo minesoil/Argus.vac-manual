@@ -79,10 +79,10 @@ def sweep(sequence, started, ranges=None):
 
 
 class LidarHubTests(unittest.TestCase):
-    def hub(self, clock=None, serial_factory=None):
+    def hub(self, clock=None, serial_factory=None, esp_port="esp"):
         clock = clock or Clock()
         factory = serial_factory or SerialFactory()
-        hub = LidarHub("c1", "esp", reader_factory=Reader,
+        hub = LidarHub("c1", esp_port, reader_factory=Reader,
                        serial_factory=factory, clock=clock).start()
         return hub, clock, factory
 
@@ -114,6 +114,18 @@ class LidarHubTests(unittest.TestCase):
         hub._reader.latest = sweep(1, 0.9)
         self.assertTrue(hub.relay_once())
         self.assertEqual(len(serial_factory.ports), 1)
+        hub.close()
+
+    def test_disabled_map_relay_leaves_c1_available_without_opening_usb(self):
+        hub, _, serial_factory = self.hub(esp_port=None)
+        reading = sweep(1, 0.9)
+        hub._reader.latest = reading
+        self.assertFalse(hub.open_map_port())
+        self.assertFalse(hub.relay_once())
+        self.assertEqual(serial_factory.ports, [])
+        self.assertIs(hub.latest, reading)
+        self.assertIsNone(hub.error)
+        self.assertIsNone(hub.map_error)
         hub.close()
 
     def test_relay_only_new_fresh_scans_at_most_five_per_second(self):

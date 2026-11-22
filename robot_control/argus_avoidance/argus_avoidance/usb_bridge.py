@@ -150,7 +150,8 @@ def main(argv=None):
             hub = LidarHub(profile["lidar"], profile.get("map_port", ESP_PORT),
                            front_deg=float(profile.get("front_deg", 90))).start()
             hub.open_map_port()
-            print("C1 scanner ready; ESP32 map relay optional", flush=True)
+            relay_status = "disabled" if hub.esp_port is None else "optional"
+            print(f"C1 scanner ready; ESP32 map relay {relay_status}", flush=True)
         except (OSError, ValueError) as error:
             if hub is not None:
                 hub.close()

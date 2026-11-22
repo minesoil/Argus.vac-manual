@@ -92,8 +92,11 @@ remains as an optional preview placeholder for future use.
 
 The bridge owns the C1 port so the phone and roaming runner do not compete for
 USB serial access. The runner reads the latest sweep from the bridge's loopback
-`/lidar/sweep` endpoint. Failure of the separate map USB link leaves the drive
-link available; stale or invalid C1 data still stops autonomous roaming.
+`/lidar/sweep` endpoint. In a GPIO-control installation, set `"map_port": null`
+in the private roaming profile and restart the bridge to disable the phone map
+relay. C1 acquisition and the GPIO control path stay available. The phone map
+will show stale or disconnected while relaying is disabled. Omitting `map_port`
+uses the default ESP32 USB port. Stale or invalid C1 data still stops roaming.
 
 ## Operator behaviour
 

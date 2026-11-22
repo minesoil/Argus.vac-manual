@@ -1,7 +1,7 @@
 """Single C1 scanner owner with a best-effort ESP32 USB map relay.
 
-Navigation reads the original Sweep from ``latest``. The map is display-only:
-an absent or disconnecting ESP32 USB port cannot affect the GPIO drive link.
+Navigation reads the original Sweep from ``latest``. The phone map uses an
+optional USB port separate from the GPIO drive link.
 """
 
 import math
@@ -41,7 +41,7 @@ def map_frame(sweep, front_deg=90.0):
 
 
 class LidarHub:
-    """Keep one C1Reader open and send fresh maps over independent USB serial."""
+    """Keep one C1Reader open and relay maps when ``esp_port`` is set."""
 
     def __init__(self, lidar_port=C1_PORT, esp_port=ESP_PORT, *,
                  front_deg=90.0, reader_factory=C1Reader, serial_factory=None,
@@ -118,6 +118,8 @@ class LidarHub:
 
     def open_map_port(self):
         """Best-effort USB open before the GPIO handshake; never open the C1."""
+        if self.esp_port is None:
+            return False
         with self._lock:
             if self._map_port is not None:
                 return True
@@ -135,6 +137,8 @@ class LidarHub:
 
     def relay_once(self):
         """Try one fresh, unsent map. USB errors never propagate to navigation."""
+        if self.esp_port is None:
+            return False
         with self._lock:
             reader = self._reader
             sweep = reader.latest if reader is not None and not reader.error else None
