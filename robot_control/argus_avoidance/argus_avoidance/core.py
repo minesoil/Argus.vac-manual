@@ -6,6 +6,7 @@ enabled for a driver with that documented convention.
 """
 
 from dataclasses import dataclass, fields
+from itertools import combinations
 import math
 
 
@@ -259,18 +260,39 @@ class AvoidanceController:
         """Fit a nearby side surface only if it extends fore and aft."""
         side = 1 if self.follow_wall == "left" else -1
         radius = self.config.robot_radius_m
-        samples = [(x, y) for x, y in points
-                   if -0.45 <= x <= 0.50 and radius <= side * y <= radius + 0.40]
+        samples = sorted((x, y) for x, y in points
+                         if -0.45 <= x <= 0.50 and radius <= side * y <= radius + 0.40)
         if len(samples) < 5:
             return None
-        if min(x for x, _ in samples) > -0.08 or max(x for x, _ in samples) < 0.12:
+        if len(samples) > 24:
+            samples = [samples[round(index * (len(samples) - 1) / 23)]
+                       for index in range(24)]
+        # Fit the dominant face at joints between boxes. Keep every original
+        # scan point in the swept-path and obstacle checks.
+        best = (-1, 0.0)
+        wall_points = []
+        for (x1, y1), (x2, y2) in combinations(samples, 2):
+            if x2 - x1 < 0.20:
+                continue
+            slope = (y2 - y1) / (x2 - x1)
+            if abs(slope) > 0.45:
+                continue
+            offset = y1 - slope*x1
+            inliers = [(x, y) for x, y in samples if abs(y - offset - slope*x) <= 0.035]
+            if (len(inliers) < 5 or 3 * len(inliers) < 2 * len(samples) or
+                    inliers[0][0] > -0.05 or inliers[-1][0] < 0.12):
+                continue
+            score = (len(inliers), -sum(abs(y - offset - slope*x) for x, y in inliers))
+            if score > best:
+                best, wall_points = score, inliers
+        if not wall_points:
             return None
-        mean_x = sum(x for x, _ in samples) / len(samples)
-        mean_y = sum(y for _, y in samples) / len(samples)
-        variance = sum((x - mean_x)**2 for x, _ in samples)
-        slope = sum((x - mean_x) * (y - mean_y) for x, y in samples) / variance
+        mean_x = sum(x for x, _ in wall_points) / len(wall_points)
+        mean_y = sum(y for _, y in wall_points) / len(wall_points)
+        variance = sum((x - mean_x)**2 for x, _ in wall_points)
+        slope = sum((x - mean_x) * (y - mean_y) for x, y in wall_points) / variance
         offset = mean_y - slope * mean_x
-        if abs(slope) > 0.45 or any(abs(y - offset - slope*x) > 0.035 for x, y in samples):
+        if abs(slope) > 0.45:
             return None
         return _Wall(abs(offset) / math.hypot(1, slope), math.atan(slope))
 
@@ -279,9 +301,14 @@ class AvoidanceController:
         if self._wall is None:
             return min(obs.left, obs.right) > cfg.side_stop_clearance_m
         near, far = (obs.left, obs.right) if self.follow_wall == "left" else (obs.right, obs.left)
-        wall_limit = cfg.margin_m + 0.02
-        return (self._wall.distance > cfg.robot_radius_m + wall_limit and
-                near > 0.02 and far > cfg.side_stop_clearance_m)
+        inflated = cfg.robot_radius_m + cfg.margin_m
+        if self._wall.distance <= inflated + 0.02 or near <= 0.02 or far <= cfg.side_stop_clearance_m:
+            return False
+        side = 1 if self.follow_wall == "left" else -1
+        sine, cosine = math.sin(self._wall.heading), math.cos(self._wall.heading)
+        return all(abs(-sine*x + cosine*y - side*self._wall.distance) <= 0.035
+                   for x, y in obs.points
+                   if abs(x) <= inflated and 0 <= side*y <= inflated+cfg.side_stop_clearance_m)
 
     def _curve_path_clear(self, direction):
         """Require clearance along a short family of plausible forward arcs.

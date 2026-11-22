@@ -112,6 +112,31 @@ class ControllerTests(unittest.TestCase):
                 sign = (decision.angular > 0) - (decision.angular < 0)
                 self.assertEqual(sign, expected_sign)
 
+    def test_wall_fit_ignores_background_returns_and_keeps_near_obstacle_guard(self):
+        cfg = Config(robot_radius_m=0.15, margin_m=0.06)
+        controller = AvoidanceController(cfg, follow_wall="right")
+        delta = math.tau / 72
+        ranges = [min(3.0, 0.30 / -math.sin(index*delta))
+                  if math.sin(index*delta) < -1e-6 else 3.0
+                  for index in range(72)]
+        # A different face behind and an isolated off-line return beside it.
+        ranges[45] = 0.63
+        ranges[47] = 0.33
+        for now in (0.0, 0.1, 0.2, 0.3):
+            controller.observe(Scan(tuple(ranges), 0, delta, 0.05, 12.0, now, sensor_x=0.08))
+            if now == 0:
+                self.assertTrue(controller.arm(now)[0])
+            decision = controller.step(now)
+        self.assertEqual(decision.reason, "Following right wall")
+        self.assertAlmostEqual(controller._wall.distance, 0.30, places=2)
+
+        # A narrow object between the wheel and the fitted wall still stops travel.
+        ranges[54] = 0.24
+        controller.observe(Scan(tuple(ranges), 0, delta, 0.05, 12.0, 0.4, sensor_x=0.08))
+        self.assertIsNotNone(controller._wall)
+        decision = controller.step(0.4)
+        self.assertEqual((decision.state, decision.linear, decision.angular), ("STOP", 0, 0))
+
     def test_front_obstacle_starts_moving_curve_before_stop_line(self):
         _, decision = self.ready(((0, 0.78),))
         self.assertEqual(decision.state, "SLOW")
