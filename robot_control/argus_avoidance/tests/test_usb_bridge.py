@@ -128,8 +128,17 @@ class USBBridgeTests(unittest.TestCase):
             self.assertIn("--trial", command)
             self.assertIn("--expected-epoch", command)
             self.assertEqual(command[command.index("--follow-wall") + 1], "right")
+            path.write_text(json.dumps(profile | {"cruise": 15, "slow": 15, "seconds": 14}))
+            faster = load_roam_args(path, lidar_bridge=True)
+            self.assertEqual(faster[faster.index("--cruise") + 1], "15")
+            path.write_text(json.dumps(profile | {"cruise": 35, "slow": 12, "seconds": 3}))
+            brief = load_roam_args(path, lidar_bridge=True)
+            self.assertEqual(brief[brief.index("--cruise") + 1], "35")
             for change in ({"continuous": True}, {"seconds": 21},
-                           {"cruise": 13}, {"turn": 13}, {"follow_wall": "both"}):
+                           {"cruise": 16}, {"turn": 13}, {"follow_wall": "both"},
+                           {"cruise": 35, "seconds": 4}, {"cruise": 36, "seconds": 3},
+                           {"cruise": 35, "slow": 16, "seconds": 3},
+                           {"follow_wall": None, "cruise": 13}):
                 path.write_text(json.dumps(profile | change))
                 with self.assertRaises(ValueError):
                     load_roam_args(path, lidar_bridge=True)

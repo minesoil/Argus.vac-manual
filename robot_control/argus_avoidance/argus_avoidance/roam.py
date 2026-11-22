@@ -12,6 +12,10 @@ from .c1_bridge import BridgeC1Reader
 from .core import AvoidanceController, Config
 from .follow import ESP32AutoClient, ControlError
 
+WALL_FOLLOW_MAX_PERCENT = 35
+WALL_FOLLOW_SLOW_PERCENT = 15
+FAST_WALL_MAX_SECONDS = 3
+
 
 class RoamClient(ESP32AutoClient):
     def drive(self, left, right):
@@ -24,7 +28,7 @@ class RoamClient(ESP32AutoClient):
                                      "l": left, "r": right})
 
 
-def wheels(decision, cruise=18, slow=12, turn=15):
+def wheels(decision, cruise=18, slow=12, turn=15, *, fast_wall_trial=False):
     if not math.isfinite(decision.angular):
         return 0, 0
     if decision.state == "TURN":
@@ -36,6 +40,15 @@ def wheels(decision, cruise=18, slow=12, turn=15):
         return 0, 0
     if decision.state in ("FORWARD", "SLOW"):
         power = cruise if decision.state == "FORWARD" else slow
+        if fast_wall_trial:
+            clearances = (decision.front_clearance, decision.left_clearance,
+                          decision.right_clearance)
+            aligned = decision.wall_heading_rad is None or abs(decision.wall_heading_rad) <= 0.12
+            clear = (all(value is not None for value in clearances) and
+                     clearances[0] >= 0.80 and min(clearances[1:]) >= 0.10)
+            power = cruise if aligned and clear and abs(decision.angular) <= 0.20 else slow
+        if decision.wall_gap_estimate_m is not None and decision.wall_gap_estimate_m <= 0.13:
+            power = min(power, 12)
         # Curves keep both wheels forward; the inner wheel slows as the
         # requested turn increases, with a 50% differential cap.
         differential = min(power - 1, max(1, round(power * min(0.5, abs(decision.angular) * 1.8))))
@@ -66,7 +79,8 @@ def navigation_config(radius, wall_gap):
 
 def run(reader, controller, client=None, seconds=30.0, expected_epoch=None,
         front_deg=0.0, x=0.0, y=0.0, cruise=18, slow=12, turn=15,
-        clock=time.monotonic, sleep=time.sleep, emit=print, ended=None):
+        clock=time.monotonic, sleep=time.sleep, emit=print, ended=None, *,
+        fast_wall_trial=False):
     start = clock()
     last_sequence = 0
     armed = False
@@ -109,7 +123,7 @@ def run(reader, controller, client=None, seconds=30.0, expected_epoch=None,
                 raise ControlError(decision.reason)
             if seconds is not None and clock() - start >= seconds:
                 break
-            left, right = wheels(decision, cruise, slow, turn)
+            left, right = wheels(decision, cruise, slow, turn, fast_wall_trial=fast_wall_trial)
             if armed and client:
                 # Recheck receipt age immediately before each leased command.
                 healthy, reason = controller.health(clock())
@@ -171,19 +185,24 @@ def main(argv=None):
               args.front_deg if args.front_deg is not None else 0)
     if not all(math.isfinite(v) for v in values) or args.seconds <= 0 or args.radius <= 0:
         parser.error("Geometry and duration must be finite; duration and radius positive")
-    if not 1 <= args.slow <= args.cruise <= 25 or not 1 <= args.turn <= 20:
-        parser.error("Require 1 <= slow <= cruise <= 25 and 1 <= turn <= 20")
+    max_cruise = WALL_FOLLOW_MAX_PERCENT if args.follow_wall else 25
+    if not 1 <= args.slow <= args.cruise <= max_cruise or not 1 <= args.turn <= 20:
+        parser.error(f"Require 1 <= slow <= cruise <= {max_cruise} and 1 <= turn <= 20")
     if not 0.20 <= args.wall_gap <= 0.40:
         parser.error("Require 0.20 <= wall-gap <= 0.40 m pending loaded stopping validation")
     if args.trial:
-        if args.continuous or args.seconds > 20 or args.cruise > 12 or args.turn > 12:
-            parser.error("Trial requires <=20 seconds, <=12% cruise and turn, no continuous run")
+        cruise_limit = WALL_FOLLOW_MAX_PERCENT if args.follow_wall else 12
+        if args.continuous or args.seconds > 20 or args.cruise > cruise_limit or args.turn > 12:
+            parser.error(f"Trial requires <=20 seconds, <={cruise_limit}% cruise and <=12% turn")
         args.drive = True
     if args.drive and (args.front_deg is None or not (args.commissioned or args.trial)):
         parser.error("Driving needs measured --front-deg and completed --commissioned checks")
+    fast_wall_trial = bool(args.follow_wall and args.cruise > WALL_FOLLOW_SLOW_PERCENT)
     if args.drive and args.follow_wall and (args.continuous or args.seconds > 20 or
-                                          args.cruise > 12 or args.turn > 12):
-        parser.error("Wall-follow driving requires <=20 seconds and <=12% cruise and turn")
+                                          args.slow > WALL_FOLLOW_SLOW_PERCENT or args.turn > 12):
+        parser.error("Wall-follow driving requires <=20 seconds, <=15% slow speed and <=12% turn")
+    if args.drive and fast_wall_trial and (not args.trial or args.seconds > FAST_WALL_MAX_SECONDS):
+        parser.error("Wall-follow cruise above 15% requires a trial of at most 3 seconds")
     controller = AvoidanceController(navigation_config(args.radius, args.wall_gap),
                                      follow_wall=args.follow_wall)
     stopped = [False]
@@ -195,7 +214,8 @@ def main(argv=None):
         client = RoamClient(args.esp32, timeout=0.15) if args.drive else None
         return run(reader, controller, client, None if args.continuous else args.seconds,
                    args.expected_epoch, args.front_deg or 0, args.sensor_x, args.sensor_y,
-                   args.cruise, args.slow, args.turn, ended=lambda: stopped[0])
+                   args.cruise, args.slow, args.turn, ended=lambda: stopped[0],
+                   fast_wall_trial=fast_wall_trial)
     except (OSError, ValueError) as error:
         print("STOP " + str(error), flush=True)
         return 1

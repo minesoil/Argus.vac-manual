@@ -103,10 +103,13 @@ uses the default ESP32 USB port. Stale or invalid C1 data still stops roaming.
 For a low-speed edge pass, set `"follow_wall": "right"` or `"left"` in
 the roaming profile. The controller fits a nearby side wall and steers on a
 modeled body gap of about 10 cm. It aims at that gap over a short lookahead
-and steers parallel when the wall enters the forward corridor. A separate front obstruction can still trigger
-a moving curve or a stop. Use a straight wall with an open route ahead for
+and steers parallel when the wall enters the forward corridor. A separate
+front obstruction can still trigger a moving curve or a stop. Use a straight wall with an open route ahead for
 the first test, and verify the real gap, footprint and wheel response. The
-demo bounds remain 20 seconds and 12% wheel commands. The log records each
+ordinary wall trial permits up to 20 seconds, 15% forward and 12% pivot.
+A wall trial above 15% is capped at three seconds and 35% forward. It uses
+the faster setting when the corridor is clear and the wall is aligned, with
+slower commands close to the wall. The log records each
 state transition, requested wheel outputs and normal timer expiry. With a
 valid fit, `wall_gap_estimate_m` and `wall_heading_rad` report the estimated
 gap from the configured body and the wall angle relative to robot forward.
@@ -119,8 +122,8 @@ following. Start is a one-shot request bound to the stopped epoch. The bridge
 claims its selected kind, so a roaming request cannot fall back to the tape
 follower. Missing roaming configuration disables that Start. A private
 `trial_enabled: true` profile can expose a supervised phone trial without
-marking roaming commissioned; the bridge rejects durations over 20 seconds,
-continuous mode and wheel commands above 12% in this state.
+marking roaming commissioned. The bridge rejects continuous mode or durations
+over 20 seconds. Trials without wall following are capped at 12% per wheel.
 Phone Stop, page hidden/locked, lost phone heartbeat, manual takeover, expired
 350 ms drive lease, bad scans or connection faults end the session. New clear
 scans never rearm a faulted/stopped run. Only another deliberate Start can do so.
@@ -184,7 +187,7 @@ duration cap, not an assurance of indefinite or unattended operation.
    lidar/control link. Confirm no automatic restart. On the floor, use a short
    low-speed approach to a large upright box with Stop ready and ample space;
    measure the stopped gap. Stop and retune if the margin is inadequate.
-   The command-line `--trial` mode is limited to 20 seconds and 12% wheel
+   The ordinary command-line `--trial` mode is limited to 20 seconds and 12% wheel
    commands for that first supervised floor check; pass `--cruise 12 --turn 12`
    or lower. It does not mark the profile commissioned or enable the phone
    roaming Start by itself. A private `trial_enabled: true` with seconds <=20,

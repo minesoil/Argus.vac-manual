@@ -161,6 +161,25 @@ class RoamTests(unittest.TestCase):
         self.assertEqual(wheels(curve, cruise=18, slow=12), (12, 8))
         self.assertEqual(wheels(Decision("STOP", "wall")), (0, 0))
 
+    def test_faster_wall_trial_slows_at_close_gap(self):
+        close = Decision("SLOW", "Following right wall", wall_gap_estimate_m=0.12)
+        distant = Decision("SLOW", "Following right wall", wall_gap_estimate_m=0.18)
+        self.assertEqual(wheels(close, cruise=15, slow=15), (12, 12))
+        self.assertEqual(wheels(distant, cruise=15, slow=15), (15, 15))
+
+    def test_brief_wall_trial_caps_speed_near_wall_or_obstacle(self):
+        clear = Decision("SLOW", "Following right wall", front_clearance=1.0,
+                         left_clearance=0.3, right_clearance=0.2,
+                         wall_gap_estimate_m=0.20, wall_heading_rad=0.02)
+        near = Decision("SLOW", "Following right wall", front_clearance=1.0,
+                        left_clearance=0.3, right_clearance=0.2,
+                        wall_gap_estimate_m=0.12, wall_heading_rad=0.02)
+        blocked = Decision("SLOW", "Obstacle approaching", front_clearance=0.45,
+                           left_clearance=0.3, right_clearance=0.2)
+        for decision, expected in ((clear, 35), (near, 12), (blocked, 12)):
+            self.assertEqual(wheels(decision, cruise=35, slow=12, fast_wall_trial=True),
+                             (expected, expected))
+
     def test_wall_gap_controls_side_approach_without_weakening_hard_stop(self):
         normal = navigation_config(0.15, 0.30)
         closer = navigation_config(0.15, 0.20)
