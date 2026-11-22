@@ -126,6 +126,11 @@ def load_roam_args(path, lidar_bridge=False):
             result.extend(["--" + key.replace("_", "-"), str(value)])
     if "wall_gap" in profile:
         result.extend(["--wall-gap", str(profile["wall_gap"])])
+    follow_wall = profile.get("follow_wall")
+    if follow_wall is not None:
+        if follow_wall not in ("left", "right"):
+            raise ValueError("follow_wall must be left or right")
+        result.extend(["--follow-wall", follow_wall])
     if profile.get("continuous") is True:
         result.append("--continuous")
     else:

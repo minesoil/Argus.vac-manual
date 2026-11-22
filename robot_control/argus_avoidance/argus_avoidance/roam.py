@@ -72,6 +72,7 @@ def run(reader, controller, client=None, seconds=30.0, expected_epoch=None,
     armed = False
     captured_epoch = expected_epoch
     next_report = 0.0
+    last_report = None
     try:
         # Capture once BEFORE waiting for the sensor: Stop during startup must
         # invalidate this run instead of being silently acknowledged by arm().
@@ -84,6 +85,7 @@ def run(reader, controller, client=None, seconds=30.0, expected_epoch=None,
                 raise ControlError("Missing ESP32 epoch")
         while seconds is None or clock() - start < seconds:
             if ended and ended():
+                emit("END Interrupted")
                 return 0
             now = clock()
             if reader.error:
@@ -91,7 +93,8 @@ def run(reader, controller, client=None, seconds=30.0, expected_epoch=None,
             sweep = reader.latest
             if sweep is not None and sweep.sequence != last_sequence:
                 last_sequence = sweep.sequence
-                controller.observe(sweep.scan(front_deg, x, y, coalesce=True))
+                full_resolution = controller.follow_wall and all(map(math.isfinite, sweep.ranges))
+                controller.observe(sweep.scan(front_deg, x, y, coalesce=not full_resolution))
             healthy, reason = controller.health(now)
             if not armed:
                 if healthy:
@@ -105,23 +108,28 @@ def run(reader, controller, client=None, seconds=30.0, expected_epoch=None,
             if decision.state in ("FAULT", "BLOCKED"):
                 raise ControlError(decision.reason)
             if seconds is not None and clock() - start >= seconds:
-                return 0 if armed else 1
+                break
+            left, right = wheels(decision, cruise, slow, turn)
             if armed and client:
                 # Recheck receipt age immediately before each leased command.
                 healthy, reason = controller.health(clock())
                 if not healthy:
                     raise ControlError(reason)
-                client.drive(*wheels(decision, cruise, slow, turn))
-            if now >= next_report:
+                client.drive(left, right)
+            state = (decision.state, decision.reason)
+            if now >= next_report or state != last_report:
                 report = asdict(decision)
                 report.update(preview=client is None, sweep=last_sequence,
+                              wheel_left=left, wheel_right=right,
                               scan_age_s=round(now-sweep.started, 3) if sweep else None,
                               known_bins=sum(math.isfinite(v) for v in sweep.ranges) if sweep else 0)
                 report = {key: (None if isinstance(value, float) and not math.isfinite(value)
                                 else value) for key, value in report.items()}
                 emit(json.dumps(report, allow_nan=False))
                 next_report = now + 0.5
+                last_report = state
             sleep(0.06)
+        emit("END Duration limit reached" if armed else "STOP Duration elapsed before arming")
         return 0 if armed else 1
     except (ControlError, OSError, ValueError) as error:
         emit("STOP " + str(error))
@@ -150,6 +158,8 @@ def main(argv=None):
                         help="Circle about drive rotation centre containing the whole robot, metres")
     parser.add_argument("--wall-gap", type=float, default=0.30,
                         help="Front clearance beyond inflated radius; adjusts side steering (0.20 to 0.40 m)")
+    parser.add_argument("--follow-wall", choices=("left", "right"),
+                        help="Track the selected wall during a bounded low-speed demo")
     parser.add_argument("--commissioned", action="store_true",
                         help="Confirm sensor pose, footprint, low-speed wheel direction and braking checks")
     parser.add_argument("--cruise", type=int, default=18)
@@ -171,7 +181,11 @@ def main(argv=None):
         args.drive = True
     if args.drive and (args.front_deg is None or not (args.commissioned or args.trial)):
         parser.error("Driving needs measured --front-deg and completed --commissioned checks")
-    controller = AvoidanceController(navigation_config(args.radius, args.wall_gap))
+    if args.drive and args.follow_wall and (args.continuous or args.seconds > 20 or
+                                          args.cruise > 12 or args.turn > 12):
+        parser.error("Wall-follow driving requires <=20 seconds and <=12% cruise and turn")
+    controller = AvoidanceController(navigation_config(args.radius, args.wall_gap),
+                                     follow_wall=args.follow_wall)
     stopped = [False]
     for sig in (signal.SIGINT, signal.SIGTERM):
         signal.signal(sig, lambda *_: stopped.__setitem__(0, True))

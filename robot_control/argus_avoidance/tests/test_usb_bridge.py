@@ -109,7 +109,7 @@ class USBBridgeTests(unittest.TestCase):
                    "lidar": "/dev/c1", "front_deg": 90, "sensor_x": 0.08,
                    "sensor_y": 0, "radius": 0.15, "wall_gap": 0.25,
                    "cruise": 12, "slow": 12, "turn": 12,
-                   "seconds": 20, "continuous": False}
+                   "seconds": 20, "continuous": False, "follow_wall": "right"}
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder) / "roam.json"
             path.write_text(json.dumps(profile))
@@ -127,8 +127,9 @@ class USBBridgeTests(unittest.TestCase):
             self.assertIn("--drive", command)
             self.assertIn("--trial", command)
             self.assertIn("--expected-epoch", command)
+            self.assertEqual(command[command.index("--follow-wall") + 1], "right")
             for change in ({"continuous": True}, {"seconds": 21},
-                           {"cruise": 13}, {"turn": 13}):
+                           {"cruise": 13}, {"turn": 13}, {"follow_wall": "both"}):
                 path.write_text(json.dumps(profile | change))
                 with self.assertRaises(ValueError):
                     load_roam_args(path, lidar_bridge=True)

@@ -100,6 +100,17 @@ uses the default ESP32 USB port. Stale or invalid C1 data still stops roaming.
 
 ## Operator behaviour
 
+For a low-speed edge pass, set `"follow_wall": "right"` or `"left"` in
+the roaming profile. The controller fits a nearby side wall and steers on a
+modeled body gap of about 10 cm. A marked front obstruction can still trigger
+a moving curve or a stop. Use a straight wall with an open route ahead for
+the first test, and verify the real gap, footprint and wheel response. The
+demo bounds remain 20 seconds and 12% wheel commands. The log records each
+state transition, requested wheel outputs and normal timer expiry.
+
+For stationary testing, use the existing preview command with
+`--follow-wall right` or `--follow-wall left`.
+
 The updated ESP32 page adds **START LIDAR ROAMING**, separately from tape
 following. Start is a one-shot request bound to the stopped epoch. The bridge
 claims its selected kind, so a roaming request cannot fall back to the tape

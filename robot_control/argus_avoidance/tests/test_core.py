@@ -92,6 +92,26 @@ class ControllerTests(unittest.TestCase):
         self.assertGreater(decision.linear, 0)
         self.assertLess(decision.angular, 0)
 
+    def test_wall_tracking_crawls_parallel_and_corrects_toward_or_away(self):
+        # Raycast one side wall at the 10-degree control resolution.
+        for gap, expected_sign in ((0.10, 0), (0.20, -1), (0.085, 1)):
+            with self.subTest(body_gap=gap):
+                cfg = Config(robot_radius_m=0.15, margin_m=0.06)
+                controller = AvoidanceController(cfg, follow_wall="right")
+                delta = math.tau / 36
+                ranges = tuple(min(3.0, (cfg.robot_radius_m + gap) / -math.sin(index*delta))
+                               if math.sin(index*delta) < -1e-6 else 3.0
+                               for index in range(36))
+                for now in (0.0, 0.1, 0.2, 0.3):
+                    controller.observe(Scan(ranges, 0, delta, 0.05, 12.0, now, sensor_x=0.08))
+                    if now == 0:
+                        self.assertTrue(controller.arm(now)[0])
+                    decision = controller.step(now)
+                self.assertEqual(decision.reason, "Following right wall")
+                self.assertGreater(decision.linear, 0)
+                sign = (decision.angular > 0) - (decision.angular < 0)
+                self.assertEqual(sign, expected_sign)
+
     def test_front_obstacle_starts_moving_curve_before_stop_line(self):
         _, decision = self.ready(((0, 0.78),))
         self.assertEqual(decision.state, "SLOW")

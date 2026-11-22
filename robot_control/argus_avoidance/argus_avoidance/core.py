@@ -96,9 +96,21 @@ class _Observation:
     points: tuple[tuple[float, float], ...]
 
 
+@dataclass(frozen=True)
+class _Wall:
+    distance: float
+    heading: float
+
+
 class AvoidanceController:
-    def __init__(self, config: Config | None = None):
+    def __init__(self, config: Config | None = None, *, follow_wall=None):
         self.config = config or Config()
+        if follow_wall not in (None, "left", "right"):
+            raise ValueError("Wall following needs a left or right side")
+        self.follow_wall = follow_wall
+        self._wall = None
+        self._front_close_scans = 0
+        self._front_open_scans = 0
         self.state = "DISARMED"
         self.reason = "Disarmed"
         self.armed = False
@@ -124,11 +136,18 @@ class AvoidanceController:
             observation = self._parse_scan(scan)
         except (ValueError, TypeError, OverflowError, AttributeError) as error:
             self._observation = None
+            self._wall = None
             self._scan_reason = f"Invalid scan: {error}"
             self._clear_count = 0
             return
         self._last_received = scan.received_at
         self._observation = observation
+        if self.follow_wall:
+            self._wall = self._fit_side_wall(observation.points)
+            self._front_close_scans = (self._front_close_scans + 1
+                                       if observation.front <= self.config.curve_start_clearance_m else 0)
+            self._front_open_scans = (self._front_open_scans + 1
+                                      if observation.front > self.config.curve_release_clearance_m else 0)
         self._scan_reason = "Healthy scan"
         self._sequence += 1
 
@@ -236,6 +255,34 @@ class AvoidanceController:
                         obs.front if obs else None, obs.left if obs else None,
                         obs.right if obs else None)
 
+    def _fit_side_wall(self, points):
+        """Fit a nearby side surface only if it extends fore and aft."""
+        side = 1 if self.follow_wall == "left" else -1
+        radius = self.config.robot_radius_m
+        samples = [(x, y) for x, y in points
+                   if -0.45 <= x <= 0.50 and radius <= side * y <= radius + 0.40]
+        if len(samples) < 5:
+            return None
+        if min(x for x, _ in samples) > -0.08 or max(x for x, _ in samples) < 0.12:
+            return None
+        mean_x = sum(x for x, _ in samples) / len(samples)
+        mean_y = sum(y for _, y in samples) / len(samples)
+        variance = sum((x - mean_x)**2 for x, _ in samples)
+        slope = sum((x - mean_x) * (y - mean_y) for x, y in samples) / variance
+        offset = mean_y - slope * mean_x
+        if abs(slope) > 0.45 or any(abs(y - offset - slope*x) > 0.035 for x, y in samples):
+            return None
+        return _Wall(abs(offset) / math.hypot(1, slope), math.atan(slope))
+
+    def _sides_clear(self):
+        cfg, obs = self.config, self._observation
+        if self._wall is None:
+            return min(obs.left, obs.right) > cfg.side_stop_clearance_m
+        near, far = (obs.left, obs.right) if self.follow_wall == "left" else (obs.right, obs.left)
+        wall_limit = cfg.margin_m + 0.02
+        return (self._wall.distance > cfg.robot_radius_m + wall_limit and
+                near > 0.02 and far > cfg.side_stop_clearance_m)
+
     def _curve_path_clear(self, direction):
         """Require clearance along a short family of plausible forward arcs.
 
@@ -244,21 +291,43 @@ class AvoidanceController:
         requested wheel ratio produces one exact radius. This is a local guard;
         the front stop threshold and fresh-scan requirement still apply.
         """
+        return self._paths_clear((direction*c for c in (0.0, 1.5, 3.0, 4.5, 6.0)), 0.03)
+
+    def _paths_clear(self, curvatures, extra_margin):
         cfg, obs = self.config, self._observation
-        clearance = cfg.robot_radius_m + cfg.margin_m + 0.03
+        curvatures = tuple(curvatures)
+        clearance = cfg.robot_radius_m + cfg.margin_m + extra_margin
         limit_sq = clearance * clearance
         for step in range(1, 13):
             distance = cfg.curve_lookahead_m * step / 12
-            for curvature in (0.0, 1.5, 3.0, 4.5, 6.0):
+            for curvature in curvatures:
                 if curvature == 0:
                     x, y = distance, 0.0
                 else:
                     angle = curvature * distance
                     x = math.sin(angle) / curvature
-                    y = direction * (1 - math.cos(angle)) / curvature
+                    y = (1 - math.cos(angle)) / curvature
                 if any((px-x)**2 + (py-y)**2 <= limit_sq for px, py in obs.points):
                     return False
         return True
+
+    def _track_wall(self):
+        cfg, wall = self.config, self._wall
+        side = 1 if self.follow_wall == "left" else -1
+        gap_error = wall.distance - cfg.robot_radius_m - (cfg.margin_m + 0.04)
+        steering = 0.5 * wall.heading + 1.2 * side * gap_error
+        steering = max(-0.16, min(0.16, steering))
+        if abs(steering) < 0.015:
+            steering = 0.0
+        # The floor turn radius is uncalibrated. Check straight and two
+        # nearby curvatures before allowing a wheel-speed correction.
+        curve = 15 * steering
+        if not self._paths_clear((0.0, curve / 2, curve), 0.0):
+            if not self._paths_clear((0.0,), 0.0):
+                return self._halt("BLOCKED", "Wall-follow path blocked")
+            steering = 0.0
+        self.state, self.reason = "SLOW", f"Following {self.follow_wall} wall"
+        return self._decision(cfg.slow_m_s, steering)
 
     def _drive(self):
         cfg, obs = self.config, self._observation
@@ -266,9 +335,12 @@ class AvoidanceController:
         self.state = "SLOW" if slow else "FORWARD"
         speed = cfg.slow_m_s if slow else cfg.forward_m_s
         self.reason = "Obstacle approaching" if slow else "Forward corridor clear"
-        if obs.front > cfg.curve_release_clearance_m:
+        if obs.front > cfg.curve_release_clearance_m and (
+                not self.follow_wall or self._front_open_scans >= 3):
             self._curve_direction = 0
-        if obs.front <= cfg.curve_start_clearance_m or self._curve_direction:
+        start_curve = obs.front <= cfg.curve_start_clearance_m and (
+            self._wall is None or self._front_close_scans >= 3)
+        if start_curve or self._curve_direction:
             if self._curve_direction:
                 directions = (self._curve_direction,)
             else:
@@ -279,6 +351,8 @@ class AvoidanceController:
                     self.state = "SLOW"
                     self.reason = "Curving left around obstacle" if direction > 0 else "Curving right around obstacle"
                     return self._decision(cfg.slow_m_s, cfg.curve_rad_s * direction)
+        if self._wall is not None and not start_curve and not self._curve_direction:
+            return self._track_wall()
         if obs.front > cfg.steer_front_clearance_m and min(obs.left, obs.right) < cfg.side_steer_clearance_m:
             if obs.left + cfg.steer_balance_m < obs.right:
                 if self._curve_path_clear(-1):
@@ -303,9 +377,9 @@ class AvoidanceController:
         # A circle containing the whole chassis covers every in-place rotation.
         if obs.nearest <= cfg.robot_radius_m + cfg.margin_m:
             return self._halt("BLOCKED", "Obstacle inside swept footprint clearance")
+        sides_clear = self._sides_clear()
         if self._counted_sequence != self._sequence:
-            path_clear = (obs.front > cfg.resume_clearance_m and
-                          min(obs.left, obs.right) > cfg.side_stop_clearance_m)
+            path_clear = obs.front > cfg.resume_clearance_m and sides_clear
             self._clear_count = self._clear_count + 1 if path_clear else 0
             self._counted_sequence = self._sequence
         if self.state == "TURN":
@@ -317,8 +391,7 @@ class AvoidanceController:
                 return self._decision()
             return self._decision(angular=cfg.turn_rad_s * self._turn_direction)
         if self.state in ("FORWARD", "SLOW"):
-            if (obs.front > cfg.stop_clearance_m and
-                    min(obs.left, obs.right) > cfg.side_stop_clearance_m):
+            if obs.front > cfg.stop_clearance_m and sides_clear:
                 return self._drive()
             self.state, self.reason = "STOP", "Obstacle near travel path; stopping before turn"
             self._stopped_at = now
@@ -332,8 +405,7 @@ class AvoidanceController:
                 self._turn_direction = 0
                 return self._drive()
             # Wait for actual distinct clear observations, not repeated timer ticks.
-            if (obs.front > cfg.resume_clearance_m and
-                    min(obs.left, obs.right) > cfg.side_stop_clearance_m):
+            if obs.front > cfg.resume_clearance_m and sides_clear:
                 return self._decision()
             # Turning in place sweeps the circular footprint already checked
             # above. Side corridors need not fit a forward-moving chassis.

@@ -77,13 +77,14 @@ class RoamTests(unittest.TestCase):
         def scene(now, ranges):
             if 0.7 <= now < 1.8:
                 ranges[0] = ranges[-1] = 0.5
-        result, client, _ = self.execute(scene)
+        result, client, output = self.execute(scene)
         self.assertEqual(result, 0)
         commands = client.commands
         forward = commands.index((18, 18))
         turn = commands.index((-15, 15))
         self.assertIn((0, 0), commands[forward:turn])
         self.assertIn((18, 18), commands[turn+1:])
+        self.assertIn("END Duration limit reached", output)
         self.assertEqual(client.arms, [42])
 
     def test_expired_scan_stops_and_never_rearms(self):
