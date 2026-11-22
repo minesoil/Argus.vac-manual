@@ -1,6 +1,8 @@
 # Argus Vac — project memory
 
-Context refresh, 2026-11-22: 14 November records establish a corrected-heading
+Context refresh, 2026-11-22, published in
+[4c0f62e](https://github.com/minesoil/Argus.vac-manual/commit/4c0f62e580ef305597f95a68f2700bc6e81922dc):
+14 November records establish a corrected-heading
 phone trial that turned away from a front marker bag without contact and a
 separate 60-second supervised floor run at 12% that ended stopped/zero without
 contact. Justin switched motor power OFF afterward. A later indoor-only,

@@ -1,4 +1,4 @@
-# Lidar roaming — implementation and tonight's commissioning
+# Lidar roaming — implementation and commissioning record
 
 Goal requested 14 November 2026: drive around a closed room, curve around an
 obstacle when the scan leaves room, otherwise stop, pivot and continue. On 15

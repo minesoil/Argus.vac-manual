@@ -6,8 +6,9 @@ Stop/page/heartbeat action and contact outcome were not recorded. Recheck
 current motor power and Pi bridge state before new physical work; the last
 dated motor-OFF confirmation preceded that attempt. Verify service startup
 after reboot, loaded stopping/body gap, room coverage and outdoor sensing.
-N20 side-brush motors are fitted to printed parts but untested. GitHub and the
-old convention sheet need the corrected heading and later test status.
+N20 side-brush motors are fitted to printed parts but untested. GitHub source
+and memory were updated in 4c0f62e; the older convention sheet still carries
+stale 90° advice and should be treated as historical.
 [Source review](updates/2026-11-22-context-refresh.md).
 
 2026-11-14 latest: complete a phone Start and corrected-heading loaded floor

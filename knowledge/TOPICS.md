@@ -3,7 +3,7 @@
 [22 November cross-source refresh: corrected-heading 60-second no-contact
 trial; brief indoor no-limit session ended for unknown control reason; N20
 side-brush parts fitted but untested; Drive December 31 goal and GitHub
-publication gap](updates/2026-11-22-context-refresh.md).
+reconciliation](updates/2026-11-22-context-refresh.md).
 
 [Latest 2026-11-14 front-target correction: raw forward 7.5° replaces 90°;
 phone map aligned, 20-second trial configured, corrected-heading loaded test

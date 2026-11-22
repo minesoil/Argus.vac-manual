@@ -53,7 +53,7 @@ validated. The outdoor showcase's outcome was not recorded.
 
 ## Source reconciliation
 
-GitHub main had no commits after 802b216d during this review. It omits the
+At the start of this review, GitHub main had no commits after 802b216d. It omitted the
 later 7.5° correction, 60-second run, and final phone status and still contains
 90° advice in its roaming guide. The
 [14 November convention sheet](https://drive.google.com/file/d/1RwiIDJJyBqMxaipAJ7x2Lmd80DObdKsy/view)
@@ -64,6 +64,12 @@ navigation test found. Gmail could not be checked because its connection
 requires reauthentication. A newer assistant summary claiming phone/camera
 work was never flashed conflicts with the 14 November physical tests and is
 not used as evidence.
+
+After this reconciliation, the reviewed local source, calibrated example,
+and memory were published to GitHub main as
+[4c0f62e](https://github.com/minesoil/Argus.vac-manual/commit/4c0f62e580ef305597f95a68f2700bc6e81922dc).
+That publication changes the repository record; it does not validate a new
+physical run. The older convention sheet remains a historical snapshot.
 
 Remaining checks: determine why the no-time-limit phone session ended; verify
 the phone Stop/heartbeat and Pi service after reboot; measure loaded stopping
