@@ -112,6 +112,7 @@ class AvoidanceController:
             raise ValueError("Wall following needs a left or right side")
         self.follow_wall = follow_wall
         self._wall = None
+        self._front_obstacle = math.inf
         self._front_close_scans = 0
         self._front_open_scans = 0
         self.state = "DISARMED"
@@ -147,10 +148,11 @@ class AvoidanceController:
         self._observation = observation
         if self.follow_wall:
             self._wall = self._fit_side_wall(observation.points)
+            self._front_obstacle = self._front_beyond_wall(observation)
             self._front_close_scans = (self._front_close_scans + 1
-                                       if observation.front <= self.config.curve_start_clearance_m else 0)
+                                       if self._front_obstacle <= self.config.curve_start_clearance_m else 0)
             self._front_open_scans = (self._front_open_scans + 1
-                                      if observation.front > self.config.curve_release_clearance_m else 0)
+                                      if self._front_obstacle > self.config.curve_release_clearance_m else 0)
         self._scan_reason = "Healthy scan"
         self._sequence += 1
 
@@ -301,6 +303,18 @@ class AvoidanceController:
             return None
         return _Wall(abs(offset) / math.hypot(1, slope), math.atan(slope))
 
+    def _front_beyond_wall(self, observation):
+        """Use separate obstacles for early turns; raw clearance still gates motion."""
+        if self._wall is None:
+            return observation.front
+        inflated = self.config.robot_radius_m + self.config.margin_m
+        side = 1 if self.follow_wall == "left" else -1
+        sine, cosine = math.sin(self._wall.heading), math.cos(self._wall.heading)
+        return min((max(0.0, x - inflated) for x, y in observation.points
+                    if x >= 0 and abs(y) <= inflated and
+                    abs(-sine*x + cosine*y - side*self._wall.distance) > 0.035),
+                   default=math.inf)
+
     def _sides_clear(self):
         cfg, obs = self.config, self._observation
         if self._wall is None:
@@ -347,8 +361,13 @@ class AvoidanceController:
         cfg, wall = self.config, self._wall
         side = 1 if self.follow_wall == "left" else -1
         gap_error = wall.distance - cfg.robot_radius_m - (cfg.margin_m + 0.04)
-        steering = 0.5 * wall.heading + 1.2 * side * gap_error
-        steering = max(-0.16, min(0.16, steering))
+        approach_heading = 0.0
+        if self._observation.front > cfg.curve_start_clearance_m:
+            approach_heading = math.atan2(side * gap_error, cfg.curve_lookahead_m)
+        # Aim toward a point at the desired clearance. The measured wall angle
+        # reduces the correction as the chassis approaches that line.
+        steering = 0.8 * (wall.heading + approach_heading)
+        steering = max(-0.20, min(0.20, steering))
         if abs(steering) < 0.015:
             steering = 0.0
         # The floor turn radius is uncalibrated. Check straight and two
@@ -367,10 +386,11 @@ class AvoidanceController:
         self.state = "SLOW" if slow else "FORWARD"
         speed = cfg.slow_m_s if slow else cfg.forward_m_s
         self.reason = "Obstacle approaching" if slow else "Forward corridor clear"
-        if obs.front > cfg.curve_release_clearance_m and (
+        turn_clearance = self._front_obstacle if self.follow_wall else obs.front
+        if turn_clearance > cfg.curve_release_clearance_m and (
                 not self.follow_wall or self._front_open_scans >= 3):
             self._curve_direction = 0
-        start_curve = obs.front <= cfg.curve_start_clearance_m and (
+        start_curve = turn_clearance <= cfg.curve_start_clearance_m and (
             self._wall is None or self._front_close_scans >= 3)
         if start_curve or self._curve_direction:
             if self._curve_direction:

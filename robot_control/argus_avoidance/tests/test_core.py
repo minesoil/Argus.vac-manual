@@ -113,6 +113,8 @@ class ControllerTests(unittest.TestCase):
                 self.assertAlmostEqual(decision.wall_heading_rad, 0.0, places=3)
                 sign = (decision.angular > 0) - (decision.angular < 0)
                 self.assertEqual(sign, expected_sign)
+                if gap == 0.20:
+                    self.assertAlmostEqual(decision.angular, -0.20)
 
     def test_wall_fit_ignores_background_returns_and_keeps_near_obstacle_guard(self):
         cfg = Config(robot_radius_m=0.15, margin_m=0.06)
@@ -136,6 +138,32 @@ class ControllerTests(unittest.TestCase):
         ranges[54] = 0.24
         controller.observe(Scan(tuple(ranges), 0, delta, 0.05, 12.0, 0.4, sensor_x=0.08))
         self.assertIsNotNone(controller._wall)
+        decision = controller.step(0.4)
+        self.assertEqual((decision.state, decision.linear, decision.angular), ("STOP", 0, 0))
+
+    def test_angled_wall_guides_alignment_and_separate_front_obstacle_stops(self):
+        cfg = Config(robot_radius_m=0.15, margin_m=0.06,
+                     stop_clearance_m=0.25, resume_clearance_m=0.35)
+        controller = AvoidanceController(cfg, follow_wall="right")
+        delta = math.tau / 72
+        slope = 0.23
+        expected = []
+        for index in range(72):
+            angle = index*delta
+            slope_difference = math.sin(angle) - slope*math.cos(angle)
+            distance = (-0.35 + slope*0.08) / slope_difference if slope_difference < 0 else 3.0
+            expected.append(min(3.0, distance))
+        for now in (0.0, 0.1, 0.2, 0.3):
+            controller.observe(Scan(tuple(expected), 0, delta, 0.05, 12.0, now, sensor_x=0.08))
+            if now == 0:
+                self.assertTrue(controller.arm(now)[0])
+            decision = controller.step(now)
+        self.assertLess(decision.front_clearance, cfg.curve_start_clearance_m)
+        self.assertEqual(decision.reason, "Following right wall")
+        self.assertGreater(decision.angular, 0.0)
+
+        expected[0] = 0.34
+        controller.observe(Scan(tuple(expected), 0, delta, 0.05, 12.0, 0.4, sensor_x=0.08))
         decision = controller.step(0.4)
         self.assertEqual((decision.state, decision.linear, decision.angular), ("STOP", 0, 0))
 

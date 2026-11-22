@@ -102,7 +102,8 @@ uses the default ESP32 USB port. Stale or invalid C1 data still stops roaming.
 
 For a low-speed edge pass, set `"follow_wall": "right"` or `"left"` in
 the roaming profile. The controller fits a nearby side wall and steers on a
-modeled body gap of about 10 cm. A marked front obstruction can still trigger
+modeled body gap of about 10 cm. It aims at that gap over a short lookahead
+and steers parallel when the wall enters the forward corridor. A separate front obstruction can still trigger
 a moving curve or a stop. Use a straight wall with an open route ahead for
 the first test, and verify the real gap, footprint and wheel response. The
 demo bounds remain 20 seconds and 12% wheel commands. The log records each
