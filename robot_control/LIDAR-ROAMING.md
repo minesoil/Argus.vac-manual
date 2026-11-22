@@ -30,8 +30,9 @@ Forward clearance is calculated across the full footprint width with sensor
 translation and orientation applied. Justin's latest working dimensions are a
 150 mm maximum body radius from the drive-wheel midpoint and a C1 scan centre
 roughly 80 mm forward, centred left-to-right. The Pi private profile uses
-`radius=0.15`, `sensor_x=0.08`, `sensor_y=0`; these are user estimates that have
-not had a loaded motion trial since the correction. They supersede the earlier
+`radius=0.15`, `sensor_x=0.08`, `sensor_y=0`; these are user estimates. Later
+bounded loaded motion passed without contact, but the exact dimensions and
+stopping gap are still unmeasured. They supersede the earlier
 230 mm radius/zero-offset placeholders. The runner adds a 60 mm margin, giving
 a 210 mm inflated circular footprint for the current profile. A standalone
 command without that profile still defaults to its old 230 mm radius, so pass
@@ -77,12 +78,15 @@ than claiming an unmeasured metres/second conversion.
 
 ## Phone LiDAR view
 
-The proposed phone page opens on **LiDAR map**. It draws 72 five-degree rays
+The phone page opens on **LiDAR map**. It draws 72 five-degree rays
 with robot-forward at the top, a body outline, the roughly 8 cm forward scan
 origin, selectable range and a visible stale/disconnected state. The Pi encodes
-each raw range in 5 cm steps and sends at most one map packet every 250 ms over
+each raw range in 5 cm steps and sends at most one map packet every 200 ms over
 the ESP32 USB serial port. Zero means unknown. The ESP32 serves `/lidar`; the
-browser polls every 250 ms and marks data stale after one second. This is a live relative
+browser polls every 200 ms and marks data stale after one second. A display-only
+filter blends small range noise but shows newly appearing or missing returns
+immediately; the drive controller always receives the unfiltered C1 sweep.
+This is a live relative
 range view, not a persistent room map or localization. A **Camera** selection
 remains as an optional preview placeholder for future use.
 
@@ -96,13 +100,21 @@ link available; stale or invalid C1 data still stops autonomous roaming.
 The updated ESP32 page adds **START LIDAR ROAMING**, separately from tape
 following. Start is a one-shot request bound to the stopped epoch. The bridge
 claims its selected kind, so a roaming request cannot fall back to the tape
-follower. Missing/uncommissioned roaming configuration disables that Start.
+follower. Missing roaming configuration disables that Start. A private
+`trial_enabled: true` profile can expose a supervised phone trial without
+marking roaming commissioned; the bridge rejects durations over 20 seconds,
+continuous mode and wheel commands above 12% in this state.
 Phone Stop, page hidden/locked, lost phone heartbeat, manual takeover, expired
 350 ms drive lease, bad scans or connection faults end the session. New clear
 scans never rearm a faulted/stopped run. Only another deliberate Start can do so.
 
-Thirty seconds is the initial run limit. A measured profile can explicitly set
-`continuous: true` to remove that timer. Battery, motor temperature, traction,
+The last recorded private showcase profile caps phone Start at 20 seconds and 12%
+wheel commands. A separate private indoor profile sets `continuous: true`
+with the same wheel limits; the manually launched bridge used that indoor
+profile for a supervised room attempt. The enabled systemd unit still
+points to the capped showcase profile for its next boot. The phone must stay
+open: a missed heartbeat stops the ESP32 within one second. Battery, motor
+temperature, traction,
 people and sensor performance still limit the run: continuous means no software
 duration cap, not an assurance of indefinite or unattended operation.
 
@@ -122,7 +134,7 @@ duration cap, not an assurance of indefinite or unattended operation.
 
    ```sh
    cd /home/orangepi/argus/avoidance
-   ./argus roam --lidar bridge --front-deg 90 --sensor-x 0.08 --sensor-y 0 --radius 0.15 --seconds 30
+   ./argus roam --lidar bridge --front-deg 7.5 --sensor-x 0.08 --sensor-y 0 --radius 0.15 --seconds 30
    ```
 
    This `bridge` form applies once the single-owner Pi bridge is running with
@@ -134,10 +146,15 @@ duration cap, not an assurance of indefinite or unattended operation.
    convert missing returns into invented clear distances.
 4. Measure raw scanner direction by placing a broad upright target in front of
    the robot, at lidar height. Use `python3 -m argus_avoidance.c1_preview` to print
-   its nearest raw-angle bins. Verify front, left and right. Set `front_deg` to
+   its nearest raw-angle bins. Justin's later front-target check found 5–10°,
+   correcting an earlier 90° assumption. That earlier heading made the phone
+   map appear rotated and means previous floor curves did not validate obstacle
+   direction. Verify front, left and right. Set `front_deg` to
    the raw clockwise angle pointing forward. Measure sensor x/y from the drive
    rotation centre (x forward, y left) and a radius containing every protrusion.
-5. Copy `config/roam.example.json` to private `.state/roam.json`. Fill measured
+5. Copy `config/roam.example.json` to private `.state/roam.json`. Its heading,
+   offset and size reflect the estimated 14 November Argus calibration, not a
+   universal C1 mounting. Confirm them on the actual robot. Fill measured
    geometry and device path; leave `commissioned` false until checks below pass.
    The map can run from this profile while driving remains disabled. Optional
    `map_port` selects the ESP32 USB device and `wall_gap` sets the bounded front
@@ -153,11 +170,16 @@ duration cap, not an assurance of indefinite or unattended operation.
    The command-line `--trial` mode is limited to 20 seconds and 12% wheel
    commands for that first supervised floor check; pass `--cruise 12 --turn 12`
    or lower. It does not mark the profile commissioned or enable the phone
-   roaming Start. Check a moving curve as well as a pivot with Stop in hand.
+   roaming Start by itself. A private `trial_enabled: true` with seconds <=20,
+   `continuous: false`, cruise/slow/turn <=12 enables a phone-launched trial.
+   Check a moving curve as well as a pivot with Stop in hand.
 7. After those physical checks, set `commissioned: true`, restart the bridge,
-   press Stop, then **START LIDAR ROAMING** for the initial 30-second room test.
+   press Stop, then **START LIDAR ROAMING** for a bounded supervised room test.
    Validate several different walls/corners and a placed object, then extend
-   duration. Only then consider `continuous: true` while supervising.
+   duration. Only then consider `continuous: true` while supervising. The
+   14 November 60-second CLI drive passed without contact, but the subsequent
+   phone no-duration-limit attempt stopped early because its control session
+   ended. Resolve that stop before claiming sustained phone roaming.
 
 ## Outdoor showcase
 
@@ -178,8 +200,11 @@ objects; that remains a separate assisted-manual prototype.
 
 The earlier C1 laptop test passed identity, health and three seconds of live
 ranging. Later Pi and bounded loaded trials established C1 scans, forward motion,
-a right pivot and no-contact continuation in the cramped room. Those trials
-predate the corrected +80 mm sensor pose and new moving-curve code. Source now
+turns and curves in the cramped room. A corrected-heading phone trial avoided
+a marker bag without contact; a separate 60-second supervised CLI run completed
+with no contact and final Stop/zero. The actual closest body gap and stopping
+distance were not measured. A no-duration-limit indoor phone attempt ended
+early with a control-session stop of unknown cause. Source now
 also checks arc path selection, wall stop, stale/unknown scans, swept-footprint
 hazards, phone Stop, turn timeout, raw-angle conversion and separate phone
 request routing. Test results and installation status are recorded in

@@ -103,6 +103,38 @@ class USBBridgeTests(unittest.TestCase):
         self.assertEqual(args[args.index("--lidar") + 1], "bridge")
         self.assertEqual(args[args.index("--wall-gap") + 1], "0.3")
 
+    def test_uncommissioned_phone_trial_is_bounded_and_uses_bridge(self):
+        import tempfile
+        profile = {"commissioned": False, "trial_enabled": True,
+                   "lidar": "/dev/c1", "front_deg": 90, "sensor_x": 0.08,
+                   "sensor_y": 0, "radius": 0.15, "wall_gap": 0.25,
+                   "cruise": 12, "slow": 12, "turn": 12,
+                   "seconds": 20, "continuous": False}
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "roam.json"
+            path.write_text(json.dumps(profile))
+            args = load_roam_args(path, lidar_bridge=True)
+            self.assertIn("--trial", args)
+            self.assertNotIn("--commissioned", args)
+            self.assertEqual(args[args.index("--seconds") + 1], "20")
+            self.assertEqual(args[args.index("--lidar") + 1], "bridge")
+            controller = self.server.controller
+            launch = mock.Mock(return_value=object())
+            state = {"follow_pending": True, "follow_kind": "roam",
+                     "epoch": 42, "follow_token": "1234567890abcdef"}
+            claim_phone_start(controller, state, None, launch, args)
+            command = launch.call_args.args[0]
+            self.assertIn("--drive", command)
+            self.assertIn("--trial", command)
+            self.assertIn("--expected-epoch", command)
+            for change in ({"continuous": True}, {"seconds": 21},
+                           {"cruise": 13}, {"turn": 13}):
+                path.write_text(json.dumps(profile | change))
+                with self.assertRaises(ValueError):
+                    load_roam_args(path, lidar_bridge=True)
+            path.write_text(json.dumps(profile | {"trial_enabled": False}))
+            self.assertIsNone(load_roam_args(path, lidar_bridge=True))
+
     def test_start_claim_launches_once_with_captured_epoch(self):
         controller = self.server.controller
         launch = mock.Mock(return_value=object())

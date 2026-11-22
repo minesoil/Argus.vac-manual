@@ -1,5 +1,23 @@
 # Unresolved project facts
 
+As of 2026-11-22: why did the indoor no-duration-limit phone session end after
+a brief start (`Control session ended or another operator took over`)? Justin's
+Stop/page/heartbeat action and contact outcome were not recorded. Recheck
+current motor power and Pi bridge state before new physical work; the last
+dated motor-OFF confirmation preceded that attempt. Verify service startup
+after reboot, loaded stopping/body gap, room coverage and outdoor sensing.
+N20 side-brush motors are fitted to printed parts but untested. GitHub and the
+old convention sheet need the corrected heading and later test status.
+[Source review](updates/2026-11-22-context-refresh.md).
+
+2026-11-14 latest: complete a phone Start and corrected-heading loaded floor
+trial before considering unlimited roaming. The front-target test revised raw
+forward to 7.5° and invalidated prior avoidance-direction confidence. Measure
+stopping and closest body gap to a broad upright wall; assess a longer room
+run, low objects and cord clearance. Outdoor floor tape is unsensed and cannot
+constrain unlimited roaming. Pi systemd bridge auto-start after reboot remains
+unobserved; only a manual process runs now.
+
 2026-11-14 evening: measure actual loaded stopping distance and body clearance
 to a broad upright wall after a longer supervised run, then decide whether
 to commission 30-second phone Start or continuous room roaming. Two short

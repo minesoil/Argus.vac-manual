@@ -99,16 +99,27 @@ def claim_phone_start(controller, state, follower, launch=subprocess.Popen, roam
 
 
 def load_roam_args(path, lidar_bridge=False):
-    """Explicit measured deployment profile; absent/uncommissioned disables Start."""
+    """Load commissioned roam or an explicitly capped, low-power phone trial."""
     if path is None:
         return None
     profile = json.loads(Path(path).read_text())
-    if profile.get("commissioned") is not True:
+    commissioned = profile.get("commissioned") is True
+    trial = profile.get("trial_enabled") is True and not commissioned
+    if not commissioned and not trial:
         return None
     required = ("lidar", "front_deg", "sensor_x", "sensor_y", "radius")
     if any(key not in profile for key in required):
         raise ValueError("Roam profile requires lidar, front_deg, sensor_x, sensor_y, radius")
-    result = ["--commissioned"]
+    if trial:
+        seconds = profile.get("seconds", 20)
+        if (profile.get("continuous") is True or isinstance(seconds, bool)
+                or not isinstance(seconds, (int, float)) or not 0 < seconds <= 20):
+            raise ValueError("Phone trial requires a duration from 1 to 20 seconds")
+        cruise, slow, turn = (profile.get(key, 12) for key in ("cruise", "slow", "turn"))
+        if (any(type(value) is not int for value in (cruise, slow, turn))
+                or not 1 <= slow <= cruise <= 12 or not 1 <= turn <= 12):
+            raise ValueError("Phone trial requires wheel commands at or below 12%")
+    result = ["--commissioned" if commissioned else "--trial"]
     for key in required + ("cruise", "slow", "turn"):
         if key in profile:
             value = "bridge" if key == "lidar" and lidar_bridge else profile[key]
@@ -118,7 +129,7 @@ def load_roam_args(path, lidar_bridge=False):
     if profile.get("continuous") is True:
         result.append("--continuous")
     else:
-        result.extend(["--seconds", str(profile.get("seconds", 30))])
+        result.extend(["--seconds", str(profile.get("seconds", 20 if trial else 30))])
     return result
 
 

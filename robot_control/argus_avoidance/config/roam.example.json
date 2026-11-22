@@ -1,13 +1,14 @@
 {
   "commissioned": false,
+  "trial_enabled": false,
   "lidar": "/dev/serial/by-id/REPLACE_WITH_C1_ADAPTER",
-  "front_deg": 0,
-  "sensor_x": 0,
+  "front_deg": 7.5,
+  "sensor_x": 0.08,
   "sensor_y": 0,
-  "radius": 0.23,
-  "cruise": 18,
+  "radius": 0.15,
+  "cruise": 12,
   "slow": 12,
-  "turn": 15,
-  "seconds": 30,
+  "turn": 12,
+  "seconds": 20,
   "continuous": false
 }

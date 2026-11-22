@@ -200,3 +200,73 @@ ESP32 stopped/zero and a 72-bin C1 sweep. Justin refreshed the final phone
 page and said its technical display looks better and updates more smoothly.
 Outdoor performance, sustained room operation, loaded braking and
 close-wall/corner cleaning remain unverified.
+
+Later front-target correction: with motor power OFF, Justin held a marker bag
+directly in front of the C1. The phone map placed its close return about 20°
+north of west, and the Pi raw sweep put the nearest returns at 5–10°,
+~0.365–0.372 m. The previous `front_deg=90` was wrong for the current mounting.
+The private profile was backed up and changed to `front_deg=7.5`; a stationary
+preview then measured ~0.235 m front clearance and chose a left pivot. The
+bridge was restarted, and Justin confirmed the bag now appears near the top
+of the map. This correction invalidates the prior no-contact curves as tests
+of correctly directed obstacle avoidance; those drives used the wrong heading.
+
+The display marker was redrawn as a single chassis circle and forward arrow,
+the narrow-screen status layout was adjusted, and display-only small-range
+noise blending was added. Pi map relay and browser polling are now each
+limited to one update per 200 ms; new/missing returns bypass that blending.
+The ESP32 image compiled at 951316 program bytes and the 951472-byte app was
+flash-hash verified. The corrected Pi bridge passed 136 Python tests; actual
+ESP32-sketch host and browser checks passed. Justin refreshed the phone page
+and confirmed the arrow is clear, front bag is at top, and scan looks smoother.
+
+An uncommissioned phone trial route was added to the Pi bridge. The private
+profile currently sets `trial_enabled: true`, `seconds: 20`, cruise/slow/turn
+12%, `wall_gap: 0.25`, `commissioned: false`, `continuous: false`, and raw
+forward heading 7.5°. This exposes phone Start only for a capped supervised
+trial. A phone-button and corrected-direction floor test are still pending at
+this checkpoint; unlimited roaming has not been enabled. Motor power remains
+OFF per Justin's latest confirmation.
+
+Phone-trial follow-up: with motors OFF and the front bag unchanged, Justin
+pressed phone Start. The Pi claimed LiDAR automatic control, requested a left
+pivot, and timed out at 15 seconds because the robot could not physically
+rotate; final ESP32 outputs were zero. The phone's generic "Auto — Automatic
+command" label confused Justin, so source now gives LiDAR automatic control a
+specific status label; that small label change is not yet flashed at this
+checkpoint.
+
+Justin then switched motor power ON and pressed phone Start for a loaded
+corrected-heading run. The log shows a left turn away from the bag, forward
+travel, a stop and turn as right-side clearance tightened, then a fail-stop
+for an obstacle inside the swept footprint. Justin reported no contact.
+This was a bounded profile with a 20-second maximum, but the hazard may have
+ended it earlier. The final ESP32 state was stopped/zero.
+
+Justin confirmed onboard Pi, ESP32 and drive power; Ethernet to the laptop is
+the sole external tether. He confirmed a level floor, no loose cords or steps,
+enough Ethernet slack and that he was watching with Stop ready for a bounded
+one-minute CLI run. The corrected-heading 60-second run at 12%, wall gap 0.25,
+logged forward travel, slow curves and pivots and completed at Stop/zero. A
+read-only check during the run saw a close return and earlier phone-run
+fail-stop in the rolling log; the operator was asked to Stop and turn motor
+power OFF. The 60-second process itself returned success and final zero.
+Justin confirmed no contact and switched motor power OFF. A separate private
+`.state/room-continuous.json` now preserves the same corrected 7.5° heading,
+12% wheel settings and 0.25 m requested wall gap, with no software duration
+limit. The normal `.state/roam.json` remains capped at 20 seconds for the
+systemd unit's next boot. The manual bridge was relaunched with the room
+profile only after a further firmware flash-hash verification (951584 app
+bytes) and checked stopped/zero with 72-bin sweeps. The final phone label
+identifies active LiDAR navigation instead of generic "Auto". A supervised
+no-time-limit phone trial is pending; motor power is OFF at this checkpoint.
+
+Later 14 November phone attempt: Justin replied that he was ready for the
+supervised minute. The manual bridge was using the separate room profile.
+The controller briefly ran, then logged `STOP Control session ended or another
+operator took over`; the final bridge state was stopped with left/right zero.
+The record does not establish whether Justin tapped Stop, hid/locked the page,
+or lost its heartbeat. Contact and motor-power state after this attempt were
+not confirmed. Therefore this was not a verified full-minute phone run, much
+less an unlimited room run. The normal systemd profile remained the capped
+20-second trial. See the [22 November source reconciliation](../../../knowledge/updates/2026-11-22-context-refresh.md).

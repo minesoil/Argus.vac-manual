@@ -110,3 +110,36 @@ it looks better and updates more smoothly. Profile `commissioned` and
 `continuous` remain false. Sustained
 room, measured braking, close-wall/corner, and outdoor performance remain
 unverified.
+
+## Front heading correction and capped phone trial — later 14 November
+
+Evidence: Justin's front-target observation, a Pi raw C1 sweep and read-only
+stationary preview, esptool/hash output, Pi tests, and the private profile
+readback. With drive-motor power OFF, Justin held a marker bag directly ahead
+at scanner height. The phone map showed it roughly 20° north of west. The Pi
+raw scan showed nearest returns of 0.365–0.372 m at 5–10°, consistent with
+that phone position and demonstrating that `front_deg=90` was wrong for this
+mounting. The private profile was backed up and changed to `front_deg=7.5`.
+The corrected stationary preview put the bag in the front corridor at about
+0.235 m clearance beyond the inflated footprint and chose a left pivot.
+Justin then confirmed the bag appears near the top of the phone map.
+
+The two earlier short no-contact floor curves remain evidence of motion and
+Stop/zero, but used the wrong heading; they do not validate the intended
+obstacle direction. No motor motion was commanded during this correction.
+
+The final ESP32 page draws a single chassis circle and forward arrow, wraps
+status on narrow screens, and blends small range noise for display only.
+New/missing returns update immediately; navigation uses unfiltered C1 scans.
+Pi relay and browser polls are at most every 200 ms. The 951472-byte app was
+flash-hash verified. The corrected Pi bridge passed 136 tests; actual-sketch
+host and browser checks passed. Justin refreshed the phone and confirmed the
+arrow is clear, bag at top and display smoother.
+
+A Pi bridge update permits a private `trial_enabled` phone Start even though
+`commissioned=false`. The profile now selects 20 seconds, cruise/slow/turn
+12%, `wall_gap=0.25`, `continuous=false` and raw front 7.5°. The code rejects
+a longer trial, continuous operation or wheel commands over 12% in this mode.
+The phone button and a loaded corrected-heading drive remain pending at this
+checkpoint. Motor power remains OFF per Justin's latest statement. Systemd
+bridge is enabled but inactive; the manual process remains in use.

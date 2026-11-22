@@ -338,7 +338,9 @@ h2 {
 }
 .map-heading {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
+  gap: 5px 12px;
   padding: 2px 3px 9px;
   color: #a9c8ce;
   font-size: 11px;
@@ -353,14 +355,14 @@ h2 {
 }
 .map-card.stale #lidarCanvas { opacity: .6; }
 .map-details {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  justify-content: space-between;
   gap: 10px;
   margin-top: 8px;
   text-align: left;
 }
-.map-details .status { margin: 0; }
+.map-details .status { margin: 0; min-width: 0; overflow-wrap: anywhere; }
 .map-details select {
   flex: none;
   border: 1px solid #45606a;
@@ -450,7 +452,7 @@ button {
 </div>
 <section id="lidarPanel" class="sensor-panel" aria-label="Live LiDAR map">
   <div id="mapCard" class="map-card stale">
-    <div class="map-heading"><span>C1 / POLAR SCAN</span><span>72 × 5° · ROBOT FRAME</span></div>
+    <div class="map-heading"><span>RPLIDAR C1 / LIVE SCAN</span><span>72 × 5° · ROBOT FRAME</span></div>
     <canvas id="lidarCanvas" aria-label="Robot centered range map; forward is up"></canvas>
     <div class="map-details">
       <div id="mapStatus" class="status">Waiting for LiDAR scan...</div>
@@ -462,7 +464,7 @@ button {
       </select>
     </div>
   </div>
-  <p class="status">FORWARD ↑ · RETURNS AT SCANNER HEIGHT · BLANK SECTORS = UNKNOWN</p>
+  <p class="status">ARROW = ROBOT FORWARD · RANGE ORIGIN 8 CM AHEAD OF CENTER · BLANK = UNKNOWN</p>
 </section>
 <section id="cameraPanel" class="sensor-panel" hidden>
   <img id="camera" class="camera" alt="Optional camera preview">
@@ -588,7 +590,9 @@ async function refreshState() {
   if (observedGeneration !== stateGeneration || request < latestStateApplied) return state;
   latestStateApplied = request;
   mode = state.mode;
-  modeLabel.textContent = state.mode + " — " + state.reason;
+  modeLabel.textContent = state.mode === "auto" && state.follow_kind === "roam"
+    ? "LiDAR navigation running · press STOP anytime"
+    : state.mode + " — " + state.reason;
   document.getElementById("guardStatus").textContent = state.assist
       ? (state.guard === "clear" ? (state.guard_latched ? "View clear — re-enable assisted drive to resume" : "Camera assistance active — watched front region only")
          : (state.guard === "blocked" ? "OBSTACLE WARNING — assisted drive stopped" : "CAMERA UNAVAILABLE — assisted drive stopped"))
@@ -774,8 +778,23 @@ const camera = document.getElementById("camera");
 const cameraStatus = document.getElementById("cameraStatus");
 let selectedView = "lidar";
 let latestScan = null;
+let displaySteps = Array(72).fill(0);
+let lastDisplayBins = "";
 let lidarPending = false;
 let cameraTimer;
+
+function updateDisplaySteps(bins) {
+  if (bins === lastDisplayBins) return;
+  lastDisplayBins = bins;
+  for (let i = 0; i < 72; i++) {
+    const raw = parseInt(bins.slice(i * 2, i * 2 + 2), 16) || 0;
+    const prior = displaySteps[i];
+    // Display-only jitter reduction: new, missing, or changed objects update
+    // immediately. Small range noise is blended; drive decisions use raw C1.
+    displaySteps[i] = (!raw || !prior || Math.abs(raw - prior) > 12)
+      ? raw : prior * .35 + raw * .65;
+  }
+}
 
 function drawLidar(scan) {
   const context = mapCanvas.getContext("2d");
@@ -812,7 +831,7 @@ function drawLidar(scan) {
 
   const points = [];
   for (let i = 0; i < 72; i++) {
-    const steps = parseInt(scan.bins.slice(i * 2, i * 2 + 2), 16);
+    const steps = displaySteps[i];
     if (!steps) { points.push(null); continue; }
     const cm = steps * 5;
     const angle = i * Math.PI / 36;
@@ -840,19 +859,20 @@ function drawLidar(scan) {
     context.fill();
   }
 
-  // Chassis and scanner share one robot-centered coordinate frame.
+  // Chassis circle and single heading arrow share the robot coordinate frame.
   context.beginPath();
   context.arc(middle, middle, 15 * scale, 0, Math.PI * 2);
   context.strokeStyle = "#d7e1df";
   context.lineWidth = 1.5;
   context.stroke();
   context.beginPath();
-  context.moveTo(middle, middle - 16 * scale);
-  context.lineTo(middle - 6 * scale, middle + 3 * scale);
-  context.lineTo(middle + 6 * scale, middle + 3 * scale);
+  context.moveTo(middle, middle + 4);
+  context.lineTo(middle, middle - 15 * scale - 5);
   context.stroke();
   context.beginPath();
-  context.arc(middle, sensorY, 3, 0, Math.PI * 2);
+  context.moveTo(middle, middle - 15 * scale - 7);
+  context.lineTo(middle - 4, middle - 15 * scale - 1);
+  context.lineTo(middle + 4, middle - 15 * scale - 1);
   context.fillStyle = "#d7e1df";
   context.fill();
   context.fillStyle = "#a9c8ce";
@@ -869,6 +889,7 @@ async function refreshLidar() {
     if (typeof scan.bins !== "string" || !/^[0-9A-F]{144}$/.test(scan.bins))
       throw new Error("Invalid LiDAR data");
     latestScan = scan;
+    if (scan.fresh) updateDisplaySteps(scan.bins);
     drawLidar(scan);
     mapCard.className = "map-card" + (scan.fresh ? "" : " stale");
     const hasReturns = /[1-9A-F]/.test(scan.bins);
@@ -910,7 +931,7 @@ function selectView(view) {
 document.getElementById("viewLidar").onclick = () => selectView("lidar");
 document.getElementById("viewCamera").onclick = () => selectView("camera");
 mapRange.onchange = () => { if (latestScan) drawLidar(latestScan); };
-setInterval(() => refreshLidar().catch(() => {}), 250);
+setInterval(() => refreshLidar().catch(() => {}), 200);
 setTimeout(() => refreshLidar().catch(() => {}), 0);
 
 </script>

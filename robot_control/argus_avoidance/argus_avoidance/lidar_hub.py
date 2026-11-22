@@ -17,7 +17,7 @@ C1_PORT = ("/dev/serial/by-id/"
 ESP_PORT = "/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0"
 MAP_MAGIC = b"AVL1"
 MAP_BINS = 72
-MAP_INTERVAL_S = 0.25
+MAP_INTERVAL_S = 0.20
 SCAN_MAX_AGE_S = 0.6
 USB_RETRY_S = 2.0
 

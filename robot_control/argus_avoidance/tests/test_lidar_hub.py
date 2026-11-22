@@ -116,16 +116,16 @@ class LidarHubTests(unittest.TestCase):
         self.assertEqual(len(serial_factory.ports), 1)
         hub.close()
 
-    def test_relay_only_new_fresh_scans_at_most_four_per_second(self):
+    def test_relay_only_new_fresh_scans_at_most_five_per_second(self):
         hub, clock, serial_factory = self.hub()
         self.assertTrue(hub._reader.started)
         hub._reader.latest = sweep(1, 0.9)
         self.assertTrue(hub.relay_once())
         self.assertFalse(hub.relay_once())  # Same revolution is never resent.
-        clock.now = 1.2
+        clock.now = 1.19
         hub._reader.latest = sweep(2, 1.15)
         self.assertFalse(hub.relay_once())  # Rate limit.
-        clock.now = 1.25
+        clock.now = 1.21
         self.assertTrue(hub.relay_once())
         self.assertEqual(len(serial_factory.ports), 1)
         self.assertEqual(len(serial_factory.ports[0].packets), 2)

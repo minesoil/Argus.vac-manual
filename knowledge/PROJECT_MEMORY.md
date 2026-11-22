@@ -1,5 +1,30 @@
 # Argus Vac — project memory
 
+Context refresh, 2026-11-22: 14 November records establish a corrected-heading
+phone trial that turned away from a front marker bag without contact and a
+separate 60-second supervised floor run at 12% that ended stopped/zero without
+contact. Justin switched motor power OFF afterward. A later indoor-only,
+no-duration-limit phone attempt started briefly but stopped because its control
+session ended; its cause, contact outcome and motor-power state afterward are
+unconfirmed. No full-minute unlimited phone run, room coverage, close-wall gap
+or outdoor performance is verified. GitHub main was still at 802b216d before
+this refresh, so older 90° heading advice there is stale. On 21 November Justin
+confirmed printed side-brush parts with N20 motors fitted but not used in real
+operation. His 19 November schedule targets a presentable prototype by
+31 December; on 22 November he chose automation as the next focus. These are
+plans, not completed tests. [Source reconciliation](updates/2026-11-22-context-refresh.md).
+
+Latest 2026-11-14 heading correction: a marker bag directly ahead appeared
+left on the phone map; raw C1 returns at 5–10° showed the earlier 90° forward
+assumption was wrong. The backed-up Pi private profile now uses `front_deg=7.5`.
+Stationary preview sees the bag ahead and Justin confirms it appears at the
+top of the refreshed map. The final app image is flash-hash verified and its
+arrow/jitter fixes look better to Justin. The earlier no-contact floor curves
+used the wrong heading and do not validate correct obstacle directions. The
+private profile exposes only a 20-second, 12% phone trial; `commissioned` and
+`continuous` remain false. Corrected-direction floor validation is pending;
+motor power remains OFF. [Evidence](updates/2026-11-14-arc-map-flash-interruption.md).
+
 Latest 2026-11-14 evening: two corrected-geometry eight-second floor runs at
 12% ended stopped/zero. Justin saw a left pivot then moving curve without
 contact, then a continuous smooth left curve without contact at `--wall-gap

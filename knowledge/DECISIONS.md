@@ -1,5 +1,22 @@
 # Argus Vac decisions and chronology
 
+2026-11-22 source reconciliation: use the calibrated raw 7.5° heading and the
+later 14 November loaded trials in place of older 90°/pending-drive summaries.
+Keep the normal systemd phone profile capped at 20 seconds and 12%; the
+separate no-duration-limit room profile was tested only briefly before a
+control-session stop. Do not claim unlimited roaming commissioned. Justin
+chooses automation for his next 2–3 hours of project work; the December 31
+prototype date in Drive is a target. Record 21 November N20 side-brush parts
+as printed/motors fitted, with no operational test. Source:
+[22 November review](updates/2026-11-22-context-refresh.md).
+
+2026-11-14 heading correction: use raw C1 front 7.5° from a direct front
+marker-bag target, superseding 90°. Treat older no-contact curves as motion
+checks only, not validated obstacle-direction checks. Keep `commissioned` and
+`continuous` false. Enable only a phone-launched 20-second, 12% supervised
+trial with `wall_gap=0.25` for corrected-direction commissioning. Motor power
+OFF during final 951472-byte app flash, which passed hash verification.
+
 2026-11-14 evening: keep the private roaming profile uncommissioned and
 continuous mode disabled after two eight-second loaded checks. Use
 `--wall-gap 0.20` only for a bounded supervised trial; its coupled side-steer

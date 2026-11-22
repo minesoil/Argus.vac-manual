@@ -1,5 +1,26 @@
 # Argus Vac — current physical build
 
+As of the 2026-11-22 record review, the latest **observed** navigation test is
+from 14 November: corrected raw C1 forward 7.5°, a marker-bag avoidance phone
+trial without contact, and a separate supervised 60-second floor run without
+contact that ended stopped/zero. Justin switched motor power OFF after that
+run. An indoor no-duration-limit phone attempt later stopped after a brief
+start due to the control session ending; the cause and any later motor-power
+state were not confirmed. No robot connection or live power check was made on
+22 November. On 21 November Justin said N20 side-brush parts were printed and
+motors fitted, but not used in real operation. See the
+[dated review](updates/2026-11-22-context-refresh.md).
+
+Latest 2026-11-14 heading: front target raw returns at 5–10° corrected
+the former 90° assumption to `front_deg=7.5` in the private Pi profile. The
+phone map now shows the target at the top; Justin confirms a clearer arrow and
+smoother scan. Final 951472-byte ESP32 app flash hash verified. Prior bounded
+no-contact curves were driven with the wrong heading and do not prove correct
+obstacle avoidance. Phone Start is configured only as a capped 20-second,
+12% trial while `commissioned=false`, `continuous=false`; corrected-heading
+floor test pending. Motor power confirmed OFF. Pi bridge runs manually while
+its enabled systemd service is inactive.
+
 Latest 2026-11-14 evening: C1, Pi bridge and ESP32 phone LiDAR map are live;
 Justin said the final map looks better and updates more smoothly.
 The ESP32's final 950736-byte app image passed flash-hash verification and the

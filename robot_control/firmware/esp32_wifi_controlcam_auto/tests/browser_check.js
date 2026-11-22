@@ -80,6 +80,7 @@ async function main() {
   earlier.resolve(response({mode: 'manual', epoch: 101, reason: 'older state'}));
   await first;
   assert.equal(evaluate('mode'), 'auto');
+  assert.equal(evaluate('modeLabel.textContent'), 'auto — auto selected');
   assert.equal(evaluate('manualSession'), '');
   const beforeIdle = posts.length;
   await evaluate('sendDrive()');
@@ -169,6 +170,12 @@ async function main() {
   await settle();
   assert.ok(elements.get('mapStatus').textContent.toLowerCase().includes('stale'));
   assert.ok(elements.get('mapCard').className.includes('stale'));
+  const running = evaluate('refreshState()');
+  states.at(-1).resolve(response({mode: 'auto', epoch: 200,
+    reason: 'Automatic command', follow_kind: 'roam'}));
+  await running;
+  assert.equal(evaluate('modeLabel.textContent'),
+    'LiDAR navigation running · press STOP anytime');
   console.log('PASS embedded UI: stale poll, manual takeover, Stop races and separate lidar roaming Start');
 }
 main().catch(error => {console.error(error); process.exitCode = 1;});
