@@ -80,13 +80,14 @@ def navigation_config(radius, wall_gap):
 def run(reader, controller, client=None, seconds=30.0, expected_epoch=None,
         front_deg=0.0, x=0.0, y=0.0, cruise=18, slow=12, turn=15,
         clock=time.monotonic, sleep=time.sleep, emit=print, ended=None, *,
-        fast_wall_trial=False):
+        fast_wall_trial=False, stop_ahead=False):
     start = clock()
     last_sequence = 0
     armed = False
     captured_epoch = expected_epoch
     next_report = 0.0
     last_report = None
+    front_close_scans = 0
     try:
         # Capture once BEFORE waiting for the sensor: Stop during startup must
         # invalidate this run instead of being silently acknowledged by arm().
@@ -105,7 +106,8 @@ def run(reader, controller, client=None, seconds=30.0, expected_epoch=None,
             if reader.error:
                 raise ControlError("C1 acquisition failed: " + reader.error)
             sweep = reader.latest
-            if sweep is not None and sweep.sequence != last_sequence:
+            new_sweep = sweep is not None and sweep.sequence != last_sequence
+            if new_sweep:
                 last_sequence = sweep.sequence
                 full_resolution = controller.follow_wall and all(map(math.isfinite, sweep.ranges))
                 controller.observe(sweep.scan(front_deg, x, y, coalesce=not full_resolution))
@@ -121,6 +123,14 @@ def run(reader, controller, client=None, seconds=30.0, expected_epoch=None,
             decision = controller.step(clock())
             if decision.state in ("FAULT", "BLOCKED"):
                 raise ControlError(decision.reason)
+            if healthy and stop_ahead and new_sweep:
+                if decision.front_clearance is not None and decision.front_clearance <= 0.30:
+                    front_close_scans += 1
+                else:
+                    front_close_scans = 0
+                if front_close_scans >= 3:
+                    emit(f"END Front obstacle at {decision.front_clearance:.2f} m clearance")
+                    return 0
             if seconds is not None and clock() - start >= seconds:
                 break
             left, right = wheels(decision, cruise, slow, turn, fast_wall_trial=fast_wall_trial)
@@ -158,6 +168,8 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--lidar", required=True)
     parser.add_argument("--drive", action="store_true")
+    parser.add_argument("--stop-ahead", action="store_true",
+                        help="End after three close front scans at 0.30 m clearance")
     parser.add_argument("--trial", action="store_true",
                         help="Bounded low-power floor commissioning trial; requires explicit duration")
     parser.add_argument("--esp32", default="http://127.0.0.1:8766")
@@ -201,8 +213,9 @@ def main(argv=None):
     if args.drive and args.follow_wall and (args.continuous or args.seconds > 20 or
                                           args.slow > WALL_FOLLOW_SLOW_PERCENT or args.turn > 12):
         parser.error("Wall-follow driving requires <=20 seconds, <=15% slow speed and <=12% turn")
-    if args.drive and fast_wall_trial and (not args.trial or args.seconds > FAST_WALL_MAX_SECONDS):
-        parser.error("Wall-follow cruise above 15% requires a trial of at most 3 seconds")
+    fast_limit = 10 if args.stop_ahead else FAST_WALL_MAX_SECONDS
+    if args.drive and fast_wall_trial and (not args.trial or args.seconds > fast_limit):
+        parser.error(f"Wall-follow cruise above 15% requires a trial of at most {fast_limit} seconds")
     controller = AvoidanceController(navigation_config(args.radius, args.wall_gap),
                                      follow_wall=args.follow_wall)
     stopped = [False]
@@ -215,7 +228,7 @@ def main(argv=None):
         return run(reader, controller, client, None if args.continuous else args.seconds,
                    args.expected_epoch, args.front_deg or 0, args.sensor_x, args.sensor_y,
                    args.cruise, args.slow, args.turn, ended=lambda: stopped[0],
-                   fast_wall_trial=fast_wall_trial)
+                   fast_wall_trial=fast_wall_trial, stop_ahead=args.stop_ahead)
     except (OSError, ValueError) as error:
         print("STOP " + str(error), flush=True)
         return 1

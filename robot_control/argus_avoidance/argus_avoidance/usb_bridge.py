@@ -109,6 +109,7 @@ def load_roam_args(path, lidar_bridge=False):
     if not commissioned and not trial:
         return None
     follow_wall = profile.get("follow_wall")
+    stop_ahead = profile.get("stop_ahead") is True
     if follow_wall not in (None, "left", "right"):
         raise ValueError("follow_wall must be left or right")
     required = ("lidar", "front_deg", "sensor_x", "sensor_y", "radius")
@@ -126,8 +127,9 @@ def load_roam_args(path, lidar_bridge=False):
             raise ValueError(f"Phone trial requires cruise at or below {cruise_limit}% and turn at or below 12%")
         if follow_wall and slow > WALL_FOLLOW_SLOW_PERCENT:
             raise ValueError("Phone wall trial slow speed must be at or below 15%")
-        if follow_wall and cruise > WALL_FOLLOW_SLOW_PERCENT and seconds > FAST_WALL_MAX_SECONDS:
-            raise ValueError("Phone wall trial above 15% requires a duration of at most 3 seconds")
+        fast_limit = 10 if stop_ahead else FAST_WALL_MAX_SECONDS
+        if follow_wall and cruise > WALL_FOLLOW_SLOW_PERCENT and seconds > fast_limit:
+            raise ValueError(f"Phone wall trial above 15% requires a duration of at most {fast_limit} seconds")
     result = ["--commissioned" if commissioned else "--trial"]
     for key in required + ("cruise", "slow", "turn"):
         if key in profile:
@@ -137,6 +139,8 @@ def load_roam_args(path, lidar_bridge=False):
         result.extend(["--wall-gap", str(profile["wall_gap"])])
     if follow_wall is not None:
         result.extend(["--follow-wall", follow_wall])
+    if stop_ahead:
+        result.append("--stop-ahead")
     if profile.get("continuous") is True:
         result.append("--continuous")
     else:

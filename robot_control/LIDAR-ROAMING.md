@@ -218,6 +218,20 @@ objects; that remains a separate assisted-manual prototype.
 
 ## Verification status
 
+For repeatable tuning, run these commands from the `argus_avoidance`
+directory. Capture reads the existing Pi bridge and can run while a
+supervised trial is started normally. Replay runs the roaming controller
+against that sequence without sending wheel commands.
+
+```sh
+python3 -m argus_avoidance.replay capture .state/wall-pass.jsonl --seconds 15
+python3 -m argus_avoidance.replay replay .state/wall-pass.jsonl --profile .state/roam.json
+```
+
+Keep raw scans and the site profile local. Replay checks decisions against
+the recorded trajectory. Use the simulator to test how different commands
+change a trajectory, and a physical pass to verify actual wheel clearance.
+
 The earlier C1 laptop test passed identity, health and three seconds of live
 ranging. Later Pi and bounded loaded trials established C1 scans, forward motion,
 turns and curves in the cramped room. A corrected-heading phone trial avoided
