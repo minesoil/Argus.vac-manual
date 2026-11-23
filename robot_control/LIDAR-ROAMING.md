@@ -274,6 +274,10 @@ margin. A close-wall trial can use 35% cruise during its initial clear
 approach, with up to 18% slow speed. The fast window remains three seconds,
 or ten with front stopping enabled. The close tracking speed tapers to
 13% at the tightest part of the pass when the slow setting allows it.
+The pass can run up to 30 seconds when configured to finish at the wall
+end. The shorter fast window still applies within that pass. Distant
+returns keep their obstacle checks, but only local returns can tighten
+the tracked wall distance used for the swept path.
 
 This simulation uses assumed dimensions and starts about 3.8 cm from the
 outer tire:

@@ -15,6 +15,7 @@ from .follow import ESP32AutoClient, ControlError
 WALL_FOLLOW_MAX_PERCENT = 35
 WALL_FOLLOW_SLOW_PERCENT = 15
 CLOSE_WALL_MAX_PERCENT = 18
+CLOSE_WALL_MAX_SECONDS = 30
 FAST_WALL_MAX_SECONDS = 3
 
 
@@ -230,19 +231,21 @@ def main(argv=None):
         parser.error("Require 0.20 <= wall-gap <= 0.40 m pending loaded stopping validation")
     if args.finish_at_wall_end and not args.follow_wall:
         parser.error("--finish-at-wall-end requires --follow-wall")
+    close_wall = args.close_wall_radius is not None
+    trial_limit = CLOSE_WALL_MAX_SECONDS if close_wall else 20
     if args.trial:
         cruise_limit = WALL_FOLLOW_MAX_PERCENT if args.follow_wall else 12
-        if args.continuous or args.seconds > 20 or args.cruise > cruise_limit or args.turn > 12:
-            parser.error(f"Trial requires <=20 seconds, <={cruise_limit}% cruise and <=12% turn")
+        if args.continuous or args.seconds > trial_limit or args.cruise > cruise_limit or args.turn > 12:
+            parser.error(f"Trial requires <={trial_limit} seconds, <={cruise_limit}% cruise and <=12% turn")
         args.drive = True
     if args.drive and (args.front_deg is None or not (args.commissioned or args.trial)):
         parser.error("Driving needs measured --front-deg and completed --commissioned checks")
     fast_wall_trial = bool(args.follow_wall and args.cruise > WALL_FOLLOW_SLOW_PERCENT)
-    close_wall = args.close_wall_radius is not None
     slow_limit = CLOSE_WALL_MAX_PERCENT if close_wall else WALL_FOLLOW_SLOW_PERCENT
-    if args.drive and args.follow_wall and (args.continuous or args.seconds > 20 or
+    if args.drive and args.follow_wall and (args.continuous or args.seconds > trial_limit or
                                           args.slow > slow_limit or args.turn > 12):
-        parser.error(f"Wall-follow driving requires <=20 seconds, <={slow_limit}% slow speed and <=12% turn")
+        parser.error(f"Wall-follow driving requires <={trial_limit} seconds, "
+                     f"<={slow_limit}% slow speed and <=12% turn")
     fast_limit = 10 if args.stop_ahead else FAST_WALL_MAX_SECONDS
     if args.drive and fast_wall_trial and (not args.trial or (not close_wall and args.seconds > fast_limit)):
         parser.error(f"Wall-follow cruise above 15% requires a trial of at most {fast_limit} seconds")

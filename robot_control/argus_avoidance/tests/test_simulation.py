@@ -54,6 +54,17 @@ class GeometryTests(unittest.TestCase):
 
 
 class ControllerSimulationTests(unittest.TestCase):
+    def test_close_wall_continues_past_distant_returns_and_twenty_seconds(self):
+        from argus_avoidance.wall_trial_sim import simulate
+
+        result = simulate(30, track=0.3254, wheel_gain=0.004, seam=0.08,
+                          finish_at_wall_end=True, cruise=35, slow=18,
+                          close_wall_radius_m=0.1854, start_side_gap=0.063, row_end=1.12)
+        self.assertEqual(result["transitions"][-1]["reason"], "Reached end of tracked wall")
+        self.assertGreater(result["trace"][-1]["at_s"], 20)
+        self.assertEqual(result["zero_command_ticks_after_motion"], 0)
+        self.assertTrue(0.01 <= result["minimum_projected_axle_tire_edge_gap_m"] <= 0.02)
+
     def test_close_wall_trial_finishes_with_a_one_to_two_centimetre_tire_gap(self):
         from argus_avoidance.wall_trial_sim import simulate
 

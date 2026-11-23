@@ -370,9 +370,14 @@ class AvoidanceController:
         nx, ny = self._wall_normal()
         distance = self._wall.distance
         others = []
+        inflated = self.config.robot_radius_m + self.config.margin_m
+        forward_limit = self.config.curve_lookahead_m + inflated
         for x, y in self._observation.points:
             projection = nx*x + ny*y
-            if abs(projection - self._wall.distance) <= CLOSE_WALL_LINE_TOLERANCE_M:
+            # A distant return can line up with the wall by chance. Only
+            # local returns can reduce the estimated wall clearance.
+            if (-inflated <= x <= forward_limit and
+                    abs(projection - self._wall.distance) <= CLOSE_WALL_LINE_TOLERANCE_M):
                 distance = min(distance, projection)
             else:
                 others.append((x, y))

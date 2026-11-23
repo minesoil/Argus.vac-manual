@@ -17,7 +17,7 @@ from .line_preview import SnapshotReader
 from .serial_control import SerialAutoClient
 from .manual_guard import GuardPublisher
 from .lidar_hub import LidarHub, ESP_PORT
-from .roam import (CLOSE_WALL_MAX_PERCENT, FAST_WALL_MAX_SECONDS,
+from .roam import (CLOSE_WALL_MAX_PERCENT, CLOSE_WALL_MAX_SECONDS, FAST_WALL_MAX_SECONDS,
                    WALL_FOLLOW_MAX_PERCENT, WALL_FOLLOW_SLOW_PERCENT)
 
 
@@ -119,9 +119,10 @@ def load_roam_args(path, lidar_bridge=False):
         raise ValueError("Roam profile requires lidar, front_deg, sensor_x, sensor_y, radius")
     if trial:
         seconds = profile.get("seconds", 20)
+        trial_limit = CLOSE_WALL_MAX_SECONDS if close_radius is not None else 20
         if (profile.get("continuous") is True or isinstance(seconds, bool)
-                or not isinstance(seconds, (int, float)) or not 0 < seconds <= 20):
-            raise ValueError("Phone trial requires a duration from 1 to 20 seconds")
+                or not isinstance(seconds, (int, float)) or not 0 < seconds <= trial_limit):
+            raise ValueError(f"Phone trial requires a duration from 1 to {trial_limit} seconds")
         cruise, slow, turn = (profile.get(key, 12) for key in ("cruise", "slow", "turn"))
         cruise_limit = WALL_FOLLOW_MAX_PERCENT if follow_wall else 12
         if (any(type(value) is not int for value in (cruise, slow, turn))
