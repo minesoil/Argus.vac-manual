@@ -17,7 +17,8 @@ from .line_preview import SnapshotReader
 from .serial_control import SerialAutoClient
 from .manual_guard import GuardPublisher
 from .lidar_hub import LidarHub, ESP_PORT
-from .roam import FAST_WALL_MAX_SECONDS, WALL_FOLLOW_MAX_PERCENT, WALL_FOLLOW_SLOW_PERCENT
+from .roam import (CLOSE_WALL_MAX_PERCENT, FAST_WALL_MAX_SECONDS,
+                   WALL_FOLLOW_MAX_PERCENT, WALL_FOLLOW_SLOW_PERCENT)
 
 
 class BridgeHandler(BaseHTTPRequestHandler):
@@ -110,6 +111,7 @@ def load_roam_args(path, lidar_bridge=False):
         return None
     follow_wall = profile.get("follow_wall")
     stop_ahead = profile.get("stop_ahead") is True
+    close_radius = profile.get("close_wall_radius_m")
     if follow_wall not in (None, "left", "right"):
         raise ValueError("follow_wall must be left or right")
     required = ("lidar", "front_deg", "sensor_x", "sensor_y", "radius")
@@ -125,10 +127,12 @@ def load_roam_args(path, lidar_bridge=False):
         if (any(type(value) is not int for value in (cruise, slow, turn))
                 or not 1 <= slow <= cruise <= cruise_limit or not 1 <= turn <= 12):
             raise ValueError(f"Phone trial requires cruise at or below {cruise_limit}% and turn at or below 12%")
-        if follow_wall and slow > WALL_FOLLOW_SLOW_PERCENT:
-            raise ValueError("Phone wall trial slow speed must be at or below 15%")
+        slow_limit = CLOSE_WALL_MAX_PERCENT if close_radius is not None else WALL_FOLLOW_SLOW_PERCENT
+        if follow_wall and slow > slow_limit:
+            raise ValueError(f"Phone wall trial slow speed must be at or below {slow_limit}%")
         fast_limit = 10 if stop_ahead else FAST_WALL_MAX_SECONDS
-        if follow_wall and cruise > WALL_FOLLOW_SLOW_PERCENT and seconds > fast_limit:
+        if (follow_wall and close_radius is None and cruise > WALL_FOLLOW_SLOW_PERCENT
+                and seconds > fast_limit):
             raise ValueError(f"Phone wall trial above 15% requires a duration of at most {fast_limit} seconds")
     result = ["--commissioned" if commissioned else "--trial"]
     for key in required + ("cruise", "slow", "turn"):
@@ -143,11 +147,10 @@ def load_roam_args(path, lidar_bridge=False):
         if follow_wall is None:
             raise ValueError("Finishing at the wall end requires wall following")
         result.append("--finish-at-wall-end")
-    close_radius = profile.get("close_wall_radius_m")
     if close_radius is not None:
-        if (not trial or "--finish-at-wall-end" not in result or cruise > WALL_FOLLOW_SLOW_PERCENT or
-                type(close_radius) not in (int, float)):
-            raise ValueError("Close wall radius requires a bounded wall-end trial at up to 15% cruise")
+        if (not trial or "--finish-at-wall-end" not in result or
+                type(close_radius) not in (int, float) or not math.isfinite(close_radius)):
+            raise ValueError("Close wall radius requires a finite radius and a bounded wall-end trial")
         result.extend(["--close-wall-radius", str(close_radius)])
     if stop_ahead:
         result.append("--stop-ahead")

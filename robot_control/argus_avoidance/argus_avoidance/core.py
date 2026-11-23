@@ -95,6 +95,7 @@ class Decision:
     wall_gap_estimate_m: float | None = None
     wall_heading_rad: float | None = None
     front_obstacle_clearance: float | None = None
+    close_wall_tracking: bool = False
 
 
 @dataclass(frozen=True)
@@ -289,14 +290,15 @@ class AvoidanceController:
         self.state, self.reason = state, reason
         return self._decision()
 
-    def _decision(self, linear=0.0, angular=0.0, *, front_obstacle_clearance=None):
+    def _decision(self, linear=0.0, angular=0.0, *, front_obstacle_clearance=None,
+                  close_wall_tracking=False):
         obs = self._observation
         wall = self._wall
         return Decision(self.state, self.reason, linear, angular,
                         obs.front if obs else None, obs.left if obs else None,
                         obs.right if obs else None,
                         wall.distance - self.config.robot_radius_m if wall else None,
-                        wall.heading if wall else None, front_obstacle_clearance)
+                        wall.heading if wall else None, front_obstacle_clearance, close_wall_tracking)
 
     def _fit_side_wall(self, points):
         """Acquire a wall fore and aft, then keep tracking it up to its end."""
@@ -454,7 +456,8 @@ class AvoidanceController:
             if self._paths_clear((0.0, curve / 2, curve), 0.0, close=close):
                 self.state, self.reason = "SLOW", f"Following {self.follow_wall} wall"
                 return self._decision(cfg.slow_m_s, correction,
-                                      front_obstacle_clearance=self._front_obstacle)
+                                      front_obstacle_clearance=self._front_obstacle,
+                                      close_wall_tracking=close is not None)
         return self._halt("BLOCKED", "Wall-follow path blocked")
 
     def _drive(self):

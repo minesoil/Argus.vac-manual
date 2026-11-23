@@ -58,7 +58,7 @@ class ControllerSimulationTests(unittest.TestCase):
         from argus_avoidance.wall_trial_sim import simulate
 
         result = simulate(20, track=0.3254, wheel_gain=0.004, seam=0.08,
-                          finish_at_wall_end=True, cruise=15, close_wall_radius_m=0.1854,
+                          finish_at_wall_end=True, cruise=35, slow=18, close_wall_radius_m=0.1854,
                           start_side_gap=0.063, row_end=0.90)
         self.assertEqual(result["transitions"][-1]["reason"], "Reached end of tracked wall")
         self.assertEqual(result["zero_command_ticks_after_motion"], 0)
@@ -66,6 +66,19 @@ class ControllerSimulationTests(unittest.TestCase):
                 if min(frame["wheels"]) > 0]
         self.assertGreaterEqual(min(gaps), 0.010)
         self.assertTrue(all(gap <= 0.020 for gap in gaps[-20:]))
+        self.assertEqual(result["peak_wheel_command_percent"], 13)
+
+    def test_close_wall_trial_can_cruise_at_35_and_slow_after_approach(self):
+        from argus_avoidance.wall_trial_sim import simulate
+
+        result = simulate(20, track=0.3254, wheel_gain=0.004, seam=0.08,
+                          finish_at_wall_end=True, cruise=35, slow=18,
+                          close_wall_radius_m=0.1854, start_side_gap=0.18, row_end=0.90)
+        self.assertEqual(result["transitions"][-1]["reason"], "Reached end of tracked wall")
+        self.assertEqual(result["zero_command_ticks_after_motion"], 0)
+        self.assertEqual(result["peak_wheel_command_percent"], 35)
+        self.assertTrue(all(max(frame["wheels"]) <= 18 for frame in result["trace"]
+                            if frame["at_s"] >= 3))
 
     def test_reduced_wall_offset_still_crosses_seam_with_wider_track(self):
         from argus_avoidance.wall_trial_sim import simulate

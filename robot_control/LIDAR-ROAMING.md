@@ -270,13 +270,16 @@ check, and the normal clearance is required to start or pivot. The CLI
 takes `--close-wall-radius` and the phone profile takes
 `close_wall_radius_m` alongside the wall-end option. For hardware, use a
 radius verified against the full rigid outline and a measured stopping
-margin. The close-wall trial requires at most 15% cruise.
+margin. A close-wall trial can use 35% cruise during its initial clear
+approach, with up to 18% slow speed. The fast window remains three seconds,
+or ten with front stopping enabled. The close tracking speed tapers to
+13% at the tightest part of the pass when the slow setting allows it.
 
 This simulation uses assumed dimensions and starts about 3.8 cm from the
 outer tire:
 
 ```sh
-python3 -m argus_avoidance.wall_trial_sim --seconds 20 --cruise 15 \
+python3 -m argus_avoidance.wall_trial_sim --seconds 20 --cruise 35 --slow 18 \
     --track 0.3254 --seam 0.08 --row-end 0.90 --start-side-gap 0.063 \
     --finish-at-wall-end --close-wall-radius 0.1854
 ```

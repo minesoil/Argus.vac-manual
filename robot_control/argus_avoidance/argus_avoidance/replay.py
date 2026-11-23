@@ -10,7 +10,7 @@ import time
 from .c1 import Sweep
 from .c1_bridge import BridgeC1Reader
 from .core import AvoidanceController
-from .roam import WALL_FOLLOW_SLOW_PERCENT, navigation_config, run
+from .roam import FAST_WALL_MAX_SECONDS, WALL_FOLLOW_SLOW_PERCENT, navigation_config, run
 
 
 def capture(output, seconds):
@@ -88,11 +88,14 @@ def replay(log, profile):
                                      finish_at_wall_end=profile.get("finish_at_wall_end") is True,
                                      close_wall_radius_m=profile.get("close_wall_radius_m"))
     seconds = min(profile.get("seconds", 30), reader.end + 0.061)
+    stop_ahead = profile.get("stop_ahead") is True
+    fast_limit = 10 if stop_ahead else FAST_WALL_MAX_SECONDS
     return run(reader, controller, seconds=seconds, front_deg=profile["front_deg"],
                x=profile["sensor_x"], y=profile["sensor_y"], cruise=cruise,
                slow=profile.get("slow", 12), turn=profile.get("turn", 15), clock=clock,
                sleep=clock.sleep, fast_wall_trial=bool(side and cruise > WALL_FOLLOW_SLOW_PERCENT),
-               stop_ahead=profile.get("stop_ahead") is True)
+               stop_ahead=stop_ahead,
+               fast_window_s=fast_limit if controller.close_wall_radius_m is not None else None)
 
 
 def main(argv=None):

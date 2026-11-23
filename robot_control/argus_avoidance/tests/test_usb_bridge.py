@@ -136,6 +136,11 @@ class USBBridgeTests(unittest.TestCase):
             path.write_text(json.dumps(profile | {"cruise": 35, "slow": 12, "seconds": 3}))
             brief = load_roam_args(path, lidar_bridge=True)
             self.assertEqual(brief[brief.index("--cruise") + 1], "35")
+            path.write_text(json.dumps(profile | {"cruise": 35, "slow": 18,
+                                                  "close_wall_radius_m": 0.1854}))
+            close = load_roam_args(path, lidar_bridge=True)
+            self.assertEqual(close[close.index("--close-wall-radius") + 1], "0.1854")
+            self.assertEqual(close[close.index("--seconds") + 1], "20")
             for change in ({"continuous": True}, {"seconds": 21},
                            {"cruise": 16}, {"turn": 13}, {"follow_wall": "both"},
                            {"cruise": 35, "seconds": 4}, {"cruise": 36, "seconds": 3},

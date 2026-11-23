@@ -6,13 +6,13 @@ import json
 import math
 
 from .core import AvoidanceController
-from .roam import navigation_config, wheels
+from .roam import FAST_WALL_MAX_SECONDS, navigation_config, wheels
 from .simulate import Segment, World
 
 
 def simulate(seconds, track, wheel_gain, seam, *, finish_at_wall_end=False, cruise=35,
              tire_width=0.0254, start_side_gap=0.15, close_wall_radius_m=None,
-             row_end=0.65):
+             row_end=0.65, slow=12):
     config = replace(navigation_config(0.15, 0.25), no_return_is_clear=True)
     box_y = -(config.robot_radius_m + start_side_gap)
     world = World((
@@ -42,7 +42,8 @@ def simulate(seconds, track, wheel_gain, seam, *, finish_at_wall_end=False, crui
         if tick == 0:
             controller.arm(now)
         decision = controller.step(now)
-        left, right = wheels(decision, cruise, 12, 12, fast_wall_trial=cruise > 15)
+        active_cruise = slow if close_wall_radius_m is not None and now >= FAST_WALL_MAX_SECONDS else cruise
+        left, right = wheels(decision, active_cruise, slow, 12, fast_wall_trial=cruise > 15)
         peak_command = max(peak_command, abs(left), abs(right))
         gap = y - box_y - config.robot_radius_m
         # Axle-end projection only. Tread length and rigid protrusions are
@@ -103,16 +104,19 @@ def main():
     parser.add_argument("--finish-at-wall-end", action="store_true")
     parser.add_argument("--cruise", type=int, choices=range(12, 36), default=35,
                         metavar="12–35")
+    parser.add_argument("--slow", type=int, choices=range(1, 19), default=12, metavar="1–18")
     parser.add_argument("--trace", action="store_true", help="Include pose and wheel commands for each tick")
     args = parser.parse_args()
     dimensions = (args.seconds, args.track, args.wheel_gain, args.tire_width, args.start_side_gap)
     if (not all(math.isfinite(value) and value > 0 for value in dimensions) or
             not 0 <= args.seam < 0.40 or not 0.25 + args.seam < args.row_end < 1.8):
         parser.error("Use positive finite dimensions and timing, with a seam below 0.40 m")
+    if args.slow > args.cruise:
+        parser.error("Slow speed must be at or below cruise")
     report = simulate(args.seconds, args.track, args.wheel_gain, args.seam,
                       finish_at_wall_end=args.finish_at_wall_end, cruise=args.cruise,
                       tire_width=args.tire_width, start_side_gap=args.start_side_gap,
-                      close_wall_radius_m=args.close_wall_radius, row_end=args.row_end)
+                      close_wall_radius_m=args.close_wall_radius, row_end=args.row_end, slow=args.slow)
     if not args.trace:
         del report["trace"]
     print(json.dumps(report, indent=2))

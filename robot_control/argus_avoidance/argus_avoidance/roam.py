@@ -14,6 +14,7 @@ from .follow import ESP32AutoClient, ControlError
 
 WALL_FOLLOW_MAX_PERCENT = 35
 WALL_FOLLOW_SLOW_PERCENT = 15
+CLOSE_WALL_MAX_PERCENT = 18
 FAST_WALL_MAX_SECONDS = 3
 
 
@@ -39,6 +40,8 @@ def wheels(decision, cruise=18, slow=12, turn=15, *, fast_wall_trial=False):
             return turn, -turn
         return 0, 0
     if decision.state in ("FORWARD", "SLOW"):
+        if not decision.close_wall_tracking:
+            slow = min(slow, WALL_FOLLOW_SLOW_PERCENT) if fast_wall_trial else slow
         power = cruise if decision.state == "FORWARD" else slow
         if fast_wall_trial:
             clearances = (decision.front_clearance, decision.left_clearance,
@@ -48,7 +51,14 @@ def wheels(decision, cruise=18, slow=12, turn=15, *, fast_wall_trial=False):
                      clearances[0] >= 0.80 and min(clearances[1:]) >= 0.10)
             power = cruise if aligned and clear and abs(decision.angular) <= 0.20 else slow
         if decision.wall_gap_estimate_m is not None and decision.wall_gap_estimate_m <= 0.13:
-            power = min(power, 12)
+            cap = 12
+            if decision.close_wall_tracking:
+                # Allow faster travel farther from the surface. Taper back
+                # before the tightest part of the pass.
+                cap = 13
+                extra = max(0.0, min(1.0, (decision.wall_gap_estimate_m - 0.061) / 0.026))
+                cap += round(extra * (CLOSE_WALL_MAX_PERCENT - cap))
+            power = min(power, cap)
         # Keep the slow wall-follow steering authority at higher cruise.
         # Scaling the wheel difference with cruise makes the same correction
         # turn faster and can drive an otherwise clear approach into a stop.
@@ -85,7 +95,7 @@ def navigation_config(radius, wall_gap):
 def run(reader, controller, client=None, seconds=30.0, expected_epoch=None,
         front_deg=0.0, x=0.0, y=0.0, cruise=18, slow=12, turn=15,
         clock=time.monotonic, sleep=time.sleep, emit=print, ended=None, *,
-        fast_wall_trial=False, stop_ahead=False):
+        fast_wall_trial=False, stop_ahead=False, fast_window_s=None):
     start = clock()
     last_sequence = 0
     armed = False
@@ -144,7 +154,8 @@ def run(reader, controller, client=None, seconds=30.0, expected_epoch=None,
                     return 0
             if seconds is not None and clock() - start >= seconds:
                 break
-            left, right = wheels(decision, cruise, slow, turn, fast_wall_trial=fast_wall_trial)
+            active_cruise = slow if fast_window_s is not None and now - start >= fast_window_s else cruise
+            left, right = wheels(decision, active_cruise, slow, turn, fast_wall_trial=fast_wall_trial)
             if armed and client:
                 # Recheck receipt age immediately before each leased command.
                 healthy, reason = controller.health(clock())
@@ -227,15 +238,16 @@ def main(argv=None):
     if args.drive and (args.front_deg is None or not (args.commissioned or args.trial)):
         parser.error("Driving needs measured --front-deg and completed --commissioned checks")
     fast_wall_trial = bool(args.follow_wall and args.cruise > WALL_FOLLOW_SLOW_PERCENT)
+    close_wall = args.close_wall_radius is not None
+    slow_limit = CLOSE_WALL_MAX_PERCENT if close_wall else WALL_FOLLOW_SLOW_PERCENT
     if args.drive and args.follow_wall and (args.continuous or args.seconds > 20 or
-                                          args.slow > WALL_FOLLOW_SLOW_PERCENT or args.turn > 12):
-        parser.error("Wall-follow driving requires <=20 seconds, <=15% slow speed and <=12% turn")
+                                          args.slow > slow_limit or args.turn > 12):
+        parser.error(f"Wall-follow driving requires <=20 seconds, <={slow_limit}% slow speed and <=12% turn")
     fast_limit = 10 if args.stop_ahead else FAST_WALL_MAX_SECONDS
-    if args.drive and fast_wall_trial and (not args.trial or args.seconds > fast_limit):
+    if args.drive and fast_wall_trial and (not args.trial or (not close_wall and args.seconds > fast_limit)):
         parser.error(f"Wall-follow cruise above 15% requires a trial of at most {fast_limit} seconds")
-    if args.close_wall_radius is not None and args.drive and (
-            not args.trial or args.cruise > WALL_FOLLOW_SLOW_PERCENT):
-        parser.error("Close wall driving requires a bounded trial with at most 15% cruise")
+    if close_wall and args.drive and not args.trial:
+        parser.error("Close wall driving requires a bounded trial")
     try:
         controller = AvoidanceController(navigation_config(args.radius, args.wall_gap),
                                          follow_wall=args.follow_wall,
@@ -253,7 +265,8 @@ def main(argv=None):
         return run(reader, controller, client, None if args.continuous else args.seconds,
                    args.expected_epoch, args.front_deg or 0, args.sensor_x, args.sensor_y,
                    args.cruise, args.slow, args.turn, ended=lambda: stopped[0],
-                   fast_wall_trial=fast_wall_trial, stop_ahead=args.stop_ahead)
+                   fast_wall_trial=fast_wall_trial, stop_ahead=args.stop_ahead,
+                   fast_window_s=fast_limit if close_wall else None)
     except (OSError, ValueError) as error:
         print("STOP " + str(error), flush=True)
         return 1
