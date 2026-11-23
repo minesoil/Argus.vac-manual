@@ -49,9 +49,12 @@ def wheels(decision, cruise=18, slow=12, turn=15, *, fast_wall_trial=False):
             power = cruise if aligned and clear and abs(decision.angular) <= 0.20 else slow
         if decision.wall_gap_estimate_m is not None and decision.wall_gap_estimate_m <= 0.13:
             power = min(power, 12)
-        # Curves keep both wheels forward; the inner wheel slows as the
-        # requested turn increases, with a 50% differential cap.
-        differential = min(power - 1, max(1, round(power * min(0.5, abs(decision.angular) * 1.8))))
+        # Keep the slow wall-follow steering authority at higher cruise.
+        # Scaling the wheel difference with cruise makes the same correction
+        # turn faster and can drive an otherwise clear approach into a stop.
+        steering_power = min(power, slow) if fast_wall_trial else power
+        differential = min(power - 1, max(1, round(
+            steering_power * min(0.5, abs(decision.angular) * 1.8))))
         if decision.angular > 0:
             return power - differential, power
         if decision.angular < 0:

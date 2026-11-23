@@ -54,6 +54,16 @@ class GeometryTests(unittest.TestCase):
 
 
 class ControllerSimulationTests(unittest.TestCase):
+    def test_35_percent_wall_trial_keeps_rolling_on_wider_approach(self):
+        from argus_avoidance.wall_trial_sim import simulate
+
+        result = simulate(10, track=0.22, wheel_gain=0.004, seam=0.08,
+                          finish_at_wall_end=True, cruise=35, start_side_gap=0.18)
+        self.assertEqual(result["peak_wheel_command_percent"], 35)
+        self.assertEqual(result["zero_command_ticks_after_motion"], 0)
+        self.assertGreater(result["forward_travel_m"], 0.50)
+        self.assertGreater(result["minimum_modeled_side_gap_m"], 0.10)
+
     def test_optional_wall_end_finish_stops_once_without_pivoting(self):
         from argus_avoidance.wall_trial_sim import simulate
 

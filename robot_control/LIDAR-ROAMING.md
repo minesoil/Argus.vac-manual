@@ -244,6 +244,21 @@ when three fresh scans show the tracked wall ending beside the robot.
 For a longer supervised pass use a cruise setting of 15% or below and a
 bounded trial of up to 20 seconds.
 
+For a 35% peak trial with front stopping and row-end finishing, use
+`cruise: 35`, `slow: 12`, `turn: 12`, `seconds: 10`, `stop_ahead: true`
+and `finish_at_wall_end: true` in the private wall-follow profile. The
+controller limits speed when alignment or clearance is tight. The wheel
+speed difference for steering stays capped by the slow setting.
+
+```sh
+python3 -m argus_avoidance.wall_trial_sim --seconds 10 --seam 0.08 --cruise 35 \
+    --finish-at-wall-end --start-side-gap 0.18 --tire-width 0.0254
+```
+
+The simulator reports the circle clearance and a separate projected clearance
+at the axle's outer tire edge. The latter uses the supplied tire width and an
+assumed wheel track. It does not measure the installed wheel position.
+
 The earlier C1 laptop test passed identity, health and three seconds of live
 ranging. Later Pi and bounded loaded trials established C1 scans, forward motion,
 turns and curves in the cramped room. A corrected-heading phone trial avoided
