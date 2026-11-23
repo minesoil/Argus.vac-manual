@@ -143,6 +143,12 @@ def load_roam_args(path, lidar_bridge=False):
         if follow_wall is None:
             raise ValueError("Finishing at the wall end requires wall following")
         result.append("--finish-at-wall-end")
+    close_radius = profile.get("close_wall_radius_m")
+    if close_radius is not None:
+        if (not trial or "--finish-at-wall-end" not in result or cruise > WALL_FOLLOW_SLOW_PERCENT or
+                type(close_radius) not in (int, float)):
+            raise ValueError("Close wall radius requires a bounded wall-end trial at up to 15% cruise")
+        result.extend(["--close-wall-radius", str(close_radius)])
     if stop_ahead:
         result.append("--stop-ahead")
     if profile.get("continuous") is True:

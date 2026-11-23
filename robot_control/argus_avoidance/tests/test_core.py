@@ -92,6 +92,29 @@ class ControllerTests(unittest.TestCase):
         self.assertGreater(decision.linear, 0)
         self.assertLess(decision.angular, 0)
 
+    def test_close_wall_keeps_normal_footprint_guard_for_a_separate_object(self):
+        from argus_avoidance.simulate import Circle, Segment, World
+
+        wall = Segment(-1.5, -0.24, 1.5, -0.24)
+        boundary = (wall, Segment(2, -2, 2, 2), Segment(-2, 2, 2, 2),
+                    Segment(-2, -2, -2, 2), Segment(-2, -2, 2, -2))
+        controller = AvoidanceController(Config(robot_radius_m=0.15, margin_m=0.06),
+                                         follow_wall="right", finish_at_wall_end=True,
+                                         close_wall_radius_m=0.1854)
+        world = World(boundary)
+        for now in (0.0, 0.1, 0.2, 0.3):
+            controller.observe(world.scan(0, 0, 0, now, sensor_x=0.08, samples=72))
+            if now == 0:
+                self.assertTrue(controller.arm(now)[0])
+            controller.step(now)
+        controller.observe(world.scan(0, -0.043, 0, 0.4, sensor_x=0.08, samples=72))
+        self.assertGreater(controller.step(0.4).linear, 0)
+
+        blocked = World(boundary, (Circle(0.17, -0.043, 0.02),))
+        controller.observe(blocked.scan(0, -0.043, 0, 0.5, sensor_x=0.08, samples=72))
+        decision = controller.step(0.5)
+        self.assertEqual((decision.state, decision.linear, decision.angular), ("BLOCKED", 0, 0))
+
     def test_wall_tracking_crawls_parallel_and_corrects_toward_or_away(self):
         # Raycast one side wall at the 10-degree control resolution.
         for gap, expected_sign in ((0.10, 0), (0.20, -1), (0.085, 1)):

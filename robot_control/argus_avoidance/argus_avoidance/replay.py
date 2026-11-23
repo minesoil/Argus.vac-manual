@@ -85,7 +85,8 @@ def replay(log, profile):
     cruise = profile.get("cruise", 18)
     controller = AvoidanceController(navigation_config(profile["radius"], profile.get("wall_gap", 0.30)),
                                      follow_wall=side,
-                                     finish_at_wall_end=profile.get("finish_at_wall_end") is True)
+                                     finish_at_wall_end=profile.get("finish_at_wall_end") is True,
+                                     close_wall_radius_m=profile.get("close_wall_radius_m"))
     seconds = min(profile.get("seconds", 30), reader.end + 0.061)
     return run(reader, controller, seconds=seconds, front_deg=profile["front_deg"],
                x=profile["sensor_x"], y=profile["sensor_y"], cruise=cruise,

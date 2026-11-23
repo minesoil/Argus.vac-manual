@@ -264,6 +264,23 @@ If the tracked wall crosses the forward corridor, the controller can align
 at low speed after checking its path against every range return. Separate
 obstacles and obstacles within the swept footprint still stop the pass.
 
+An optional low-speed trial uses a smaller buffer only for returns that
+match a well-aligned side wall. Other returns keep the full footprint
+check, and the normal clearance is required to start or pivot. The CLI
+takes `--close-wall-radius` and the phone profile takes
+`close_wall_radius_m` alongside the wall-end option. For hardware, use a
+radius verified against the full rigid outline and a measured stopping
+margin. The close-wall trial requires at most 15% cruise.
+
+This simulation uses assumed dimensions and starts about 3.8 cm from the
+outer tire:
+
+```sh
+python3 -m argus_avoidance.wall_trial_sim --seconds 20 --cruise 15 \
+    --track 0.3254 --seam 0.08 --row-end 0.90 --start-side-gap 0.063 \
+    --finish-at-wall-end --close-wall-radius 0.1854
+```
+
 The earlier C1 laptop test passed identity, health and three seconds of live
 ranging. Later Pi and bounded loaded trials established C1 scans, forward motion,
 turns and curves in the cramped room. A corrected-heading phone trial avoided

@@ -199,6 +199,8 @@ def main(argv=None):
                         help="Track the selected wall during a bounded low-speed demo")
     parser.add_argument("--finish-at-wall-end", action="store_true",
                         help="Finish a wall pass after confirming the end of the tracked surface")
+    parser.add_argument("--close-wall-radius", type=float,
+                        help="Verified clearance from the axle midpoint for a tracked side wall, in metres")
     parser.add_argument("--commissioned", action="store_true",
                         help="Confirm sensor pose, footprint, low-speed wheel direction and braking checks")
     parser.add_argument("--cruise", type=int, default=18)
@@ -231,9 +233,16 @@ def main(argv=None):
     fast_limit = 10 if args.stop_ahead else FAST_WALL_MAX_SECONDS
     if args.drive and fast_wall_trial and (not args.trial or args.seconds > fast_limit):
         parser.error(f"Wall-follow cruise above 15% requires a trial of at most {fast_limit} seconds")
-    controller = AvoidanceController(navigation_config(args.radius, args.wall_gap),
-                                     follow_wall=args.follow_wall,
-                                     finish_at_wall_end=args.finish_at_wall_end)
+    if args.close_wall_radius is not None and args.drive and (
+            not args.trial or args.cruise > WALL_FOLLOW_SLOW_PERCENT):
+        parser.error("Close wall driving requires a bounded trial with at most 15% cruise")
+    try:
+        controller = AvoidanceController(navigation_config(args.radius, args.wall_gap),
+                                         follow_wall=args.follow_wall,
+                                         finish_at_wall_end=args.finish_at_wall_end,
+                                         close_wall_radius_m=args.close_wall_radius)
+    except ValueError as error:
+        parser.error(str(error))
     stopped = [False]
     for sig in (signal.SIGINT, signal.SIGTERM):
         signal.signal(sig, lambda *_: stopped.__setitem__(0, True))

@@ -9,6 +9,9 @@ from dataclasses import dataclass, fields
 from itertools import combinations
 import math
 
+CLOSE_WALL_LINE_TOLERANCE_M = 0.010
+CLOSE_WALL_TARGET_PADDING_M = 0.006
+
 
 @dataclass(frozen=True)
 class Config:
@@ -111,9 +114,17 @@ class _Wall:
     forward_extent: float
 
 
+@dataclass(frozen=True)
+class _CloseWall:
+    nx: float
+    ny: float
+    distance: float
+    obstacles: list[tuple[float, float]]
+
+
 class AvoidanceController:
     def __init__(self, config: Config | None = None, *, follow_wall=None,
-                 finish_at_wall_end=False):
+                 finish_at_wall_end=False, close_wall_radius_m=None):
         self.config = config or Config()
         if follow_wall not in (None, "left", "right"):
             raise ValueError("Wall following needs a left or right side")
@@ -121,6 +132,13 @@ class AvoidanceController:
         if finish_at_wall_end and follow_wall is None:
             raise ValueError("Finishing at the wall end requires wall following")
         self.finish_at_wall_end = finish_at_wall_end
+        if close_wall_radius_m is not None and (
+                follow_wall is None or not finish_at_wall_end or
+                not math.isfinite(close_wall_radius_m) or
+                not self.config.robot_radius_m <= close_wall_radius_m <
+                self.config.robot_radius_m + self.config.margin_m - CLOSE_WALL_TARGET_PADDING_M):
+            raise ValueError("Close wall radius requires a bounded wall pass and must fit inside the inflated circle")
+        self.close_wall_radius_m = close_wall_radius_m
         self._wall = None
         self._wall_end_scans = 0
         self._front_obstacle = math.inf
@@ -331,12 +349,32 @@ class AvoidanceController:
         if self._wall is None:
             return observation.front
         inflated = self.config.robot_radius_m + self.config.margin_m
-        side = 1 if self.follow_wall == "left" else -1
-        sine, cosine = math.sin(self._wall.heading), math.cos(self._wall.heading)
+        nx, ny = self._wall_normal()
+        tolerance = CLOSE_WALL_LINE_TOLERANCE_M if self.close_wall_radius_m is not None else 0.035
         return min((max(0.0, x - inflated) for x, y in observation.points
                     if x >= 0 and abs(y) <= inflated and
-                    abs(-sine*x + cosine*y - side*self._wall.distance) > 0.035),
+                    abs(nx*x + ny*y - self._wall.distance) > tolerance),
                    default=math.inf)
+
+    def _wall_normal(self):
+        side = 1 if self.follow_wall == "left" else -1
+        return -side * math.sin(self._wall.heading), side * math.cos(self._wall.heading)
+
+    def _close_wall(self):
+        """Partition a well-aligned wall from returns that need the full buffer."""
+        if (self.close_wall_radius_m is None or self._wall is None or
+                abs(self._wall.heading) > 0.24):
+            return None
+        nx, ny = self._wall_normal()
+        distance = self._wall.distance
+        others = []
+        for x, y in self._observation.points:
+            projection = nx*x + ny*y
+            if abs(projection - self._wall.distance) <= CLOSE_WALL_LINE_TOLERANCE_M:
+                distance = min(distance, projection)
+            else:
+                others.append((x, y))
+        return _CloseWall(nx, ny, distance, others)
 
     def _sides_clear(self):
         cfg, obs = self.config, self._observation
@@ -344,6 +382,12 @@ class AvoidanceController:
             return min(obs.left, obs.right) > cfg.side_stop_clearance_m
         near, far = (obs.left, obs.right) if self.follow_wall == "left" else (obs.right, obs.left)
         inflated = cfg.robot_radius_m + cfg.margin_m
+        close = self._close_wall()
+        if close is not None:
+            return close.distance > self.close_wall_radius_m and all(
+                abs(x) > inflated or abs(y) > inflated + cfg.side_stop_clearance_m
+                for x, y in close.obstacles
+            )
         if (self._wall.distance <= inflated + cfg.tracked_wall_stop_m or
                 near <= cfg.tracked_wall_stop_m or far <= cfg.side_stop_clearance_m):
             return False
@@ -363,11 +407,12 @@ class AvoidanceController:
         """
         return self._paths_clear((direction*c for c in (0.0, 1.5, 3.0, 4.5, 6.0)), 0.03)
 
-    def _paths_clear(self, curvatures, extra_margin):
+    def _paths_clear(self, curvatures, extra_margin, *, close=None):
         cfg, obs = self.config, self._observation
         curvatures = tuple(curvatures)
         clearance = cfg.robot_radius_m + cfg.margin_m + extra_margin
         limit_sq = clearance * clearance
+        points = obs.points if close is None else close.obstacles
         for step in range(1, 13):
             distance = cfg.curve_lookahead_m * step / 12
             for curvature in curvatures:
@@ -377,20 +422,28 @@ class AvoidanceController:
                     angle = curvature * distance
                     x = math.sin(angle) / curvature
                     y = (1 - math.cos(angle)) / curvature
-                if any((px-x)**2 + (py-y)**2 <= limit_sq for px, py in obs.points):
+                if (close is not None and
+                        close.distance - close.nx*x - close.ny*y <= self.close_wall_radius_m):
+                    return False
+                if any((px-x)**2 + (py-y)**2 <= limit_sq for px, py in points):
                     return False
         return True
 
     def _track_wall(self):
         cfg, wall = self.config, self._wall
         side = 1 if self.follow_wall == "left" else -1
-        gap_error = wall.distance - cfg.robot_radius_m - cfg.margin_m - cfg.tracked_wall_target_m
+        close = self._close_wall()
+        target = (self.close_wall_radius_m + CLOSE_WALL_TARGET_PADDING_M if close is not None else
+                  cfg.robot_radius_m + cfg.margin_m + cfg.tracked_wall_target_m)
+        gap_error = wall.distance - target
         approach_heading = 0.0
-        if self._observation.front > cfg.curve_start_clearance_m:
+        front = self._front_obstacle if close is not None else self._observation.front
+        if front > cfg.curve_start_clearance_m:
             approach_heading = math.atan2(side * gap_error, cfg.curve_lookahead_m)
         # Aim toward a point at the desired clearance. The measured wall angle
         # reduces the correction as the chassis approaches that line.
-        steering = 0.8 * (wall.heading + approach_heading)
+        steering = (2.4 * wall.heading + 1.2 * approach_heading if close is not None
+                    else 0.8 * (wall.heading + approach_heading))
         steering = max(-0.20, min(0.20, steering))
         if abs(steering) < 0.015:
             steering = 0.0
@@ -398,7 +451,7 @@ class AvoidanceController:
         # nearby curvatures before allowing a wheel-speed correction.
         for correction in (steering, steering / 2, 0.0):
             curve = 15 * correction
-            if self._paths_clear((0.0, curve / 2, curve), 0.0):
+            if self._paths_clear((0.0, curve / 2, curve), 0.0, close=close):
                 self.state, self.reason = "SLOW", f"Following {self.follow_wall} wall"
                 return self._decision(cfg.slow_m_s, correction,
                                       front_obstacle_clearance=self._front_obstacle)
@@ -451,7 +504,11 @@ class AvoidanceController:
         self._last_step = now
         cfg, obs = self.config, self._observation
         # A circle containing the whole chassis covers every in-place rotation.
-        if obs.nearest <= cfg.robot_radius_m + cfg.margin_m:
+        inflated = cfg.robot_radius_m + cfg.margin_m
+        close = self._close_wall() if self.state in ("FORWARD", "SLOW") else None
+        if obs.nearest <= inflated and (close is None or
+                close.distance <= self.close_wall_radius_m or
+                any(x*x + y*y <= inflated*inflated for x, y in close.obstacles)):
             return self._halt("BLOCKED", "Obstacle inside swept footprint clearance")
         if self._wall_end_scans >= 3:
             return self._halt("COMPLETE", "Reached end of tracked wall")

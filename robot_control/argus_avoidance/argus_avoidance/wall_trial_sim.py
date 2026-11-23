@@ -11,9 +11,10 @@ from .simulate import Segment, World
 
 
 def simulate(seconds, track, wheel_gain, seam, *, finish_at_wall_end=False, cruise=35,
-             tire_width=0.0254, start_side_gap=0.15):
+             tire_width=0.0254, start_side_gap=0.15, close_wall_radius_m=None,
+             row_end=0.65):
     config = replace(navigation_config(0.15, 0.25), no_return_is_clear=True)
-    box_y, row_end = -(config.robot_radius_m + start_side_gap), 0.65
+    box_y = -(config.robot_radius_m + start_side_gap)
     world = World((
         Segment(-1, box_y, 0.25, box_y),
         Segment(0.25 + seam, box_y, row_end, box_y),
@@ -21,7 +22,8 @@ def simulate(seconds, track, wheel_gain, seam, *, finish_at_wall_end=False, crui
         Segment(2, 2, -2, 2), Segment(-2, 2, -2, -2),
     ))
     controller = AvoidanceController(config, follow_wall="right",
-                                     finish_at_wall_end=finish_at_wall_end)
+                                     finish_at_wall_end=finish_at_wall_end,
+                                     close_wall_radius_m=close_wall_radius_m)
     period = 0.1
     x = y = heading = 0.0
     minimum_gap = -box_y - config.robot_radius_m
@@ -94,17 +96,23 @@ def main():
     parser.add_argument("--tire-width", type=float, default=0.0254, help="Tire width in metres")
     parser.add_argument("--start-side-gap", type=float, default=0.15,
                         help="Initial gap from the modeled circle in metres")
+    parser.add_argument("--close-wall-radius", type=float,
+                        help="Assumed turning radius with local wall clearance in metres")
+    parser.add_argument("--row-end", type=float, default=0.65,
+                        help="Distance from the start pose to the end of the row in metres")
     parser.add_argument("--finish-at-wall-end", action="store_true")
     parser.add_argument("--cruise", type=int, choices=range(12, 36), default=35,
                         metavar="12–35")
     parser.add_argument("--trace", action="store_true", help="Include pose and wheel commands for each tick")
     args = parser.parse_args()
     dimensions = (args.seconds, args.track, args.wheel_gain, args.tire_width, args.start_side_gap)
-    if not all(math.isfinite(value) and value > 0 for value in dimensions) or not 0 <= args.seam < 0.40:
+    if (not all(math.isfinite(value) and value > 0 for value in dimensions) or
+            not 0 <= args.seam < 0.40 or not 0.25 + args.seam < args.row_end < 1.8):
         parser.error("Use positive finite dimensions and timing, with a seam below 0.40 m")
     report = simulate(args.seconds, args.track, args.wheel_gain, args.seam,
                       finish_at_wall_end=args.finish_at_wall_end, cruise=args.cruise,
-                      tire_width=args.tire_width, start_side_gap=args.start_side_gap)
+                      tire_width=args.tire_width, start_side_gap=args.start_side_gap,
+                      close_wall_radius_m=args.close_wall_radius, row_end=args.row_end)
     if not args.trace:
         del report["trace"]
     print(json.dumps(report, indent=2))
