@@ -109,7 +109,8 @@ class USBBridgeTests(unittest.TestCase):
                    "lidar": "/dev/c1", "front_deg": 90, "sensor_x": 0.08,
                    "sensor_y": 0, "radius": 0.15, "wall_gap": 0.25,
                    "cruise": 12, "slow": 12, "turn": 12,
-                   "seconds": 20, "continuous": False, "follow_wall": "right"}
+                   "seconds": 20, "continuous": False, "follow_wall": "right",
+                   "finish_at_wall_end": True}
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder) / "roam.json"
             path.write_text(json.dumps(profile))
@@ -127,6 +128,7 @@ class USBBridgeTests(unittest.TestCase):
             self.assertIn("--drive", command)
             self.assertIn("--trial", command)
             self.assertIn("--expected-epoch", command)
+            self.assertIn("--finish-at-wall-end", command)
             self.assertEqual(command[command.index("--follow-wall") + 1], "right")
             path.write_text(json.dumps(profile | {"cruise": 15, "slow": 15, "seconds": 14}))
             faster = load_roam_args(path, lidar_bridge=True)
@@ -138,7 +140,7 @@ class USBBridgeTests(unittest.TestCase):
                            {"cruise": 16}, {"turn": 13}, {"follow_wall": "both"},
                            {"cruise": 35, "seconds": 4}, {"cruise": 36, "seconds": 3},
                            {"cruise": 35, "slow": 16, "seconds": 3},
-                           {"follow_wall": None, "cruise": 13}):
+                           {"follow_wall": None, "cruise": 13}, {"follow_wall": None}):
                 path.write_text(json.dumps(profile | change))
                 with self.assertRaises(ValueError):
                     load_roam_args(path, lidar_bridge=True)

@@ -103,15 +103,21 @@ class _Observation:
 class _Wall:
     distance: float
     heading: float
+    forward_extent: float
 
 
 class AvoidanceController:
-    def __init__(self, config: Config | None = None, *, follow_wall=None):
+    def __init__(self, config: Config | None = None, *, follow_wall=None,
+                 finish_at_wall_end=False):
         self.config = config or Config()
         if follow_wall not in (None, "left", "right"):
             raise ValueError("Wall following needs a left or right side")
         self.follow_wall = follow_wall
+        if finish_at_wall_end and follow_wall is None:
+            raise ValueError("Finishing at the wall end requires wall following")
+        self.finish_at_wall_end = finish_at_wall_end
         self._wall = None
+        self._wall_end_scans = 0
         self._front_obstacle = math.inf
         self._front_close_scans = 0
         self._front_open_scans = 0
@@ -141,6 +147,7 @@ class AvoidanceController:
         except (ValueError, TypeError, OverflowError, AttributeError) as error:
             self._observation = None
             self._wall = None
+            self._wall_end_scans = 0
             self._scan_reason = f"Invalid scan: {error}"
             self._clear_count = 0
             return
@@ -148,6 +155,10 @@ class AvoidanceController:
         self._observation = observation
         if self.follow_wall:
             self._wall = self._fit_side_wall(observation.points)
+            near_end = (self.finish_at_wall_end and self.armed and
+                        self.reason == f"Following {self.follow_wall} wall" and
+                        self._wall is not None and self._wall.forward_extent <= 0.05)
+            self._wall_end_scans = self._wall_end_scans + 1 if near_end else 0
             self._front_obstacle = self._front_beyond_wall(observation)
             self._front_close_scans = (self._front_close_scans + 1
                                        if self._front_obstacle <= self.config.curve_start_clearance_m else 0)
@@ -233,6 +244,7 @@ class AvoidanceController:
             self.disarm(reason)
             return False, reason
         self.armed = True
+        self._wall_end_scans = 0
         self.state, self.reason = "STOP", "Armed; checking clear scans"
         self._stopped_at = now
         self._turn_direction = 0
@@ -306,7 +318,8 @@ class AvoidanceController:
         offset = mean_y - slope * mean_x
         if abs(slope) > 0.45:
             return None
-        return _Wall(abs(offset) / math.hypot(1, slope), math.atan(slope))
+        return _Wall(abs(offset) / math.hypot(1, slope), math.atan(slope),
+                     wall_points[-1][0])
 
     def _front_beyond_wall(self, observation):
         """Use separate obstacles for early turns; raw clearance still gates motion."""
@@ -433,6 +446,8 @@ class AvoidanceController:
         # A circle containing the whole chassis covers every in-place rotation.
         if obs.nearest <= cfg.robot_radius_m + cfg.margin_m:
             return self._halt("BLOCKED", "Obstacle inside swept footprint clearance")
+        if self._wall_end_scans >= 3:
+            return self._halt("COMPLETE", "Reached end of tracked wall")
         sides_clear = self._sides_clear()
         if self._counted_sequence != self._sequence:
             path_clear = obs.front > cfg.resume_clearance_m and sides_clear

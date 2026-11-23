@@ -54,6 +54,18 @@ class GeometryTests(unittest.TestCase):
 
 
 class ControllerSimulationTests(unittest.TestCase):
+    def test_optional_wall_end_finish_stops_once_without_pivoting(self):
+        from argus_avoidance.wall_trial_sim import simulate
+
+        result = simulate(20, track=0.22, wheel_gain=0.004, seam=0.08,
+                          finish_at_wall_end=True, cruise=15)
+        finish = result["trace"][-1]
+        self.assertEqual(finish["reason"], "Reached end of tracked wall")
+        self.assertEqual(finish["wheels"], [0, 0])
+        self.assertGreaterEqual(finish["x_m"], 0.59)
+        self.assertTrue(all(min(frame["wheels"]) > 0 for frame in result["trace"]
+                            if 0.3 <= frame["at_s"] < finish["at_s"]))
+
     def test_box_row_keeps_known_wall_through_seam_until_near_end(self):
         from argus_avoidance.wall_trial_sim import simulate
 

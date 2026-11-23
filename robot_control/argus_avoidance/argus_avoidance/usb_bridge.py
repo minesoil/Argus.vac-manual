@@ -139,6 +139,10 @@ def load_roam_args(path, lidar_bridge=False):
         result.extend(["--wall-gap", str(profile["wall_gap"])])
     if follow_wall is not None:
         result.extend(["--follow-wall", follow_wall])
+    if profile.get("finish_at_wall_end") is True:
+        if follow_wall is None:
+            raise ValueError("Finishing at the wall end requires wall following")
+        result.append("--finish-at-wall-end")
     if stop_ahead:
         result.append("--stop-ahead")
     if profile.get("continuous") is True:

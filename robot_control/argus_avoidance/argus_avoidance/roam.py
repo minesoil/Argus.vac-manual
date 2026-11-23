@@ -123,6 +123,9 @@ def run(reader, controller, client=None, seconds=30.0, expected_epoch=None,
             decision = controller.step(clock())
             if decision.state in ("FAULT", "BLOCKED"):
                 raise ControlError(decision.reason)
+            if decision.state == "COMPLETE":
+                emit("END " + decision.reason)
+                return 0
             if healthy and stop_ahead and new_sweep:
                 if decision.front_clearance is not None and decision.front_clearance <= 0.30:
                     front_close_scans += 1
@@ -186,6 +189,8 @@ def main(argv=None):
                         help="Front clearance beyond inflated radius; adjusts side steering (0.20 to 0.40 m)")
     parser.add_argument("--follow-wall", choices=("left", "right"),
                         help="Track the selected wall during a bounded low-speed demo")
+    parser.add_argument("--finish-at-wall-end", action="store_true",
+                        help="Finish a wall pass after confirming the end of the tracked surface")
     parser.add_argument("--commissioned", action="store_true",
                         help="Confirm sensor pose, footprint, low-speed wheel direction and braking checks")
     parser.add_argument("--cruise", type=int, default=18)
@@ -202,6 +207,8 @@ def main(argv=None):
         parser.error(f"Require 1 <= slow <= cruise <= {max_cruise} and 1 <= turn <= 20")
     if not 0.20 <= args.wall_gap <= 0.40:
         parser.error("Require 0.20 <= wall-gap <= 0.40 m pending loaded stopping validation")
+    if args.finish_at_wall_end and not args.follow_wall:
+        parser.error("--finish-at-wall-end requires --follow-wall")
     if args.trial:
         cruise_limit = WALL_FOLLOW_MAX_PERCENT if args.follow_wall else 12
         if args.continuous or args.seconds > 20 or args.cruise > cruise_limit or args.turn > 12:
@@ -217,7 +224,8 @@ def main(argv=None):
     if args.drive and fast_wall_trial and (not args.trial or args.seconds > fast_limit):
         parser.error(f"Wall-follow cruise above 15% requires a trial of at most {fast_limit} seconds")
     controller = AvoidanceController(navigation_config(args.radius, args.wall_gap),
-                                     follow_wall=args.follow_wall)
+                                     follow_wall=args.follow_wall,
+                                     finish_at_wall_end=args.finish_at_wall_end)
     stopped = [False]
     for sig in (signal.SIGINT, signal.SIGTERM):
         signal.signal(sig, lambda *_: stopped.__setitem__(0, True))

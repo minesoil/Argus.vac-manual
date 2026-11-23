@@ -238,6 +238,11 @@ python3 -m argus_avoidance.wall_trial_sim --seconds 25 --seam 0.08
 
 The simulation reports where the wheel commands change along a synthetic
 box row. Its wheel track and command-to-speed gain are adjustable assumptions.
+For a single row pass, pair `--follow-wall` with `--finish-at-wall-end`, or
+set `"finish_at_wall_end": true` in the phone profile. This option finishes
+when three fresh scans show the tracked wall ending beside the robot.
+For a longer supervised pass use a cruise setting of 15% or below and a
+bounded trial of up to 20 seconds.
 
 The earlier C1 laptop test passed identity, health and three seconds of live
 ranging. Later Pi and bounded loaded trials established C1 scans, forward motion,
