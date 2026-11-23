@@ -36,6 +36,8 @@ class Config:
     min_coverage_ratio: float = 0.90
     max_unknown_gap_rad: float = 0.20
     no_return_is_clear: bool = False
+    tracked_wall_stop_m: float = 0.02
+    tracked_wall_target_m: float = 0.04
 
     def __post_init__(self):
         for item in fields(self):
@@ -52,6 +54,8 @@ class Config:
         if not self.side_stop_clearance_m < self.side_steer_clearance_m or (
                 self.steer_front_clearance_m <= self.stop_clearance_m):
             raise ValueError("Steering thresholds must exceed stop thresholds")
+        if not self.tracked_wall_stop_m < self.tracked_wall_target_m:
+            raise ValueError("Tracked wall target must exceed its stop clearance")
         if not (self.stop_clearance_m < self.curve_start_clearance_m <
                 self.curve_release_clearance_m):
             raise ValueError("Curve thresholds must exceed stop clearance")
@@ -87,6 +91,7 @@ class Decision:
     right_clearance: float | None = None
     wall_gap_estimate_m: float | None = None
     wall_heading_rad: float | None = None
+    front_obstacle_clearance: float | None = None
 
 
 @dataclass(frozen=True)
@@ -266,14 +271,14 @@ class AvoidanceController:
         self.state, self.reason = state, reason
         return self._decision()
 
-    def _decision(self, linear=0.0, angular=0.0):
+    def _decision(self, linear=0.0, angular=0.0, *, front_obstacle_clearance=None):
         obs = self._observation
         wall = self._wall
         return Decision(self.state, self.reason, linear, angular,
                         obs.front if obs else None, obs.left if obs else None,
                         obs.right if obs else None,
                         wall.distance - self.config.robot_radius_m if wall else None,
-                        wall.heading if wall else None)
+                        wall.heading if wall else None, front_obstacle_clearance)
 
     def _fit_side_wall(self, points):
         """Acquire a wall fore and aft, then keep tracking it up to its end."""
@@ -339,7 +344,8 @@ class AvoidanceController:
             return min(obs.left, obs.right) > cfg.side_stop_clearance_m
         near, far = (obs.left, obs.right) if self.follow_wall == "left" else (obs.right, obs.left)
         inflated = cfg.robot_radius_m + cfg.margin_m
-        if self._wall.distance <= inflated + 0.02 or near <= 0.02 or far <= cfg.side_stop_clearance_m:
+        if (self._wall.distance <= inflated + cfg.tracked_wall_stop_m or
+                near <= cfg.tracked_wall_stop_m or far <= cfg.side_stop_clearance_m):
             return False
         side = 1 if self.follow_wall == "left" else -1
         sine, cosine = math.sin(self._wall.heading), math.cos(self._wall.heading)
@@ -378,7 +384,7 @@ class AvoidanceController:
     def _track_wall(self):
         cfg, wall = self.config, self._wall
         side = 1 if self.follow_wall == "left" else -1
-        gap_error = wall.distance - cfg.robot_radius_m - (cfg.margin_m + 0.04)
+        gap_error = wall.distance - cfg.robot_radius_m - cfg.margin_m - cfg.tracked_wall_target_m
         approach_heading = 0.0
         if self._observation.front > cfg.curve_start_clearance_m:
             approach_heading = math.atan2(side * gap_error, cfg.curve_lookahead_m)
@@ -394,7 +400,8 @@ class AvoidanceController:
             curve = 15 * correction
             if self._paths_clear((0.0, curve / 2, curve), 0.0):
                 self.state, self.reason = "SLOW", f"Following {self.follow_wall} wall"
-                return self._decision(cfg.slow_m_s, correction)
+                return self._decision(cfg.slow_m_s, correction,
+                                      front_obstacle_clearance=self._front_obstacle)
         return self._halt("BLOCKED", "Wall-follow path blocked")
 
     def _drive(self):
@@ -464,6 +471,11 @@ class AvoidanceController:
         if self.state in ("FORWARD", "SLOW"):
             if obs.front > cfg.stop_clearance_m and sides_clear:
                 return self._drive()
+            if (sides_clear and self._wall is not None and
+                    self._front_obstacle > cfg.resume_clearance_m):
+                # The fitted wall has crossed the forward scan corridor.
+                # Align using an arc checked against every scan return.
+                return self._track_wall()
             self.state, self.reason = "STOP", "Obstacle near travel path; stopping before turn"
             self._stopped_at = now
             self._clear_count = 0

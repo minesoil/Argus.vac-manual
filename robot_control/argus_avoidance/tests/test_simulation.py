@@ -54,6 +54,16 @@ class GeometryTests(unittest.TestCase):
 
 
 class ControllerSimulationTests(unittest.TestCase):
+    def test_reduced_wall_offset_still_crosses_seam_with_wider_track(self):
+        from argus_avoidance.wall_trial_sim import simulate
+
+        result = simulate(20, track=0.3254, wheel_gain=0.004, seam=0.08,
+                          finish_at_wall_end=True, cruise=15)
+        self.assertEqual(result["transitions"][-1]["reason"], "Reached end of tracked wall")
+        self.assertEqual(result["zero_command_ticks_after_motion"], 0)
+        self.assertLess(result["minimum_projected_axle_tire_edge_gap_m"], 0.07)
+        self.assertGreater(result["minimum_projected_axle_tire_edge_gap_m"], 0.05)
+
     def test_35_percent_wall_trial_keeps_rolling_on_wider_approach(self):
         from argus_avoidance.wall_trial_sim import simulate
 
@@ -62,7 +72,7 @@ class ControllerSimulationTests(unittest.TestCase):
         self.assertEqual(result["peak_wheel_command_percent"], 35)
         self.assertEqual(result["zero_command_ticks_after_motion"], 0)
         self.assertGreater(result["forward_travel_m"], 0.50)
-        self.assertGreater(result["minimum_modeled_side_gap_m"], 0.10)
+        self.assertGreater(result["minimum_modeled_side_gap_m"], 0.08)
 
     def test_optional_wall_end_finish_stops_once_without_pivoting(self):
         from argus_avoidance.wall_trial_sim import simulate

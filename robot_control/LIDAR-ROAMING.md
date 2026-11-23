@@ -258,6 +258,11 @@ python3 -m argus_avoidance.wall_trial_sim --seconds 10 --seam 0.08 --cruise 35 \
 The simulator reports the circle clearance and a separate projected clearance
 at the axle's outer tire edge. The latter uses the supplied tire width and an
 assumed wheel track. It does not measure the installed wheel position.
+The roaming controller now targets 8 cm outside the modeled body circle
+while tracking a fitted wall, with a 7 cm side clearance floor for that wall.
+If the tracked wall crosses the forward corridor, the controller can align
+at low speed after checking its path against every range return. Separate
+obstacles and obstacles within the swept footprint still stop the pass.
 
 The earlier C1 laptop test passed identity, health and three seconds of live
 ranging. Later Pi and bounded loaded trials established C1 scans, forward motion,

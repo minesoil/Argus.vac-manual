@@ -77,6 +77,8 @@ def navigation_config(radius, wall_gap):
                   stop_clearance_m=wall_gap,
                   resume_clearance_m=wall_gap + 0.10,
                   side_steer_clearance_m=wall_gap - margin,
+                  tracked_wall_stop_m=0.01,
+                  tracked_wall_target_m=0.02,
                   scan_timeout_s=0.6)
 
 
@@ -130,12 +132,15 @@ def run(reader, controller, client=None, seconds=30.0, expected_epoch=None,
                 emit("END " + decision.reason)
                 return 0
             if healthy and stop_ahead and new_sweep:
-                if decision.front_clearance is not None and decision.front_clearance <= 0.30:
+                front = decision.front_obstacle_clearance
+                if front is None:
+                    front = decision.front_clearance
+                if front is not None and front <= 0.30:
                     front_close_scans += 1
                 else:
                     front_close_scans = 0
                 if front_close_scans >= 3:
-                    emit(f"END Front obstacle at {decision.front_clearance:.2f} m clearance")
+                    emit(f"END Front obstacle at {front:.2f} m clearance")
                     return 0
             if seconds is not None and clock() - start >= seconds:
                 break

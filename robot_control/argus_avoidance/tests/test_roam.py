@@ -93,6 +93,23 @@ class RoamTests(unittest.TestCase):
         self.assertIn("Scan expired", output[-1])
         self.assertEqual(len(client.arms), 1)
 
+    def test_front_stop_distinguishes_fitted_wall_from_separate_obstacle(self):
+        clock = Clock()
+        reader = Reader(clock)
+        controller = Mock(follow_wall="right")
+        controller.health.return_value = (True, "Healthy")
+        controller.step.side_effect = lambda now: Decision(
+            "SLOW", "Following right wall", linear=0.025, front_clearance=0.23,
+            front_obstacle_clearance=1.0 if now < 0.70 else 0.28)
+        client = Client()
+        output = []
+        result = run(reader, controller, client, 2, clock=clock, sleep=clock.sleep,
+                     emit=output.append, stop_ahead=True)
+        self.assertEqual(result, 0)
+        self.assertGreater(clock(), 0.85)
+        self.assertEqual(output[-1], "END Front obstacle at 0.28 m clearance")
+        self.assertTrue(client.stopped)
+
     def test_unknown_return_cannot_be_treated_as_clear(self):
         def scene(now, ranges):
             if now > 0.8:
