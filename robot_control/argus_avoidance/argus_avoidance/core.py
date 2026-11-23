@@ -264,7 +264,7 @@ class AvoidanceController:
                         wall.heading if wall else None)
 
     def _fit_side_wall(self, points):
-        """Fit a nearby side surface only if it extends fore and aft."""
+        """Acquire a wall fore and aft, then keep tracking it up to its end."""
         side = 1 if self.follow_wall == "left" else -1
         radius = self.config.robot_radius_m
         samples = sorted((x, y) for x, y in points
@@ -287,7 +287,12 @@ class AvoidanceController:
             offset = y1 - slope*x1
             inliers = [(x, y) for x, y in samples if abs(y - offset - slope*x) <= 0.035]
             if (len(inliers) < 5 or 3 * len(inliers) < 2 * len(samples) or
-                    inliers[0][0] > -0.05 or inliers[-1][0] < 0.12):
+                    inliers[0][0] > -0.05):
+                continue
+            if inliers[-1][0] < 0.12 and not (
+                    self._wall is not None and inliers[-1][0] >= 0.0 and
+                    abs(math.atan(slope) - self._wall.heading) <= 0.12 and
+                    abs(abs(offset) / math.hypot(1, slope) - self._wall.distance) <= 0.04):
                 continue
             score = (len(inliers), -sum(abs(y - offset - slope*x) for x, y in inliers))
             if score > best:

@@ -232,6 +232,13 @@ Keep raw scans and the site profile local. Replay checks decisions against
 the recorded trajectory. Use the simulator to test how different commands
 change a trajectory, and a physical pass to verify actual wheel clearance.
 
+```sh
+python3 -m argus_avoidance.wall_trial_sim --seconds 25 --seam 0.08
+```
+
+The simulation reports where the wheel commands change along a synthetic
+box row. Its wheel track and command-to-speed gain are adjustable assumptions.
+
 The earlier C1 laptop test passed identity, health and three seconds of live
 ranging. Later Pi and bounded loaded trials established C1 scans, forward motion,
 turns and curves in the cramped room. A corrected-heading phone trial avoided
